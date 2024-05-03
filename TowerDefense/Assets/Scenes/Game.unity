@@ -574,11 +574,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 922816695}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa1c176e2b688b742ae3f0ef2e7e5c17, type: 3}
+  m_Script: {fileID: 11500000, guid: 10b8a144001d4634b840e54476b440a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSelection: 0
   selectionLightObj: {fileID: 1791959641}
+  tower:
+    towerID: 0
+    attack: 0
+    attackSpeed: 0
+    towerObj: {fileID: 2794337052100866639, guid: f73f4ed2dda148a4090ee2633190dd9e, type: 3}
 --- !u!65 &922816698
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -650,6 +654,51 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 922816695}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &951100543
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 951100545}
+  - component: {fileID: 951100544}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &951100544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951100543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bce7d0a07f196a449cb3b28c83f1851, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerController: {fileID: 2134023288}
+--- !u!4 &951100545
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951100543}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1026,11 +1075,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1525866606}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa1c176e2b688b742ae3f0ef2e7e5c17, type: 3}
+  m_Script: {fileID: 11500000, guid: 10b8a144001d4634b840e54476b440a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSelection: 0
   selectionLightObj: {fileID: 1237110506}
+  tower:
+    towerID: 0
+    attack: 0
+    attackSpeed: 0
+    towerObj: {fileID: 8086526034338496935, guid: 5a73972eb75c11f4a93952e6e8c47dfb, type: 3}
 --- !u!65 &1525866609
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1241,6 +1294,51 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1791959641}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2046381147
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2046381149}
+  - component: {fileID: 2046381148}
+  m_Layer: 0
+  m_Name: GameScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2046381148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046381147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d20bf0c7732907e4280439535963fd85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameController: {fileID: 951100544}
+--- !u!4 &2046381149
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046381147}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2132860049
 GameObject:
   m_ObjectHideFlags: 0
@@ -1356,11 +1454,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2132860049}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa1c176e2b688b742ae3f0ef2e7e5c17, type: 3}
+  m_Script: {fileID: 11500000, guid: 10b8a144001d4634b840e54476b440a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSelection: 0
   selectionLightObj: {fileID: 503166114}
+  tower:
+    towerID: 0
+    attack: 0
+    attackSpeed: 0
+    towerObj: {fileID: 2794337052100866639, guid: f73f4ed2dda148a4090ee2633190dd9e, type: 3}
 --- !u!1 &2134023285
 GameObject:
   m_ObjectHideFlags: 0
@@ -1406,6 +1508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiPrefab: {fileID: 2128800052566426228, guid: 1256e3966f5e0f24394d3028835cdaed, type: 3}
+  towerDatabase: {fileID: 11400000, guid: f07cdd46fb7af284dbbf9bbed3a35425, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1416,6 +1519,8 @@ SceneRoots:
   - {fileID: 1337202669}
   - {fileID: 1542832963}
   - {fileID: 787977628}
-  - {fileID: 2134023287}
   - {fileID: 1254862713}
   - {fileID: 896067406}
+  - {fileID: 2046381149}
+  - {fileID: 951100545}
+  - {fileID: 2134023287}

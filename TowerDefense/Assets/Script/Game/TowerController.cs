@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 namespace Game.Tower
@@ -6,19 +6,20 @@ namespace Game.Tower
     public class TowerController : MonoBehaviour
     {
         #region PrivateField
-        // 現在表示しているUI
-        private GameObject currentUI; 
+        /// <summary>タワー建設のUI</summary>
+        private TowerBuildUI towerBuildUI; 
         /// <summary>選択しているタワー</summary>
         private Tower selectionTower;
         #endregion
 
         #region SerializeField
         /// <summary>選択時に土台のハイライト</summary>
-        [SerializeField] GameObject uiPrefab;
+        [SerializeField] private GameObject uiPrefab;
         /// <summary>タワーの情報</summary>
-        [SerializeField] TowerDatabase towerDatabase;
+        [SerializeField] private TowerDatabase towerDatabase;
         #endregion
 
+        #region UnityEvent
         void Update()
         {
             // マウスがクリックされたかどうかを確認
@@ -54,17 +55,37 @@ namespace Game.Tower
                 }
             }
         }
+        #endregion
 
-        void ShowTowerUI(Vector3 position)
+        #region PublicMethod
+        /// <summary>
+        /// 初期化
+        /// </summary>
+        public void Init()
+        {
+
+        }
+        #endregion
+
+        #region PrivateMethod
+        private void ShowTowerUI(Vector3 position)
         {
             // 現在表示しているUIがあれば破棄する
-            if (currentUI != null)
+            if (towerBuildUI != null)
             {
-                Destroy(currentUI);
+                Destroy(towerBuildUI);
             }
 
             // UIをインスタンス化して表示する
-            currentUI = Instantiate(uiPrefab, position, Quaternion.identity);
+            towerBuildUI = Instantiate(uiPrefab, position, Quaternion.identity).GetComponent<TowerBuildUI>();
+
+            towerBuildUI.Init();
+
+            towerBuildUI.TowerBuildSubject.Subscribe(_ =>
+            {
+                selectionTower.CreateTower();
+            }).AddTo(this);
         }
+        #endregion
     }
 }

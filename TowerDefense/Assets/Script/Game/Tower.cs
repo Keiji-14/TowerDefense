@@ -15,6 +15,8 @@ namespace Game.Tower
         #region SerializeField
         /// <summary>選択時に土台のハイライト</summary>
         [SerializeField] GameObject selectionLightObj;
+
+        [SerializeField] TowerData tower;
         #endregion
 
         #region PublicMethod
@@ -26,7 +28,7 @@ namespace Game.Tower
 
         public void CreateTower()
         {
-            Instantiate(towerData.towerObj, transform.position, Quaternion.identity);
+            Instantiate(tower.towerObj, transform.position, Quaternion.identity);
         }
         #endregion
     }

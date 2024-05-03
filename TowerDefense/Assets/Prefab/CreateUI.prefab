@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8839321414974967638}
+  - component: {fileID: -2406145164982834658}
   m_Layer: 5
   m_Name: CreateUI
   m_TagString: Untagged
@@ -38,6 +39,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &-2406145164982834658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128800052566426228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ba82e49af85f1f4da5b989004210d00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerBuildBtn: {fileID: 4016696347702745073}
 --- !u!1 &3640533576461656601
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,7 +265,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5785543909616022959
 RectTransform:
   m_ObjectHideFlags: 0
