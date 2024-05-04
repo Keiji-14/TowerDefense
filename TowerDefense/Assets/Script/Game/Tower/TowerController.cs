@@ -1,16 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using GameData.Tower;
+using System.Collections.Generic;
+using System.Linq;
 using UniRx;
 using UnityEngine;
 
 namespace Game.Tower
 {
+    /// <summary>
+    /// タワーの処理を管理
+    /// </summary>
     public class TowerController : MonoBehaviour
     {
         #region PrivateField
         /// <summary>タワー建設のUI</summary>
         private TowerBuildUI towerBuildUI; 
-        /// <summary>選択しているタワー</summary>
-        private TowerStand selectionTower;
+        /// <summary>選択しているタワーの土台</summary>
+        private TowerStand selectionTowerStand;
         /// <summary>建設したタワーのリスト</summary>
         private List<Tower> towerList = new List<Tower>();
         #endregion
@@ -23,7 +28,7 @@ namespace Game.Tower
         /// <summary>タワーの情報</summary>
         [SerializeField] private TowerDatabase towerDatabase;
         /// <summary>タワー土台のリスト</summary>
-        [SerializeField] List<TowerStand> towerStandList = new List<TowerStand>();
+        [SerializeField] private List<TowerStand> towerStandList = new List<TowerStand>();
         #endregion
 
         #region UnityEvent
@@ -46,17 +51,17 @@ namespace Game.Tower
 
                     if (towerStand != null)
                     {
-                        if (selectionTower != null)
+                        if (selectionTowerStand != null)
                         {
                             towerStand.OnTowerClicked();
-                            selectionTower.OnTowerClicked();
-                            selectionTower = towerStand;
+                            selectionTowerStand.OnTowerClicked();
+                            selectionTowerStand = towerStand;
                             ShowTowerUI(towerStand.transform.position);
                         }
                         else
                         {
                             towerStand.OnTowerClicked();
-                            selectionTower = towerStand;
+                            selectionTowerStand = towerStand;
                             ShowTowerUI(towerStand.transform.position);
                         }
                     }
@@ -109,10 +114,21 @@ namespace Game.Tower
 
             towerBuildUI.Init();
 
-            towerBuildUI.TowerBuildSubject.Subscribe(_ =>
+            towerBuildUI.TowerBuildSubject.Subscribe(towerType =>
             {
-                selectionTower.CreateTower();
+                var towerData = GetTowerData(towerType);
+                selectionTowerStand.CreateTower(towerData);
             }).AddTo(this);
+        }
+
+        /// <summary>
+        /// タワーの情報を取得する処理
+        /// </summary>
+        /// <param name="towerType">タワーの種類</param>
+        private TowerData GetTowerData(TowerType towerType)
+        {
+            return towerDatabase.towerDataList.FirstOrDefault
+                (data => data.towerType == towerType);
         }
         #endregion
     }

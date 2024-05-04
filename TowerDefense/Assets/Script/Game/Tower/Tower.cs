@@ -3,6 +3,9 @@ using UniRx;
 
 namespace Game.Tower
 {
+    /// <summary>
+    /// É^ÉèÅ[Ç…Ç¬Ç¢ÇƒÇÃèàóù
+    /// </summary>
     public class Tower : MonoBehaviour
     {
         #region PrivateField
@@ -29,7 +32,7 @@ namespace Game.Tower
         private void Attack(GameObject enemy)
         {
             Vector3 targetDirection = enemy.transform.position - transform.position;
-            targetDirection.y = 0f;
+            targetDirection.y = VerticalLockValue;
             Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 

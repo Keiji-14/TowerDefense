@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using GameData.Tower;
+using UniRx;
 using UnityEngine;
 
 namespace Game.Tower
@@ -25,8 +26,6 @@ namespace Game.Tower
         #region SerializeField
         /// <summary>選択時に土台のハイライト</summary>
         [SerializeField] GameObject selectionLightObj;
-
-        [SerializeField] TowerData towerdata;
         #endregion
 
         #region PublicMethod
@@ -36,9 +35,16 @@ namespace Game.Tower
             selectionLightObj.SetActive(isSelection);
         }
 
-        public void CreateTower()
+        /// <summary>
+        /// タワーを生成する処理
+        /// </summary>
+        /// <param name="towerType">タワーの情報</param>
+        public void CreateTower(TowerData towerData)
         {
-            tower = Instantiate(towerdata.towerObj, transform.position, Quaternion.identity).GetComponent<Tower>();
+            // タワーの情報を保持させる
+            this.towerData = towerData;
+
+            tower = Instantiate(towerData.towerObj, transform.position, Quaternion.identity).GetComponent<Tower>();
 
             tower.transform.SetParent(this.transform);
 
