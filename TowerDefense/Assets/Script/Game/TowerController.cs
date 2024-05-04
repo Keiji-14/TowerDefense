@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 namespace Game.Tower
@@ -9,7 +10,9 @@ namespace Game.Tower
         /// <summary>タワー建設のUI</summary>
         private TowerBuildUI towerBuildUI; 
         /// <summary>選択しているタワー</summary>
-        private Tower selectionTower;
+        private TowerStand selectionTower;
+        /// <summary>建設したタワーのリスト</summary>
+        private List<Tower> towerList = new List<Tower>();
         #endregion
 
         #region SerializeField
@@ -19,6 +22,8 @@ namespace Game.Tower
         [SerializeField] private GameObject uiPrefab;
         /// <summary>タワーの情報</summary>
         [SerializeField] private TowerDatabase towerDatabase;
+        /// <summary>タワー土台のリスト</summary>
+        [SerializeField] List<TowerStand> towerStandList = new List<TowerStand>();
         #endregion
 
         #region UnityEvent
@@ -31,11 +36,13 @@ namespace Game.Tower
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
 
+                int layerMask = ~(1 << LayerMask.NameToLayer("Tower"));
+
                 // Rayがオブジェクトに当たったかどうかを確認
-                if (Physics.Raycast(ray, out hit))
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
                 {
                     // Towerコンポーネントがアタッチされているかどうかを確認
-                    Tower towerStand = hit.collider.gameObject.GetComponent<Tower>();
+                    TowerStand towerStand = hit.collider.gameObject.GetComponent<TowerStand>();
 
                     if (towerStand != null)
                     {
@@ -53,7 +60,6 @@ namespace Game.Tower
                             ShowTowerUI(towerStand.transform.position);
                         }
                     }
-                    
                 }
             }
         }
@@ -65,21 +71,41 @@ namespace Game.Tower
         /// </summary>
         public void Init()
         {
-
+            foreach (var towerStand in towerStandList)
+            {
+                TowerStandInit(towerStand);
+            }
         }
         #endregion
 
         #region PrivateMethod
+        /// <summary>
+        /// タワー土台の初期化
+        /// </summary>
+        public void TowerStandInit(TowerStand towerStand)
+        {
+            // タワーの建設時に通知を行う
+            towerStand.TowerBuildSubject.Subscribe(tower =>
+            {
+                // 建設したタワーをリストに追加
+                towerList.Add(tower);
+            }).AddTo(this);
+        }
+
+        /// <summary>
+        /// 建設内を選択するUIを表示する
+        /// </summary>
+        /// <param name="position">表示する座標</param>
         private void ShowTowerUI(Vector3 position)
         {
             // 現在表示しているUIがあれば破棄する
             if (towerBuildUI != null)
             {
-                Destroy(towerBuildUI);
+                Destroy(towerBuildUI.gameObject);
             }
 
             // UIをインスタンス化して表示する
-            towerBuildUI = Instantiate(uiPrefab, new Vector3(0,0,0), Quaternion.identity, uiCanvas).GetComponent<TowerBuildUI>();
+            towerBuildUI = Instantiate(uiPrefab, new Vector3(960,540,0), Quaternion.identity, uiCanvas).GetComponent<TowerBuildUI>();
 
             towerBuildUI.Init();
 
