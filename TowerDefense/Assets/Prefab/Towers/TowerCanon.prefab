@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4548128971147783272}
   - component: {fileID: 3540206319282565916}
   - component: {fileID: 3649886062173877337}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 5789220963578694705}
   - component: {fileID: 3809228596741217939}
   - component: {fileID: 7653848123615874274}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2521721146167589695}
-  m_Layer: 29
+  m_Layer: 7
   m_Name: TurretObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +210,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2633314043360967022}
   - component: {fileID: 3863090435668153854}
-  m_Layer: 29
+  - component: {fileID: 6243668719526935066}
+  - component: {fileID: 3570798459277785318}
+  m_Layer: 7
   m_Name: TowerCanon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,6 +257,41 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.1, z: 1}
   m_Center: {x: 0, y: 0.55, z: 0}
+--- !u!136 &6243668719526935066
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2794337052100866639}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3570798459277785318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2794337052100866639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd4df18a164685447a54b4ba2dc0da00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3394497223729283250
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,7 +303,7 @@ GameObject:
   - component: {fileID: 4134148760152929446}
   - component: {fileID: 4254031306517686188}
   - component: {fileID: 8822057536057264441}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,7 +384,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3200512964041577958}
-  m_Layer: 29
+  m_Layer: 7
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -378,7 +415,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4544043737517938638}
-  m_Layer: 29
+  m_Layer: 7
   m_Name: BaseObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -413,7 +450,7 @@ GameObject:
   - component: {fileID: 1317140241779412070}
   - component: {fileID: 6366503984211385707}
   - component: {fileID: 5875378395438395054}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

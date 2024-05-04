@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4009292618697750990}
   - component: {fileID: 325221877101681215}
   - component: {fileID: 5813412191175175428}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7492521552079593350}
   - component: {fileID: 4081185374360575355}
-  m_Layer: 29
+  - component: {fileID: -5079550071252224091}
+  - component: {fileID: 1796402698687127968}
+  m_Layer: 7
   m_Name: TowerAOE2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,6 +140,41 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.2, z: 1}
   m_Center: {x: 0, y: 0.6, z: 0}
+--- !u!136 &-5079550071252224091
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2639799811546682514}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1796402698687127968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2639799811546682514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd4df18a164685447a54b4ba2dc0da00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2649876372462284340
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,7 +184,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4977254011232369723}
-  m_Layer: 29
+  m_Layer: 7
   m_Name: BaseObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +218,7 @@ GameObject:
   - component: {fileID: 5181463538775151527}
   - component: {fileID: 4546873037293378546}
   - component: {fileID: 7443591828603850225}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,7 +301,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3493542769453749861}
   - component: {fileID: 3372538235700120660}
-  m_Layer: 29
+  m_Layer: 7
   m_Name: TurretObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -311,7 +348,7 @@ GameObject:
   - component: {fileID: 9099465217585971227}
   - component: {fileID: 7891746931434446422}
   - component: {fileID: 6426956556304768266}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hexagon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

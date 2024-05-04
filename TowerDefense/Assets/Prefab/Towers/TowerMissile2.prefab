@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8196266149571354737}
   - component: {fileID: 5184140352510142550}
-  m_Layer: 29
+  - component: {fileID: 2125031487315306771}
+  - component: {fileID: -4986458473622753999}
+  m_Layer: 7
   m_Name: TowerMissile2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,6 +57,41 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.1, z: 1}
   m_Center: {x: 0, y: 0.55, z: 0}
+--- !u!136 &2125031487315306771
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269560782529413622}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-4986458473622753999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269560782529413622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd4df18a164685447a54b4ba2dc0da00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &837257767661610702
 GameObject:
   m_ObjectHideFlags: 0
@@ -67,7 +104,7 @@ GameObject:
   - component: {fileID: 1368739142880671288}
   - component: {fileID: 3907300776615774411}
   - component: {fileID: 2536878891183512897}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +209,7 @@ GameObject:
   - component: {fileID: 941925666228525731}
   - component: {fileID: 3258261518281048234}
   - component: {fileID: 6978576521242392101}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,7 +292,7 @@ GameObject:
   - component: {fileID: 396476516976186210}
   - component: {fileID: 6632246039349555389}
   - component: {fileID: 3990257420802442550}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,7 +375,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7250047048739271613}
-  m_Layer: 29
+  m_Layer: 7
   m_Name: BaseObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -374,7 +411,7 @@ GameObject:
   - component: {fileID: 2403749748210780057}
   - component: {fileID: 4362856065701380194}
   - component: {fileID: 991765122390646321}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -479,7 +516,7 @@ GameObject:
   - component: {fileID: 5741715212875601374}
   - component: {fileID: 333537075475647988}
   - component: {fileID: 5579619827331915837}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -562,7 +599,7 @@ GameObject:
   - component: {fileID: 8157680693357903419}
   - component: {fileID: 8890260583243464501}
   - component: {fileID: 446767174537921467}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -646,7 +683,7 @@ GameObject:
   - component: {fileID: 2524046389954860871}
   - component: {fileID: 6501759303018598796}
   - component: {fileID: 9018689232959722782}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -751,7 +788,7 @@ GameObject:
   - component: {fileID: 7405748245343611186}
   - component: {fileID: 6688309169675039158}
   - component: {fileID: 4388190911438206709}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -832,7 +869,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8200838901401437141}
-  m_Layer: 29
+  m_Layer: 7
   m_Name: ShootPoint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -866,7 +903,7 @@ GameObject:
   - component: {fileID: 6190006171647452099}
   - component: {fileID: 9021531919164321979}
   - component: {fileID: 1487753337099627819}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -969,7 +1006,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4775044078350042295}
-  m_Layer: 29
+  m_Layer: 7
   m_Name: TurretObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1001,7 +1038,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7822553299687386461}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1041,7 +1078,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7993021801942924953}
-  m_Layer: 29
+  m_Layer: 7
   m_Name: ShootPoint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1075,7 +1112,7 @@ GameObject:
   - component: {fileID: 4933432077078321547}
   - component: {fileID: 3987993944427461731}
   - component: {fileID: 295193088359838853}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1181,7 +1218,7 @@ GameObject:
   - component: {fileID: 6030076570634867072}
   - component: {fileID: 8113010357782479445}
   - component: {fileID: 4044373307142427213}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}

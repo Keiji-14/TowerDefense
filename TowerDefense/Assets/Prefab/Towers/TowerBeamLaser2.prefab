@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3911547653226486137}
-  m_Layer: 29
+  m_Layer: 7
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5015171109246418820}
-  m_Layer: 29
+  m_Layer: 7
   m_Name: BaseObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9188786553634808963}
   - component: {fileID: 9095316396224343343}
-  m_Layer: 29
+  - component: {fileID: 6799144167697576291}
+  - component: {fileID: -8977821854086476363}
+  m_Layer: 7
   m_Name: TowerBeamLaser2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,6 +121,41 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.1, z: 1}
   m_Center: {x: 0, y: 0.55, z: 0}
+--- !u!136 &6799144167697576291
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411991765340560169}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-8977821854086476363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411991765340560169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd4df18a164685447a54b4ba2dc0da00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1701751651881862775
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,7 +167,7 @@ GameObject:
   - component: {fileID: 2498285712446718244}
   - component: {fileID: 902431541551923885}
   - component: {fileID: 5987520290860110236}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,7 +251,7 @@ GameObject:
   - component: {fileID: 5519962535571756836}
   - component: {fileID: 8636736700269420600}
   - component: {fileID: 7270649258959516277}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -300,7 +337,7 @@ GameObject:
   - component: {fileID: 7878070840088594049}
   - component: {fileID: 3460146562069385955}
   - component: {fileID: 7444231971067250671}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -383,7 +420,7 @@ GameObject:
   - component: {fileID: 1535790823986379001}
   - component: {fileID: 3275579145576135197}
   - component: {fileID: 6464485145502697922}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -466,7 +503,7 @@ GameObject:
   - component: {fileID: 609134107523388512}
   - component: {fileID: 4566547167993352232}
   - component: {fileID: 5670714981282206233}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -547,7 +584,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1339026468329843243}
-  m_Layer: 29
+  m_Layer: 7
   m_Name: TurretObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -581,7 +618,7 @@ GameObject:
   - component: {fileID: 4571321971236587418}
   - component: {fileID: 5926539900767506177}
   - component: {fileID: 571633800035146905}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
