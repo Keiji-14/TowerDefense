@@ -1,15 +1,15 @@
-using Scene;
+ï»¿using Scene;
 using UnityEngine;
 
 namespace Game
 {
     /// <summary>
-    /// ƒQ[ƒ€‰æ–Ê‚ÌŠÇ—
+    /// ã‚²ãƒ¼ãƒ ç”»é¢ã®ç®¡ç†
     /// </summary>
     public class GameScene : SceneBase
     {
         #region SerializeField 
-        /// <summary>ƒQ[ƒ€‰æ–Ê‚Ìˆ—</summary>
+        /// <summary>ã‚²ãƒ¼ãƒ ç”»é¢ã®å‡¦ç†</summary>
         [SerializeField] private GameController gameController;
         #endregion
 

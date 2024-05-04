@@ -1,8 +1,8 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ƒ^ƒ[‚Ìî•ñ‚ğ•Û‚·‚éScriptableObject
+/// ã‚¿ãƒ¯ãƒ¼ã®æƒ…å ±ã‚’ä¿æŒã™ã‚‹ScriptableObject
 /// </summary>
 [CreateAssetMenu(fileName = "TowerDatabase", menuName = "Create Tower Database")]
 public class TowerDatabase : ScriptableObject

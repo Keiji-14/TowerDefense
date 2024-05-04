@@ -1,4 +1,4 @@
-using UniRx;
+ï»¿using UniRx;
 using UnityEngine;
 
 namespace Game.Tower
@@ -6,33 +6,35 @@ namespace Game.Tower
     public class TowerController : MonoBehaviour
     {
         #region PrivateField
-        /// <summary>ƒ^ƒ[Œšİ‚ÌUI</summary>
+        /// <summary>ã‚¿ãƒ¯ãƒ¼å»ºè¨­ã®UI</summary>
         private TowerBuildUI towerBuildUI; 
-        /// <summary>‘I‘ğ‚µ‚Ä‚¢‚éƒ^ƒ[</summary>
+        /// <summary>é¸æŠã—ã¦ã„ã‚‹ã‚¿ãƒ¯ãƒ¼</summary>
         private Tower selectionTower;
         #endregion
 
         #region SerializeField
-        /// <summary>‘I‘ğ‚É“y‘ä‚ÌƒnƒCƒ‰ƒCƒg</summary>
+        /// <summary>é¸æŠæ™‚ã«åœŸå°ã®ãƒã‚¤ãƒ©ã‚¤ãƒˆ</summary>
+        [SerializeField] private Transform uiCanvas;
+        /// <summary>é¸æŠæ™‚ã«åœŸå°ã®ãƒã‚¤ãƒ©ã‚¤ãƒˆ</summary>
         [SerializeField] private GameObject uiPrefab;
-        /// <summary>ƒ^ƒ[‚Ìî•ñ</summary>
+        /// <summary>ã‚¿ãƒ¯ãƒ¼ã®æƒ…å ±</summary>
         [SerializeField] private TowerDatabase towerDatabase;
         #endregion
 
         #region UnityEvent
         void Update()
         {
-            // ƒ}ƒEƒX‚ªƒNƒŠƒbƒN‚³‚ê‚½‚©‚Ç‚¤‚©‚ğŠm”F
+            // ãƒã‚¦ã‚¹ãŒã‚¯ãƒªãƒƒã‚¯ã•ã‚ŒãŸã‹ã©ã†ã‹ã‚’ç¢ºèª
             if (Input.GetMouseButtonDown(0))
             {
-                // ƒ}ƒEƒX‚ÌˆÊ’u‚©‚çRay‚ğ”­Ë
+                // ãƒã‚¦ã‚¹ã®ä½ç½®ã‹ã‚‰Rayã‚’ç™ºå°„
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
 
-                // Ray‚ªƒIƒuƒWƒFƒNƒg‚É“–‚½‚Á‚½‚©‚Ç‚¤‚©‚ğŠm”F
+                // RayãŒã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«å½“ãŸã£ãŸã‹ã©ã†ã‹ã‚’ç¢ºèª
                 if (Physics.Raycast(ray, out hit))
                 {
-                    // TowerƒRƒ“ƒ|[ƒlƒ“ƒg‚ªƒAƒ^ƒbƒ`‚³‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ğŠm”F
+                    // Towerã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒã‚¢ã‚¿ãƒƒãƒã•ã‚Œã¦ã„ã‚‹ã‹ã©ã†ã‹ã‚’ç¢ºèª
                     Tower towerStand = hit.collider.gameObject.GetComponent<Tower>();
 
                     if (towerStand != null)
@@ -59,7 +61,7 @@ namespace Game.Tower
 
         #region PublicMethod
         /// <summary>
-        /// ‰Šú‰»
+        /// åˆæœŸåŒ–
         /// </summary>
         public void Init()
         {
@@ -70,14 +72,14 @@ namespace Game.Tower
         #region PrivateMethod
         private void ShowTowerUI(Vector3 position)
         {
-            // Œ»İ•\¦‚µ‚Ä‚¢‚éUI‚ª‚ ‚ê‚Î”jŠü‚·‚é
+            // ç¾åœ¨è¡¨ç¤ºã—ã¦ã„ã‚‹UIãŒã‚ã‚Œã°ç ´æ£„ã™ã‚‹
             if (towerBuildUI != null)
             {
                 Destroy(towerBuildUI);
             }
 
-            // UI‚ğƒCƒ“ƒXƒ^ƒ“ƒX‰»‚µ‚Ä•\¦‚·‚é
-            towerBuildUI = Instantiate(uiPrefab, position, Quaternion.identity).GetComponent<TowerBuildUI>();
+            // UIã‚’ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åŒ–ã—ã¦è¡¨ç¤ºã™ã‚‹
+            towerBuildUI = Instantiate(uiPrefab, new Vector3(0,0,0), Quaternion.identity, uiCanvas).GetComponent<TowerBuildUI>();
 
             towerBuildUI.Init();
 

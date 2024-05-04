@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 namespace Game.Tower
 {
     /// <summary>
-    /// ƒ^ƒ[‚É‚Â‚¢‚Ä‚Ìˆ—
+    /// ã‚¿ãƒ¯ãƒ¼ã«ã¤ã„ã¦ã®å‡¦ç†
     /// </summary>
     public class Tower : MonoBehaviour
     {
@@ -13,7 +13,7 @@ namespace Game.Tower
         #endregion
 
         #region SerializeField
-        /// <summary>‘I‘ğ‚É“y‘ä‚ÌƒnƒCƒ‰ƒCƒg</summary>
+        /// <summary>é¸æŠæ™‚ã«åœŸå°ã®ãƒã‚¤ãƒ©ã‚¤ãƒˆ</summary>
         [SerializeField] GameObject selectionLightObj;
 
         [SerializeField] TowerData tower;

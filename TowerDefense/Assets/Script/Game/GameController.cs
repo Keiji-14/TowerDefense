@@ -1,19 +1,19 @@
-using Game.Tower;
+ï»¿using Game.Tower;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
     /// <summary>
-    /// ƒQ[ƒ€‰æ–Ê‚Ìˆ—
+    /// ã‚²ãƒ¼ãƒ ç”»é¢ã®å‡¦ç†
     /// </summary>
     #region SerializeField 
-    /// <summary>ƒ^ƒ[‚Ìˆ—</summary>
+    /// <summary>ã‚¿ãƒ¯ãƒ¼ã®å‡¦ç†</summary>
     [SerializeField] private TowerController towerController;
     #endregion
 
     #region PublicMethod
     /// <summary>
-    /// ‰Šú‰»
+    /// åˆæœŸåŒ–
     /// </summary>
     public void Init()
     {

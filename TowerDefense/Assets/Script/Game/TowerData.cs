@@ -1,9 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ƒ^ƒ[‚Ìî•ñ‚ğŠÇ—‚·‚éƒNƒ‰ƒX
+/// ã‚¿ãƒ¯ãƒ¼ã®æƒ…å ±ã‚’ç®¡ç†ã™ã‚‹ã‚¯ãƒ©ã‚¹
 /// </summary>
 [System.Serializable]
 public class TowerData

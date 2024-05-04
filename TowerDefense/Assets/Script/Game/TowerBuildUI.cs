@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,18 +13,18 @@ namespace Game.Tower
         #endregion
 
         #region PrivateField
-        /// <summary>ƒ^ƒ[Œšİƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚Ìˆ—</summary>
+        /// <summary>ã‚¿ãƒ¯ãƒ¼å»ºè¨­ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸæ™‚ã®å‡¦ç†</summary>
         private IObservable<Unit> OnClickTowerBuildButtonObserver => towerBuildBtn.OnClickAsObservable();
         #endregion
 
         #region SerializeField
-        /// <summary>ƒ^ƒ[Œšİƒ{ƒ^ƒ“</summary>
+        /// <summary>ã‚¿ãƒ¯ãƒ¼å»ºè¨­ãƒœã‚¿ãƒ³</summary>
         [SerializeField] private Button towerBuildBtn;
         #endregion
 
         #region PublicMethod
         /// <summary>
-        /// ‰Šú‰»
+        /// åˆæœŸåŒ–
         /// </summary>
         public void Init()
         {

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,28 +6,28 @@ namespace UI
 {
     public class UIManager : MonoBehaviour
     {
-        public GameObject uiElementPrefab; // •\¦‚³‚¹‚éUI—v‘f‚ÌPrefab
-        private Canvas canvas; // UI‚ğ”z’u‚·‚éCanvas
+        public GameObject uiElementPrefab; // è¡¨ç¤ºã•ã›ã‚‹UIè¦ç´ ã®Prefab
+        private Canvas canvas; // UIã‚’é…ç½®ã™ã‚‹Canvas
 
         void Start()
         {
-            // Canvas‚ğŒŸõ‚µ‚Äæ“¾‚·‚é
+            // Canvasã‚’æ¤œç´¢ã—ã¦å–å¾—ã™ã‚‹
             canvas = FindObjectOfType<Canvas>();
         }
 
         void Update()
         {
-            // ƒ}ƒEƒX‚ªƒNƒŠƒbƒN‚³‚ê‚½‚©‚ğŒŸo
+            // ãƒã‚¦ã‚¹ãŒã‚¯ãƒªãƒƒã‚¯ã•ã‚ŒãŸã‹ã‚’æ¤œå‡º
             if (Input.GetMouseButtonDown(0))
             {
-                // ƒNƒŠƒbƒN‚³‚ê‚½ƒXƒNƒŠ[ƒ“ã‚ÌÀ•W‚ğæ“¾
+                // ã‚¯ãƒªãƒƒã‚¯ã•ã‚ŒãŸã‚¹ã‚¯ãƒªãƒ¼ãƒ³ä¸Šã®åº§æ¨™ã‚’å–å¾—
                 Vector3 clickPosition = Input.mousePosition;
 
-                // ƒXƒNƒŠ[ƒ“À•W‚©‚çƒ[ƒ‹ƒhÀ•W‚É•ÏŠ·
+                // ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ã‹ã‚‰ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã«å¤‰æ›
                 Vector3 worldPosition = Camera.main.ScreenToWorldPoint(clickPosition);
-                worldPosition.z = 0f; // 2D‚Ìê‡AzÀ•W‚Í’Êí0‚Éİ’è‚·‚é
+                worldPosition.z = 0f; // 2Dã®å ´åˆã€zåº§æ¨™ã¯é€šå¸¸0ã«è¨­å®šã™ã‚‹
 
-                // UI—v‘f‚ğƒCƒ“ƒXƒ^ƒ“ƒX‰»‚µ‚ÄCanvas‚Ìq—v‘f‚Æ‚µ‚Ä”z’u
+                // UIè¦ç´ ã‚’ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åŒ–ã—ã¦Canvasã®å­è¦ç´ ã¨ã—ã¦é…ç½®
                 GameObject uiElement = Instantiate(uiElementPrefab, worldPosition, Quaternion.identity, canvas.transform);
             }
         }
