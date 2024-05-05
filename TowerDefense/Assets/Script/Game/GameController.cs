@@ -1,4 +1,5 @@
-﻿using Game.Tower;
+﻿using Game.Enemy;
+using Game.Tower;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -9,6 +10,8 @@ public class GameController : MonoBehaviour
     #region SerializeField 
     /// <summary>タワーの処理</summary>
     [SerializeField] private TowerController towerController;
+    /// <summary>敵の処理</summary>
+    [SerializeField] private EnemyController enemyController;
     #endregion
 
     #region PublicMethod

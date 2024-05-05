@@ -84,8 +84,7 @@ namespace Game.Tower
         /// <param name="enemyObj">攻撃対象</param>
         private void MachineGun(GameObject enemyObj)
         {
-            // 1フレームあたりのダメージ量を算出（攻撃速度に応じて）
-            if (Time.time - lastAttackTime > (1f / towerData.attackSpeed))
+            if (Time.time - lastAttackTime > 1f / towerData.attackSpeed)
             {
                 var bullet = Instantiate(towerData.bulletObj, firePoint.position, firePoint.rotation).GetComponent<Bullet>();
                 bullet.Init(towerData.attack, towerData.bulletSpeed, enemyObj);
