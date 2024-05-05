@@ -3,27 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyController : MonoBehaviour
+namespace Game.Enemy
 {
-    #region PrivateField
-    /// <summary>Rigidbodyコンポーネント</summary>
-    private Rigidbody rb;
-    /// <summary>NavMeshAgentコンポーネント</summary>
-    private NavMeshAgent agent;
-    #endregion
-
-    #region SerializeField
-    [SerializeField] private Vector3 distance;
-    [SerializeField] private Transform targetPlayer;
-    #endregion
-
-    #region UnityEvent
-    void Start()
+    public class EnemyController : MonoBehaviour
     {
-        rb = GetComponent<Rigidbody>();
-        agent = GetComponent<NavMeshAgent>();
+        #region PrivateField
+        /// <summary>Rigidbodyコンポーネント</summary>
+        private Rigidbody rb;
+        /// <summary>NavMeshAgentコンポーネント</summary>
+        private NavMeshAgent agent;
+        #endregion
 
-        agent.destination = targetPlayer.position;
+        #region SerializeField
+        [SerializeField] private Vector3 distance;
+        [SerializeField] private Transform targetPlayer;
+        #endregion
+
+        #region UnityEvent
+        void Start()
+        {
+            rb = GetComponent<Rigidbody>();
+            agent = GetComponent<NavMeshAgent>();
+
+            agent.destination = targetPlayer.position;
+        }
+        #endregion
     }
-    #endregion
 }

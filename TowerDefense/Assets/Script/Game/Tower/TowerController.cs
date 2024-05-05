@@ -34,6 +34,26 @@ namespace Game.Tower
         #region UnityEvent
         void Update()
         {
+            MouseDetectionTowerStand();
+        }
+        #endregion
+
+        #region PublicMethod
+        /// <summary>
+        /// 初期化
+        /// </summary>
+        public void Init()
+        {
+            foreach (var towerStand in towerStandList)
+            {
+                TowerStandInit(towerStand);
+            }
+        }
+        #endregion
+
+        #region PrivateMethod
+        private void MouseDetectionTowerStand()
+        {
             // マウスがクリックされたかどうかを確認
             if (Input.GetMouseButtonDown(0))
             {
@@ -68,26 +88,11 @@ namespace Game.Tower
                 }
             }
         }
-        #endregion
 
-        #region PublicMethod
-        /// <summary>
-        /// 初期化
-        /// </summary>
-        public void Init()
-        {
-            foreach (var towerStand in towerStandList)
-            {
-                TowerStandInit(towerStand);
-            }
-        }
-        #endregion
-
-        #region PrivateMethod
         /// <summary>
         /// タワー土台の初期化
         /// </summary>
-        public void TowerStandInit(TowerStand towerStand)
+        private void TowerStandInit(TowerStand towerStand)
         {
             // タワーの建設時に通知を行う
             towerStand.TowerBuildSubject.Subscribe(tower =>

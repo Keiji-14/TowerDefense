@@ -38,15 +38,14 @@ namespace Game.Tower
         /// <summary>
         /// タワーを生成する処理
         /// </summary>
-        /// <param name="towerType">タワーの情報</param>
+        /// <param name="towerData">タワーの情報</param>
         public void CreateTower(TowerData towerData)
         {
-            // タワーの情報を保持させる
-            this.towerData = towerData;
-
             tower = Instantiate(towerData.towerObj, transform.position, Quaternion.identity).GetComponent<Tower>();
 
             tower.transform.SetParent(this.transform);
+
+            tower.Init(towerData);
 
             TowerBuildSubject.OnNext(tower);
         }
