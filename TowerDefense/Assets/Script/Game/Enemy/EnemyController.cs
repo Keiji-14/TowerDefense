@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -7,25 +7,13 @@ namespace Game.Enemy
 {
     public class EnemyController : MonoBehaviour
     {
-        #region PrivateField
-        /// <summary>RigidbodyƒRƒ“ƒ|[ƒlƒ“ƒg</summary>
-        private Rigidbody rb;
-        /// <summary>NavMeshAgentƒRƒ“ƒ|[ƒlƒ“ƒg</summary>
-        private NavMeshAgent agent;
-        #endregion
-
-        #region SerializeField
-        [SerializeField] private Vector3 distance;
-        [SerializeField] private Transform targetPlayer;
-        #endregion
-
-        #region UnityEvent
-        void Start()
+        #region PublicMethod
+        /// <summary>
+        /// åˆæœŸåŒ–
+        /// </summary>
+        public void Init()
         {
-            rb = GetComponent<Rigidbody>();
-            agent = GetComponent<NavMeshAgent>();
-
-            agent.destination = targetPlayer.position;
+            
         }
         #endregion
     }

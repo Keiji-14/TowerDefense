@@ -1,16 +1,19 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.AI;
 
 namespace Game.Enemy
 {
+    /// <summary>
+    /// æ•µã®å‡¦ç†
+    /// </summary>
     public class Enemy : MonoBehaviour
     {
         #region PrivateField
-        private float HP = 5;
+        private float HP = 100;
 
-        /// <summary>RigidbodyƒRƒ“ƒ|[ƒlƒ“ƒg</summary>
+        /// <summary>Rigidbodyã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ</summary>
         private Rigidbody rb;
-        /// <summary>NavMeshAgentƒRƒ“ƒ|[ƒlƒ“ƒg</summary>
+        /// <summary>NavMeshAgentã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ</summary>
         private NavMeshAgent agent;
         #endregion
 
@@ -24,15 +27,16 @@ namespace Game.Enemy
             rb = GetComponent<Rigidbody>();
             agent = GetComponent<NavMeshAgent>();
 
+            agent.speed = 1.0f;
             agent.destination = target.position;
         }
         #endregion
 
         #region PublicMethod
         /// <summary>
-        /// ƒ_ƒ[ƒW‚ğ—^‚¦‚éˆ—
+        /// ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹å‡¦ç†
         /// </summary>
-        /// <param name="damage">ƒ_ƒ[ƒW—¼</param>
+        /// <param name="damage">ãƒ€ãƒ¡ãƒ¼ã‚¸ä¸¡</param>
         public void TakeDamage(float damage)
         {
             HP -= damage;
@@ -43,11 +47,11 @@ namespace Game.Enemy
 
         #region PrivateMethod
         /// <summary>
-        /// ’e‚ğ”­Ë‚·‚é
+        /// å¼¾ã‚’ç™ºå°„ã™ã‚‹
         /// </summary>
         private void LifeCheck()
         {
-            // HP‚ª0‚ğ‰º‰ñ‚Á‚½‚©‚Ç‚¤‚©‚ğŠm”F
+            // HPãŒ0ã‚’ä¸‹å›ã£ãŸã‹ã©ã†ã‹ã‚’ç¢ºèª
             if (IsLifeZero())
             {
                 Destroy(this.gameObject);
@@ -55,7 +59,7 @@ namespace Game.Enemy
         }
 
         /// <summary>
-        /// ‘Ì—Í‚ª0‚ğ‰º‰ñ‚Á‚½‚©‚Ç‚¤‚©‚ğ”»’è
+        /// ä½“åŠ›ãŒ0ã‚’ä¸‹å›ã£ãŸã‹ã©ã†ã‹ã‚’åˆ¤å®š
         /// </summary>
         private bool IsLifeZero()
         {
