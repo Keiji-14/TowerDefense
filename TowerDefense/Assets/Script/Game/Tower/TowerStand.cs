@@ -19,8 +19,6 @@ namespace Game.Tower
         private bool isSelection = false;
         /// <summary>建設したタワー</summary>
         private Tower tower;
-        /// <summary>建設したタワーの情報</summary>
-        private TowerDataInfo towerData;
         #endregion
 
         #region SerializeField

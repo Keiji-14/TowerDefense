@@ -20,6 +20,8 @@ namespace Game.Tower
         private float lastAttackTime;
         /// <summary>現在の発射口を追跡する変数</summary>
         private Transform currentFirePoint;
+        /// <summary>捕捉した敵のオブジェクト</summary>
+        private GameObject targetEnemyObj;
         /// <summary>建設したタワーの情報</summary>
         private TowerDataInfo towerData;
         #endregion
@@ -59,6 +61,15 @@ namespace Game.Tower
             }
         }
 
+        private void OnTriggerExit(Collider other)
+        {
+            // 敵が圏外に出たかどうかを確認し、捕捉を解除する
+            if (other.transform.CompareTag("Enemy") && other.gameObject == targetEnemyObj)
+            {
+                ReleaseTarget();
+            }
+        }
+
         /// <summary>
         /// 行動パターンの判別
         /// </summary>
@@ -69,7 +80,7 @@ namespace Game.Tower
             {
                 case TowerType.MachineGun:
                     LookTarget(enemyObj);
-                    MachineGun(enemyObj);
+                    MachineGun();
                     break;
                 case TowerType.Cannon:
                     LookTarget(enemyObj);
@@ -85,30 +96,44 @@ namespace Game.Tower
         /// <param name="enemyObj">攻撃対象</param>
         private void LookTarget(GameObject enemyObj)
         {
-            Vector3 targetDirection = enemyObj.transform.position - transform.position;
-            targetDirection.y = VerticalLockValue;
-            Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            if (targetEnemyObj == null)
+            {
+                targetEnemyObj = enemyObj;
+            }
+
+            if (targetEnemyObj != null)
+            {
+                Vector3 targetDirection = targetEnemyObj.transform.position - transform.position;
+                targetDirection.y = VerticalLockValue;
+                Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            }
+        }
+
+        /// <summary>
+        /// ターゲットの捕捉を解除する
+        /// </summary>
+        private void ReleaseTarget()
+        {
+            targetEnemyObj = null;
         }
 
         /// <summary>
         /// 機関銃の処理
         /// </summary>
-        /// <param name="enemyObj">攻撃対象</param>
-        private void MachineGun(GameObject enemyObj)
+        private void MachineGun()
         {
-            if (isShootInterval)
+            if (isShootInterval && targetEnemyObj != null)
             {
                 isShootInterval = false;
-                StartCoroutine(ShotMachineGun(enemyObj));
+                StartCoroutine(ShotMachineGun());
             }
         }
 
         /// <summary>
         /// 機関銃の弾を発射する処理
         /// </summary>
-        /// <param name="enemyObj">攻撃対象</param>
-        private IEnumerator ShotMachineGun(GameObject enemyObj)
+        private IEnumerator ShotMachineGun()
         {
             // バーストの間隔
             float burstInterval = 0.05f;
@@ -121,7 +146,11 @@ namespace Game.Tower
 
                 // 弾を発射
                 var bullet = Instantiate(towerData.bulletObj, firePoint.position, firePoint.rotation).GetComponent<Bullet>();
-                bullet.Init(towerData.attack, towerData.bulletSpeed, enemyObj);
+
+                if (targetEnemyObj != null)
+                {
+                    bullet.Init(towerData.attack, towerData.bulletSpeed, targetEnemyObj);
+                }
 
                 // 現在の発射口を切り替え
                 currentFirePoint = (currentFirePoint == firePointA) ? firePointB : firePointA;
