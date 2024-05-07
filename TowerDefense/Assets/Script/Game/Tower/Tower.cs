@@ -135,11 +135,13 @@ namespace Game.Tower
         /// </summary>
         private IEnumerator ShotMachineGun()
         {
+            // バースト数
+            int burstNum = 4;
             // バーストの間隔
             float burstInterval = 0.05f;
 
             // 機関銃は4点バーストさせる
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < burstNum; i++)
             {
                 // 発射口の選択
                 Transform firePoint = (currentFirePoint == firePointA) ? firePointA : firePointB;
