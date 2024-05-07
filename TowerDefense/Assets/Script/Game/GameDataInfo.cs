@@ -11,12 +11,15 @@
         public int fortressLife;
         /// <summary>所持金</summary>
         public int money;
+        /// <summary>現在のウェーブ数</summary>
+        public int waveNum;
 
-        public GameDataInfo(int fortressLife, int money)
+        public GameDataInfo(int fortressLife, int money, int waveNum)
         {
             this.fortressLife = fortressLife;
             this.money = money;
-        }
+            this.waveNum = waveNum;
+    }
         #endregion
     }
 }
