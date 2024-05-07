@@ -54,29 +54,34 @@ namespace Game.Enemy
         {
             // ウェーブ数を取得
             var waveNum = GameDataManager.instance.GetGameDataInfo().waveNum;
-            // 敵の出現数を取得
-            var enemyNum = GameDataManager.instance.GetStageDataInfo().waveInfo[waveNum].enemyNum;
-            // 敵の出現場所を取得
-            var spawnPoint = GameDataManager.instance.GetStageDataInfo().waveInfo[waveNum].spawnPoint.position;
-            // ウェーブのインターバル時間を取得
-            var waveInterval = GameDataManager.instance.GetStageDataInfo().waveInterval;
 
-            for (int i = 0; i < enemyNum; i++)
+            // 最終ウェーブではない場合は続行
+            if (waveNum <= GameDataManager.instance.GetStageDataInfo().waveInfo.Count)
             {
-                var enemy = Instantiate(enemyDataInfo.enemyObj, spawnPoint, Quaternion.identity).GetComponent<Enemy>();
+                // 敵の出現数を取得
+                var enemyNum = GameDataManager.instance.GetStageDataInfo().waveInfo[waveNum].enemyNum;
+                // 敵の出現場所を取得
+                var spawnPoint = GameDataManager.instance.GetStageDataInfo().waveInfo[waveNum].spawnPoint.position;
+                // ウェーブのインターバル時間を取得
+                var waveInterval = GameDataManager.instance.GetStageDataInfo().waveInterval;
 
-                enemy.Init(enemyDataInfo);
+                for (int i = 0; i < enemyNum; i++)
+                {
+                    var enemy = Instantiate(enemyDataInfo.enemyObj, spawnPoint, Quaternion.identity).GetComponent<Enemy>();
 
-                enemyList.Add(enemy);
+                    enemy.Init(enemyDataInfo);
 
-                yield return new WaitForSeconds(1f);
+                    enemyList.Add(enemy);
+
+                    yield return new WaitForSeconds(1f);
+                }
+
+                yield return new WaitForSeconds(waveInterval);
+
+                NextWaveSubject.OnNext(waveNum);
+
+                isWaveStart = true;
             }
-
-            yield return new WaitForSeconds(waveInterval);
-
-            NextWaveSubject.OnNext(waveNum);
-
-            isWaveStart = true;
         }
         #endregion
     }
