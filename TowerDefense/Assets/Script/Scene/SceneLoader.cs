@@ -17,6 +17,7 @@ namespace Scene
         {
             {SceneName.Title,   "Title"},
             {SceneName.Game,    "Game"},
+            {SceneName.GameOver, "GameOver"},
             {SceneName.Upgrade, "Upgrade"},
         };
         #endregion
@@ -27,6 +28,7 @@ namespace Scene
         {
             Title,
             Game,
+            GameOver,
             Upgrade
         }
 

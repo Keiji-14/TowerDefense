@@ -1,4 +1,5 @@
-﻿using GameData.Tower;
+﻿using GameData;
+using GameData.Tower;
 using System.Collections.Generic;
 using System.Linq;
 using UniRx;
@@ -11,6 +12,11 @@ namespace Game.Tower
     /// </summary>
     public class TowerController : MonoBehaviour
     {
+        #region PublicField
+        /// <summary>タワーを建設した時の処理</summary>
+        public Subject<int> TowerBuildSubject = new Subject<int>();
+        #endregion
+
         #region PrivateField
         /// <summary>タワー建設のUI</summary>
         private TowerBuildUI towerBuildUI; 
@@ -106,13 +112,13 @@ namespace Game.Tower
                             towerStand.OnTowerClicked();
                             selectionTowerStand.OnTowerClicked();
                             selectionTowerStand = towerStand;
-                            ShowTowerUI(towerStand.transform.position);
+                            ShowTowerUI();
                         }
                         else
                         {
                             towerStand.OnTowerClicked();
                             selectionTowerStand = towerStand;
-                            ShowTowerUI(towerStand.transform.position);
+                            ShowTowerUI();
                         }
                     }
                 }
@@ -135,10 +141,9 @@ namespace Game.Tower
         /// <summary>
         /// 建設内を選択するUIを表示する
         /// </summary>
-        /// <param name="position">表示する座標</param>
-        private void ShowTowerUI(Vector3 position)
+        private void ShowTowerUI()
         {
-            if (Input.GetMouseButtonDown(0))
+            /*if (Input.GetMouseButtonDown(0))
             {
                 // 現在表示しているUIがあれば破棄する
                 if (towerBuildUI != null)
@@ -156,6 +161,44 @@ namespace Game.Tower
                     var towerData = GetTowerData(towerType);
                     selectionTowerStand.CreateTower(towerData);
                 }).AddTo(this);
+            }*/
+            // 現在表示しているUIがあれば破棄する
+            if (towerBuildUI != null)
+            {
+                Destroy(towerBuildUI.gameObject);
+            }
+
+            // UIをインスタンス化して表示する
+            towerBuildUI = Instantiate(uiPrefab, new Vector3(960, 540, 0), Quaternion.identity, uiCanvas).GetComponent<TowerBuildUI>();
+
+            towerBuildUI.Init();
+
+            towerBuildUI.TowerBuildSubject.Subscribe(towerType =>
+            {
+                IsCanBuild(towerType);
+            }).AddTo(this);
+        }
+
+        /// <summary>
+        /// 建設できるかを判定する処理
+        /// </summary>
+        /// <param name="towerType">タワーの種類</param>
+        private void IsCanBuild(TowerType towerType)
+        {
+            // タワーの情報を取得
+            var towerData = GetTowerData(towerType);
+            // 所持金を取得
+            var possessionMoney = GameDataManager.instance.GetGameDataInfo().possessionMoney;
+
+            // 所持金が足りるかを判定
+            if (towerData.towerCost <= possessionMoney)
+            {
+                TowerBuildSubject.OnNext(towerData.towerCost);
+                selectionTowerStand.CreateTower(towerData);
+            }
+            else
+            {
+                Debug.Log("所持金が足りません");
             }
         }
 

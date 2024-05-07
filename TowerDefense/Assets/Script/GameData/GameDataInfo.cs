@@ -10,14 +10,14 @@
         /// <summary>砦の耐久値</summary>
         public int fortressLife;
         /// <summary>所持金</summary>
-        public int money;
+        public int possessionMoney;
         /// <summary>現在のウェーブ数</summary>
         public int waveNum;
 
         public GameDataInfo(int fortressLife, int money, int waveNum)
         {
             this.fortressLife = fortressLife;
-            this.money = money;
+            this.possessionMoney = money;
             this.waveNum = waveNum;
     }
         #endregion

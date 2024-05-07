@@ -13,6 +13,10 @@ namespace GameData.Tower
         public int towerID;
         /// <summary>攻撃力</summary>
         public int attack;
+        /// <summary>建設費用</summary>
+        public int towerCost;
+        /// <summary>売却時の返金額</summary>
+        public int towerIncome;
         /// <summary>攻撃速度</summary>
         public float attackSpeed;
         /// <summary>弾速</summary>

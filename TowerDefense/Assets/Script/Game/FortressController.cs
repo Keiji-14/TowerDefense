@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UniRx;
+using UnityEngine;
 
 namespace Game.Fortress
 {
@@ -7,6 +8,11 @@ namespace Game.Fortress
     /// </summary>
     public class FortressController : MonoBehaviour
     {
+        #region PublicField
+        /// <summary>砦に時の処理</summary>
+        public Subject<Unit> FortressDamageSubject = new Subject<Unit>();
+        #endregion
+
         #region PrivateMethod
         // 敵が弾に当たった時の処理
         private void OnTriggerEnter(Collider other)
@@ -15,7 +21,7 @@ namespace Game.Fortress
             {
                 Destroy(other.gameObject);
 
-                Debug.Log("砦にダメージ");
+                FortressDamageSubject.OnNext(Unit.Default);
             }
         }
         #endregion

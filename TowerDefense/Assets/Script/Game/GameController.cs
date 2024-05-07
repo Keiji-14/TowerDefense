@@ -1,7 +1,8 @@
 ﻿using GameData;
 using GameData.Stage;
-using Game.Enemy;
+using Game.Fortress;
 using Game.Tower;
+using Game.Enemy;
 using System;
 using UniRx;
 using UnityEngine;
@@ -26,10 +27,14 @@ namespace Game
         [SerializeField] private Button gameStartBtn;
         /// <summary>ステージの情報</summary>
         [SerializeField] private StageDataInfo stageDataInfo;
+        /// <summary砦の処理</summary>
+        [SerializeField] private FortressController fortressController;
         /// <summary>タワーの処理</summary>
         [SerializeField] private TowerController towerController;
         /// <summary>敵の処理</summary>
         [SerializeField] private EnemyController enemyController;
+        /// <summary>ゲームで表示するUI情報</summary>
+        [SerializeField] private GameViewUI gameViewUI;
         #endregion
 
         #region PublicMethod
@@ -43,7 +48,20 @@ namespace Game
             GameDataManager.instance.SetGameDataInfo(gameDataInfo);
 
             // 初期化
+            fortressController.FortressDamageSubject.Subscribe(_ =>
+            {
+                FortressTakeDamage();
+            }).AddTo(this);
+
             towerController.Init();
+
+            towerController.TowerBuildSubject.Subscribe(towerCost =>
+            {
+                PossessionMoneyUpdate(towerCost);
+                gameViewUI.UpdateViewUI();
+            }).AddTo(this);
+
+            gameViewUI.UpdateViewUI();
 
             OnClickGameStartButtonObserver.Subscribe(_ =>
             {
@@ -70,6 +88,41 @@ namespace Game
         }
 
         /// <summary>
+        /// 砦にダメージを与える処理
+        /// </summary>
+        private void FortressTakeDamage()
+        {
+            var fortressLife = GameDataManager.instance.GetGameDataInfo().fortressLife;
+            fortressLife--;
+
+            // ゲームの情報を更新する
+            var gameDataInfo = new GameDataInfo(
+                    fortressLife,
+                    GameDataManager.instance.GetGameDataInfo().possessionMoney,
+                    GameDataManager.instance.GetGameDataInfo().waveNum);
+            GameDataManager.instance.SetGameDataInfo(gameDataInfo);
+
+            gameViewUI.UpdateViewUI();
+        }
+
+        /// <summary>
+        /// 所持金を更新する処理
+        /// </summary>
+        /// <param name="towerCost">タワーの価値</param>
+        private void PossessionMoneyUpdate(int towerCost)
+        {
+            var possessionMoney = GameDataManager.instance.GetGameDataInfo().possessionMoney;
+            possessionMoney -= towerCost;
+
+            // ゲームの情報を更新する
+            var gameDataInfo = new GameDataInfo(
+                    GameDataManager.instance.GetGameDataInfo().fortressLife,
+                    possessionMoney,
+                    GameDataManager.instance.GetGameDataInfo().waveNum);
+            GameDataManager.instance.SetGameDataInfo(gameDataInfo);
+        }
+
+        /// <summary>
         /// ゲーム情報のウェーブを更新する処理
         /// </summary>
         /// <param name="waveNum">ウェーブ数</param>
@@ -81,7 +134,7 @@ namespace Game
             // ゲームの情報を更新する
             var gameDataInfo = new GameDataInfo(
                     GameDataManager.instance.GetGameDataInfo().fortressLife,
-                    GameDataManager.instance.GetGameDataInfo().money,
+                    GameDataManager.instance.GetGameDataInfo().possessionMoney,
                     waveNum);
             GameDataManager.instance.SetGameDataInfo(gameDataInfo);
         }
