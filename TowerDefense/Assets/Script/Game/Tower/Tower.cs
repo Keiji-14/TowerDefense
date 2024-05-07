@@ -1,45 +1,58 @@
-using GameData.Tower;
+ï»¿using GameData.Tower;
+using System.Collections;
 using UnityEngine;
 
 namespace Game.Tower
 {
     /// <summary>
-    /// ƒ^ƒ[‚É‚Â‚¢‚Ä‚Ìˆ—
+    /// ã‚¿ãƒ¯ãƒ¼ã«ã¤ã„ã¦ã®å‡¦ç†
     /// </summary>
     public class Tower : MonoBehaviour
     {
         #region PrivateField
-        /// <summary>ƒ^ƒ[‰ñ“]‚ÌY²‚Ì’l</summary>
+        /// <summary>ã‚¿ãƒ¯ãƒ¼å›è»¢ã®Yè»¸ã®å€¤</summary>
         private const float VerticalLockValue = 0f;
-        /// <summary>ƒ^ƒ[‚Ì‰ñ“]‘¬“x</summary>
+        /// <summary>æ”»æ’ƒå¯èƒ½ã‹ã©ã†ã‹</summary>
+        private bool isShootInterval;
+        /// <summary>ã‚¿ãƒ¯ãƒ¼ã®å›è»¢é€Ÿåº¦</summary>
         private float rotationSpeed = 5f;
         /// <summary></summary>
         private float lastAttackTime;
-        /// <summary>Œšİ‚µ‚½ƒ^ƒ[‚Ìî•ñ</summary>
-        private TowerData towerData;
+        /// <summary>ç¾åœ¨ã®ç™ºå°„å£ã‚’è¿½è·¡ã™ã‚‹å¤‰æ•°</summary>
+        private Transform currentFirePoint;
+        /// <summary>å»ºè¨­ã—ãŸã‚¿ãƒ¯ãƒ¼ã®æƒ…å ±</summary>
+        private TowerDataInfo towerData;
         #endregion
 
         #region SerializeField
-        /// <summary>’e‚Ì”­ËŒû</summary>
-        [SerializeField] Transform firePoint;
+        /// <summary>å¼¾ã®ç™ºå°„å£A</summary>
+        [SerializeField] Transform firePointA;
+        /// <summary>å¼¾ã®ç™ºå°„å£B</summary>
+        [SerializeField] Transform firePointB;
+        /// <summary>ãƒã‚ºãƒ«ãƒ•ãƒ©ãƒƒã‚·ãƒ¥ã®ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«</summary>
+        [SerializeField] ParticleSystem muzzleFlash;
         #endregion
 
         #region PublicMethod
         /// <summary>
-        /// ‰Šú‰»
+        /// åˆæœŸåŒ–
         /// </summary>
-        /// <param name="towerData">ƒ^ƒ[‚Ìî•ñ</param>
-        public void Init(TowerData towerData)
+        /// <param name="towerData">ã‚¿ãƒ¯ãƒ¼ã®æƒ…å ±</param>
+        public void Init(TowerDataInfo towerData)
         {
-            // ƒ^ƒ[‚Ìî•ñ‚ğ•Û‚³‚¹‚é
+            // ã‚¿ãƒ¯ãƒ¼ã®æƒ…å ±ã‚’ä¿æŒã•ã›ã‚‹
             this.towerData = towerData;
+            // ç™ºå°„å¯èƒ½çŠ¶æ…‹ã«ã™ã‚‹
+            isShootInterval = true;
+
+            currentFirePoint = firePointA;
         }
         #endregion
 
         #region PrivateMethod
         private void OnTriggerStay(Collider other)
         {
-            // “G‚ªŒ—“à‚É“ü‚Á‚½‚©‚Ç‚¤‚©
+            // æ•µãŒåœå†…ã«å…¥ã£ãŸã‹ã©ã†ã‹
             if (other.transform.CompareTag("Enemy"))
             {
                 ActionType(other.gameObject);
@@ -47,9 +60,9 @@ namespace Game.Tower
         }
 
         /// <summary>
-        /// s“®ƒpƒ^[ƒ“‚Ì”»•Ê
+        /// è¡Œå‹•ãƒ‘ã‚¿ãƒ¼ãƒ³ã®åˆ¤åˆ¥
         /// </summary>
-        /// <param name="enemyObj">UŒ‚‘ÎÛ</param>
+        /// <param name="enemyObj">æ”»æ’ƒå¯¾è±¡</param>
         private void ActionType(GameObject enemyObj)
         {
             switch (towerData.towerType)
@@ -67,9 +80,9 @@ namespace Game.Tower
         }
 
         /// <summary>
-        /// ƒ^[ƒQƒbƒg‚Ì•ûŒü‚ğŒü‚­ˆ—
+        /// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®æ–¹å‘ã‚’å‘ãå‡¦ç†
         /// </summary>
-        /// <param name="enemyObj">UŒ‚‘ÎÛ</param>
+        /// <param name="enemyObj">æ”»æ’ƒå¯¾è±¡</param>
         private void LookTarget(GameObject enemyObj)
         {
             Vector3 targetDirection = enemyObj.transform.position - transform.position;
@@ -79,34 +92,46 @@ namespace Game.Tower
         }
 
         /// <summary>
-        /// ’e‚ğ”­Ë‚·‚é
+        /// æ©Ÿé–¢éŠƒã®å‡¦ç†
         /// </summary>
-        /// <param name="enemyObj">UŒ‚‘ÎÛ</param>
+        /// <param name="enemyObj">æ”»æ’ƒå¯¾è±¡</param>
         private void MachineGun(GameObject enemyObj)
         {
-            if (Time.time - lastAttackTime > 1f / towerData.attackSpeed)
+            if (isShootInterval)
             {
-                var bullet = Instantiate(towerData.bulletObj, firePoint.position, firePoint.rotation).GetComponent<Bullet>();
-                bullet.Init(towerData.attack, towerData.bulletSpeed, enemyObj);
-                // ‘O‰ñ‚ÌUŒ‚‚ğXV
-                lastAttackTime = Time.time;
+                isShootInterval = false;
+                StartCoroutine(ShotMachineGun(enemyObj));
             }
         }
 
         /// <summary>
-        /// ’e‚ğ”­Ë‚·‚é
+        /// æ©Ÿé–¢éŠƒã®å¼¾ã‚’ç™ºå°„ã™ã‚‹å‡¦ç†
         /// </summary>
-        /// <param name="enemyObj">UŒ‚‘ÎÛ</param>
-        private void Shot(GameObject enemyObj)
+        /// <param name="enemyObj">æ”»æ’ƒå¯¾è±¡</param>
+        private IEnumerator ShotMachineGun(GameObject enemyObj)
         {
-            var enemy = enemyObj.GetComponent<Enemy.Enemy>();
+            // ãƒãƒ¼ã‚¹ãƒˆã®é–“éš”
+            float burstInterval = 0.05f;
 
-            // 1ƒtƒŒ[ƒ€‚ ‚½‚è‚Ìƒ_ƒ[ƒW—Ê‚ğZoiUŒ‚‘¬“x‚É‰‚¶‚Äj
-            float damage = towerData.attack * (1f / towerData.attackSpeed) * Time.deltaTime;
+            // æ©Ÿé–¢éŠƒã¯4ç‚¹ãƒãƒ¼ã‚¹ãƒˆã•ã›ã‚‹
+            for (int i = 0; i < 4; i++)
+            {
+                // ç™ºå°„å£ã®é¸æŠ
+                Transform firePoint = (currentFirePoint == firePointA) ? firePointA : firePointB;
 
-            enemy.TakeDamage(damage);
+                // å¼¾ã‚’ç™ºå°„
+                var bullet = Instantiate(towerData.bulletObj, firePoint.position, firePoint.rotation).GetComponent<Bullet>();
+                bullet.Init(towerData.attack, towerData.bulletSpeed, enemyObj);
 
-            Debug.Log("UŒ‚");
+                // ç¾åœ¨ã®ç™ºå°„å£ã‚’åˆ‡ã‚Šæ›¿ãˆ
+                currentFirePoint = (currentFirePoint == firePointA) ? firePointB : firePointA;
+
+                yield return new WaitForSeconds(burstInterval);
+            }
+
+            yield return new WaitForSeconds(towerData.attackSpeed);
+
+            isShootInterval = true;
         }
         #endregion
     }

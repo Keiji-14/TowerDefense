@@ -54,6 +54,36 @@ namespace Game.Tower
         #region PrivateMethod
         private void MouseDetectionTowerStand()
         {
+            // マウスの位置からRayを発射
+            /*Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            int layerMask = ~(1 << LayerMask.NameToLayer("Tower"));
+
+            // Rayがオブジェクトに当たったかどうかを確認
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+            {
+                // Towerコンポーネントがアタッチされているかどうかを確認
+                TowerStand towerStand = hit.collider.gameObject.GetComponent<TowerStand>();
+
+                if (towerStand != null)
+                {
+                    if (selectionTowerStand != null)
+                    {
+                        towerStand.OnTowerClicked();
+                        selectionTowerStand.OnTowerClicked();
+                        selectionTowerStand = towerStand;
+                        ShowTowerUI(towerStand.transform.position);
+                    }
+                    else
+                    {
+                        towerStand.OnTowerClicked();
+                        selectionTowerStand = towerStand;
+                        ShowTowerUI(towerStand.transform.position);
+                    }
+                }
+            }*/
+
             // マウスがクリックされたかどうかを確認
             if (Input.GetMouseButtonDown(0))
             {
@@ -108,29 +138,32 @@ namespace Game.Tower
         /// <param name="position">表示する座標</param>
         private void ShowTowerUI(Vector3 position)
         {
-            // 現在表示しているUIがあれば破棄する
-            if (towerBuildUI != null)
+            if (Input.GetMouseButtonDown(0))
             {
-                Destroy(towerBuildUI.gameObject);
+                // 現在表示しているUIがあれば破棄する
+                if (towerBuildUI != null)
+                {
+                    Destroy(towerBuildUI.gameObject);
+                }
+
+                // UIをインスタンス化して表示する
+                towerBuildUI = Instantiate(uiPrefab, new Vector3(960, 540, 0), Quaternion.identity, uiCanvas).GetComponent<TowerBuildUI>();
+
+                towerBuildUI.Init();
+
+                towerBuildUI.TowerBuildSubject.Subscribe(towerType =>
+                {
+                    var towerData = GetTowerData(towerType);
+                    selectionTowerStand.CreateTower(towerData);
+                }).AddTo(this);
             }
-
-            // UIをインスタンス化して表示する
-            towerBuildUI = Instantiate(uiPrefab, new Vector3(960,540,0), Quaternion.identity, uiCanvas).GetComponent<TowerBuildUI>();
-
-            towerBuildUI.Init();
-
-            towerBuildUI.TowerBuildSubject.Subscribe(towerType =>
-            {
-                var towerData = GetTowerData(towerType);
-                selectionTowerStand.CreateTower(towerData);
-            }).AddTo(this);
         }
 
         /// <summary>
         /// タワーの情報を取得する処理
         /// </summary>
         /// <param name="towerType">タワーの種類</param>
-        private TowerData GetTowerData(TowerType towerType)
+        private TowerDataInfo GetTowerData(TowerType towerType)
         {
             return towerDatabase.towerDataList.FirstOrDefault
                 (data => data.towerType == towerType);

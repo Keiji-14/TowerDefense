@@ -1,34 +1,39 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 namespace Game.Tower
 {
+    /// <summary>
+    /// å¼¾ã®å‡¦ç†
+    /// </summary>
     public class Bullet : MonoBehaviour
     {
         #region PrivateField
-        /// <summary>UŒ‚—Í</summary>
+        /// <summary>æ”»æ’ƒåŠ›</summary>
         private int attack;
-        /// <summary>’e‚Ì‘¬“x</summary>
+        /// <summary>å¼¾ã®é€Ÿåº¦</summary>
         private float bulletSpeed;
-        /// <summary>’Ç”ö‘ÎÛ‚Ì“G</summary>
+        /// <summary>è¿½å°¾å¯¾è±¡ã®æ•µ</summary>
         private GameObject targetEnemy;
-        /// <summary>’Ç”ö‘ÎÛ‚ÌˆÊ’u</summary>
+        /// <summary>è¿½å°¾å¯¾è±¡ã®ä½ç½®</summary>
         private Vector3 targetPosition;
+        /// <summary>å¼¾ã®åˆæœŸæ–¹å‘</summary>
+        private Vector3 bulletInitRot = new Vector3(90.0f, 0.0f, 0.0f);
         #endregion
 
         #region UnityEvent
         void Update()
         {
-            // ’Ç”ö‘ÎÛ‚ª‘¶İ‚·‚éê‡‚Í‚»‚Ì•ûŒü‚ÉˆÚ“®‚·‚é
+            // è¿½å°¾å¯¾è±¡ãŒå­˜åœ¨ã™ã‚‹å ´åˆã¯ãã®æ–¹å‘ã«ç§»å‹•ã™ã‚‹
             if (targetEnemy != null)
             {
-                // ’Ç”ö‘ÎÛ‚ÌˆÊ’u‚ğXV
+                // è¿½å°¾å¯¾è±¡ã®ä½ç½®ã‚’æ›´æ–°
                 targetPosition = targetEnemy.transform.position;
-                // ’Ç”ö‘ÎÛ‚Ì•ûŒü‚ÉŒü‚©‚Á‚ÄˆÚ“®
+                // è¿½å°¾å¯¾è±¡ã®æ–¹å‘ã«å‘ã‹ã£ã¦ç§»å‹•
                 transform.position = Vector3.MoveTowards(transform.position, targetPosition, bulletSpeed * Time.deltaTime);
             }
             else
             {
-                // ’Ç”ö‘ÎÛ‚ª‘¶İ‚µ‚È‚¢ê‡‚Í’e‚ğ”jŠü‚·‚é
+                // è¿½å°¾å¯¾è±¡ãŒå­˜åœ¨ã—ãªã„å ´åˆã¯å¼¾ã‚’ç ´æ£„ã™ã‚‹
                 Destroy(this.gameObject);
             }
         }
@@ -36,20 +41,22 @@ namespace Game.Tower
 
         #region PublicMethod
         /// <summary>
-        /// ‰Šú‰»
+        /// åˆæœŸåŒ–
         /// </summary>
-        /// <param name="enemyObj">’Ç”ö‘ÎÛ</param>
+        /// <param name="enemyObj">è¿½å°¾å¯¾è±¡</param>
         public void Init(int attack, float bulletSpeed, GameObject enemyObj)
         {
             this.attack = attack;
             this.bulletSpeed = bulletSpeed;
             targetEnemy = enemyObj;
             targetPosition = targetEnemy.transform.position;
+
+            transform.Rotate(bulletInitRot);
         }
         #endregion
 
         #region PrivateMethod
-        // “G‚ª’e‚É“–‚½‚Á‚½‚Ìˆ—
+        // æ•µãŒå¼¾ã«å½“ãŸã£ãŸæ™‚ã®å‡¦ç†
         private void OnTriggerEnter(Collider other)
         {
             if (other.transform.CompareTag("Enemy"))

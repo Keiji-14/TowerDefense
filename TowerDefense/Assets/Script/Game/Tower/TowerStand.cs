@@ -20,7 +20,7 @@ namespace Game.Tower
         /// <summary>建設したタワー</summary>
         private Tower tower;
         /// <summary>建設したタワーの情報</summary>
-        private TowerData towerData;
+        private TowerDataInfo towerData;
         #endregion
 
         #region SerializeField
@@ -39,7 +39,7 @@ namespace Game.Tower
         /// タワーを生成する処理
         /// </summary>
         /// <param name="towerData">タワーの情報</param>
-        public void CreateTower(TowerData towerData)
+        public void CreateTower(TowerDataInfo towerData)
         {
             tower = Instantiate(towerData.towerObj, transform.position, Quaternion.identity).GetComponent<Tower>();
 
