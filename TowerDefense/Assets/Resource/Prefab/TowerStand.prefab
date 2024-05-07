@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.25, z: 0}
-  m_LocalScale: {x: 2, y: 0.5, z: 2}
+  m_LocalScale: {x: 2, y: 0.25, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 146860104833395690}
@@ -120,11 +120,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectionLightObj: {fileID: 6336871119688350187}
-  towerdata:
-    towerID: 0
-    attack: 0
-    attackSpeed: 0
-    towerObj: {fileID: 1659223853436937936, guid: eac0c09775cba7544824d4824ac56b50, type: 3}
 --- !u!1 &6336871119688350187
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,7 +148,7 @@ Transform:
   m_GameObject: {fileID: 6336871119688350187}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.55, z: 0}
+  m_LocalPosition: {x: 0, y: 0.51, z: 0}
   m_LocalScale: {x: 0.1, y: 5, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
