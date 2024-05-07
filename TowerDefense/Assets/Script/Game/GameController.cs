@@ -15,6 +15,11 @@ namespace Game
     /// </summary>
     public class GameController : MonoBehaviour
     {
+        #region PublicField
+        /// <summary>ゲームオーバー時の処理</summary>
+        public Subject<Unit> GameOverSubject = new Subject<Unit>();
+        #endregion
+
         #region PrivateField
         /// <summary>ウェーブ数の初期化</summary>
         private const int waveInitNum = 1;
@@ -44,7 +49,7 @@ namespace Game
         public void Init()
         {
             // ゲーム情報をを初期化
-            var gameDataInfo = new GameDataInfo(stageDataInfo.startFortressLife, stageDataInfo.startMoney, waveInitNum);
+            var gameDataInfo = new GameDataInfo(stageDataInfo.startFortressLife, stageDataInfo.startMoney, waveInitNum, false, false);
             GameDataManager.instance.SetGameDataInfo(gameDataInfo);
 
             // 初期化
@@ -92,17 +97,22 @@ namespace Game
         /// </summary>
         private void FortressTakeDamage()
         {
-            var fortressLife = GameDataManager.instance.GetGameDataInfo().fortressLife;
+            var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
+            var fortressLife = gameDataInfo.fortressLife;
             fortressLife--;
 
             // ゲームの情報を更新する
-            var gameDataInfo = new GameDataInfo(
+            var setGameDataInfo = new GameDataInfo(
                     fortressLife,
-                    GameDataManager.instance.GetGameDataInfo().possessionMoney,
-                    GameDataManager.instance.GetGameDataInfo().waveNum);
-            GameDataManager.instance.SetGameDataInfo(gameDataInfo);
+                    gameDataInfo.possessionMoney,
+                    gameDataInfo.waveNum,
+                    gameDataInfo.isGameClear,
+                    gameDataInfo.isGameOver);
+            GameDataManager.instance.SetGameDataInfo(setGameDataInfo);
 
             gameViewUI.UpdateViewUI();
+
+            IsGameOver();
         }
 
         /// <summary>
@@ -111,15 +121,20 @@ namespace Game
         /// <param name="towerCost">タワーの価値</param>
         private void PossessionMoneyUpdate(int towerCost)
         {
-            var possessionMoney = GameDataManager.instance.GetGameDataInfo().possessionMoney;
+            var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
+
+            var possessionMoney = gameDataInfo.possessionMoney;
             possessionMoney -= towerCost;
 
             // ゲームの情報を更新する
-            var gameDataInfo = new GameDataInfo(
-                    GameDataManager.instance.GetGameDataInfo().fortressLife,
+            var setGameDataInfo = new GameDataInfo(
+                    gameDataInfo.fortressLife,
                     possessionMoney,
-                    GameDataManager.instance.GetGameDataInfo().waveNum);
-            GameDataManager.instance.SetGameDataInfo(gameDataInfo);
+                    gameDataInfo.waveNum,
+                    gameDataInfo.isGameClear,
+                    gameDataInfo.isGameOver);
+            
+            GameDataManager.instance.SetGameDataInfo(setGameDataInfo);
         }
 
         /// <summary>
@@ -128,15 +143,42 @@ namespace Game
         /// <param name="waveNum">ウェーブ数</param>
         private void WaveUpdate(int waveNum)
         {
+            var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
             // ウェーブ数を加算する
             waveNum++;
 
             // ゲームの情報を更新する
-            var gameDataInfo = new GameDataInfo(
-                    GameDataManager.instance.GetGameDataInfo().fortressLife,
-                    GameDataManager.instance.GetGameDataInfo().possessionMoney,
-                    waveNum);
-            GameDataManager.instance.SetGameDataInfo(gameDataInfo);
+            var setGameDataInfo = new GameDataInfo(
+                    gameDataInfo.fortressLife,
+                    gameDataInfo.possessionMoney,
+                    waveNum,
+                    gameDataInfo.isGameClear,
+                    gameDataInfo.isGameOver);
+            GameDataManager.instance.SetGameDataInfo(setGameDataInfo);
+        }
+
+        /// <summary>
+        /// ゲームオーバーかどうかを確認する処理
+        /// </summary>
+        private void IsGameOver()
+        {
+            var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
+            var fortressLife = gameDataInfo.fortressLife;
+
+            // 砦の耐久値が0以下の場合
+            if (fortressLife <= 0 && !gameDataInfo.isGameOver)
+            {
+                // ゲームの情報を更新する
+                var setGameDataInfo = new GameDataInfo(
+                        gameDataInfo.fortressLife,
+                        gameDataInfo.possessionMoney,
+                        gameDataInfo.waveNum,
+                        gameDataInfo.isGameClear,
+                        true);
+                GameDataManager.instance.SetGameDataInfo(setGameDataInfo);
+
+                GameOverSubject.OnNext(Unit.Default);
+            }
         }
         #endregion
     }

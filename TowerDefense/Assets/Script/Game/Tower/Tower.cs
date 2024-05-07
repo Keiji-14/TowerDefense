@@ -16,8 +16,6 @@ namespace Game.Tower
         private bool isShootInterval;
         /// <summary>タワーの回転速度</summary>
         private float rotationSpeed = 5f;
-        /// <summary></summary>
-        private float lastAttackTime;
         /// <summary>現在の発射口を追跡する変数</summary>
         private Transform currentFirePoint;
         /// <summary>捕捉した敵のオブジェクト</summary>

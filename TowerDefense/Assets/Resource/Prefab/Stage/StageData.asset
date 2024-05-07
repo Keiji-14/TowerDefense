@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StageData
   m_EditorClassIdentifier: 
   stageID: 0
-  startFortressLife: 20
+  startFortressLife: 5
   startMoney: 100
   waveInterval: 5
   fortressTransform: {fileID: 7235649449911910283, guid: 60187d3b59f74fb4a8bffca50b0a24f1, type: 3}

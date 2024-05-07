@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using GameData;
+using UniRx;
 using UnityEngine;
 
 namespace Game.Fortress
@@ -17,6 +18,10 @@ namespace Game.Fortress
         // 敵が弾に当たった時の処理
         private void OnTriggerEnter(Collider other)
         {
+            if (GameDataManager.instance.GetGameDataInfo().isGameClear ||
+                GameDataManager.instance.GetGameDataInfo().isGameOver)
+                return;
+
             if (other.transform.CompareTag("Enemy"))
             {
                 Destroy(other.gameObject);

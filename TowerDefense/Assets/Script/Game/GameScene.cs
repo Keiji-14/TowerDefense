@@ -1,4 +1,5 @@
 ﻿using Scene;
+using UniRx;
 using UnityEngine;
 
 namespace Game
@@ -19,6 +20,11 @@ namespace Game
             base.Start();
 
             gameController.Init();
+
+            gameController.GameOverSubject.Subscribe(_ =>
+            {
+                SceneLoader.Instance().Load(SceneLoader.SceneName.GameOver, true);
+            }).AddTo(this);
         }
         #endregion
     }
