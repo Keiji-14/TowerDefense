@@ -18,6 +18,8 @@ namespace GameData.Stage
         public int startMoney;
         /// <summary>ウェーブのインターバル</summary>
         public float waveInterval;
+        /// <summary>砦の場所</summary>
+        public Transform fortressTransform;
         /// <summary>1Weveの情報</summary>
         public List<WaveInfo> waveInfo = new List<WaveInfo>();
         #endregion

@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
-namespace GameData.Tower
+namespace GameData.Enemy
 {
     /// <summary>
     /// 敵の情報を管理するクラス
     /// </summary>
-    [System.Serializable]
-    public class EnemyDataInfo : MonoBehaviour
+    [CreateAssetMenu(fileName = "EnemyData", menuName = "Create Enemy Data")]
+    public class EnemyDataInfo : ScriptableObject
     {
         #region PublicField
         /// <summary>敵のID</summary>

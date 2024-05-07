@@ -1,17 +1,23 @@
-﻿using GameData.Tower;
+﻿using GameData;
 using GameData.Stage;
-using System.Collections.Generic;
-using UnityEngine;
+using GameData.Enemy;
 using System.Collections;
+using System.Collections.Generic;
+using UniRx;
+using UnityEngine;
 
 namespace Game.Enemy
 {
     public class EnemyController : MonoBehaviour
     {
-        #region PrivateField
-        private bool isWaveStart = false;
+        #region PublicField
         /// <summary>出現した敵の保持</summary>
-        private StageDataInfo stageDataInfo;
+        public Subject<int> NextWaveSubject = new Subject<int>();
+        #endregion
+
+        #region PrivateField
+        /// <summary>ウェーブを開始するかどうかの判定</summary>
+        private bool isWaveStart = false;
         /// <summary>出現した敵の保持</summary>
         private List<Enemy> enemyList = new List<Enemy>(); 
         #endregion
@@ -35,7 +41,6 @@ namespace Game.Enemy
         /// </summary>
         public void Init(StageDataInfo stageDataInfo)
         {
-            this.stageDataInfo = stageDataInfo;
             isWaveStart = true;
         }
         #endregion
@@ -47,19 +52,31 @@ namespace Game.Enemy
         /// <param name="">攻撃対象</param>
         private IEnumerator CreateEnemy()
         {
-            // 機関銃は4点バーストさせる
-            for (int i = 0; i < stageDataInfo.waveInfo[0].enemyNum; i++)
+            // ウェーブ数を取得
+            var waveNum = GameDataManager.instance.GetGameDataInfo().waveNum;
+            // 敵の出現数を取得
+            var enemyNum = GameDataManager.instance.GetStageDataInfo().waveInfo[waveNum].enemyNum;
+            // 敵の出現場所を取得
+            var spawnPoint = GameDataManager.instance.GetStageDataInfo().waveInfo[waveNum].spawnPoint.position;
+            // ウェーブのインターバル時間を取得
+            var waveInterval = GameDataManager.instance.GetStageDataInfo().waveInterval;
+
+            for (int i = 0; i < enemyNum; i++)
             {
-                var enemy = Instantiate(enemyDataInfo.enemyObj, stageDataInfo.waveInfo[0].spawnPoint.position, Quaternion.identity).GetComponent<Enemy>();
+                var enemy = Instantiate(enemyDataInfo.enemyObj, spawnPoint, Quaternion.identity).GetComponent<Enemy>();
+
+                enemy.Init();
+
                 enemyList.Add(enemy);
 
                 yield return new WaitForSeconds(1f);
             }
 
+            yield return new WaitForSeconds(waveInterval);
 
-            yield return new WaitForSeconds(stageDataInfo.waveInterval);
+            NextWaveSubject.OnNext(waveNum);
 
-             isWaveStart= true;
+            isWaveStart = true;
         }
         #endregion
     }

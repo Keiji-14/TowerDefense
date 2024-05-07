@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using GameData;
+using UnityEngine;
 using UnityEngine.AI;
 
 namespace Game.Enemy
@@ -21,18 +22,21 @@ namespace Game.Enemy
         [SerializeField] private Transform target;
         #endregion
 
-        #region UnityEvent
-        void Start()
+        #region PublicMethod
+        /// <summary>
+        /// 初期化
+        /// </summary>
+        public void Init()
         {
             rb = GetComponent<Rigidbody>();
             agent = GetComponent<NavMeshAgent>();
 
+            target = GameDataManager.instance.GetStageDataInfo().fortressTransform;
+
             agent.speed = 1.0f;
             agent.destination = target.position;
         }
-        #endregion
 
-        #region PublicMethod
         /// <summary>
         /// ダメージを与える処理
         /// </summary>

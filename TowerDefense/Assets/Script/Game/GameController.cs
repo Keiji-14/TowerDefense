@@ -15,8 +15,6 @@ namespace Game
     public class GameController : MonoBehaviour
     {
         #region PrivateField
-        /// <summary>ゲーム中の情報</summary>
-        private GameDataInfo gameDataInfo;
         /// <summary>ウェーブ数の初期化</summary>
         private const int waveInitNum = 1;
         /// <summary>ゲーム開始ボタンを押した時の処理</summary>
@@ -41,7 +39,8 @@ namespace Game
         public void Init()
         {
             // ゲーム情報をを初期化
-            gameDataInfo = new GameDataInfo(stageDataInfo.startFortressLife, stageDataInfo.startMoney, waveInitNum);
+            var gameDataInfo = new GameDataInfo(stageDataInfo.startFortressLife, stageDataInfo.startMoney, waveInitNum);
+            GameDataManager.instance.SetGameDataInfo(gameDataInfo);
 
             // 初期化
             towerController.Init();
@@ -63,6 +62,28 @@ namespace Game
             gameStartBtn.gameObject.SetActive(false);
 
             enemyController.Init(stageDataInfo);
+
+            enemyController.NextWaveSubject.Subscribe(waveNum =>
+            {
+                WaveUpdate(waveNum);
+            }).AddTo(this);
+        }
+
+        /// <summary>
+        /// ゲーム情報のウェーブを更新する処理
+        /// </summary>
+        /// <param name="waveNum">ウェーブ数</param>
+        private void WaveUpdate(int waveNum)
+        {
+            // ウェーブ数を加算する
+            waveNum++;
+
+            // ゲームの情報を更新する
+            var gameDataInfo = new GameDataInfo(
+                    GameDataManager.instance.GetGameDataInfo().fortressLife,
+                    GameDataManager.instance.GetGameDataInfo().money,
+                    waveNum);
+            GameDataManager.instance.SetGameDataInfo(gameDataInfo);
         }
         #endregion
     }

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd51e574b629e1e4e9809d55bf7ced7a, type: 3}
+  m_Name: StageData
+  m_EditorClassIdentifier: 
+  stageID: 0
+  startFortressLife: 20
+  startMoney: 100
+  waveInterval: 5
+  fortressTransform: {fileID: 7235649449911910283, guid: 60187d3b59f74fb4a8bffca50b0a24f1, type: 3}
+  waveInfo:
+  - enemyNum: 3
+    spawnPoint: {fileID: 1967474276183628169, guid: 897e12e6ff535c84a838f08d64f952b8, type: 3}
+  - enemyNum: 3
+    spawnPoint: {fileID: 1967474276183628169, guid: 897e12e6ff535c84a838f08d64f952b8, type: 3}
+  - enemyNum: 3
+    spawnPoint: {fileID: 1967474276183628169, guid: 897e12e6ff535c84a838f08d64f952b8, type: 3}
+  - enemyNum: 3
+    spawnPoint: {fileID: 1967474276183628169, guid: 897e12e6ff535c84a838f08d64f952b8, type: 3}
+  - enemyNum: 3
+    spawnPoint: {fileID: 1967474276183628169, guid: 897e12e6ff535c84a838f08d64f952b8, type: 3}
