@@ -1,4 +1,5 @@
 ﻿using GameData;
+using GameData.Enemy;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,8 +11,7 @@ namespace Game.Enemy
     public class Enemy : MonoBehaviour
     {
         #region PrivateField
-        private float HP = 100;
-
+        private float life = 10;
         /// <summary>Rigidbodyコンポーネント</summary>
         private Rigidbody rb;
         /// <summary>NavMeshAgentコンポーネント</summary>
@@ -26,14 +26,18 @@ namespace Game.Enemy
         /// <summary>
         /// 初期化
         /// </summary>
-        public void Init()
+        public void Init(EnemyDataInfo enemyDataInfo)
         {
             rb = GetComponent<Rigidbody>();
             agent = GetComponent<NavMeshAgent>();
 
-            target = GameDataManager.instance.GetStageDataInfo().fortressTransform;
+            var stageDataInfo = GameDataManager.instance.GetStageDataInfo();
 
-            agent.speed = 1.0f;
+            target = stageDataInfo.fortressTransform;
+
+            life = enemyDataInfo.life;
+            agent.speed = enemyDataInfo.speed;
+
             agent.destination = target.position;
         }
 
@@ -43,7 +47,7 @@ namespace Game.Enemy
         /// <param name="damage">ダメージ量</param>
         public void TakeDamage(float damage)
         {
-            HP -= damage;
+            life -= damage;
 
             LifeCheck();
         }
@@ -67,7 +71,7 @@ namespace Game.Enemy
         /// </summary>
         private bool IsLifeZero()
         {
-            return HP <= 0;
+            return life <= 0;
         }
         #endregion
     }
