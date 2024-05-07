@@ -6,7 +6,7 @@ namespace GameData.Tower
     /// タワーの情報を管理するクラス
     /// </summary>
     [System.Serializable]
-    public class TowerData
+    public class TowerDataInfo
     {
         #region PublicField
         /// <summary>タワーID</summary>
