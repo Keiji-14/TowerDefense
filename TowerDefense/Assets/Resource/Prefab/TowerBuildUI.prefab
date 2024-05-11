@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8839321414974967638}
   - component: {fileID: -2406145164982834658}
   m_Layer: 5
-  m_Name: CreateUI
+  m_Name: TowerBuildUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,8 +33,6 @@ RectTransform:
   - {fileID: 2674946742230266493}
   - {fileID: 5403791423209340105}
   - {fileID: 254578653373756878}
-  - {fileID: 5785543909616022959}
-  - {fileID: 8988035695731861125}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -69,6 +67,7 @@ GameObject:
   - component: {fileID: 77175517084853608}
   - component: {fileID: 2270828237460973997}
   - component: {fileID: 4016696347702745073}
+  - component: {fileID: 5058544013518881452}
   m_Layer: 5
   m_Name: MGButton
   m_TagString: Untagged
@@ -177,6 +176,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5058544013518881452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3640533576461656601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 614d22639c975be45adb6ddd7dd6b173, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiCanvas: {fileID: 0}
+  towerExplanationUIObj: {fileID: 0}
 --- !u!1 &5078444777350165895
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,6 +277,7 @@ GameObject:
   - component: {fileID: 1687905775184374712}
   - component: {fileID: 3710735524291699304}
   - component: {fileID: 9142431399810377892}
+  - component: {fileID: 7708644832250124085}
   m_Layer: 5
   m_Name: JammingButton (1)
   m_TagString: Untagged
@@ -278,16 +292,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7519031613878627871}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8839321414974967638}
+  m_Father: {fileID: 254578653373756878}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -800, y: -150}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1687905775184374712
@@ -372,6 +386,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7708644832250124085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7519031613878627871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 614d22639c975be45adb6ddd7dd6b173, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiCanvas: {fileID: 0}
+  towerExplanationUIObj: {fileID: 0}
 --- !u!1 &8717789298440864467
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,7 +429,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8988035695731861125}
   m_Father: {fileID: 8839321414974967638}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -476,7 +505,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5785543909616022959}
   m_Father: {fileID: 8839321414974967638}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -610,6 +640,7 @@ GameObject:
   - component: {fileID: 4984481449948696001}
   - component: {fileID: 5076158067551734962}
   - component: {fileID: 1069166624884456511}
+  - component: {fileID: 7435001860964978904}
   m_Layer: 5
   m_Name: CannonButton
   m_TagString: Untagged
@@ -624,16 +655,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8988203843125954877}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8839321414974967638}
+  m_Father: {fileID: 5403791423209340105}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -800, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4984481449948696001
@@ -718,3 +749,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7435001860964978904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8988203843125954877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 614d22639c975be45adb6ddd7dd6b173, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiCanvas: {fileID: 0}
+  towerExplanationUIObj: {fileID: 0}
