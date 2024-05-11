@@ -19,7 +19,7 @@ namespace Game.Tower
 
         #region PrivateField
         /// <summary>タワー建設のUI</summary>
-        private TowerBuildUI towerBuildUI; 
+        private TowerBuildUI towerBuildUI;
         /// <summary>選択しているタワーの土台</summary>
         private TowerStand selectionTowerStand;
         /// <summary>建設したタワーのリスト</summary>
@@ -27,10 +27,10 @@ namespace Game.Tower
         #endregion
 
         #region SerializeField
-        /// <summary>選択時に土台のハイライト</summary>
+        /// <summary>生成場所の親オブジェクト</summary>
         [SerializeField] private Transform uiCanvas;
-        /// <summary>選択時に土台のハイライト</summary>
-        [SerializeField] private GameObject uiPrefab;
+        /// <summary>生成するUIオブジェクト</summary>
+        [SerializeField] private GameObject TowerBuildUIObj;
         /// <summary>タワーの情報</summary>
         [SerializeField] private TowerDatabase towerDatabase;
         /// <summary>タワー土台のリスト</summary>
@@ -58,38 +58,11 @@ namespace Game.Tower
         #endregion
 
         #region PrivateMethod
+        /// <summary>
+        /// タワー土台をクリック選択する処理
+        /// </summary>
         private void MouseDetectionTowerStand()
         {
-            // マウスの位置からRayを発射
-            /*Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            int layerMask = ~(1 << LayerMask.NameToLayer("Tower"));
-
-            // Rayがオブジェクトに当たったかどうかを確認
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
-            {
-                // Towerコンポーネントがアタッチされているかどうかを確認
-                TowerStand towerStand = hit.collider.gameObject.GetComponent<TowerStand>();
-
-                if (towerStand != null)
-                {
-                    if (selectionTowerStand != null)
-                    {
-                        towerStand.OnTowerClicked();
-                        selectionTowerStand.OnTowerClicked();
-                        selectionTowerStand = towerStand;
-                        ShowTowerUI(towerStand.transform.position);
-                    }
-                    else
-                    {
-                        towerStand.OnTowerClicked();
-                        selectionTowerStand = towerStand;
-                        ShowTowerUI(towerStand.transform.position);
-                    }
-                }
-            }*/
-
             // マウスがクリックされたかどうかを確認
             if (Input.GetMouseButtonDown(0))
             {
@@ -105,22 +78,30 @@ namespace Game.Tower
                     // Towerコンポーネントがアタッチされているかどうかを確認
                     TowerStand towerStand = hit.collider.gameObject.GetComponent<TowerStand>();
 
-                    if (towerStand != null)
-                    {
-                        if (selectionTowerStand != null)
-                        {
-                            towerStand.OnTowerClicked();
-                            selectionTowerStand.OnTowerClicked();
-                            selectionTowerStand = towerStand;
-                            ShowTowerUI();
-                        }
-                        else
-                        {
-                            towerStand.OnTowerClicked();
-                            selectionTowerStand = towerStand;
-                            ShowTowerUI();
-                        }
-                    }
+                    SelectTowerStand(towerStand);
+                }
+            }
+        }
+
+        /// <summary>
+        /// タワーを選択する
+        /// </summary>
+        private void SelectTowerStand(TowerStand towerStand)
+        {
+            if (towerStand != null)
+            {
+                if (selectionTowerStand != null)
+                {
+                    towerStand.OnTowerClicked();
+                    selectionTowerStand.OnTowerClicked();
+                    selectionTowerStand = towerStand;
+                    ShowTowerUI();
+                }
+                else
+                {
+                    towerStand.OnTowerClicked();
+                    selectionTowerStand = towerStand;
+                    ShowTowerUI();
                 }
             }
         }
@@ -143,25 +124,6 @@ namespace Game.Tower
         /// </summary>
         private void ShowTowerUI()
         {
-            /*if (Input.GetMouseButtonDown(0))
-            {
-                // 現在表示しているUIがあれば破棄する
-                if (towerBuildUI != null)
-                {
-                    Destroy(towerBuildUI.gameObject);
-                }
-
-                // UIをインスタンス化して表示する
-                towerBuildUI = Instantiate(uiPrefab, new Vector3(960, 540, 0), Quaternion.identity, uiCanvas).GetComponent<TowerBuildUI>();
-
-                towerBuildUI.Init();
-
-                towerBuildUI.TowerBuildSubject.Subscribe(towerType =>
-                {
-                    var towerData = GetTowerData(towerType);
-                    selectionTowerStand.CreateTower(towerData);
-                }).AddTo(this);
-            }*/
             // 現在表示しているUIがあれば破棄する
             if (towerBuildUI != null)
             {
@@ -169,7 +131,7 @@ namespace Game.Tower
             }
 
             // UIをインスタンス化して表示する
-            towerBuildUI = Instantiate(uiPrefab, new Vector3(960, 540, 0), Quaternion.identity, uiCanvas).GetComponent<TowerBuildUI>();
+            towerBuildUI = Instantiate(TowerBuildUIObj, new Vector3(960, 540, 0), Quaternion.identity, uiCanvas).GetComponent<TowerBuildUI>();
 
             towerBuildUI.Init();
 
@@ -194,7 +156,12 @@ namespace Game.Tower
             if (towerData.towerCost <= possessionMoney)
             {
                 TowerBuildSubject.OnNext(towerData.towerCost);
+                selectionTowerStand.OnTowerClicked();
                 selectionTowerStand.CreateTower(towerData);
+
+                Destroy(towerBuildUI.gameObject);
+                towerBuildUI = null;
+                selectionTowerStand = null;
             }
             else
             {

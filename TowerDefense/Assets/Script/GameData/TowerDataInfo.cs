@@ -11,6 +11,8 @@ namespace GameData.Tower
         #region PublicField
         /// <summary>タワーID</summary>
         public int towerID;
+        /// <summary>タワーの種類</summary>
+        public TowerType towerType;
         /// <summary>攻撃力</summary>
         public int attack;
         /// <summary>建設費用</summary>
@@ -25,8 +27,6 @@ namespace GameData.Tower
         public GameObject towerObj;
         /// <summary>弾のオブジェクト</summary>
         public GameObject bulletObj;
-        /// <summary>タワーの種類</summary>
-        public TowerType towerType;
         #endregion
     }
 

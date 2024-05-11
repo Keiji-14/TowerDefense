@@ -2,6 +2,9 @@
 
 namespace Game
 {
+    /// <summary>
+    /// カメラの移動処理
+    /// </summary>
     public class CameraMove : MonoBehaviour
     {
         #region SerializeField 
