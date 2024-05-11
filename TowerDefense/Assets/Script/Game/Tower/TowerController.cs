@@ -1,7 +1,6 @@
 ﻿using GameData;
 using GameData.Tower;
 using System.Collections.Generic;
-using System.Linq;
 using UniRx;
 using UnityEngine;
 
@@ -31,8 +30,6 @@ namespace Game.Tower
         [SerializeField] private Transform uiCanvas;
         /// <summary>生成するUIオブジェクト</summary>
         [SerializeField] private GameObject TowerBuildUIObj;
-        /// <summary>タワーの情報</summary>
-        [SerializeField] private TowerDatabase towerDatabase;
         /// <summary>タワー土台のリスト</summary>
         [SerializeField] private List<TowerStand> towerStandList = new List<TowerStand>();
         #endregion
@@ -148,7 +145,7 @@ namespace Game.Tower
         private void IsCanBuild(TowerType towerType)
         {
             // タワーの情報を取得
-            var towerData = GetTowerData(towerType);
+            var towerData = GameDataManager.instance.GetTowerData(towerType);
             // 所持金を取得
             var possessionMoney = GameDataManager.instance.GetGameDataInfo().possessionMoney;
 
@@ -159,6 +156,8 @@ namespace Game.Tower
                 selectionTowerStand.OnTowerClicked();
                 selectionTowerStand.CreateTower(towerData);
 
+                towerBuildUI.DeleteTowerDescription();
+
                 Destroy(towerBuildUI.gameObject);
                 towerBuildUI = null;
                 selectionTowerStand = null;
@@ -167,16 +166,6 @@ namespace Game.Tower
             {
                 Debug.Log("所持金が足りません");
             }
-        }
-
-        /// <summary>
-        /// タワーの情報を取得する処理
-        /// </summary>
-        /// <param name="towerType">タワーの種類</param>
-        private TowerDataInfo GetTowerData(TowerType towerType)
-        {
-            return towerDatabase.towerDataList.FirstOrDefault
-                (data => data.towerType == towerType);
         }
         #endregion
     }

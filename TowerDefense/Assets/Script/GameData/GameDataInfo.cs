@@ -25,7 +25,7 @@
             this.waveNum = waveNum;
             this.isGameClear = isGameClear;
             this.isGameOver = isGameOver;
-    }
+        }
         #endregion
     }
 }

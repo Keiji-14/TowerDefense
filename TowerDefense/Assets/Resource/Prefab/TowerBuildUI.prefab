@@ -30,9 +30,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7203132356187219233}
-  - {fileID: 2674946742230266493}
-  - {fileID: 5403791423209340105}
-  - {fileID: 254578653373756878}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -55,6 +52,7 @@ MonoBehaviour:
   machineGunTowerBuildBtn: {fileID: 4016696347702745073}
   cannonTowerBuildBtn: {fileID: 1069166624884456511}
   jammingTowerBuildBtn: {fileID: 9142431399810377892}
+  towerExplanationUIObj: {fileID: 6223233259047067493, guid: d810e100e9824ab488a12be522ae92d0, type: 3}
 --- !u!1 &3640533576461656601
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,8 +186,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614d22639c975be45adb6ddd7dd6b173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiCanvas: {fileID: 0}
-  towerExplanationUIObj: {fileID: 0}
 --- !u!1 &5078444777350165895
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,13 +215,16 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2674946742230266493}
+  - {fileID: 5403791423209340105}
+  - {fileID: 254578653373756878}
   m_Father: {fileID: 8839321414974967638}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -800, y: 0}
-  m_SizeDelta: {x: 200, y: 700}
+  m_AnchoredPosition: {x: -850, y: 0}
+  m_SizeDelta: {x: 180, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4923458141774524120
 CanvasRenderer:
@@ -398,8 +397,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614d22639c975be45adb6ddd7dd6b173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiCanvas: {fileID: 0}
-  towerExplanationUIObj: {fileID: 0}
 --- !u!1 &8717789298440864467
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,17 +422,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8717789298440864467}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8988035695731861125}
-  m_Father: {fileID: 8839321414974967638}
+  m_Father: {fileID: 7203132356187219233}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -800, y: -150}
+  m_AnchoredPosition: {x: 0, y: -150}
   m_SizeDelta: {x: 105, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2240900849645297113
@@ -501,17 +498,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8719601904108474640}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5785543909616022959}
-  m_Father: {fileID: 8839321414974967638}
+  m_Father: {fileID: 7203132356187219233}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -800, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 105, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6063783551625806982
@@ -577,17 +574,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8879631464638984841}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5287476400425839311}
-  m_Father: {fileID: 8839321414974967638}
+  m_Father: {fileID: 7203132356187219233}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -800, y: 150}
+  m_AnchoredPosition: {x: 0, y: 150}
   m_SizeDelta: {x: 105, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1648511176400141313
@@ -761,5 +758,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614d22639c975be45adb6ddd7dd6b173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiCanvas: {fileID: 0}
-  towerExplanationUIObj: {fileID: 0}

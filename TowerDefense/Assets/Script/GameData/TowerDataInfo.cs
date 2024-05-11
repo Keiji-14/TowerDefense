@@ -11,8 +11,13 @@ namespace GameData.Tower
         #region PublicField
         /// <summary>タワーID</summary>
         public int towerID;
+        /// <summary>タワーの名前</summary>
+        public string name;
         /// <summary>タワーの種類</summary>
         public TowerType towerType;
+        /// <summary>タワーの説明</summary>
+        [Multiline(3)]
+        public string description;
         /// <summary>攻撃力</summary>
         public int attack;
         /// <summary>建設費用</summary>
