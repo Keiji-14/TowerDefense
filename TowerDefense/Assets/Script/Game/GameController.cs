@@ -30,8 +30,6 @@ namespace Game
         #region SerializeField 
         /// <summary>ゲーム開始ボタン</summary>
         [SerializeField] private Button gameStartBtn;
-        /// <summary>ステージの情報</summary>
-        [SerializeField] private StageDataInfo stageDataInfo;
         /// <summary砦の処理</summary>
         [SerializeField] private FortressController fortressController;
         /// <summary>タワーの処理</summary>
@@ -48,9 +46,15 @@ namespace Game
         /// </summary>
         public void Init()
         {
+            // ステージ情報を取得
+            var stageDataInfo = GameDataManager.instance.GetStageDataInfo();
+
             // ゲーム情報をを初期化
             var gameDataInfo = new GameDataInfo(stageDataInfo.startFortressLife, stageDataInfo.startMoney, waveInitNum, false, false);
             GameDataManager.instance.SetGameDataInfo(gameDataInfo);
+
+            Instantiate(stageDataInfo.stageObj, Vector3.zero, Quaternion.identity);
+            fortressController = GameObject.FindWithTag("Fortress").GetComponent<FortressController>();
 
             // 初期化
             fortressController.FortressDamageSubject.Subscribe(_ =>
@@ -70,7 +74,7 @@ namespace Game
 
             OnClickGameStartButtonObserver.Subscribe(_ =>
             {
-                GameStart();
+                GameStart(stageDataInfo);
             }).AddTo(this);
         }
         #endregion
@@ -79,7 +83,7 @@ namespace Game
         /// <summary>
         /// ゲームを開始する処理
         /// </summary>
-        private void GameStart()
+        private void GameStart(StageDataInfo stageDataInfo)
         {
             // 開始と同時にボタンを非表示にする
             gameStartBtn.gameObject.SetActive(false);

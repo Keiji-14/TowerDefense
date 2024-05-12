@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Enemy
   - Canvas
+  - Undefined
+  - Fortress
+  - Tower
+  - TowerList
+  - TowerStandList
   layers:
   - Default
   - TransparentFX

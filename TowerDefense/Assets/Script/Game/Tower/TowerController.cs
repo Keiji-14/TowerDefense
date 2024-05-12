@@ -47,9 +47,17 @@ namespace Game.Tower
         /// </summary>
         public void Init()
         {
-            foreach (var towerStand in towerStandList)
+            var obj = GameObject.FindWithTag("TowerStandList");
+
+            foreach (Transform child in obj.transform)
             {
-                TowerStandInit(towerStand);
+                var towerStand = child.GetComponent<TowerStand>();
+
+                if (towerStand != null)
+                {
+                    towerStandList.Add(towerStand);
+                    TowerStandInit(towerStand);
+                }
             }
         }
         #endregion

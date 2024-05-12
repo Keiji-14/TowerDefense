@@ -1,8 +1,6 @@
 ﻿using GameData.Enemy;
 using GameData.Stage;
 using GameData.Tower;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;

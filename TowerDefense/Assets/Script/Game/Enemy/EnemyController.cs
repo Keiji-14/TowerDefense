@@ -68,7 +68,7 @@ namespace Game.Enemy
 
                 for (int i = 0; i < enemyNum; i++)
                 {
-                    var enemy = Instantiate(enemyDataInfo.enemyObj, new Vector3(spawnPoint.x, 2, spawnPoint.z), Quaternion.identity).GetComponent<Enemy>();
+                    var enemy = Instantiate(enemyDataInfo.enemyObj, spawnPoint, Quaternion.identity).GetComponent<Enemy>();
 
                     enemy.Init(enemyDataInfo);
 
