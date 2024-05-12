@@ -1,4 +1,5 @@
-﻿using GameData.Tower;
+﻿using Audio;
+using GameData.Tower;
 using System.Collections;
 using UnityEngine;
 
@@ -31,6 +32,8 @@ namespace Game.Tower
         [SerializeField] Transform firePointB;
         /// <summary>マズルフラッシュのパーティクル</summary>
         [SerializeField] ParticleSystem muzzleFlash;
+        /// <summary>発射時の効果音</summary>
+        [SerializeField] AudioClip shotSE;
         #endregion
 
         #region PublicMethod
@@ -146,6 +149,7 @@ namespace Game.Tower
 
                 // 弾を発射
                 var bullet = Instantiate(towerData.bulletObj, firePoint.position, firePoint.rotation).GetComponent<Bullet>();
+                SE.instance.Play(shotSE);
 
                 if (targetEnemyObj != null)
                 {
