@@ -17,7 +17,7 @@ namespace GameData
         /// <summary>ゲームの情報</summary>
         private GameDataInfo gameDataInfo;
         /// <summary>ステージの情報</summary>
-        [SerializeField] private StageDataInfo stageDataInfo;
+        private StageDataInfo stageDataInfo;
         /// <summary>タワーの情報</summary>
         private TowerDatabase towerDatabase;
         /// <summary>敵の情報</summary>

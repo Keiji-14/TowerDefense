@@ -13,6 +13,8 @@ namespace Game.Enemy
         #region PublicField
         /// <summary>出現した敵の保持</summary>
         public Subject<int> NextWaveSubject = new Subject<int>();
+        /// <summary>敵を倒したお金を入手する処理</summary>
+        public Subject<int> GetDropMoneySubject = new Subject<int>();
         #endregion
 
         #region PrivateField
@@ -60,18 +62,24 @@ namespace Game.Enemy
                 var enemyNum = GameDataManager.instance.GetStageDataInfo().waveInfo[waveNum].enemyNum;
                 // 敵の出現場所を取得
                 var spawnPoint = GameDataManager.instance.GetStageDataInfo().waveInfo[waveNum].spawnPoint.position;
-                
                 // ウェーブのインターバル時間を取得
                 var waveInterval = GameDataManager.instance.GetStageDataInfo().waveInterval;
-
+                // 敵の情報を取得
                 var enemyDataInfo = GameDataManager.instance.GetEnemyDataInfo(0);
 
                 for (int i = 0; i < enemyNum; i++)
                 {
                     var enemy = Instantiate(enemyDataInfo.enemyObj, spawnPoint, Quaternion.identity).GetComponent<Enemy>();
-
+                    
                     enemy.Init(enemyDataInfo);
 
+                    enemy.EnemyDestroySubject.Subscribe(dropMoney =>
+                    {
+                        GetDropMoneySubject.OnNext(dropMoney);
+
+                        DesteryEnemy(enemy);
+                    }).AddTo(this);
+                    // 生成した敵を追加
                     enemyList.Add(enemy);
 
                     yield return new WaitForSeconds(1f);
@@ -83,6 +91,14 @@ namespace Game.Enemy
 
                 isWaveStart = true;
             }
+        }
+
+        /// <summary>
+        /// 敵が消滅する時の処理
+        /// </summary>
+        private void DesteryEnemy(Enemy enemy)
+        {
+            Destroy(enemy.gameObject);
         }
         #endregion
     }

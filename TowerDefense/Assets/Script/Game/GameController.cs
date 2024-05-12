@@ -66,8 +66,7 @@ namespace Game
 
             towerController.TowerBuildSubject.Subscribe(towerCost =>
             {
-                PossessionMoneyUpdate(towerCost);
-                gameViewUI.UpdateViewUI();
+                PossessionMoneyUpdate(-towerCost);
             }).AddTo(this);
 
             gameViewUI.UpdateViewUI();
@@ -93,6 +92,11 @@ namespace Game
             enemyController.NextWaveSubject.Subscribe(waveNum =>
             {
                 WaveUpdate(waveNum);
+            }).AddTo(this);
+
+            enemyController.GetDropMoneySubject.Subscribe(dropMoney =>
+            {
+                PossessionMoneyUpdate(dropMoney);
             }).AddTo(this);
         }
 
@@ -123,12 +127,12 @@ namespace Game
         /// 所持金を更新する処理
         /// </summary>
         /// <param name="towerCost">タワーの価値</param>
-        private void PossessionMoneyUpdate(int towerCost)
+        private void PossessionMoneyUpdate(int variableValue)
         {
             var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
 
             var possessionMoney = gameDataInfo.possessionMoney;
-            possessionMoney -= towerCost;
+            possessionMoney += variableValue;
 
             // ゲームの情報を更新する
             var setGameDataInfo = new GameDataInfo(
@@ -139,6 +143,9 @@ namespace Game
                     gameDataInfo.isGameOver);
             
             GameDataManager.instance.SetGameDataInfo(setGameDataInfo);
+
+            gameViewUI.UpdateViewUI();
+
         }
 
         /// <summary>

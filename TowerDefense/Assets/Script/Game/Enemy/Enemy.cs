@@ -1,5 +1,6 @@
 ﻿using GameData;
 using GameData.Enemy;
+using UniRx;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,10 +11,18 @@ namespace Game.Enemy
     /// </summary>
     public class Enemy : MonoBehaviour
     {
+        #region PublicField
+        /// <summary>敵が消滅する時の処理</summary>
+        public Subject<int> EnemyDestroySubject = new Subject<int>();
+        #endregion
+
         #region PrivateField
-        private float life;
+        /// <summary>敵の体力</summary>
+        private int life;
         /// <summary>NavMeshAgentコンポーネント</summary>
         private NavMeshAgent agent;
+        /// <summary>敵の情報</summary>
+        private EnemyDataInfo enemyDataInfo;
         #endregion
 
         #region SerializeField
@@ -29,9 +38,9 @@ namespace Game.Enemy
             agent = GetComponent<NavMeshAgent>();
 
             var stageDataInfo = GameDataManager.instance.GetStageDataInfo();
-
             target = stageDataInfo.fortressTransform;
 
+            this.enemyDataInfo = enemyDataInfo;
             life = enemyDataInfo.life;
             agent.speed = enemyDataInfo.speed;
 
@@ -42,7 +51,7 @@ namespace Game.Enemy
         /// ダメージを与える処理
         /// </summary>
         /// <param name="damage">ダメージ量</param>
-        public void TakeDamage(float damage)
+        public void TakeDamage(int damage)
         {
             life -= damage;
 
@@ -59,7 +68,7 @@ namespace Game.Enemy
             // HPが0を下回ったかどうかを確認
             if (IsLifeZero())
             {
-                Destroy(this.gameObject);
+                EnemyDestroySubject.OnNext(enemyDataInfo.dropMoney);
             }
         }
 

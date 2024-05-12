@@ -227,7 +227,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 455553c5a1da0f84b868c27e00486e41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyDataInfo: {fileID: 11400000, guid: 89462a0a56097db4d8379b63cdae0bfa, type: 2}
 --- !u!4 &120766787
 Transform:
   m_ObjectHideFlags: 0
@@ -1431,7 +1430,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00e2fb000fe29fe44a912c6f8bef103f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageDataInfo: {fileID: 11400000, guid: 92c5947fd85d00840bb78b853c801268, type: 2}
 --- !u!4 &1677640055
 Transform:
   m_ObjectHideFlags: 0
@@ -1714,7 +1712,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 59dbde98f464e6943a3a06d3a4ddb952, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

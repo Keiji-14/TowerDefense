@@ -40,7 +40,7 @@ namespace Title
             // ステージ選択画面に遷移する処理
             OnClickStageDecisionButtonObserver.Subscribe(_ =>
             {
-                StageDecisionSubject.OnNext(0);
+                StageDecisionSubject.OnNext(1);
             }).AddTo(this);
 
             OnClickMainTitleBackButtonObserver.Subscribe(_ =>

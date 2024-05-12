@@ -1,7 +1,11 @@
-﻿using Scene;
+﻿using GameData;
+using GameData.Stage;
+using Scene;
 using System;
+using System.Collections;
 using UniRx;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
 
 namespace Title
@@ -12,6 +16,8 @@ namespace Title
     public class TitleController : MonoBehaviour
     {
         #region PrivateField
+
+        private const float sceneLoaderWaitTime = 2f;
         /// <summary>ステージ選択ボタンを押した時の処理</summary>
         private IObservable<Unit> OnClickStageSelectButtonObserver => stageSelectBtn.OnClickAsObservable();
         /// <summary>終了ボタンを押した時の処理</summary>
@@ -29,6 +35,8 @@ namespace Title
         [SerializeField] private GameObject stageSelectUIObj;
         /// <summary>ステージ選択画面</summary>
         [SerializeField] private StageSelect stageSelect;
+        /// <summary>フェードイン・フェードアウトの処理</summary>
+        [SerializeField] private FadeController fadeController;
         #endregion
 
         #region PublicMethod
@@ -55,7 +63,7 @@ namespace Title
             // 選択したステージのゲームを開始する処理
             stageSelect.StageDecisionSubject.Subscribe(stageNum =>
             {
-                SceneLoader.Instance().Load(SceneLoader.SceneName.Game);
+                StartCoroutine(SetGameStage(stageNum));
             }).AddTo(this);
 
             // ステージ選択画面を閉じる処理
@@ -64,6 +72,31 @@ namespace Title
                 mainTitleUIObj.SetActive(true);
                 stageSelectUIObj.SetActive(false);
             }).AddTo(this);
+        }
+        #endregion
+
+        #region PrivateMethod
+        /// <summary>
+        /// 選択したステージのゲームを開始する処理
+        /// </summary>
+        private IEnumerator SetGameStage(int stageNum)
+        {
+            Addressables.LoadAssetAsync<StageDataInfo>($"StageData{stageNum}.asset").Completed += handle =>
+            {
+                if (handle.Result == null)
+                {
+                    Debug.Log("Load Error");
+                    return;
+                }
+                var stageDataInfo = handle.Result;
+                GameDataManager.instance.SetStageDataInfo(stageDataInfo);
+            };
+
+            fadeController.fadeOut = true;
+
+            yield return new WaitForSeconds(sceneLoaderWaitTime);
+            
+            SceneLoader.Instance().Load(SceneLoader.SceneName.Game);
         }
         #endregion
     }
