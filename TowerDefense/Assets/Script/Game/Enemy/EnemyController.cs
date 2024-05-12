@@ -15,6 +15,8 @@ namespace Game.Enemy
         public Subject<int> NextWaveSubject = new Subject<int>();
         /// <summary>敵を倒したお金を入手する処理</summary>
         public Subject<int> GetDropMoneySubject = new Subject<int>();
+        /// <summary>終了したかどうかの処理</summary>
+        public Subject<int> IsFinishSubject = new Subject<int>();
         #endregion
 
         #region PrivateField
@@ -98,7 +100,10 @@ namespace Game.Enemy
         /// </summary>
         private void DesteryEnemy(Enemy enemy)
         {
+            enemyList.Remove(enemy);
             Destroy(enemy.gameObject);
+
+            IsFinishSubject.OnNext(enemyList.Count);
         }
         #endregion
     }

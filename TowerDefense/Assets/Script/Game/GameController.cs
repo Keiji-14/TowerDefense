@@ -98,6 +98,11 @@ namespace Game
             {
                 PossessionMoneyUpdate(dropMoney);
             }).AddTo(this);
+
+            enemyController.IsFinishSubject.Subscribe(enemtNum =>
+            {
+                IsFinish(enemtNum);
+            }).AddTo(this);
         }
 
         /// <summary>
@@ -169,6 +174,17 @@ namespace Game
         }
 
         /// <summary>
+        /// ゲームが終了したかどうかを確認する処理
+        /// </summary>
+        private void IsFinish(int enemyNum)
+        {
+            if (IsEnemyZero(enemyNum) && IsWaveFinish())
+            {
+                Debug.Log("クリア");
+            }
+        }
+
+        /// <summary>
         /// ゲームオーバーかどうかを確認する処理
         /// </summary>
         private void IsGameOver()
@@ -191,6 +207,31 @@ namespace Game
                 GameOverSubject.OnNext(Unit.Default);
             }
         }
+
+        /// <summary>
+        /// 敵の数が0かどうかを判定する処理
+        /// </summary>
+        private bool IsEnemyZero(int enemyNum)
+        {
+            Debug.Log($"enemyNum{enemyNum}");
+            var enemyZeroNum = 0;
+            return enemyNum == enemyZeroNum;
+        }
+
+        /// <summary>
+        /// 全ウェーブが終了したかどうかを判定する処理
+        /// </summary>
+        private bool IsWaveFinish()
+        {
+            var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
+            var stageDataInfo = GameDataManager.instance.GetStageDataInfo();
+
+            Debug.Log($"waveNum{gameDataInfo.waveNum}");
+            Debug.Log($"waveInfo.Count{stageDataInfo.waveInfo.Count}");
+
+            return gameDataInfo.waveNum == stageDataInfo.waveInfo.Count;
+        }
+        
         #endregion
     }
 }
