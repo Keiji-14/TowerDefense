@@ -62,12 +62,13 @@ namespace Game.Enemy
                 var enemyNum = GameDataManager.instance.GetStageDataInfo().waveInfo[waveNum].enemyNum;
                 // 敵の出現場所を取得
                 var spawnPoint = GameDataManager.instance.GetStageDataInfo().waveInfo[waveNum].spawnPoint.position;
+                
                 // ウェーブのインターバル時間を取得
                 var waveInterval = GameDataManager.instance.GetStageDataInfo().waveInterval;
 
                 for (int i = 0; i < enemyNum; i++)
                 {
-                    var enemy = Instantiate(enemyDataInfo.enemyObj, spawnPoint, Quaternion.identity).GetComponent<Enemy>();
+                    var enemy = Instantiate(enemyDataInfo.enemyObj, new Vector3(spawnPoint.x, 2, spawnPoint.z), Quaternion.identity).GetComponent<Enemy>();
 
                     enemy.Init(enemyDataInfo);
 
