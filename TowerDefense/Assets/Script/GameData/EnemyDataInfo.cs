@@ -5,8 +5,8 @@ namespace GameData.Enemy
     /// <summary>
     /// 敵の情報を管理するクラス
     /// </summary>
-    [CreateAssetMenu(fileName = "EnemyData", menuName = "Create Enemy Data")]
-    public class EnemyDataInfo : ScriptableObject
+    [System.Serializable]
+    public class EnemyDataInfo
     {
         #region PublicField
         /// <summary>敵のID</summary>

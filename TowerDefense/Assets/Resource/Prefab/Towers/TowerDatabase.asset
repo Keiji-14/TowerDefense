@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 487518e5a413509469cc65bcfc5f02df, type: 3}
   m_Name: TowerDatabase
   m_EditorClassIdentifier: 
-  towerDataList:
+  towerDataInfoList:
   - towerID: 0
     name: "\u6A5F\u95A2\u9283"
     towerType: 0
-    description: "\u6A5F\u95A2\u9283\u3092\u642D\u8F09\u3057\u305F\u30BF\u30EF\u30FC\n\u5358\u4F53\u306E\u6575\u306B\u653B\u6483\u3059\u308B"
+    description: "\u6A5F\u95A2\u9283\u3092\u642D\u8F09\u3057\u305F\u30BF\u30EF\u30FC\n\u5358\u4F53\u306E\u6575\u306B\u653B\u6483\u3092\u884C\u3046"
     attack: 1
     towerCost: 20
     towerIncome: 10
@@ -25,23 +25,23 @@ MonoBehaviour:
     towerObj: {fileID: 1920787663165968115, guid: be4c46a52bcc89741b09bffb0356ac6b, type: 3}
     bulletObj: {fileID: 4651760243979247549, guid: 9b957f4da85cbaa409eea48d175924db, type: 3}
   - towerID: 1
-    name: "\u5927\u7832"
+    name: 
     towerType: 1
-    description: "\u5927\u7832\u3092\u642D\u8F09\u3057\u305F\u30BF\u30EF\u30FC\n\u7BC4\u56F2\u30C0\u30E1\u30FC\u30B8\u3067\u8907\u6570\u306E\u6575\u306B\u653B\u6483\u3059\u308B"
+    description: "\u5927\u7832\u3092\u642D\u8F09\u3057\u305F\u30BF\u30EF\u30FC\n\u7BC4\u56F2\u30C0\u30E1\u30FC\u30B8\u306E\u653B\u6483\u3092\u884C\u3046"
     attack: 10
     towerCost: 40
     towerIncome: 20
     attackSpeed: 2
-    bulletSpeed: 1
+    bulletSpeed: 5
     towerObj: {fileID: 2794337052100866639, guid: f73f4ed2dda148a4090ee2633190dd9e, type: 3}
     bulletObj: {fileID: 4651760243979247549, guid: 9b957f4da85cbaa409eea48d175924db, type: 3}
   - towerID: 2
-    name: "\u30B8\u30E3\u30DF\u30F3\u30B0"
+    name: 
     towerType: 2
     description: "\u30B8\u30E3\u30DF\u30F3\u30B0\u3092\u642D\u8F09\u3057\u305F\u30BF\u30EF\u30FC\n\u7BC4\u56F2\u5185\u306E\u6575\u306E\u79FB\u52D5\u901F\u5EA6\u3092\u4F4E\u4E0B\u3055\u305B\u308B"
     attack: 0
-    towerCost: 40
-    towerIncome: 0
+    towerCost: 30
+    towerIncome: 15
     attackSpeed: 0
     bulletSpeed: 0
     towerObj: {fileID: 7097396684384315682, guid: e915e970279efa345b86148b94907ee6, type: 3}

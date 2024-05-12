@@ -10,7 +10,7 @@ namespace GameData.Tower
     public class TowerDatabase : ScriptableObject
     {
         #region PublicField
-        public List<TowerDataInfo> towerDataList = new List<TowerDataInfo>();
+        public List<TowerDataInfo> towerDataInfoList = new List<TowerDataInfo>();
         #endregion
     }
 }

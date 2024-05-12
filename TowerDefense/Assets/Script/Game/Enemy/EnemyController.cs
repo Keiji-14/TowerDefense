@@ -19,11 +19,9 @@ namespace Game.Enemy
         /// <summary>ウェーブを開始するかどうかの判定</summary>
         private bool isWaveStart = false;
         /// <summary>出現した敵の保持</summary>
-        private List<Enemy> enemyList = new List<Enemy>(); 
-        #endregion
-
-        #region SerializeField
-        [SerializeField] private EnemyDataInfo enemyDataInfo;
+        private List<Enemy> enemyList = new List<Enemy>();
+        /// <summary>敵の情報</summary>
+        private EnemyDataInfo enemyDataInfo;
         #endregion
 
         void Update()
@@ -65,6 +63,8 @@ namespace Game.Enemy
                 
                 // ウェーブのインターバル時間を取得
                 var waveInterval = GameDataManager.instance.GetStageDataInfo().waveInterval;
+
+                var enemyDataInfo = GameDataManager.instance.GetEnemyDataInfo(0);
 
                 for (int i = 0; i < enemyNum; i++)
                 {

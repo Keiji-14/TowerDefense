@@ -11,9 +11,7 @@ namespace Game.Enemy
     public class Enemy : MonoBehaviour
     {
         #region PrivateField
-        private float life = 10;
-        /// <summary>Rigidbodyコンポーネント</summary>
-        private Rigidbody rb;
+        private float life;
         /// <summary>NavMeshAgentコンポーネント</summary>
         private NavMeshAgent agent;
         #endregion
@@ -28,7 +26,6 @@ namespace Game.Enemy
         /// </summary>
         public void Init(EnemyDataInfo enemyDataInfo)
         {
-            rb = GetComponent<Rigidbody>();
             agent = GetComponent<NavMeshAgent>();
 
             var stageDataInfo = GameDataManager.instance.GetStageDataInfo();

@@ -16,10 +16,12 @@ namespace GameData
         #region PrivateField
         /// <summary>ゲームの情報</summary>
         private GameDataInfo gameDataInfo;
-        /// <summary></summary>
-        private TowerDatabase towerDatabase;
         /// <summary>ステージの情報</summary>
         [SerializeField] private StageDataInfo stageDataInfo;
+        /// <summary>タワーの情報</summary>
+        private TowerDatabase towerDatabase;
+        /// <summary>敵の情報</summary>
+        private EnemyDatabase enemyDatabase;
         #endregion
 
         #region UnityEvent
@@ -62,7 +64,7 @@ namespace GameData
         /// <param name="towerType">タワーの種類</param>
         public TowerDataInfo GetTowerData(TowerType towerType)
         {
-            return towerDatabase.towerDataList.FirstOrDefault
+            return towerDatabase.towerDataInfoList.FirstOrDefault
                 (data => data.towerType == towerType);
         }
 
@@ -81,6 +83,16 @@ namespace GameData
         {
             return stageDataInfo;
         }
+
+        /// <summary>
+        /// 敵の情報を返す
+        /// </summary>
+        /// <param name="enemyID">敵のID</param>
+        public EnemyDataInfo GetEnemyDataInfo(int enemyID)
+        {
+            return enemyDatabase.enemyDataInfoList.FirstOrDefault
+                (data => data.enemyID == enemyID);
+        }
         #endregion
 
         private void DataInit()
@@ -94,6 +106,16 @@ namespace GameData
                  }
                  towerDatabase = handle.Result;
              };
+
+            Addressables.LoadAssetAsync<EnemyDatabase>("EnemyDatabase.asset").Completed += handle =>
+            {
+                if (handle.Result == null)
+                {
+                    Debug.Log("Load Error");
+                    return;
+                }
+                enemyDatabase = handle.Result;
+            };
         }
     }
 }
