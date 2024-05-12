@@ -84,6 +84,7 @@ namespace Game.Tower
                     MachineGun();
                     break;
                 case TowerType.Cannon:
+                    Cannon();
                     LookTarget(enemyObj);
                     break;
                 case TowerType.Jamming:
@@ -153,13 +154,43 @@ namespace Game.Tower
 
                 if (targetEnemyObj != null)
                 {
-                    bullet.Init(towerData.attack, towerData.bulletSpeed, targetEnemyObj);
+                    bullet.Init(towerData.attack, towerData.bulletSpeed, towerData.towerType, targetEnemyObj);
                 }
 
                 // 現在の発射口を切り替え
                 currentFirePoint = (currentFirePoint == firePointA) ? firePointB : firePointA;
 
                 yield return new WaitForSeconds(burstInterval);
+            }
+
+            yield return new WaitForSeconds(towerData.attackSpeed);
+
+            isShootInterval = true;
+        }
+
+        /// <summary>
+        /// 大砲の処理
+        /// </summary>
+        private void Cannon()
+        {
+            if (isShootInterval && targetEnemyObj != null)
+            {
+                isShootInterval = false;
+                StartCoroutine(ShotCannon());
+            }
+        }
+
+        /// <summary>
+        /// 機関銃の弾を発射する処理
+        /// </summary>
+        private IEnumerator ShotCannon()
+        {
+            var bullet = Instantiate(towerData.bulletObj, firePointA.position, firePointA.rotation).GetComponent<Bullet>();
+            SE.instance.Play(shotSE);
+
+            if (targetEnemyObj != null)
+            {
+                bullet.Init(towerData.attack, towerData.bulletSpeed, towerData.towerType, targetEnemyObj);
             }
 
             yield return new WaitForSeconds(towerData.attackSpeed);

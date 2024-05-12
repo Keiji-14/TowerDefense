@@ -42,6 +42,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d3197a5997f216a45a9eb9f2fa0ee0d7
+    m_Address: BulletCAN.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 8140d1e87c7fdbf4fb282f5cb06e6d97, type: 2}
   m_SchemaSet:

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using GameData.Tower;
+using Game.Enemy;
+using UnityEngine;
 
 namespace Game.Tower
 {
@@ -12,6 +14,8 @@ namespace Game.Tower
         private int attack;
         /// <summary>弾の速度</summary>
         private float bulletSpeed;
+        /// <summary>タワーの種類</summary>
+        private TowerType towerType;
         /// <summary>追尾対象の敵</summary>
         private GameObject targetEnemy;
         /// <summary>追尾対象の位置</summary>
@@ -44,10 +48,11 @@ namespace Game.Tower
         /// 初期化
         /// </summary>
         /// <param name="enemyObj">追尾対象</param>
-        public void Init(int attack, float bulletSpeed, GameObject enemyObj)
+        public void Init(int attack, float bulletSpeed, TowerType towerType, GameObject enemyObj)
         {
             this.attack = attack;
             this.bulletSpeed = bulletSpeed;
+            this.towerType = towerType;
             targetEnemy = enemyObj;
             targetPosition = targetEnemy.transform.position;
 
@@ -56,17 +61,70 @@ namespace Game.Tower
         #endregion
 
         #region PrivateMethod
-        // 敵が弾に当たった時の処理
+        /// <summary>
+        /// 弾が敵に当たった時の処理
+        /// </summary>
+        /// <param name="other">当たった対象</param>
         private void OnTriggerEnter(Collider other)
         {
             if (other.transform.CompareTag("Enemy"))
             {
-                var enemy = other.GetComponent<Enemy.Enemy>();
-
-                enemy.TakeDamage(attack);
-
-                Destroy(this.gameObject);
+                BulletType(other);
             }
+        }
+
+        /// <summary>
+        /// タワーの種類によって弾の処理を変更
+        /// </summary>
+        /// <param name="other">当たった対象</param>
+        private void BulletType(Collider other)
+        {
+            switch (towerType)
+            {
+                case TowerType.MachineGun:
+                    MachineGunBullet(other);
+                    break;
+                case TowerType.Cannon:
+                    CannonGunBullet(other.transform.position);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// 機関銃の弾の処理
+        /// </summary>
+        /// <param name="other">当たった対象</param>
+        private void MachineGunBullet(Collider other)
+        {
+            var enemy = other.GetComponent<Enemy.Enemy>();
+
+            enemy.TakeDamage(attack);
+
+            Destroy(this.gameObject);
+        }
+
+        /// <summary>
+        /// 大砲の弾の処理
+        /// </summary>
+        /// <param name="explosionPoint">着弾地点</param>
+        private void CannonGunBullet(Vector3 explosionPoint)
+        {
+            // 爆破範囲
+            var explosionRadius = 2;
+
+            Collider[] colliders = Physics.OverlapSphere(explosionPoint, explosionRadius);
+            
+            foreach (Collider hit in colliders)
+            {
+                // 範囲内の敵にダメージを与える
+                var enemy = hit.GetComponent<Enemy.Enemy>();
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(attack);
+                }
+            }
+
+            Destroy(this.gameObject);
         }
         #endregion
     }

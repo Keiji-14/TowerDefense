@@ -21,22 +21,22 @@ MonoBehaviour:
     towerCost: 20
     towerIncome: 10
     attackSpeed: 1
-    bulletSpeed: 20
+    bulletSpeed: 30
     towerObj: {fileID: 1920787663165968115, guid: be4c46a52bcc89741b09bffb0356ac6b, type: 3}
     bulletObj: {fileID: 4651760243979247549, guid: 9b957f4da85cbaa409eea48d175924db, type: 3}
   - towerID: 1
-    name: 
+    name: "\u5927\u7832"
     towerType: 1
     description: "\u5927\u7832\u3092\u642D\u8F09\u3057\u305F\u30BF\u30EF\u30FC\n\u7BC4\u56F2\u30C0\u30E1\u30FC\u30B8\u306E\u653B\u6483\u3092\u884C\u3046"
-    attack: 10
+    attack: 5
     towerCost: 40
     towerIncome: 20
     attackSpeed: 2
-    bulletSpeed: 5
+    bulletSpeed: 15
     towerObj: {fileID: 2794337052100866639, guid: f73f4ed2dda148a4090ee2633190dd9e, type: 3}
-    bulletObj: {fileID: 4651760243979247549, guid: 9b957f4da85cbaa409eea48d175924db, type: 3}
+    bulletObj: {fileID: 2418806758292392722, guid: d3197a5997f216a45a9eb9f2fa0ee0d7, type: 3}
   - towerID: 2
-    name: 
+    name: "\u30B8\u30E3\u30DF\u30F3\u30B0"
     towerType: 2
     description: "\u30B8\u30E3\u30DF\u30F3\u30B0\u3092\u642D\u8F09\u3057\u305F\u30BF\u30EF\u30FC\n\u7BC4\u56F2\u5185\u306E\u6575\u306E\u79FB\u52D5\u901F\u5EA6\u3092\u4F4E\u4E0B\u3055\u305B\u308B"
     attack: 0
