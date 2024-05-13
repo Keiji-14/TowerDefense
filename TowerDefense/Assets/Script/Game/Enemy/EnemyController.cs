@@ -24,8 +24,6 @@ namespace Game.Enemy
         private bool isWaveStart = false;
         /// <summary>出現した敵の保持</summary>
         private List<Enemy> enemyList = new List<Enemy>();
-        /// <summary>敵の情報</summary>
-        private EnemyDataInfo enemyDataInfo;
         #endregion
 
         void Update()
@@ -71,7 +69,15 @@ namespace Game.Enemy
 
                 for (int i = 0; i < enemyNum; i++)
                 {
-                    var enemy = Instantiate(enemyDataInfo.enemyObj, spawnPoint, Quaternion.identity).GetComponent<Enemy>();
+                    Vector3 center = spawnPoint;
+                    // ランダムな方向を選択
+                    Vector3 randomDirection = Random.insideUnitSphere * 1f;
+                    // 中心からランダムな方向へ1からランダムな距離の位置を計算
+                    Vector3 randomPos = center + randomDirection;
+                    // Y軸の位置を中心と同じにする（必要に応じて修正）
+                    randomPos.y = center.y;
+
+                    var enemy = Instantiate(enemyDataInfo.enemyObj, randomPos, Quaternion.identity).GetComponent<Enemy>();
                     
                     enemy.Init(enemyDataInfo);
 

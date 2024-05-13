@@ -16,5 +16,5 @@ MonoBehaviour:
   - enemyID: 0
     life: 10
     dropMoney: 5
-    speed: 1
+    speed: 3
     enemyObj: {fileID: 1769015344297125693, guid: 3e72a55154d25d44e8c814ccf9afeab4, type: 3}
