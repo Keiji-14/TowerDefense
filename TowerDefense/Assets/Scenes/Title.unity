@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.7621087, g: 0.78579843, b: 0.73052114, a: 1}
+  m_IndirectSpecularColor: {r: 0.7621401, g: 0.78578526, b: 0.73053503, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7992,7 +7992,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cf3e5ecf6fbd1444a048edc6360b019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageDecisionBtn: {fileID: 1765867087}
+  stageNumBtnList:
+  - {fileID: 1765867087}
+  - {fileID: 1914694822}
+  - {fileID: 1060514237}
+  tutorialStageBtn: {fileID: 476171660}
+  exStageBtn: {fileID: 1477758553}
   mainTitleBackBtn: {fileID: 556935966}
 --- !u!4 &1989823120
 Transform:

@@ -60,10 +60,22 @@ namespace Title
                 Application.Quit();
             }).AddTo(this);
 
-            // 選択したステージのゲームを開始する処理
+            // 通常ステージの設定を行う処理
             stageSelect.StageDecisionSubject.Subscribe(stageNum =>
             {
-                StartCoroutine(SetGameStage(stageNum));
+                SetDefaultStage(stageNum);
+            }).AddTo(this);
+
+            // チュートリアルステージの設定を行う処理
+            stageSelect.TutorialStageSubject.Subscribe(_ =>
+            {
+                SetTutorialStage();
+            }).AddTo(this);
+
+            // EXステージの設定を行う処理
+            stageSelect.EXStageSubject.Subscribe(_ =>
+            {
+                SetEXStage();
             }).AddTo(this);
 
             // ステージ選択画面を閉じる処理
@@ -77,9 +89,9 @@ namespace Title
 
         #region PrivateMethod
         /// <summary>
-        /// 選択したステージのゲームを開始する処理
+        /// 通常ステージの設定を行う処理
         /// </summary>
-        private IEnumerator SetGameStage(int stageNum)
+        private void SetDefaultStage(int stageNum)
         {
             Addressables.LoadAssetAsync<StageDataInfo>($"StageData{stageNum}.asset").Completed += handle =>
             {
@@ -92,6 +104,52 @@ namespace Title
                 GameDataManager.instance.SetStageDataInfo(stageDataInfo);
             };
 
+            StartCoroutine(ChangeGameScene());
+        }
+
+        /// <summary>
+        /// チュートリアルステージの設定を行う処理
+        /// </summary>
+        private void SetTutorialStage()
+        {
+            Addressables.LoadAssetAsync<StageDataInfo>("TutorialStageData.asset").Completed += handle =>
+            {
+                if (handle.Result == null)
+                {
+                    Debug.Log("Load Error");
+                    return;
+                }
+                var stageDataInfo = handle.Result;
+                GameDataManager.instance.SetStageDataInfo(stageDataInfo);
+            };
+
+            StartCoroutine(ChangeGameScene());
+        }
+
+        /// <summary>
+        /// EXステージの設定を行う処理
+        /// </summary>
+        private void SetEXStage()
+        {
+            Addressables.LoadAssetAsync<StageDataInfo>("EXStageData.asset").Completed += handle =>
+            {
+                if (handle.Result == null)
+                {
+                    Debug.Log("Load Error");
+                    return;
+                }
+                var stageDataInfo = handle.Result;
+                GameDataManager.instance.SetStageDataInfo(stageDataInfo);
+            };
+
+            StartCoroutine(ChangeGameScene());
+        }
+
+        /// <summary>
+        /// 選択したステージのゲームシーンに遷移を行う処理
+        /// </summary>
+        private IEnumerator ChangeGameScene()
+        {
             fadeController.fadeOut = true;
 
             yield return new WaitForSeconds(sceneLoaderWaitTime);

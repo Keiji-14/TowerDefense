@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,22 +12,32 @@ namespace Title
     public class StageSelect : MonoBehaviour
     {
         #region PublicField
-        /// <summary>ステージ選択決定時の処理</summary>
+        /// <summary>通常ステージの選択を決定時の処理</summary>
         public Subject<int> StageDecisionSubject = new Subject<int>();
+        /// <summary>チュートリアルステージ決定時の処理</summary>
+        public Subject<Unit> TutorialStageSubject = new Subject<Unit>();
+        /// <summary>EXステージ決定時の処理</summary>
+        public Subject<Unit> EXStageSubject = new Subject<Unit>();
         /// <summary>ステージ選択決定時の処理</summary>
         public Subject<Unit> MainTitleBackSubject = new Subject<Unit>();
         #endregion
 
         #region PrivateField
-        /// <summary>ステージ選択ボタンを押した時の処理</summary>
-        private IObservable<Unit> OnClickStageDecisionButtonObserver => stageDecisionBtn.OnClickAsObservable();
+        /// <summary>チュートリアルステージのボタンを押した時の処理</summary>
+        private IObservable<Unit> OnClickTutorialStageButtonObserver => tutorialStageBtn.OnClickAsObservable();
+        /// <summary>EXステージのボタンを押した時の処理</summary>
+        private IObservable<Unit> OnClickEXStageButtonObserver => exStageBtn.OnClickAsObservable();
         /// <summary>メインタイトルに戻るボタンを押した時の処理</summary>
         private IObservable<Unit> OnClickMainTitleBackButtonObserver => mainTitleBackBtn.OnClickAsObservable();
         #endregion
 
         #region SerializeField
-        /// <summary>ステージ選択ボタン</summary>
-        [SerializeField] private Button stageDecisionBtn;
+        /// <summary>通常ステージのボタンリスト</summary>
+        [SerializeField] private List<Button> stageNumBtnList;
+        /// <summary>チュートリアルステージのボタン</summary>
+        [SerializeField] private Button tutorialStageBtn;
+        /// <summary>EXステージのボタン</summary>
+        [SerializeField] private Button exStageBtn;
         /// <summary>メインタイトルに戻るボタン</summary>
         [SerializeField] private Button mainTitleBackBtn;
         #endregion
@@ -37,10 +48,28 @@ namespace Title
         /// </summary>
         public void Init()
         {
-            // ステージ選択画面に遷移する処理
-            OnClickStageDecisionButtonObserver.Subscribe(_ =>
+            int stageNum = 1; // ステージ番号を初期化
+
+            foreach (var button in stageNumBtnList)
             {
-                StageDecisionSubject.OnNext(1);
+                int capturedStageNum = stageNum; // ステージ番号をキャプチャ
+
+                button.OnClickAsObservable().Subscribe(_ =>
+                {
+                    StageDecisionSubject.OnNext(capturedStageNum); // クリックされたボタンに対応するステージ番号を発行
+                }).AddTo(this);
+
+                stageNum++; // 次のループで新しいステージ番号を使うためにインクリメント
+            }
+
+            OnClickTutorialStageButtonObserver.Subscribe(_ =>
+            {
+                TutorialStageSubject.OnNext(Unit.Default);
+            }).AddTo(this);
+
+            OnClickEXStageButtonObserver.Subscribe(_ =>
+            {
+                EXStageSubject.OnNext(Unit.Default);
             }).AddTo(this);
 
             OnClickMainTitleBackButtonObserver.Subscribe(_ =>

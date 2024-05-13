@@ -171,6 +171,8 @@ namespace Game
                     gameDataInfo.isGameClear,
                     gameDataInfo.isGameOver);
             GameDataManager.instance.SetGameDataInfo(setGameDataInfo);
+
+            gameViewUI.UpdateViewUI();
         }
 
         /// <summary>

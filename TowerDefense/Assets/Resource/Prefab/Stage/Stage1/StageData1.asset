@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd51e574b629e1e4e9809d55bf7ced7a, type: 3}
   m_Name: StageData1
   m_EditorClassIdentifier: 
-  stageID: 0
+  stageID: 1
   startFortressLife: 5
   startMoney: 100
   waveInterval: 5

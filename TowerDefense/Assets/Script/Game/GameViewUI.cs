@@ -11,6 +11,8 @@ namespace Game
         [SerializeField] private TextMeshProUGUI fortressLifeText;
         /// <summary>所持金のUI</summary>
         [SerializeField] private TextMeshProUGUI possessionMoneyText;
+        /// <summary>ウェーブ数のUI</summary>
+        [SerializeField] private TextMeshProUGUI waveText;
         #endregion
 
         #region PublicMethod
@@ -20,9 +22,11 @@ namespace Game
         public void UpdateViewUI()
         {
             var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
+            var stageDataInfo = GameDataManager.instance.GetStageDataInfo();
 
             fortressLifeText.text = gameDataInfo.fortressLife.ToString();
             possessionMoneyText.text = gameDataInfo.possessionMoney.ToString();
+            waveText.text = $"{gameDataInfo.waveNum}/{stageDataInfo.waveInfo.Count}";
         }
         #endregion
     }
