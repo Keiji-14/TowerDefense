@@ -24,6 +24,9 @@ namespace Game.Fortress
 
             if (other.transform.CompareTag("Enemy"))
             {
+                var enemy = other.GetComponent<Enemy.Enemy>();
+                enemy.EnemyDestroySubject.OnNext(Unit.Default);
+
                 Destroy(other.gameObject);
 
                 FortressDamageSubject.OnNext(Unit.Default);

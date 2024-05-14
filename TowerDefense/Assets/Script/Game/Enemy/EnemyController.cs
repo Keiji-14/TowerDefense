@@ -81,12 +81,16 @@ namespace Game.Enemy
                     
                     enemy.Init(enemyDataInfo);
 
-                    enemy.EnemyDestroySubject.Subscribe(dropMoney =>
+                    enemy.EnemyDropMoneySubject.Subscribe(dropMoney =>
                     {
                         GetDropMoneySubject.OnNext(dropMoney);
+                    }).AddTo(this);
 
+                    enemy.EnemyDestroySubject.Subscribe(_ =>
+                    {
                         DesteryEnemy(enemy);
                     }).AddTo(this);
+
                     // 生成した敵を追加
                     enemyList.Add(enemy);
 

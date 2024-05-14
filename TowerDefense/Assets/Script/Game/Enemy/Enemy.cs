@@ -12,8 +12,10 @@ namespace Game.Enemy
     public class Enemy : MonoBehaviour
     {
         #region PublicField
+        /// <summary>敵が敵がお金を落とした時の処理</summary>
+        public Subject<int> EnemyDropMoneySubject = new Subject<int>();
         /// <summary>敵が消滅する時の処理</summary>
-        public Subject<int> EnemyDestroySubject = new Subject<int>();
+        public Subject<Unit> EnemyDestroySubject = new Subject<Unit>();
         #endregion
 
         #region PrivateField
@@ -68,7 +70,8 @@ namespace Game.Enemy
             // HPが0を下回ったかどうかを確認
             if (IsLifeZero())
             {
-                EnemyDestroySubject.OnNext(enemyDataInfo.dropMoney);
+                EnemyDropMoneySubject.OnNext(enemyDataInfo.dropMoney);
+                EnemyDestroySubject.OnNext(Unit.Default);
             }
         }
 
