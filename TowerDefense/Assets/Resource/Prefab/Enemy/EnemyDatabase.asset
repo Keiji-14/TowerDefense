@@ -18,3 +18,4 @@ MonoBehaviour:
     dropMoney: 5
     speed: 3
     enemyObj: {fileID: 1769015344297125693, guid: 3e72a55154d25d44e8c814ccf9afeab4, type: 3}
+    destroyParticle: {fileID: 5367459830565765355, guid: 3d74d8266bb7b8d4e9cff3eae9af5b31, type: 3}

@@ -19,6 +19,8 @@ namespace GameData.Enemy
         public float speed;
         /// <summary>敵のオブジェクト</summary>
         public GameObject enemyObj;
+        /// <summary>消滅時のパーティクル</summary>
+        public ParticleSystem destroyParticle;
         #endregion
     }
 }

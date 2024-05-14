@@ -12,8 +12,8 @@ namespace Game.Enemy
     public class Enemy : MonoBehaviour
     {
         #region PublicField
-        /// <summary>敵が敵がお金を落とした時の処理</summary>
-        public Subject<int> EnemyDropMoneySubject = new Subject<int>();
+        /// <summary>敵の情報</summary>
+        public EnemyDataInfo enemyDataInfo;
         /// <summary>敵が消滅する時の処理</summary>
         public Subject<Unit> EnemyDestroySubject = new Subject<Unit>();
         #endregion
@@ -23,8 +23,6 @@ namespace Game.Enemy
         private int life;
         /// <summary>NavMeshAgentコンポーネント</summary>
         private NavMeshAgent agent;
-        /// <summary>敵の情報</summary>
-        private EnemyDataInfo enemyDataInfo;
         #endregion
 
         #region SerializeField
@@ -70,7 +68,6 @@ namespace Game.Enemy
             // HPが0を下回ったかどうかを確認
             if (IsLifeZero())
             {
-                EnemyDropMoneySubject.OnNext(enemyDataInfo.dropMoney);
                 EnemyDestroySubject.OnNext(Unit.Default);
             }
         }

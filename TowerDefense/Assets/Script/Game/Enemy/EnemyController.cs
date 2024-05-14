@@ -1,4 +1,5 @@
 ﻿using GameData;
+using GameData.Enemy;
 using GameData.Stage;
 using System.Collections;
 using System.Collections.Generic;
@@ -80,13 +81,9 @@ namespace Game.Enemy
                     
                     enemy.Init(enemyDataInfo);
 
-                    enemy.EnemyDropMoneySubject.Subscribe(dropMoney =>
-                    {
-                        GetDropMoneySubject.OnNext(dropMoney);
-                    }).AddTo(this);
-
                     enemy.EnemyDestroySubject.Subscribe(_ =>
                     {
+                        GetDropMoneySubject.OnNext(enemy.enemyDataInfo.dropMoney);
                         DesteryEnemy(enemy);
                     }).AddTo(this);
 
@@ -110,6 +107,7 @@ namespace Game.Enemy
         private void DesteryEnemy(Enemy enemy)
         {
             enemyList.Remove(enemy);
+            Instantiate(enemy.enemyDataInfo.destroyParticle, enemy.transform.position, Quaternion.identity);
             Destroy(enemy.gameObject);
 
             IsFinishSubject.OnNext(enemyList.Count);
