@@ -11,6 +11,8 @@ namespace Game.Tower
     public class Tower : MonoBehaviour
     {
         #region PrivateField
+        /// <summary>マズルフラッシュの表示時間の値</summary>
+        private const float flashTime = 0.1f;
         /// <summary>タワー回転のY軸の値</summary>
         private const float VerticalLockValue = 0f;
         /// <summary>攻撃可能かどうか</summary>
@@ -30,8 +32,8 @@ namespace Game.Tower
         [SerializeField] Transform firePointA;
         /// <summary>弾の発射口B</summary>
         [SerializeField] Transform firePointB;
-        /// <summary>マズルフラッシュのパーティクル</summary>
-        [SerializeField] ParticleSystem muzzleFlash;
+        /// <summary>マズルフラッシュのオブジェクト</summary>
+        [SerializeField] GameObject muzzleFlashObj;
         /// <summary>発射時の効果音</summary>
         [SerializeField] AudioClip shotSE;
         #endregion
@@ -149,8 +151,11 @@ namespace Game.Tower
                 Transform firePoint = (currentFirePoint == firePointA) ? firePointA : firePointB;
 
                 // 弾を発射
-                var bullet = Instantiate(towerData.bulletObj, firePoint.position, firePoint.rotation).GetComponent<Bullet>();
+                var bullet = Instantiate(towerData.bulletObj, firePoint.position, transform.rotation).GetComponent<Bullet>();
                 SE.instance.Play(shotSE);
+                
+                var muzzleFlash = Instantiate(muzzleFlashObj, firePoint.position, transform.rotation);
+                Destroy(muzzleFlash, flashTime);
 
                 if (targetEnemyObj != null)
                 {
