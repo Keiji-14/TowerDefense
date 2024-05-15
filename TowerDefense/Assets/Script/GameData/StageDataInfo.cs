@@ -38,7 +38,7 @@ namespace GameData.Stage
         public int enemyNum;
         /// <summary>敵の出現場所</summary>
         public Transform spawnPoint;
-        /// <summary>敵の出現場所</summary>
+        /// <summary>ルートの中継地点</summary>
         public List<Transform> routeAnchor;
         #endregion
     }
