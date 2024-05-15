@@ -849,7 +849,6 @@ GameObject:
   - component: {fileID: 1603170386140874526}
   - component: {fileID: 1839775961036668132}
   - component: {fileID: 5000697331666048703}
-  - component: {fileID: 3166340044692165496}
   m_Layer: 0
   m_Name: StageGround
   m_TagString: Untagged
@@ -944,37 +943,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &3166340044692165496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4735839946337685753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_GenerateLinks: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.25
-  m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 4e2c59be092484b46bd7f464b6cffd8a, type: 2}
-  m_BuildHeightMesh: 0
 --- !u!1 &5373759165311652901
 GameObject:
   m_ObjectHideFlags: 0
@@ -1562,8 +1530,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7697219976327791734}
+  - component: {fileID: 7920536499765548494}
   m_Layer: 0
-  m_Name: StageObj
+  m_Name: Stage1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1590,6 +1559,37 @@ Transform:
   - {fileID: 1473688271525931093}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7920536499765548494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6880986505371123615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.25
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 39e0a5d172e29c54283ae2c781110ea3, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1 &7145796221736375319
 GameObject:
   m_ObjectHideFlags: 0
@@ -2829,7 +2829,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 406717458255114202, guid: a5b2ec34d75c1534289c90d3023e1228, type: 3}
       propertyPath: m_Name
-      value: ForestCastle_Red
+      value: Stage1_Castle
       objectReference: {fileID: 0}
     - target: {fileID: 5851511114138118420, guid: a5b2ec34d75c1534289c90d3023e1228, type: 3}
       propertyPath: m_Size.z

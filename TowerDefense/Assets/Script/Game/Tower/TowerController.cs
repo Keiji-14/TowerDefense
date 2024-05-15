@@ -3,6 +3,7 @@ using GameData.Tower;
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Game.Tower
 {
@@ -68,17 +69,18 @@ namespace Game.Tower
         /// </summary>
         private void MouseDetectionTowerStand()
         {
-            // マウスがクリックされたかどうかを確認
             if (Input.GetMouseButtonDown(0))
             {
                 // マウスの位置からRayを発射
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
 
-                int layerMask = ~(1 << LayerMask.NameToLayer("Tower"));
+                // UIの貫通を防ぐ
+                if (EventSystem.current.IsPointerOverGameObject()) 
+                    return;
 
                 // Rayがオブジェクトに当たったかどうかを確認
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity))
                 {
                     // Towerコンポーネントがアタッチされているかどうかを確認
                     TowerStand towerStand = hit.collider.gameObject.GetComponent<TowerStand>();
@@ -89,13 +91,18 @@ namespace Game.Tower
         }
 
         /// <summary>
-        /// タワーを選択する
+        /// タワーと代を選択する処理
         /// </summary>
         private void SelectTowerStand(TowerStand towerStand)
         {
             if (towerStand != null)
             {
-                if (selectionTowerStand != null)
+                if (selectionTowerStand == towerStand)
+                {
+                    towerStand.OnTowerClicked();
+                    DestroyTowerBuildUI();
+                }
+                else if (selectionTowerStand != null)
                 {
                     towerStand.OnTowerClicked();
                     selectionTowerStand.OnTowerClicked();
@@ -164,16 +171,24 @@ namespace Game.Tower
                 selectionTowerStand.OnTowerClicked();
                 selectionTowerStand.CreateTower(towerData);
 
-                towerBuildUI.DeleteTowerDescription();
-
-                Destroy(towerBuildUI.gameObject);
-                towerBuildUI = null;
-                selectionTowerStand = null;
+                DestroyTowerBuildUI();
             }
             else
             {
                 Debug.Log("所持金が足りません");
             }
+        }
+
+        /// <summary>
+        /// 建設できるかを判定する処理
+        /// </summary>
+        private void DestroyTowerBuildUI()
+        {
+            towerBuildUI.DeleteTowerDescription();
+
+            Destroy(towerBuildUI.gameObject);
+            towerBuildUI = null;
+            selectionTowerStand = null;
         }
         #endregion
     }

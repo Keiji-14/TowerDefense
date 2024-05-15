@@ -1,5 +1,4 @@
 ﻿using GameData;
-using GameData.Enemy;
 using GameData.Stage;
 using System.Collections;
 using System.Collections.Generic;

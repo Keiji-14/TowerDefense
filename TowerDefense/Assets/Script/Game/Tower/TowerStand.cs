@@ -47,6 +47,14 @@ namespace Game.Tower
 
             TowerBuildSubject.OnNext(tower);
         }
+
+        /// <summary>
+        /// タワーが建設済みかどうか
+        /// </summary>
+        public Tower IsBulidedTower()
+        {
+            return tower;
+        }
         #endregion
     }
 }
