@@ -1,10 +1,10 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
 public class Effect : MonoBehaviour
 {
 	#region SerializeField
-	/// <summary>ƒGƒtƒFƒNƒg‚Ì•\¦ŠÔ</summary>
+	/// <summary>ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®è¡¨ç¤ºæ™‚é–“</summary>
 	[SerializeField] private float effectTime;
 	#endregion
 

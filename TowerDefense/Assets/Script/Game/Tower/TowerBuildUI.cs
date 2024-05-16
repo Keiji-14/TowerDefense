@@ -22,7 +22,7 @@ namespace Game.Tower
         /// <summary>生成場所の親オブジェクト</summary>
         private Transform uiCanvas;
         /// <summary>表示しているタワーの説明UI</summary>
-        private TowerDescriptionUI towerDescriptionUI;
+        private TowerBuildDescriptionUI towerDescriptionUI;
         /// <summary>タワー建設ボタンを押した時の処理</summary>
         private IObservable<Unit> OnClickMachineGunTowerBuildButtonObserver => machineGunTowerBuildBtn.OnClickAsObservable();
         /// <summary>タワー建設ボタンを押した時の処理</summary>
@@ -39,7 +39,7 @@ namespace Game.Tower
         /// <summary>ジャミングタワー建設ボタン</summary>
         [SerializeField] private Button jammingTowerBuildBtn;
         /// <summary>タワー説明UIオブジェクト</summary>
-        [SerializeField] private GameObject towerExplanationUIObj;
+        [SerializeField] private GameObject towerDescriptionUIObj;
         #endregion
 
         #region PublicMethod
@@ -106,10 +106,11 @@ namespace Game.Tower
         {
             if (isView)
             {
-                towerDescriptionUI = Instantiate(towerExplanationUIObj, createPos, Quaternion.identity, uiCanvas).GetComponent<TowerDescriptionUI>();
-
+                towerDescriptionUI = Instantiate(towerDescriptionUIObj, createPos, Quaternion.identity, uiCanvas).GetComponent<TowerBuildDescriptionUI>();
                 var towerData = GameDataManager.instance.GetTowerData(towerType);
-                var towerDescriptionInfo = new TowerDescriptionInfo(towerData.name, towerData.attack, towerData.attackSpeed, towerData.towerCost, towerData.description);
+                var towerStatus = towerData.towerStatusDataInfoList[0];
+
+                var towerDescriptionInfo = new TowerDescriptionInfo(towerData.name, towerStatus.attack, towerStatus.attackSpeed, towerStatus.towerCost, towerData.description);
                 towerDescriptionUI.ViewTowerText(towerDescriptionInfo);
             }
             else

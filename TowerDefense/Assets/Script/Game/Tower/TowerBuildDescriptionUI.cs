@@ -6,7 +6,7 @@ namespace Game.Tower
     /// <summary>
     /// タワーについての説明UIを表示する処理
     /// </summary>
-    public class TowerDescriptionUI : MonoBehaviour
+    public class TowerBuildDescriptionUI : MonoBehaviour
     {
         #region SerializeField
         /// <summary>タワー名のテキスト</summary>
@@ -29,7 +29,7 @@ namespace Game.Tower
         {
             nameText.text = towerDescriptionInfo.name;
             attackText.text = towerDescriptionInfo.attack.ToString();
-            attackSpeedText.text = towerDescriptionInfo.attackSpeed.ToString();
+            attackSpeedText.text = towerDescriptionInfo.attackSpeed.ToString() + "s";
             towerCostText.text = towerDescriptionInfo.cose.ToString();
             towerDescriptionText.text = towerDescriptionInfo.description;
         }

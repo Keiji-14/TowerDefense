@@ -24,7 +24,9 @@ namespace Game.Tower
         /// <summary>捕捉した敵のオブジェクト</summary>
         private GameObject targetEnemyObj;
         /// <summary>建設したタワーの情報</summary>
-        private TowerDataInfo towerData;
+        private TowerDataInfo towerDataInfo;
+        /// <summary>建設したタワーのステータス</summary>
+        private TowerStatusDataInfo towerStatusDataInfo;
         #endregion
 
         #region SerializeField
@@ -43,10 +45,12 @@ namespace Game.Tower
         /// 初期化
         /// </summary>
         /// <param name="towerData">タワーの情報</param>
-        public void Init(TowerDataInfo towerData)
+        public void Init(TowerDataInfo towerDataInfo)
         {
             // タワーの情報を保持させる
-            this.towerData = towerData;
+            this.towerDataInfo = towerDataInfo;
+
+            towerStatusDataInfo = towerDataInfo.towerStatusDataInfoList[towerDataInfo.level - 1];
             // 発射可能状態にする
             isShootInterval = true;
 
@@ -79,7 +83,7 @@ namespace Game.Tower
         /// <param name="enemyObj">攻撃対象</param>
         private void ActionType(GameObject enemyObj)
         {
-            switch (towerData.towerType)
+            switch (towerDataInfo.towerType)
             {
                 case TowerType.MachineGun:
                     LookTarget(enemyObj);
@@ -140,18 +144,17 @@ namespace Game.Tower
         private IEnumerator ShotMachineGun()
         {
             // バースト数
-            int burstNum = 4;
+            var burstNum = towerStatusDataInfo.uniqueStatus;
             // バーストの間隔
             float burstInterval = 0.05f;
 
-            // 機関銃は4点バーストさせる
             for (int i = 0; i < burstNum; i++)
             {
                 // 発射口の選択
                 Transform firePoint = (currentFirePoint == firePointA) ? firePointA : firePointB;
 
                 // 弾を発射
-                var bullet = Instantiate(towerData.bulletObj, firePoint.position, transform.rotation).GetComponent<Bullet>();
+                var bullet = Instantiate(towerDataInfo.bulletObj, firePoint.position, transform.rotation).GetComponent<Bullet>();
                 SE.instance.Play(shotSE);
                 
                 var muzzleFlash = Instantiate(muzzleFlashObj, firePoint.position, transform.rotation);
@@ -159,7 +162,7 @@ namespace Game.Tower
 
                 if (targetEnemyObj != null)
                 {
-                    bullet.Init(towerData.attack, towerData.bulletSpeed, towerData.towerType, targetEnemyObj);
+                    bullet.Init(towerStatusDataInfo.attack, towerStatusDataInfo.bulletSpeed, towerDataInfo.towerType, targetEnemyObj);
                 }
 
                 // 現在の発射口を切り替え
@@ -168,7 +171,7 @@ namespace Game.Tower
                 yield return new WaitForSeconds(burstInterval);
             }
 
-            yield return new WaitForSeconds(towerData.attackSpeed);
+            yield return new WaitForSeconds(towerStatusDataInfo.attackSpeed);
 
             isShootInterval = true;
         }
@@ -190,15 +193,15 @@ namespace Game.Tower
         /// </summary>
         private IEnumerator ShotCannon()
         {
-            var bullet = Instantiate(towerData.bulletObj, firePointA.position, firePointA.rotation).GetComponent<Bullet>();
+            var bullet = Instantiate(towerDataInfo.bulletObj, firePointA.position, firePointA.rotation).GetComponent<Bullet>();
             SE.instance.Play(shotSE);
 
             if (targetEnemyObj != null)
             {
-                bullet.Init(towerData.attack, towerData.bulletSpeed, towerData.towerType, targetEnemyObj);
+                bullet.Init(towerStatusDataInfo.attack, towerStatusDataInfo.bulletSpeed, towerDataInfo.towerType, targetEnemyObj);
             }
 
-            yield return new WaitForSeconds(towerData.attackSpeed);
+            yield return new WaitForSeconds(towerStatusDataInfo.attackSpeed);
 
             isShootInterval = true;
         }

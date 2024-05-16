@@ -52,7 +52,7 @@ MonoBehaviour:
   machineGunTowerBuildBtn: {fileID: 4016696347702745073}
   cannonTowerBuildBtn: {fileID: 1069166624884456511}
   jammingTowerBuildBtn: {fileID: 9142431399810377892}
-  towerExplanationUIObj: {fileID: 6223233259047067493, guid: d810e100e9824ab488a12be522ae92d0, type: 3}
+  towerDescriptionUIObj: {fileID: 6223233259047067493, guid: d810e100e9824ab488a12be522ae92d0, type: 3}
 --- !u!1 &3640533576461656601
 GameObject:
   m_ObjectHideFlags: 0

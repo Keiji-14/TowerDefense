@@ -1,6 +1,4 @@
-﻿using GameData;
-using GameData.Tower;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UniRx;
 

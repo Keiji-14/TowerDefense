@@ -14,7 +14,7 @@ public class SQLTest : MonoBehaviour
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
 
-        if (www.result != UnityWebRequest.Result.Success)
+        /*if (www.result != UnityWebRequest.Result.Success)
         {
             Debug.LogError("HTTP Error: " + www.error);
         }
@@ -28,6 +28,6 @@ public class SQLTest : MonoBehaviour
             {
                 Debug.Log("tower: " + tower.towerIncome);
             }
-        }
+        }*/
     }
 }

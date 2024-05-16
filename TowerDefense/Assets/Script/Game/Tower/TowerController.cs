@@ -20,6 +20,8 @@ namespace Game.Tower
         #region PrivateField
         /// <summary>タワー建設のUI</summary>
         private TowerBuildUI towerBuildUI;
+        /// <summary>タワー強化・売却のUI</summary>
+        private TowerActionsUI towerActionsUI;
         /// <summary>選択しているタワーの土台</summary>
         private TowerStand selectionTowerStand;
         /// <summary>建設したタワーのリスト</summary>
@@ -29,8 +31,10 @@ namespace Game.Tower
         #region SerializeField
         /// <summary>生成場所の親オブジェクト</summary>
         [SerializeField] private Transform uiCanvas;
-        /// <summary>生成するUIオブジェクト</summary>
-        [SerializeField] private GameObject TowerBuildUIObj;
+        /// <summary>タワー建設のUIオブジェクト</summary>
+        [SerializeField] private GameObject towerBuildUIObj;
+        /// <summary>タワー強化・売却のUIオブジェクト</summary>
+        [SerializeField] private GameObject towerActionsUIObj;
         /// <summary>タワー土台のリスト</summary>
         [SerializeField] private List<TowerStand> towerStandList = new List<TowerStand>();
         #endregion
@@ -79,8 +83,10 @@ namespace Game.Tower
                 if (EventSystem.current.IsPointerOverGameObject()) 
                     return;
 
+                int layerMask = ~(1 << LayerMask.NameToLayer("Tower"));
+
                 // Rayがオブジェクトに当たったかどうかを確認
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
                 {
                     // Towerコンポーネントがアタッチされているかどうかを確認
                     TowerStand towerStand = hit.collider.gameObject.GetComponent<TowerStand>();
@@ -102,18 +108,31 @@ namespace Game.Tower
                     towerStand.OnTowerClicked();
                     DestroyTowerBuildUI();
                 }
-                else if (selectionTowerStand != null)
+                else if (selectionTowerStand != null && towerStand.IsBulidedTower() != null)
                 {
                     towerStand.OnTowerClicked();
                     selectionTowerStand.OnTowerClicked();
                     selectionTowerStand = towerStand;
-                    ShowTowerUI();
+                    ShowTowerActionsUI(selectionTowerStand);
+                }
+                else if (selectionTowerStand != null && towerStand.IsBulidedTower() == null)
+                {
+                    towerStand.OnTowerClicked();
+                    selectionTowerStand.OnTowerClicked();
+                    selectionTowerStand = towerStand;
+                    ShowTowerBuildUI();
+                }
+                else if (selectionTowerStand == null && towerStand.IsBulidedTower() != null)
+                {
+                    towerStand.OnTowerClicked();
+                    selectionTowerStand = towerStand;
+                    ShowTowerActionsUI(selectionTowerStand);
                 }
                 else
                 {
                     towerStand.OnTowerClicked();
                     selectionTowerStand = towerStand;
-                    ShowTowerUI();
+                    ShowTowerBuildUI();
                 }
             }
         }
@@ -134,7 +153,7 @@ namespace Game.Tower
         /// <summary>
         /// 建設内を選択するUIを表示する
         /// </summary>
-        private void ShowTowerUI()
+        private void ShowTowerBuildUI()
         {
             // 現在表示しているUIがあれば破棄する
             if (towerBuildUI != null)
@@ -143,7 +162,7 @@ namespace Game.Tower
             }
 
             // UIをインスタンス化して表示する
-            towerBuildUI = Instantiate(TowerBuildUIObj, new Vector3(960, 540, 0), Quaternion.identity, uiCanvas).GetComponent<TowerBuildUI>();
+            towerBuildUI = Instantiate(towerBuildUIObj, new Vector3(960, 540, 0), Quaternion.identity, uiCanvas).GetComponent<TowerBuildUI>();
 
             towerBuildUI.Init();
 
@@ -154,6 +173,22 @@ namespace Game.Tower
         }
 
         /// <summary>
+        /// 建設内を選択するUIを表示する
+        /// </summary>
+        private void ShowTowerActionsUI(TowerStand towerStand)
+        {
+            // 現在表示しているUIがあれば破棄する
+            if (towerActionsUI != null)
+            {
+                Destroy(towerActionsUI.gameObject);
+            }
+
+            // UIをインスタンス化して表示する
+            towerActionsUI = Instantiate(towerActionsUIObj, new Vector3(960, 540, 0), Quaternion.identity, uiCanvas).GetComponent<TowerActionsUI>();
+            towerActionsUI.Init(towerStand);
+        }
+
+        /// <summary>
         /// 建設できるかを判定する処理
         /// </summary>
         /// <param name="towerType">タワーの種類</param>
@@ -161,13 +196,14 @@ namespace Game.Tower
         {
             // タワーの情報を取得
             var towerData = GameDataManager.instance.GetTowerData(towerType);
+            var towerStatus = towerData.towerStatusDataInfoList[0];
             // 所持金を取得
             var possessionMoney = GameDataManager.instance.GetGameDataInfo().possessionMoney;
 
             // 所持金が足りるかを判定
-            if (towerData.towerCost <= possessionMoney)
+            if (towerStatus.towerCost <= possessionMoney)
             {
-                TowerBuildSubject.OnNext(towerData.towerCost);
+                TowerBuildSubject.OnNext(towerStatus.towerCost);
                 selectionTowerStand.OnTowerClicked();
                 selectionTowerStand.CreateTower(towerData);
 
@@ -181,6 +217,15 @@ namespace Game.Tower
 
         /// <summary>
         /// 建設できるかを判定する処理
+        /// </summary>
+        /// <param name="towerType">タワーの種類</param>
+        private void IsCanUpGrade(TowerType towerType)
+        {
+            
+        }
+
+        /// <summary>
+        /// 建設UIを削除する処理
         /// </summary>
         private void DestroyTowerBuildUI()
         {
