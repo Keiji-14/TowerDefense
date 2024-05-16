@@ -13,19 +13,24 @@ MonoBehaviour:
   m_Name: StageData1
   m_EditorClassIdentifier: 
   stageID: 1
-  startFortressLife: 5
+  startFortressLife: 10
   startMoney: 100
   waveInterval: 5
-  stageObj: {fileID: 6880986505371123615, guid: f815c34d12d9573449335d5a3ee07d29, type: 3}
+  stageObj: {fileID: 7014081645879819774, guid: f815c34d12d9573449335d5a3ee07d29, type: 3}
   fortressTransform: {fileID: 6331221454793896029, guid: a5b2ec34d75c1534289c90d3023e1228, type: 3}
   waveInfo:
   - enemyNum: 5
     spawnPoint: {fileID: 1967474276183628169, guid: 897e12e6ff535c84a838f08d64f952b8, type: 3}
+    routeAnchor: []
   - enemyNum: 6
     spawnPoint: {fileID: 1967474276183628169, guid: 897e12e6ff535c84a838f08d64f952b8, type: 3}
+    routeAnchor: []
   - enemyNum: 7
     spawnPoint: {fileID: 1967474276183628169, guid: 897e12e6ff535c84a838f08d64f952b8, type: 3}
+    routeAnchor: []
   - enemyNum: 8
     spawnPoint: {fileID: 1967474276183628169, guid: 897e12e6ff535c84a838f08d64f952b8, type: 3}
+    routeAnchor: []
   - enemyNum: 10
     spawnPoint: {fileID: 1967474276183628169, guid: 897e12e6ff535c84a838f08d64f952b8, type: 3}
+    routeAnchor: []

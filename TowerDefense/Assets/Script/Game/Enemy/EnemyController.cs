@@ -90,7 +90,12 @@ namespace Game.Enemy
                  
                  enemy.Init(enemyDataInfo);
 
-                 enemy.EnemyDestroySubject.Subscribe(_ =>
+                enemy.EnemyDestroySubject.Subscribe(_ =>
+                {
+                    DesteryEnemy(enemy);
+                }).AddTo(this);
+
+                enemy.EnemyDefeatSubject.Subscribe(_ =>
                  {
                      GetDropMoneySubject.OnNext(enemy.enemyDataInfo.dropMoney);
                      DesteryEnemy(enemy);

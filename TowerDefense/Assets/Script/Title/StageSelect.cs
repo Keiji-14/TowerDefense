@@ -52,14 +52,15 @@ namespace Title
 
             foreach (var button in stageNumBtnList)
             {
-                int capturedStageNum = stageNum; // ステージ番号をキャプチャ
+                // ステージ番号を設定
+                int capturedStageNum = stageNum; 
 
                 button.OnClickAsObservable().Subscribe(_ =>
                 {
-                    StageDecisionSubject.OnNext(capturedStageNum); // クリックされたボタンに対応するステージ番号を発行
+                    StageDecisionSubject.OnNext(capturedStageNum);
                 }).AddTo(this);
 
-                stageNum++; // 次のループで新しいステージ番号を使うためにインクリメント
+                stageNum++;
             }
 
             OnClickTutorialStageButtonObserver.Subscribe(_ =>

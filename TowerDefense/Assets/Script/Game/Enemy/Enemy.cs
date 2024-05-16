@@ -17,13 +17,15 @@ namespace Game.Enemy
         public EnemyDataInfo enemyDataInfo;
         /// <summary>敵が消滅する時の処理</summary>
         public Subject<Unit> EnemyDestroySubject = new Subject<Unit>();
+        /// <summary>敵を倒した時の処理</summary>
+        public Subject<Unit> EnemyDefeatSubject = new Subject<Unit>();
         #endregion
 
         #region PrivateField
         /// <summary>敵の体力</summary>
         private int life;
         /// <summary>現在の中継を通過した値</summary>
-        private int currentRouteAnchorIndex = 0;
+        private int currentRouteAnchorIndex = -1;
         /// <summary>NavMeshAgentコンポーネント</summary>
         private NavMeshAgent agent;
         #endregion
@@ -41,7 +43,6 @@ namespace Game.Enemy
         void Update()
         {
             RotationLifeBar();
-
 
             if (!agent.pathPending && agent.remainingDistance < 0.1f)
             {
@@ -68,7 +69,8 @@ namespace Game.Enemy
             lifeBar.value = life;
 
             agent.speed = enemyDataInfo.speed;
-            agent.destination = target.position;
+            //agent.stoppingDistance = 0.1f; // 必要に応じて調整
+            agent.autoBraking = false;     // 目的地に近づいても速度を落とさない
         }
 
         private void MoveToNextWaypoint()
@@ -113,7 +115,7 @@ namespace Game.Enemy
             // HPが0を下回ったかどうかを確認
             if (IsLifeZero())
             {
-                EnemyDestroySubject.OnNext(Unit.Default);
+                EnemyDefeatSubject.OnNext(Unit.Default);
             }
         }
 

@@ -21,7 +21,10 @@ MonoBehaviour:
   waveInfo:
   - enemyNum: 5
     spawnPoint: {fileID: 8910044401463765576, guid: 1d6ee6ca9809d9a4297069403e03a508, type: 3}
-  - enemyNum: 5
+    routeAnchor: []
+  - enemyNum: 7
     spawnPoint: {fileID: 8910044401463765576, guid: 1d6ee6ca9809d9a4297069403e03a508, type: 3}
-  - enemyNum: 5
+    routeAnchor: []
+  - enemyNum: 9
     spawnPoint: {fileID: 8910044401463765576, guid: 1d6ee6ca9809d9a4297069403e03a508, type: 3}
+    routeAnchor: []
