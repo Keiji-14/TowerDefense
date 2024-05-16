@@ -7,6 +7,11 @@ namespace Game
     public class GameViewUI : MonoBehaviour
     {
         #region SerializeField
+        /// <summary>ウェーブ数表示の補正値</summary>
+        private const int correctionWaveNum = 1;
+        #endregion
+
+        #region SerializeField
         /// <summary>砦の耐久値UI</summary>
         [SerializeField] private TextMeshProUGUI fortressLifeText;
         /// <summary>所持金のUI</summary>
@@ -26,7 +31,7 @@ namespace Game
 
             fortressLifeText.text = gameDataInfo.fortressLife.ToString();
             possessionMoneyText.text = gameDataInfo.possessionMoney.ToString();
-            waveText.text = $"{gameDataInfo.waveNum}/{stageDataInfo.waveInfo.Count}";
+            waveText.text = $"{gameDataInfo.waveNum + correctionWaveNum}/{stageDataInfo.waveInfo.Count}";
         }
         #endregion
     }

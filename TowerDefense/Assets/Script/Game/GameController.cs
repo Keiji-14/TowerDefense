@@ -22,7 +22,7 @@ namespace Game
 
         #region PrivateField
         /// <summary>ウェーブ数の初期化</summary>
-        private const int waveInitNum = 1;
+        private const int waveInitNum = 0;
         /// <summary>ゲーム開始ボタンを押した時の処理</summary>
         private IObservable<Unit> OnClickGameStartButtonObserver => gameStartBtn.OnClickAsObservable();
         #endregion
@@ -104,9 +104,12 @@ namespace Game
                 PossessionMoneyUpdate(dropMoney);
             }).AddTo(this);
 
-            enemyController.IsFinishSubject.Subscribe(enemtNum =>
+            enemyController.IsFinishSubject.Subscribe(isFinish =>
             {
-                IsFinish(enemtNum);
+                if (isFinish)
+                {
+                    IsFinish();
+                }
             }).AddTo(this);
         }
 
@@ -183,9 +186,9 @@ namespace Game
         /// <summary>
         /// ゲームが終了したかどうかを確認する処理
         /// </summary>
-        private void IsFinish(int enemyNum)
+        private void IsFinish()
         {
-            if (IsEnemyZero(enemyNum) && IsWaveFinish())
+            if (IsEnemyZero() && IsWaveFinish())
             {
                 Debug.Log("クリア");
             }
@@ -218,11 +221,9 @@ namespace Game
         /// <summary>
         /// 敵の数が0かどうかを判定する処理
         /// </summary>
-        private bool IsEnemyZero(int enemyNum)
+        private bool IsEnemyZero()
         {
-            Debug.Log($"enemyNum{enemyNum}");
-            var enemyZeroNum = 0;
-            return enemyNum == enemyZeroNum;
+            return enemyController.GetEnemyCount() == 0;
         }
 
         /// <summary>

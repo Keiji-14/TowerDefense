@@ -15,7 +15,7 @@ namespace Game.Enemy
         /// <summary>敵を倒したお金を入手する処理</summary>
         public Subject<int> GetDropMoneySubject = new Subject<int>();
         /// <summary>終了したかどうかの処理</summary>
-        public Subject<int> IsFinishSubject = new Subject<int>();
+        public Subject<bool> IsFinishSubject = new Subject<bool>();
         #endregion
 
         #region PrivateField
@@ -42,62 +42,71 @@ namespace Game.Enemy
         {
             isWaveStart = true;
         }
+
+        public int GetEnemyCount()
+        {
+            return enemyList.Count;
+        }
         #endregion
 
         #region PrivateMethod
         /// <summary>
         /// 敵を出現させる処理
         /// </summary>
-        /// <param name="">攻撃対象</param>
         private IEnumerator CreateEnemy()
         {
             // ウェーブ数を取得
             var waveNum = GameDataManager.instance.GetGameDataInfo().waveNum;
 
-            // 最終ウェーブではない場合は続行
-            if (waveNum <= GameDataManager.instance.GetStageDataInfo().waveInfo.Count)
+            var stageDataInfo = GameDataManager.instance.GetStageDataInfo();
+
+            // ウェーブが全て終了していた場合ば処理を止める
+            if (waveNum >= stageDataInfo.waveInfo.Count)
             {
-                // 敵の出現数を取得
-                var enemyNum = GameDataManager.instance.GetStageDataInfo().waveInfo[waveNum].enemyNum;
-                // 敵の出現場所を取得
-                var spawnPoint = GameDataManager.instance.GetStageDataInfo().waveInfo[waveNum].spawnPoint.position;
-                // ウェーブのインターバル時間を取得
-                var waveInterval = GameDataManager.instance.GetStageDataInfo().waveInterval;
-                // 敵の情報を取得
-                var enemyDataInfo = GameDataManager.instance.GetEnemyDataInfo(0);
-
-                for (int i = 0; i < enemyNum; i++)
-                {
-                    Vector3 center = spawnPoint;
-                    // ランダムな方向を選択
-                    Vector3 randomDirection = Random.insideUnitSphere * 1f;
-                    // 中心からランダムな方向へ1からランダムな距離の位置を計算
-                    Vector3 randomPos = center + randomDirection;
-                    // Y軸の位置を中心と同じにする（必要に応じて修正）
-                    randomPos.y = center.y;
-
-                    var enemy = Instantiate(enemyDataInfo.enemyObj, randomPos, Quaternion.identity).GetComponent<Enemy>();
-                    
-                    enemy.Init(enemyDataInfo);
-
-                    enemy.EnemyDestroySubject.Subscribe(_ =>
-                    {
-                        GetDropMoneySubject.OnNext(enemy.enemyDataInfo.dropMoney);
-                        DesteryEnemy(enemy);
-                    }).AddTo(this);
-
-                    // 生成した敵を追加
-                    enemyList.Add(enemy);
-
-                    yield return new WaitForSeconds(1f);
-                }
-
-                yield return new WaitForSeconds(waveInterval);
-
-                NextWaveSubject.OnNext(waveNum);
-
-                isWaveStart = true;
+                IsFinishSubject.OnNext(true);
+                yield break; // ウェーブ数が無効な場合は処理を中断
             }
+
+             // 敵の出現数を取得
+             var enemyNum = GameDataManager.instance.GetStageDataInfo().waveInfo[waveNum].enemyNum;
+             // 敵の出現場所を取得
+             var spawnPoint = GameDataManager.instance.GetStageDataInfo().waveInfo[waveNum].spawnPoint.position;
+             // ウェーブのインターバル時間を取得
+             var waveInterval = GameDataManager.instance.GetStageDataInfo().waveInterval;
+             // 敵の情報を取得
+             var enemyDataInfo = GameDataManager.instance.GetEnemyDataInfo(0);
+
+             for (int i = 0; i < enemyNum; i++)
+             {
+                 Vector3 center = spawnPoint;
+                 // ランダムな方向を選択
+                 Vector3 randomDirection = Random.insideUnitSphere * 1f;
+                 // 中心からランダムな方向へ1からランダムな距離の位置を計算
+                 Vector3 randomPos = center + randomDirection;
+                 // Y軸の位置を中心と同じにする（必要に応じて修正）
+                 randomPos.y = center.y;
+
+                 var enemy = Instantiate(enemyDataInfo.enemyObj, randomPos, Quaternion.identity).GetComponent<Enemy>();
+                 
+                 enemy.Init(enemyDataInfo);
+
+                 enemy.EnemyDestroySubject.Subscribe(_ =>
+                 {
+                     GetDropMoneySubject.OnNext(enemy.enemyDataInfo.dropMoney);
+                     DesteryEnemy(enemy);
+                 }).AddTo(this);
+
+                 // 生成した敵を追加
+                 enemyList.Add(enemy);
+
+                 yield return new WaitForSeconds(1f);
+             }
+
+             yield return new WaitForSeconds(waveInterval);
+
+             NextWaveSubject.OnNext(waveNum);
+
+             isWaveStart = true;
         }
 
         /// <summary>
@@ -109,7 +118,15 @@ namespace Game.Enemy
             Instantiate(enemy.enemyDataInfo.destroyParticle, enemy.transform.position, Quaternion.identity);
             Destroy(enemy.gameObject);
 
-            IsFinishSubject.OnNext(enemyList.Count);
+            // すべての敵が倒された後にクリア判定を行う
+            if (enemyList.Count == 0)
+            {
+                IsFinishSubject.OnNext(true);
+            }
+            else
+            {
+                IsFinishSubject.OnNext(false);
+            }
         }
         #endregion
     }
