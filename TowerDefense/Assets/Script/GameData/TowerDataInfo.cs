@@ -27,6 +27,27 @@ namespace GameData.Tower
         public GameObject towerObj;
         /// <summary>弾のオブジェクト</summary>
         public GameObject bulletObj;
+
+        /// <summary>タワーの情報をディープコピーさせる処理</summary>
+        public object Clone()
+        {
+            TowerDataInfo clone = (TowerDataInfo)MemberwiseClone();
+            clone.towerStatusDataInfoList = new List<TowerStatusDataInfo>();
+            foreach (var status in towerStatusDataInfoList)
+            {
+                clone.towerStatusDataInfoList.Add(new TowerStatusDataInfo
+                {
+                    attack = status.attack,
+                    towerCost = status.towerCost,
+                    towerIncome = status.towerIncome,
+                    firingRange = status.firingRange,
+                    attackSpeed = status.attackSpeed,
+                    bulletSpeed = status.bulletSpeed,
+                    uniqueStatus = status.uniqueStatus
+                });
+            }
+            return clone;
+        }
         #endregion
     }
 

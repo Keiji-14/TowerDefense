@@ -49,9 +49,18 @@ namespace Game.Tower
         }
 
         /// <summary>
-        /// タワーが建設済みかどうか
+        /// 建設しているタワーを削除するの処理
         /// </summary>
-        public Tower IsBulidedTower()
+        public void DestroyTower()
+        {
+            Destroy(tower.gameObject);
+            tower = null;
+        }
+
+        /// <summary>
+        /// タワーのコンポーネントを返す
+        /// </summary>
+        public Tower GetTower()
         {
             return tower;
         }

@@ -14,6 +14,8 @@ namespace Game.Tower
         private int attack;
         /// <summary>弾の速度</summary>
         private float bulletSpeed;
+        /// <summary>固有ステータス</summary>
+        private float uniqueStatus;
         /// <summary>タワーの種類</summary>
         private TowerType towerType;
         /// <summary>追尾対象の敵</summary>
@@ -47,11 +49,11 @@ namespace Game.Tower
         /// <summary>
         /// 初期化
         /// </summary>
-        /// <param name="enemyObj">追尾対象</param>
-        public void Init(int attack, float bulletSpeed, TowerType towerType, GameObject enemyObj)
+        public void Init(TowerStatusDataInfo towerStatusDataInfo, TowerType towerType, GameObject enemyObj)
         {
-            this.attack = attack;
-            this.bulletSpeed = bulletSpeed;
+            attack = towerStatusDataInfo.attack;
+            bulletSpeed = towerStatusDataInfo.bulletSpeed;
+            uniqueStatus = towerStatusDataInfo.uniqueStatus;
             this.towerType = towerType;
             targetEnemy = enemyObj;
             targetPosition = targetEnemy.transform.position;
@@ -100,7 +102,7 @@ namespace Game.Tower
 
             enemy.TakeDamage(attack);
 
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
 
         /// <summary>
@@ -110,7 +112,7 @@ namespace Game.Tower
         private void CannonGunBullet(Vector3 explosionPoint)
         {
             // 爆破範囲
-            var explosionRadius = 2;
+            var explosionRadius = uniqueStatus;
 
             Collider[] colliders = Physics.OverlapSphere(explosionPoint, explosionRadius);
             
@@ -124,7 +126,7 @@ namespace Game.Tower
                 }
             }
 
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
         #endregion
     }

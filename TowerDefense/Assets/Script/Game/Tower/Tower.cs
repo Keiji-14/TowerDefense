@@ -25,8 +25,6 @@ namespace Game.Tower
         private GameObject targetEnemyObj;
         /// <summary>建設したタワーの情報</summary>
         private TowerDataInfo towerDataInfo;
-        /// <summary>建設したタワーのステータス</summary>
-        private TowerStatusDataInfo towerStatusDataInfo;
         #endregion
 
         #region SerializeField
@@ -47,14 +45,30 @@ namespace Game.Tower
         /// <param name="towerData">タワーの情報</param>
         public void Init(TowerDataInfo towerDataInfo)
         {
-            // タワーの情報を保持させる
-            this.towerDataInfo = towerDataInfo;
+            // タワーの情報をディープコピーして保持させる
+            this.towerDataInfo = (TowerDataInfo)towerDataInfo.Clone(); ;
 
-            towerStatusDataInfo = towerDataInfo.towerStatusDataInfoList[towerDataInfo.level - 1];
             // 発射可能状態にする
             isShootInterval = true;
 
             currentFirePoint = firePointA;
+        }
+
+        /// <summary>
+        /// タワーのレベルを上げる処理
+        /// </summary>
+        public void UpGradeTower()
+        {
+            // タワーのレベルを1上げる
+            towerDataInfo.level++;
+        }
+
+        /// <summary>
+        /// タワーの情報を返す処理
+        /// </summary>
+        public TowerDataInfo GetTowerDataInfo()
+        {
+            return towerDataInfo;
         }
         #endregion
 
@@ -143,6 +157,7 @@ namespace Game.Tower
         /// </summary>
         private IEnumerator ShotMachineGun()
         {
+            var towerStatusDataInfo = towerDataInfo.towerStatusDataInfoList[towerDataInfo.level - 1];
             // バースト数
             var burstNum = towerStatusDataInfo.uniqueStatus;
             // バーストの間隔
@@ -162,7 +177,7 @@ namespace Game.Tower
 
                 if (targetEnemyObj != null)
                 {
-                    bullet.Init(towerStatusDataInfo.attack, towerStatusDataInfo.bulletSpeed, towerDataInfo.towerType, targetEnemyObj);
+                    bullet.Init(towerStatusDataInfo, towerDataInfo.towerType, targetEnemyObj);
                 }
 
                 // 現在の発射口を切り替え
@@ -193,12 +208,14 @@ namespace Game.Tower
         /// </summary>
         private IEnumerator ShotCannon()
         {
+            var towerStatusDataInfo = towerDataInfo.towerStatusDataInfoList[towerDataInfo.level - 1];
+
             var bullet = Instantiate(towerDataInfo.bulletObj, firePointA.position, firePointA.rotation).GetComponent<Bullet>();
             SE.instance.Play(shotSE);
 
             if (targetEnemyObj != null)
             {
-                bullet.Init(towerStatusDataInfo.attack, towerStatusDataInfo.bulletSpeed, towerDataInfo.towerType, targetEnemyObj);
+                bullet.Init(towerStatusDataInfo, towerDataInfo.towerType, targetEnemyObj);
             }
 
             yield return new WaitForSeconds(towerStatusDataInfo.attackSpeed);

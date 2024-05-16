@@ -69,6 +69,11 @@ namespace Game
                 PossessionMoneyUpdate(-towerCost);
             }).AddTo(this);
 
+            towerController.TowerSaleSubject.Subscribe(towerCost =>
+            {
+                PossessionMoneyUpdate(towerCost);
+            }).AddTo(this);
+
             gameViewUI.UpdateViewUI();
 
             OnClickGameStartButtonObserver.Subscribe(_ =>

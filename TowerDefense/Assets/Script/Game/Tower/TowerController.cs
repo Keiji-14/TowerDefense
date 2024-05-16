@@ -15,6 +15,8 @@ namespace Game.Tower
         #region PublicField
         /// <summary>タワーを建設した時の処理</summary>
         public Subject<int> TowerBuildSubject = new Subject<int>();
+        /// <summary>タワーを売却した時の処理</summary>
+        public Subject<int> TowerSaleSubject = new Subject<int>();
         #endregion
 
         #region PrivateField
@@ -108,21 +110,21 @@ namespace Game.Tower
                     towerStand.OnTowerClicked();
                     DestroyTowerBuildUI();
                 }
-                else if (selectionTowerStand != null && towerStand.IsBulidedTower() != null)
+                else if (selectionTowerStand != null && towerStand.GetTower() != null)
                 {
                     towerStand.OnTowerClicked();
                     selectionTowerStand.OnTowerClicked();
                     selectionTowerStand = towerStand;
                     ShowTowerActionsUI(selectionTowerStand);
                 }
-                else if (selectionTowerStand != null && towerStand.IsBulidedTower() == null)
+                else if (selectionTowerStand != null && towerStand.GetTower() == null)
                 {
                     towerStand.OnTowerClicked();
                     selectionTowerStand.OnTowerClicked();
                     selectionTowerStand = towerStand;
                     ShowTowerBuildUI();
                 }
-                else if (selectionTowerStand == null && towerStand.IsBulidedTower() != null)
+                else if (selectionTowerStand == null && towerStand.GetTower() != null)
                 {
                     towerStand.OnTowerClicked();
                     selectionTowerStand = towerStand;
@@ -186,6 +188,24 @@ namespace Game.Tower
             // UIをインスタンス化して表示する
             towerActionsUI = Instantiate(towerActionsUIObj, new Vector3(960, 540, 0), Quaternion.identity, uiCanvas).GetComponent<TowerActionsUI>();
             towerActionsUI.Init(towerStand);
+
+            towerActionsUI.TowerUpgradeSubject.Subscribe(towerStand =>
+            {
+                IsCanUpGrade(towerStand);
+                //var towerDataInfo = towerStand.GetTower().GetTowerDataInfo();
+            }).AddTo(this);
+
+            towerActionsUI.TowerSaleSubject.Subscribe(towerStand =>
+            {
+                var towerDataInfo = towerStand.GetTower().GetTowerDataInfo();
+                var towerIncome = towerDataInfo.towerStatusDataInfoList[towerDataInfo.level - 1].towerIncome;
+
+                TowerSaleSubject.OnNext(towerIncome);
+
+                selectionTowerStand.OnTowerClicked();
+                towerStand.DestroyTower();
+                DestroyTowerBuildUI();
+            }).AddTo(this);
         }
 
         /// <summary>
@@ -196,14 +216,14 @@ namespace Game.Tower
         {
             // タワーの情報を取得
             var towerData = GameDataManager.instance.GetTowerData(towerType);
-            var towerStatus = towerData.towerStatusDataInfoList[0];
+            var buildCost = towerData.towerStatusDataInfoList[0].towerCost;
             // 所持金を取得
             var possessionMoney = GameDataManager.instance.GetGameDataInfo().possessionMoney;
 
             // 所持金が足りるかを判定
-            if (towerStatus.towerCost <= possessionMoney)
+            if (buildCost <= possessionMoney)
             {
-                TowerBuildSubject.OnNext(towerStatus.towerCost);
+                TowerBuildSubject.OnNext(buildCost);
                 selectionTowerStand.OnTowerClicked();
                 selectionTowerStand.CreateTower(towerData);
 
@@ -216,12 +236,31 @@ namespace Game.Tower
         }
 
         /// <summary>
-        /// 建設できるかを判定する処理
+        /// 強化できるかを判定する処理
         /// </summary>
-        /// <param name="towerType">タワーの種類</param>
-        private void IsCanUpGrade(TowerType towerType)
+        /// <param name="towerStand">タワーの土台</param>
+        private void IsCanUpGrade(TowerStand towerStand)
         {
-            
+            var towerDataInfo = towerStand.GetTower().GetTowerDataInfo();
+            var upGradeCost = towerDataInfo.towerStatusDataInfoList[towerDataInfo.level - 1].towerCost;
+            var possessionMoney = GameDataManager.instance.GetGameDataInfo().possessionMoney;
+
+            if (upGradeCost <= possessionMoney)
+            {
+                TowerBuildSubject.OnNext(upGradeCost);
+                selectionTowerStand.OnTowerClicked();
+
+                var tower = towerStand.GetTower();
+                tower.UpGradeTower();
+                //selectionTowerStand.UpGradeTower();
+                //selectionTowerStand.CreateTower();
+
+                DestroyTowerBuildUI();
+            }
+            else
+            {
+                Debug.Log("所持金が足りません");
+            }
         }
 
         /// <summary>
@@ -229,10 +268,19 @@ namespace Game.Tower
         /// </summary>
         private void DestroyTowerBuildUI()
         {
-            towerBuildUI.DeleteTowerDescription();
+            if (towerBuildUI != null)
+            {
+                towerBuildUI.DeleteTowerDescription();
+                Destroy(towerBuildUI.gameObject);
+                towerBuildUI = null;
+            }
 
-            Destroy(towerBuildUI.gameObject);
-            towerBuildUI = null;
+            if (towerActionsUI != null)
+            {
+                towerActionsUI.DeleteTowerDescription();
+                Destroy(towerActionsUI.gameObject);
+                towerActionsUI = null;
+            }
             selectionTowerStand = null;
         }
         #endregion
