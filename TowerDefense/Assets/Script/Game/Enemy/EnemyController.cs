@@ -69,14 +69,11 @@ namespace Game.Enemy
 
             // ウェーブの情報を取得
             var waveInfo = stageDataInfo.waveInfo[waveNum];
-            // 敵の出現数を取得
-            //var enemyNum = GameDataManager.instance.GetStageDataInfo().waveInfo[waveNum].enemyNum;
             // 敵の出現場所を取得
             var spawnPoint = GameDataManager.instance.GetStageDataInfo().waveInfo[waveNum].spawnPoint.position;
-             // ウェーブのインターバル時間を取得
-             var waveInterval = GameDataManager.instance.GetStageDataInfo().waveInterval;
+            // ウェーブのインターバル時間を取得 
+            var waveInterval = GameDataManager.instance.GetStageDataInfo().waveInterval;
             // 敵の情報を取得
-            //var enemyDataInfo = GameDataManager.instance.GetEnemyDataInfo(0);
             foreach (var enemySpawnInfo in waveInfo.enemySpawnInfoList)
             {
                 // 敵の情報を取得
@@ -115,11 +112,11 @@ namespace Game.Enemy
                 }
             }
 
-             yield return new WaitForSeconds(waveInterval);
+            yield return new WaitForSeconds(waveInterval);
 
-             NextWaveSubject.OnNext(waveNum);
+            NextWaveSubject.OnNext(waveNum);
 
-             isWaveStart = true;
+            isWaveStart = true;
         }
 
         /// <summary>

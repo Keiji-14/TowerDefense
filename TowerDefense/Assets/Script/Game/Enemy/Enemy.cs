@@ -69,7 +69,7 @@ namespace Game.Enemy
             lifeBar.value = life;
 
             agent.speed = enemyDataInfo.speed;
-            //agent.stoppingDistance = 0.1f; // 必要に応じて調整
+            agent.baseOffset = enemyDataInfo.baseOffset; 
             agent.autoBraking = false;     // 目的地に近づいても速度を落とさない
         }
 

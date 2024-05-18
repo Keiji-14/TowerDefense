@@ -17,6 +17,8 @@ namespace GameData.Enemy
         public int dropMoney;
         /// <summary>移動速度</summary>
         public float speed;
+        /// <summary>垂直変位</summary>
+        public float baseOffset;
         /// <summary>敵のオブジェクト</summary>
         public GameObject enemyObj;
         /// <summary>消滅時のパーティクル</summary>
