@@ -14,8 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDataInfoList:
   - enemyID: 0
-    life: 10
+    life: 20
     dropMoney: 5
-    speed: 3
+    speed: 2
     enemyObj: {fileID: 1769015344297125693, guid: 3e72a55154d25d44e8c814ccf9afeab4, type: 3}
+    destroyParticle: {fileID: 5367459830565765355, guid: 3d74d8266bb7b8d4e9cff3eae9af5b31, type: 3}
+  - enemyID: 1
+    life: 15
+    dropMoney: 5
+    speed: 4
+    enemyObj: {fileID: 8364678408733915518, guid: 951b2919b844ba24ca5971fe0b8f5d19, type: 3}
     destroyParticle: {fileID: 5367459830565765355, guid: 3d74d8266bb7b8d4e9cff3eae9af5b31, type: 3}

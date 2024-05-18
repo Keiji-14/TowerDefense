@@ -6,7 +6,7 @@ namespace Game
 {
     public class GameViewUI : MonoBehaviour
     {
-        #region SerializeField
+        #region PrivateField
         /// <summary>ウェーブ数表示の補正値</summary>
         private const int correctionWaveNum = 1;
         #endregion
