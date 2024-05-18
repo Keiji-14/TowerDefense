@@ -23,8 +23,6 @@ namespace Title
         #endregion
 
         #region PrivateField
-        /// <summary>チュートリアルステージのボタンを押した時の処理</summary>
-        private IObservable<Unit> OnClickTutorialStageButtonObserver => tutorialStageBtn.OnClickAsObservable();
         /// <summary>EXステージのボタンを押した時の処理</summary>
         private IObservable<Unit> OnClickEXStageButtonObserver => exStageBtn.OnClickAsObservable();
         /// <summary>メインタイトルに戻るボタンを押した時の処理</summary>
@@ -34,8 +32,6 @@ namespace Title
         #region SerializeField
         /// <summary>通常ステージのボタンリスト</summary>
         [SerializeField] private List<Button> stageNumBtnList;
-        /// <summary>チュートリアルステージのボタン</summary>
-        [SerializeField] private Button tutorialStageBtn;
         /// <summary>EXステージのボタン</summary>
         [SerializeField] private Button exStageBtn;
         /// <summary>メインタイトルに戻るボタン</summary>
@@ -62,11 +58,6 @@ namespace Title
 
                 stageNum++;
             }
-
-            OnClickTutorialStageButtonObserver.Subscribe(_ =>
-            {
-                TutorialStageSubject.OnNext(Unit.Default);
-            }).AddTo(this);
 
             OnClickEXStageButtonObserver.Subscribe(_ =>
             {

@@ -20,6 +20,8 @@ namespace Title
         private const float sceneLoaderWaitTime = 2f;
         /// <summary>ステージ選択ボタンを押した時の処理</summary>
         private IObservable<Unit> OnClickStageSelectButtonObserver => stageSelectBtn.OnClickAsObservable();
+        /// <summary>チュートリアルステージのボタンを押した時の処理</summary>
+        private IObservable<Unit> OnClickTutorialStageButtonObserver => tutorialStageBtn.OnClickAsObservable();
         /// <summary>終了ボタンを押した時の処理</summary>
         private IObservable<Unit> OnClickExitButtonObserver => exitBtn.OnClickAsObservable();
         #endregion
@@ -29,6 +31,8 @@ namespace Title
         [SerializeField] private Button stageSelectBtn;
         /// <summary>終了ボタン</summary>
         [SerializeField] private Button exitBtn;
+        /// <summary>チュートリアルステージのボタン</summary>
+        [SerializeField] private Button tutorialStageBtn;
         /// <summary>タイトル画面のUIオブジェクト</summary>
         [SerializeField] private GameObject mainTitleUIObj;
         /// <summary>ステージ選択画面のUIオブジェクト</summary>
@@ -66,8 +70,7 @@ namespace Title
                 SetDefaultStage(stageNum);
             }).AddTo(this);
 
-            // チュートリアルステージの設定を行う処理
-            stageSelect.TutorialStageSubject.Subscribe(_ =>
+            OnClickTutorialStageButtonObserver.Subscribe(_ =>
             {
                 SetTutorialStage();
             }).AddTo(this);
