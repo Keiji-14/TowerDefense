@@ -1,5 +1,6 @@
 ﻿using Scene;
 using System;
+using System.Collections;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,17 +13,17 @@ namespace GameOver
     public class GameOverController : MonoBehaviour
     {
         #region PrivateField
-        /// <summary>リトライボタンを押した時の処理</summary>
-        private IObservable<Unit> OnClickRetryButtonObserver => retryBtn.OnClickAsObservable();
+        /// <summary>シーン遷移待機時間</summary>
+        private const float sceneLoaderWaitTime = 2f;
         /// <summary>タイトル画面の戻るボタンを押した時の処理</summary>
         private IObservable<Unit> OnClickTitleBackButtonObserver => titleBackBtn.OnClickAsObservable();
         #endregion
 
         #region SerializeField
-        /// <summary>リトライボタン</summary>
-        [SerializeField] private Button retryBtn;
         /// <summary>タイトル画面の戻るボタン</summary>
         [SerializeField] private Button titleBackBtn;
+        /// <summary>フェードイン・フェードアウトの処理</summary>
+        [SerializeField] private FadeController fadeController;
         #endregion
 
         #region PublicMethod
@@ -31,17 +32,26 @@ namespace GameOver
         /// </summary>
         public void Init()
         {
-            // ゲーム画面に遷移する処理
-            OnClickRetryButtonObserver.Subscribe(_ =>
-            {
-                SceneLoader.Instance().Load(SceneLoader.SceneName.Game);
-            }).AddTo(this);
-
             // タイトル画面に遷移する処理
             OnClickTitleBackButtonObserver.Subscribe(_ =>
             {
-                SceneLoader.Instance().Load(SceneLoader.SceneName.Title);
+                StartCoroutine(ChangeScene(SceneLoader.SceneName.Title));
             }).AddTo(this);
+        }
+        #endregion
+
+        #region PrivateMethod
+
+        /// <summary>
+        /// シーン遷移を行う処理
+        /// </summary>
+        private IEnumerator ChangeScene(SceneLoader.SceneName sceneName)
+        {
+            fadeController.fadeOut = true;
+
+            yield return new WaitForSeconds(sceneLoaderWaitTime);
+
+            SceneLoader.Instance().Load(sceneName);
         }
         #endregion
     }

@@ -21,6 +21,11 @@ namespace Game
 
             gameController.Init();
 
+            gameController.GameClearSubject.Subscribe(_ =>
+            {
+                SceneLoader.Instance().Load(SceneLoader.SceneName.GameClear, true);
+            }).AddTo(this);
+
             gameController.GameOverSubject.Subscribe(_ =>
             {
                 SceneLoader.Instance().Load(SceneLoader.SceneName.GameOver, true);

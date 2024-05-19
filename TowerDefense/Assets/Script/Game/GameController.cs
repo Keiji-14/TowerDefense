@@ -16,6 +16,8 @@ namespace Game
     public class GameController : MonoBehaviour
     {
         #region PublicField
+        /// <summary>ゲームクリア時の処理</summary>
+        public Subject<Unit> GameClearSubject = new Subject<Unit>();
         /// <summary>ゲームオーバー時の処理</summary>
         public Subject<Unit> GameOverSubject = new Subject<Unit>();
         #endregion
@@ -55,10 +57,6 @@ namespace Game
                 // EXステージ情報を取得
                 var stageDataInfo = GameDataManager.instance.GetEXStageDataInfo();
 
-                // ゲーム情報をを初期化
-                gameDataInfo = new GameDataInfo(stageDataInfo.startFortressLife, stageDataInfo.startMoney, waveInitNum, scoreInitNum, false, false, false);
-                GameDataManager.instance.SetGameDataInfo(gameDataInfo);
-
                 Instantiate(stageDataInfo.stageObj, Vector3.zero, Quaternion.identity);
                 fortressController = GameObject.FindWithTag("Fortress").GetComponent<FortressController>();
             }
@@ -66,10 +64,6 @@ namespace Game
             {
                 // 通常ステージ情報を取得
                 var stageDataInfo = GameDataManager.instance.GetStageDataInfo();
-
-                // ゲーム情報をを初期化
-                gameDataInfo = new GameDataInfo(stageDataInfo.startFortressLife, stageDataInfo.startMoney, waveInitNum, scoreInitNum, false, false, false);
-                GameDataManager.instance.SetGameDataInfo(gameDataInfo);
 
                 Instantiate(stageDataInfo.stageObj, Vector3.zero, Quaternion.identity);
                 fortressController = GameObject.FindWithTag("Fortress").GetComponent<FortressController>();
@@ -132,7 +126,7 @@ namespace Game
             {
                 if (isFinish)
                 {
-                    IsFinish();
+                    IsGameClear();
                 }
             }).AddTo(this);
         }
@@ -241,11 +235,24 @@ namespace Game
         /// <summary>
         /// ゲームが終了したかどうかを確認する処理
         /// </summary>
-        private void IsFinish()
+        private void IsGameClear()
         {
-            if (IsEnemyZero() && IsWaveFinish())
+            var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
+
+            if (IsEnemyZero() && IsWaveFinish() && !gameDataInfo.isGameClear)
             {
-                Debug.Log("クリア");
+                // ゲームの情報を更新する
+                var setGameDataInfo = new GameDataInfo(
+                        gameDataInfo.fortressLife,
+                        gameDataInfo.possessionMoney,
+                        gameDataInfo.waveNum,
+                        gameDataInfo.score,
+                        gameDataInfo.isEXStage,
+                        true,
+                        gameDataInfo.isGameOver);
+                GameDataManager.instance.SetGameDataInfo(setGameDataInfo);
+
+                GameClearSubject.OnNext(Unit.Default);
             }
         }
 

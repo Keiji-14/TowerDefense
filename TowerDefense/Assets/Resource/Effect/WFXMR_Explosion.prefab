@@ -38774,7 +38774,7 @@ GameObject:
   - component: {fileID: 6010559606168649496}
   - component: {fileID: 5367459830565765355}
   - component: {fileID: 4474653554069379031}
-  - component: {fileID: 4396567957711546960}
+  - component: {fileID: 8457524080010319167}
   m_Layer: 0
   m_Name: WFXMR_Explosion
   m_TagString: Untagged
@@ -43580,7 +43580,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &4396567957711546960
+--- !u!114 &8457524080010319167
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43589,7 +43589,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8902599355970286703}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd24edcf44c47ae43ba34e67f5d13257, type: 3}
+  m_Script: {fileID: 11500000, guid: d15f29eb140a64e4abee560d9e6f8fbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectTime: 1
+  effectTime: 2
