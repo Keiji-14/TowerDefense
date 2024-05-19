@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EXStageData
   m_EditorClassIdentifier: 
   stageID: 0
-  startFortressLife: 10
+  startFortressLife: 20
   startMoney: 150
   enemyNum: 5
   waveInterval: 5
@@ -86,9 +86,41 @@ MonoBehaviour:
     - {fileID: 1431326814909902193, guid: 0f50ef0c2be84f840b00abaf8bfbf739, type: 3}
     - {fileID: 7758874423346155245, guid: 80e3f08283f6fbc4bae4b95e63164e23, type: 3}
     - {fileID: 2320083351440388442, guid: 10c2e85158a9f3d429a567946eccf3c4, type: 3}
+  - spawnPoint: {fileID: 9066987073763711996, guid: 8cb7cb2737729c54e9adcce39786ad92, type: 3}
+    routeAnchor:
+    - {fileID: 525322984382857348, guid: 5e6f47c7d6c903b47987ed6fa1421454, type: 3}
+    - {fileID: 1616202863569313420, guid: 94b7e0a08f7009446bad21e91a7afa4a, type: 3}
+    - {fileID: 3272542118280661142, guid: ad9eb244a37ff814c8d0ecfc067f5e39, type: 3}
+    - {fileID: 5255239747911021343, guid: 1e90cc595a2cf6842a853df371ef4005, type: 3}
+    - {fileID: 6050509451034910913, guid: 9642b2115b1bf474e8f6b5a89b595dc3, type: 3}
+    - {fileID: 2605398149973475221, guid: 90302a38ca05fe347a94ce548b22e104, type: 3}
+    - {fileID: 1514966637534097788, guid: 97c64d7a8c12a134cb7cd7060a88d71d, type: 3}
   - spawnPoint: {fileID: 1371403287806590684, guid: 1f93910ea54d5494abc1918f8b735248, type: 3}
     routeAnchor:
     - {fileID: 6743873629446398186, guid: b1dc4ece05b56db4eaa4901d424174d2, type: 3}
     - {fileID: 5409424356598329374, guid: 24f4da16858ca584289ce826bd0a33c1, type: 3}
     - {fileID: 2618518766255824952, guid: ecf8447d496fc494ca9d11e97ddefcd4, type: 3}
     - {fileID: 26845713453117050, guid: 122d2064b3f0bf94187dac3e319df36a, type: 3}
+  - spawnPoint: {fileID: 1371403287806590684, guid: 1f93910ea54d5494abc1918f8b735248, type: 3}
+    routeAnchor:
+    - {fileID: 5424568482434824499, guid: 5dd489cc10577f94bb0c58cd8901ce32, type: 3}
+    - {fileID: 602257506826154506, guid: 0e107b8f31e4bce40b1f5a55ae177786, type: 3}
+    - {fileID: 3725451763225407034, guid: 6c03c8cdadd5b3641b48dbed8c897e6d, type: 3}
+    - {fileID: 3062661318222671628, guid: 68997cb55202ac34ea0b97d1eedb2ef1, type: 3}
+    - {fileID: 9136613611067089526, guid: 6fac535c149bafb46bc257ea3655682f, type: 3}
+  - spawnPoint: {fileID: 1371403287806590684, guid: 1f93910ea54d5494abc1918f8b735248, type: 3}
+    routeAnchor:
+    - {fileID: 3545574264655027320, guid: 555d9d9060e545f4ca8d2a5e12541c13, type: 3}
+    - {fileID: 6148358145308850626, guid: 3d13546022a434d40993366e1df875f6, type: 3}
+    - {fileID: 199126181538172488, guid: 76b4051a1f0c05444a7eda5f48258071, type: 3}
+    - {fileID: 1940295692997036860, guid: b983bbbc6ea196a48825f58b3ad95084, type: 3}
+    - {fileID: 4063916333317747455, guid: 97197b519fdc61e46ac452ecb8f8a3db, type: 3}
+    - {fileID: 1644981604674146727, guid: 5e78cd84ea407f54d8bb6ca664b03334, type: 3}
+  - spawnPoint: {fileID: 1371403287806590684, guid: 1f93910ea54d5494abc1918f8b735248, type: 3}
+    routeAnchor:
+    - {fileID: 6756559620889556725, guid: cbf2c102344829f42a27c001b73fbcdd, type: 3}
+    - {fileID: 826951283244424825, guid: 10344099cd0360a4b86ce42d579851d2, type: 3}
+    - {fileID: 2822073725928107869, guid: 352c42fd6e757984bbd5c3367f4cb753, type: 3}
+    - {fileID: 5353439624181793565, guid: 25a3bdb8be4eeff43a96fa81aa1229b8, type: 3}
+    - {fileID: 6005358997252724366, guid: c9c04acd98955a34aaebd4beaa00a361, type: 3}
+    - {fileID: 146331168654447756, guid: d87822c16d38c2d46823ce238a0ebc09, type: 3}
