@@ -267,6 +267,7 @@ MonoBehaviour:
     enemyID: 0
     life: 0
     dropMoney: 0
+    point: 0
     speed: 0
     baseOffset: 0
     enemyObj: {fileID: 0}
@@ -274,6 +275,8 @@ MonoBehaviour:
   target: {fileID: 0}
   sliderCanvas: {fileID: 7637811211782703734}
   lifeBar: {fileID: 8889355236341895784}
+  destroySE: {fileID: 8300000, guid: 66df0b6e69c05be4193d9bc31b872ef8, type: 3}
+  destroyParticle: {fileID: 5367459830565765355, guid: 3d74d8266bb7b8d4e9cff3eae9af5b31, type: 3}
 --- !u!195 &276606305522562439
 NavMeshAgent:
   m_ObjectHideFlags: 0

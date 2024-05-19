@@ -295,7 +295,7 @@ MonoBehaviour:
   firePointA: {fileID: 3200512964041577958}
   firePointB: {fileID: 3200512964041577958}
   muzzleFlashObj: {fileID: 100008, guid: 7b4c09739930d43458b94e59aa06933a, type: 3}
-  shotSE: {fileID: 8300000, guid: 6849c1fa1f1c0e14bb044a6d672aa61a, type: 3}
+  shotSE: {fileID: 8300000, guid: 45407806c88a8df43a300a9d0e4b3d72, type: 3}
 --- !u!1 &3394497223729283250
 GameObject:
   m_ObjectHideFlags: 0

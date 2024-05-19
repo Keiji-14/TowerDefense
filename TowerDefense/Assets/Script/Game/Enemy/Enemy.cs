@@ -1,4 +1,5 @@
-﻿using GameData;
+﻿using Audio;
+using GameData;
 using GameData.Enemy;
 using GameData.Stage;
 using UniRx;
@@ -40,6 +41,10 @@ namespace Game.Enemy
         [SerializeField] private Canvas sliderCanvas;
         /// <summary>敵の体力バー</summary>
         [SerializeField] private Slider lifeBar;
+        /// <summary>消滅時の効果音</summary>
+        [SerializeField] private AudioClip destroySE;
+        /// <summary>消滅時のパーティクル</summary>
+        [SerializeField] public ParticleSystem destroyParticle;
         #endregion
 
         #region UnityEvent
@@ -145,6 +150,17 @@ namespace Game.Enemy
 
             lifeBar.value = life;
             LifeCheck();
+        }
+
+        /// <summary>
+        /// 消滅時の処理
+        /// </summary>
+        public void Destroy()
+        {
+            Instantiate(destroyParticle, transform.position, Quaternion.identity);
+            SE.instance.Play(destroySE);
+
+            Destroy(gameObject);
         }
         #endregion
 

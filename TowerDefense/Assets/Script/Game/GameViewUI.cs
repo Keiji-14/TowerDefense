@@ -16,11 +16,34 @@ namespace Game
         [SerializeField] private TextMeshProUGUI fortressLifeText;
         /// <summary>所持金のUI</summary>
         [SerializeField] private TextMeshProUGUI possessionMoneyText;
+        [Header("DefaultStage")]
+        /// <summary>通常ステージ時のUI</summary>
+        [SerializeField] private GameObject defaultStageUI;
         /// <summary>ウェーブ数のUI</summary>
-        [SerializeField] private TextMeshProUGUI waveText;
+        [SerializeField] private TextMeshProUGUI defaultStageWaveText;
+        [Header("EXStage")]
+        /// <summary>EXステージ時のUI</summary>
+        [SerializeField] private GameObject exStageUI;
+        /// <summary>現在のウェーブ数のUI</summary>
+        [SerializeField] private TextMeshProUGUI exStageWaveText;
+        /// <summary>スコアのUI</summary>
+        [SerializeField] private TextMeshProUGUI scorePointText;
         #endregion
 
         #region PublicMethod
+        /// <summary>
+        /// 初期化
+        /// </summary>
+        public void Init()
+        {
+            var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
+
+            defaultStageUI.SetActive(!gameDataInfo.isEXStage);
+            exStageUI.SetActive(gameDataInfo.isEXStage);
+
+            UpdateViewUI();
+        }
+
         /// <summary>
         /// UI表示を更新
         /// </summary>
@@ -34,12 +57,12 @@ namespace Game
 
             if (gameDataInfo.isEXStage)
             {
-                waveText.text = $"{gameDataInfo.waveNum + correctionWaveNum}";
+                exStageWaveText.text = $"{gameDataInfo.waveNum + correctionWaveNum}";
             }
             else
             {
                 var stageDataInfo = GameDataManager.instance.GetStageDataInfo();
-                waveText.text = $"{gameDataInfo.waveNum + correctionWaveNum}/{stageDataInfo.waveInfo.Count}";
+                defaultStageWaveText.text = $"{gameDataInfo.waveNum + correctionWaveNum}/{stageDataInfo.waveInfo.Count}";
             }
         }
         #endregion

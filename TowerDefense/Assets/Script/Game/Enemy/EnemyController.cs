@@ -209,8 +209,8 @@ namespace Game.Enemy
         private void DesteryEnemy(Enemy enemy)
         {
             enemyList.Remove(enemy);
-            Instantiate(enemy.enemyDataInfo.destroyParticle, enemy.transform.position, Quaternion.identity);
-            Destroy(enemy.gameObject);
+
+            enemy.Destroy();
 
             // すべての敵が倒された後にクリア判定を行う
             if (enemyList.Count == 0)
