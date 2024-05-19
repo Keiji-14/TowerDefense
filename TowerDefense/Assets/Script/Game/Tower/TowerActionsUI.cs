@@ -21,7 +21,7 @@ namespace Game.Tower
 
         #region PrivateField
         /// <summary>説明UIの生成するX座標の補正値</summary>
-        private const int correctionDescriptionUIPosX = 270;
+        private const int correctionDescriptionUIPosX = 290;
         /// <summary>生成場所の親オブジェクト</summary>
         private Transform uiCanvas;
         /// <summary>表示しているタワーの説明UI</summary>
@@ -37,8 +37,8 @@ namespace Game.Tower
         [SerializeField] private Button towerUpgradeBtn;
         /// <summary>タワーの売却ボタン</summary>
         [SerializeField] private Button towerSaleBtn;
-        /// <summary>タワー説明UIオブジェクト</summary>
-        [SerializeField] private GameObject towerDescriptionUIObj;
+        /// <summary>タワー強化UIオブジェクト</summary>
+        [SerializeField] private GameObject towerUpgradeDescriptionUIObj;
         #endregion
 
         #region PublicMethod
@@ -58,26 +58,17 @@ namespace Game.Tower
             {
                 TowerSaleSubject.OnNext(towerStand);
             }).AddTo(this);
-        }
 
-        /// <summary>
-        /// タワーの説明を表示するかどうか
-        /// </summary>
-        public void IsViewTowerDescription(bool isView, Vector3 createPos, TowerType towerType)
-        {
-            if (isView)
+            var towerUpgradeUIHandler = towerUpgradeBtn.GetComponent<TowerBuildButtonHandler>();
+            towerUpgradeUIHandler.TowerDescriptionSubject.Subscribe(isView =>
             {
-                towerDescriptionUI = Instantiate(towerDescriptionUIObj, createPos, Quaternion.identity, uiCanvas).GetComponent<TowerBuildDescriptionUI>();
+                var createPos = new Vector3(
+                        towerUpgradeBtn.transform.position.x + correctionDescriptionUIPosX,
+                        towerUpgradeBtn.transform.position.y,
+                        towerUpgradeBtn.transform.position.z);
 
-                //var towerData = //GameDataManager.instance.GetTowerData(towerType);
-                //var towerDescriptionInfo = new TowerDescriptionInfo(towerData.name, towerData.attack, towerData.attackSpeed, towerData.towerCost, towerData.description);
-                //towerDescriptionUI.ViewTowerText(towerDescriptionInfo);
-            }
-            else
-            {
-                Destroy(towerDescriptionUI.gameObject);
-                towerDescriptionUI = null;
-            }
+                IsViewTowerDescription(isView, createPos, towerStand.GetTower());
+            }).AddTo(this);
         }
 
         /// <summary>
@@ -92,5 +83,27 @@ namespace Game.Tower
             }
         }
         #endregion
+
+        #region PrivateMethod
+        /// <summary>
+        /// タワーの説明を表示するかどうか
+        /// </summary>
+        private void IsViewTowerDescription(bool isView, Vector3 createPos, Tower tower)
+        {
+            if (isView)
+            {
+                towerDescriptionUI = Instantiate(towerUpgradeDescriptionUIObj, createPos, Quaternion.identity, uiCanvas).GetComponent<TowerBuildDescriptionUI>();
+
+                var towerData = tower.GetTowerDataInfo();
+                //var towerDescriptionInfo = new TowerDescriptionInfo(towerData.name, towerData.attack, towerData.attackSpeed, towerData.towerCost, towerData.description);
+                //towerDescriptionUI.ViewTowerText(towerDescriptionInfo);
+            }
+            else
+            {
+                Destroy(towerDescriptionUI.gameObject);
+                towerDescriptionUI = null;
+            }
+        }
+#endregion
     }
 }

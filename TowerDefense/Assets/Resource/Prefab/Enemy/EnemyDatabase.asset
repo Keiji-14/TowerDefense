@@ -16,7 +16,7 @@ MonoBehaviour:
   - enemyID: 0
     life: 25
     dropMoney: 5
-    point: 0
+    scorePoint: 15
     speed: 2
     baseOffset: 0.5
     enemyObj: {fileID: 1769015344297125693, guid: 3e72a55154d25d44e8c814ccf9afeab4, type: 3}
@@ -24,7 +24,7 @@ MonoBehaviour:
   - enemyID: 1
     life: 15
     dropMoney: 5
-    point: 0
+    scorePoint: 10
     speed: 3
     baseOffset: 0
     enemyObj: {fileID: 8364678408733915518, guid: 951b2919b844ba24ca5971fe0b8f5d19, type: 3}

@@ -50,14 +50,14 @@ namespace Game
         public void UpdateViewUI()
         {
             var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
-            
 
-            fortressLifeText.text = gameDataInfo.fortressLife.ToString();
-            possessionMoneyText.text = gameDataInfo.possessionMoney.ToString();
+            fortressLifeText.text = $"{gameDataInfo.fortressLife}";
+            possessionMoneyText.text = $"{gameDataInfo.possessionMoney}";
 
             if (gameDataInfo.isEXStage)
             {
                 exStageWaveText.text = $"{gameDataInfo.waveNum + correctionWaveNum}";
+                scorePointText.text = $"{gameDataInfo.score}";
             }
             else
             {

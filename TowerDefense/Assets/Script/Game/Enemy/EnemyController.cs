@@ -14,6 +14,8 @@ namespace Game.Enemy
         public Subject<int> NextWaveSubject = new Subject<int>();
         /// <summary>敵を倒したお金を入手する処理</summary>
         public Subject<int> GetDropMoneySubject = new Subject<int>();
+        /// <summary>スコアを加算する処理</summary>
+        public Subject<int> AddScoreSubject = new Subject<int>();
         /// <summary>終了したかどうかの処理</summary>
         public Subject<bool> IsFinishSubject = new Subject<bool>();
         #endregion
@@ -25,9 +27,17 @@ namespace Game.Enemy
         private List<Enemy> enemyList = new List<Enemy>();
         #endregion
 
+        #region SerializeField
+        /// <summary>管理する親オブジェクト</summary>
+        [SerializeField] private Transform createParent;
+        #endregion
+
         void Update()
         {
             var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
+
+            if (gameDataInfo.isGameOver || gameDataInfo.isGameClear)
+                return;
 
             if (isWaveStart)
             {
@@ -101,6 +111,8 @@ namespace Game.Enemy
 
                     var enemy = Instantiate(enemyDataInfo.enemyObj, randomPos, Quaternion.identity).GetComponent<Enemy>();
 
+                    enemy.transform.SetParent(createParent);
+
                     enemy.Init(enemyDataInfo);
 
                     enemy.EnemyDestroySubject.Subscribe(_ =>
@@ -166,6 +178,8 @@ namespace Game.Enemy
 
                 var enemy = Instantiate(enemyDataInfo.enemyObj, randomPos, Quaternion.identity).GetComponent<Enemy>();
 
+                enemy.transform.SetParent(createParent);
+
                 enemy.Init(enemyDataInfo, randomRouteInfo);
 
                 enemy.EnemyDestroySubject.Subscribe(_ =>
@@ -176,6 +190,7 @@ namespace Game.Enemy
                 enemy.EnemyDefeatSubject.Subscribe(_ =>
                 {
                     GetDropMoneySubject.OnNext(enemy.enemyDataInfo.dropMoney);
+                    AddScoreSubject.OnNext(enemy.enemyDataInfo.scorePoint);
                     DesteryEnemy(enemy);
                 }).AddTo(this);
 

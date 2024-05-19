@@ -100,9 +100,23 @@ namespace Game.Tower
         }
 
         /// <summary>
+        /// タワーの説明UIを削除する処理
+        /// </summary>
+        public void DeleteTowerDescription()
+        {
+            if (towerDescriptionUI != null)
+            {
+                Destroy(towerDescriptionUI.gameObject);
+                towerDescriptionUI = null;
+            }
+        }
+        #endregion
+
+        #region PublicMethod
+        /// <summary>
         /// タワーの説明を表示するかどうか
         /// </summary>
-        public void IsViewTowerDescription(bool isView, Vector3 createPos,TowerType towerType)
+        private void IsViewTowerDescription(bool isView, Vector3 createPos,TowerType towerType)
         {
             if (isView)
             {
@@ -110,22 +124,10 @@ namespace Game.Tower
                 var towerData = GameDataManager.instance.GetTowerData(towerType);
                 var towerStatus = towerData.towerStatusDataInfoList[0];
 
-                var towerDescriptionInfo = new TowerDescriptionInfo(towerData.name, towerStatus.attack, towerStatus.attackSpeed, towerStatus.towerCost, towerData.description);
-                towerDescriptionUI.ViewTowerText(towerDescriptionInfo);
+                var towerBuildDescriptionInfo = new TowerBuildDescriptionInfo(towerData.name, towerStatus.attack, towerStatus.attackSpeed, towerStatus.towerCost, towerData.description);
+                towerDescriptionUI.ViewTowerText(towerBuildDescriptionInfo);
             }
             else
-            {
-                Destroy(towerDescriptionUI.gameObject);
-                towerDescriptionUI = null;
-            }
-        }
-
-        /// <summary>
-        /// タワーの説明UIを削除する処理
-        /// </summary>
-        public void DeleteTowerDescription()
-        {
-            if (towerDescriptionUI != null)
             {
                 Destroy(towerDescriptionUI.gameObject);
                 towerDescriptionUI = null;

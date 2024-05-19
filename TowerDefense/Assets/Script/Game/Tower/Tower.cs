@@ -1,4 +1,5 @@
 ﻿using Audio;
+using GameData;
 using GameData.Tower;
 using System.Collections;
 using UnityEngine;
@@ -23,6 +24,8 @@ namespace Game.Tower
         private Transform currentFirePoint;
         /// <summary>捕捉した敵のオブジェクト</summary>
         private GameObject targetEnemyObj;
+        /// <summary>射程距離のコライダー</summary>
+        private CapsuleCollider capsuleCollider;
         /// <summary>建設したタワーの情報</summary>
         private TowerDataInfo towerDataInfo;
         #endregion
@@ -47,6 +50,10 @@ namespace Game.Tower
         {
             // タワーの情報をディープコピーして保持させる
             this.towerDataInfo = (TowerDataInfo)towerDataInfo.Clone(); ;
+
+            capsuleCollider = GetComponent<CapsuleCollider>();
+            // 射程距離を設定
+            capsuleCollider.radius = towerDataInfo.towerStatusDataInfoList[0].firingRange;
 
             // 発射可能状態にする
             isShootInterval = true;
@@ -97,6 +104,11 @@ namespace Game.Tower
         /// <param name="enemyObj">攻撃対象</param>
         private void ActionType(GameObject enemyObj)
         {
+            var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
+
+            if (gameDataInfo.isGameOver)
+                return;
+
             switch (towerDataInfo.towerType)
             {
                 case TowerType.MachineGun:
@@ -104,8 +116,8 @@ namespace Game.Tower
                     MachineGun();
                     break;
                 case TowerType.Cannon:
-                    Cannon();
                     LookTarget(enemyObj);
+                    Cannon();
                     break;
                 case TowerType.Jamming:
                     break;
@@ -130,6 +142,8 @@ namespace Game.Tower
                 Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             }
+
+            capsuleCollider.radius = towerDataInfo.towerStatusDataInfoList[towerDataInfo.level - 1].firingRange;
         }
 
         /// <summary>
@@ -212,6 +226,9 @@ namespace Game.Tower
 
             var bullet = Instantiate(towerDataInfo.bulletObj, firePointA.position, firePointA.rotation).GetComponent<Bullet>();
             SE.instance.Play(shotSE);
+
+            var muzzleFlash = Instantiate(muzzleFlashObj, firePointA.position, transform.rotation);
+            Destroy(muzzleFlash, flashTime);
 
             if (targetEnemyObj != null)
             {

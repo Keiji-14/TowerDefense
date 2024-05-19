@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace direction
+namespace Direction
 {
     /// <summary>
     /// スカイボックスを回転させる処理

@@ -18,6 +18,8 @@ namespace Title
         #region PrivateField
         /// <summary>ウェーブ数の初期化</summary>
         private const int waveInitNum = 0;
+        /// <summary>スコアの初期化</summary>
+        private const int scoreInitNum = 0;
         /// <summary>シーン遷移待機時間</summary>
         private const float sceneLoaderWaitTime = 2f;
         /// <summary>ステージ選択ボタンを押した時の処理</summary>
@@ -109,7 +111,7 @@ namespace Title
                 GameDataManager.instance.SetStageDataInfo(stageDataInfo);
 
                 // ゲーム情報をを初期化
-                var gameDataInfo = new GameDataInfo(stageDataInfo.startFortressLife, stageDataInfo.startMoney, waveInitNum, false, false, false);
+                var gameDataInfo = new GameDataInfo(stageDataInfo.startFortressLife, stageDataInfo.startMoney, waveInitNum, scoreInitNum, false, false, false);
                 GameDataManager.instance.SetGameDataInfo(gameDataInfo);
             };
 
@@ -132,7 +134,7 @@ namespace Title
                 GameDataManager.instance.SetStageDataInfo(stageDataInfo);
 
                 // ゲーム情報をを初期化
-                var gameDataInfo = new GameDataInfo(stageDataInfo.startFortressLife, stageDataInfo.startMoney, waveInitNum, false, false, false);
+                var gameDataInfo = new GameDataInfo(stageDataInfo.startFortressLife, stageDataInfo.startMoney, waveInitNum, scoreInitNum, false, false, false);
                 GameDataManager.instance.SetGameDataInfo(gameDataInfo);
             };
 
@@ -155,7 +157,7 @@ namespace Title
                 GameDataManager.instance.SetEXStageDataInfo(stageDataInfo);
 
                 // ゲーム情報をを初期化
-                var gameDataInfo = new GameDataInfo(stageDataInfo.startFortressLife, stageDataInfo.startMoney, waveInitNum, true, false, false);
+                var gameDataInfo = new GameDataInfo(stageDataInfo.startFortressLife, stageDataInfo.startMoney, waveInitNum, scoreInitNum, true, false, false);
                 GameDataManager.instance.SetGameDataInfo(gameDataInfo);
             };
 

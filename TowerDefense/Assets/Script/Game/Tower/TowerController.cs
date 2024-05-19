@@ -115,7 +115,7 @@ namespace Game.Tower
                     towerStand.OnTowerClicked();
                     selectionTowerStand.OnTowerClicked();
                     selectionTowerStand = towerStand;
-                    ShowTowerActionsUI(selectionTowerStand);
+                    //ShowTowerActionsUI(selectionTowerStand);
                 }
                 else if (selectionTowerStand != null && towerStand.GetTower() == null)
                 {
@@ -128,7 +128,7 @@ namespace Game.Tower
                 {
                     towerStand.OnTowerClicked();
                     selectionTowerStand = towerStand;
-                    ShowTowerActionsUI(selectionTowerStand);
+                    //ShowTowerActionsUI(selectionTowerStand);
                 }
                 else
                 {

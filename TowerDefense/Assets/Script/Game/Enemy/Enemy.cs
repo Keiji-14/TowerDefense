@@ -50,11 +50,19 @@ namespace Game.Enemy
         #region UnityEvent
         void Update()
         {
-            RotationLifeBar();
-
-            if (!agent.pathPending && agent.remainingDistance < 0.1f)
+            // ゲームオーバー時に動作を停止させる
+            if (GameDataManager.instance.GetGameDataInfo().isGameOver)
             {
-                MoveToNextWaypoint();
+                StopMovement();
+            }
+            else
+            {
+                RotationLifeBar();
+
+                if (!agent.pathPending && agent.remainingDistance < 0.1f)
+                {
+                    MoveToNextWaypoint();
+                }
             }
         }
         #endregion
@@ -137,6 +145,18 @@ namespace Game.Enemy
                     // 次の中継地点に向かう
                     agent.destination = stageDataInfo.waveInfo[gameDataInfo.waveNum].routeAnchor[currentRouteAnchorIndex].position;
                 }
+            }
+        }
+
+        /// <summary>
+        /// 動作を停止させる処理
+        /// </summary>
+        private void StopMovement()
+        {
+            if (agent != null && agent.isActiveAndEnabled)
+            {
+                agent.isStopped = true;
+                agent.velocity = Vector3.zero;  // 動きを完全に停止させる
             }
         }
 

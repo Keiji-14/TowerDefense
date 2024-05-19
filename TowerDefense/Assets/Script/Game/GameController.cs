@@ -21,6 +21,10 @@ namespace Game
         #endregion
 
         #region PrivateField
+        /// <summary>ウェーブ数の初期化</summary>
+        private const int waveInitNum = 0;
+        /// <summary>スコアの初期化</summary>
+        private const int scoreInitNum = 0;
         /// <summary>ゲーム開始ボタンを押した時の処理</summary>
         private IObservable<Unit> OnClickGameStartButtonObserver => gameStartBtn.OnClickAsObservable();
         #endregion
@@ -51,6 +55,10 @@ namespace Game
                 // EXステージ情報を取得
                 var stageDataInfo = GameDataManager.instance.GetEXStageDataInfo();
 
+                // ゲーム情報をを初期化
+                gameDataInfo = new GameDataInfo(stageDataInfo.startFortressLife, stageDataInfo.startMoney, waveInitNum, scoreInitNum, false, false, false);
+                GameDataManager.instance.SetGameDataInfo(gameDataInfo);
+
                 Instantiate(stageDataInfo.stageObj, Vector3.zero, Quaternion.identity);
                 fortressController = GameObject.FindWithTag("Fortress").GetComponent<FortressController>();
             }
@@ -58,6 +66,10 @@ namespace Game
             {
                 // 通常ステージ情報を取得
                 var stageDataInfo = GameDataManager.instance.GetStageDataInfo();
+
+                // ゲーム情報をを初期化
+                gameDataInfo = new GameDataInfo(stageDataInfo.startFortressLife, stageDataInfo.startMoney, waveInitNum, scoreInitNum, false, false, false);
+                GameDataManager.instance.SetGameDataInfo(gameDataInfo);
 
                 Instantiate(stageDataInfo.stageObj, Vector3.zero, Quaternion.identity);
                 fortressController = GameObject.FindWithTag("Fortress").GetComponent<FortressController>();
@@ -111,6 +123,11 @@ namespace Game
                 PossessionMoneyUpdate(dropMoney);
             }).AddTo(this);
 
+            enemyController.AddScoreSubject.Subscribe(score =>
+            {
+                ScoreUpdate(score);
+            }).AddTo(this);
+
             enemyController.IsFinishSubject.Subscribe(isFinish =>
             {
                 if (isFinish)
@@ -134,6 +151,7 @@ namespace Game
                     fortressLife,
                     gameDataInfo.possessionMoney,
                     gameDataInfo.waveNum,
+                    gameDataInfo.score,
                     gameDataInfo.isEXStage,
                     gameDataInfo.isGameClear,
                     gameDataInfo.isGameOver);
@@ -160,6 +178,7 @@ namespace Game
                     gameDataInfo.fortressLife,
                     possessionMoney,
                     gameDataInfo.waveNum,
+                    gameDataInfo.score,
                     gameDataInfo.isEXStage,
                     gameDataInfo.isGameClear,
                     gameDataInfo.isGameOver);
@@ -185,6 +204,32 @@ namespace Game
                     gameDataInfo.fortressLife,
                     gameDataInfo.possessionMoney,
                     waveNum,
+                    gameDataInfo.score,
+                    gameDataInfo.isEXStage,
+                    gameDataInfo.isGameClear,
+                    gameDataInfo.isGameOver);
+            GameDataManager.instance.SetGameDataInfo(setGameDataInfo);
+
+            gameViewUI.UpdateViewUI();
+        }
+
+        /// <summary>
+        /// ゲーム情報のスコアを更新する処理
+        /// </summary>
+        /// <param name="score">スコア</param>
+        private void ScoreUpdate(int getScore)
+        {
+            var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
+            // スコアを加算する
+            var score = gameDataInfo.score;
+            score += getScore;
+
+            // ゲームの情報を更新する
+            var setGameDataInfo = new GameDataInfo(
+                    gameDataInfo.fortressLife,
+                    gameDataInfo.possessionMoney,
+                    gameDataInfo.waveNum,
+                    score,
                     gameDataInfo.isEXStage,
                     gameDataInfo.isGameClear,
                     gameDataInfo.isGameOver);
@@ -220,6 +265,7 @@ namespace Game
                         gameDataInfo.fortressLife,
                         gameDataInfo.possessionMoney,
                         gameDataInfo.waveNum,
+                        gameDataInfo.score,
                         gameDataInfo.isEXStage,
                         gameDataInfo.isGameClear,
                         true);

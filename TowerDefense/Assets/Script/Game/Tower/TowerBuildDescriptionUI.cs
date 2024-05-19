@@ -25,7 +25,7 @@ namespace Game.Tower
         /// <summary>
         /// タワーの情報を表示する
         /// </summary>
-        public void ViewTowerText(TowerDescriptionInfo towerDescriptionInfo)
+        public void ViewTowerText(TowerBuildDescriptionInfo towerDescriptionInfo)
         {
             nameText.text = towerDescriptionInfo.name;
             attackText.text = towerDescriptionInfo.attack.ToString();
@@ -39,7 +39,7 @@ namespace Game.Tower
     /// <summary>
     /// タワーについての表示する情報
     /// </summary>
-    public class TowerDescriptionInfo
+    public class TowerBuildDescriptionInfo
     {
         #region PublicField
         /// <summary>名前</summary>
@@ -53,7 +53,7 @@ namespace Game.Tower
         /// <summary>説明</summary>
         public string description;
 
-        public TowerDescriptionInfo(string name, int attack, float attackSpeed, int cose, string description)
+        public TowerBuildDescriptionInfo(string name, int attack, float attackSpeed, int cose, string description)
         {
             this.name = name;
             this.attack = attack;
