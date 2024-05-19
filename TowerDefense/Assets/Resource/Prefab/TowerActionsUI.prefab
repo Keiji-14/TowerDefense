@@ -127,7 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerUpgradeBtn: {fileID: 4211781216590613303}
   towerSaleBtn: {fileID: 8441096572937425598}
-  towerDescriptionUIObj: {fileID: 6223233259047067493, guid: d810e100e9824ab488a12be522ae92d0, type: 3}
+  towerUpgradeDescriptionUIObj: {fileID: 1794363104099038438, guid: 084cc7c3037aecc4b90242af6a237e0c, type: 3}
 --- !u!1 &6415793005067670526
 GameObject:
   m_ObjectHideFlags: 0

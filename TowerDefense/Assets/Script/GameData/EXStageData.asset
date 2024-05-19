@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aaf4e9626920334193bcac51c3cfa1e, type: 3}
+  m_Name: EXStageData
+  m_EditorClassIdentifier: 
+  stageID: 0
+  startFortressLife: 0
+  startMoney: 0
+  waveInterval: 0
+  stageObj: {fileID: 902099497394016601, guid: 9a6630843ed5c154dbdcab04cb0dfe23, type: 3}
+  fortressTransform: {fileID: 0}
+  routeInfoList: []
