@@ -141,15 +141,21 @@ namespace Game.Enemy
             var randomRouteInfo = GetRandomRouteInfo(stageDataInfo.routeInfoList);
             // 敵の出現場所を取得
             var spawnPoint = randomRouteInfo.spawnPoint;
+            // 敵の生成するンターバル時間を設定
+            var createInterval = Mathf.Max(0.5f, 1f - 0.02f * waveNum);
             // ウェーブのインターバル時間を取得 
             var waveInterval = GameDataManager.instance.GetEXStageDataInfo().waveInterval;
             // 敵の情報を取得
             var enemyNum = stageDataInfo.enemyNum + (waveNum - 1) * 2;
 
-            var enemyDataInfo = GameDataManager.instance.GetEnemyDataInfo(0);
+            var enemyDataInfoList = GameDataManager.instance.GetEnemyDataInfoList();
 
             for (int i = 0; i < enemyNum; i++)
             {
+                // ランダムに敵情報を選択
+                var randomIndex = Random.Range(0, enemyDataInfoList.Count);
+                var enemyDataInfo = enemyDataInfoList[randomIndex];
+
                 Vector3 center = spawnPoint.position;
                 // ランダムな方向を選択
                 Vector3 randomDirection = Random.insideUnitSphere * 1f;
@@ -176,7 +182,7 @@ namespace Game.Enemy
                 // 生成した敵を追加
                 enemyList.Add(enemy);
 
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(createInterval);
             }
 
             yield return new WaitForSeconds(waveInterval);

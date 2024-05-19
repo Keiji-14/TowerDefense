@@ -1,6 +1,7 @@
 ﻿using GameData.Enemy;
 using GameData.Stage;
 using GameData.Tower;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -103,7 +104,15 @@ namespace GameData
         }
 
         /// <summary>
-        /// 敵の情報を返す
+        /// 敵の情報リストを返す
+        /// </summary>
+        public List<EnemyDataInfo> GetEnemyDataInfoList()
+        {
+            return enemyDatabase.enemyDataInfoList;
+        }
+
+        /// <summary>
+        /// 指定した敵の情報を返す
         /// </summary>
         /// <param name="enemyID">敵のID</param>
         public EnemyDataInfo GetEnemyDataInfo(int enemyID)
