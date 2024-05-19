@@ -27,10 +27,19 @@ namespace Game.Enemy
 
         void Update()
         {
+            var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
+
             if (isWaveStart)
             {
                 isWaveStart = false;
-                StartCoroutine(CreateEnemy());
+                if (gameDataInfo.isEXStage)
+                {
+                    StartCoroutine(EXCreateEnemy());
+                }
+                else
+                {
+                    StartCoroutine(DefaultCreateEnemy());
+                }
             }
         }
 
@@ -38,7 +47,7 @@ namespace Game.Enemy
         /// <summary>
         /// 初期化
         /// </summary>
-        public void Init(StageDataInfo stageDataInfo)
+        public void Init()
         {
             isWaveStart = true;
         }
@@ -51,9 +60,9 @@ namespace Game.Enemy
 
         #region PrivateMethod
         /// <summary>
-        /// 敵を出現させる処理
+        /// 通常ステージの敵を出現させる処理
         /// </summary>
-        private IEnumerator CreateEnemy()
+        private IEnumerator DefaultCreateEnemy()
         {
             // ウェーブ数を取得
             var waveNum = GameDataManager.instance.GetGameDataInfo().waveNum;
@@ -120,6 +129,77 @@ namespace Game.Enemy
         }
 
         /// <summary>
+        /// EXステージの敵を出現させる処理
+        /// </summary>
+        private IEnumerator EXCreateEnemy()
+        {
+            // ウェーブ数を取得
+            var waveNum = GameDataManager.instance.GetGameDataInfo().waveNum;
+
+            var stageDataInfo = GameDataManager.instance.GetEXStageDataInfo();
+
+            var randomRouteInfo = GetRandomRouteInfo(stageDataInfo.routeInfoList);
+            // 敵の出現場所を取得
+            var spawnPoint = randomRouteInfo.spawnPoint;
+            // ウェーブのインターバル時間を取得 
+            var waveInterval = GameDataManager.instance.GetEXStageDataInfo().waveInterval;
+            // 敵の情報を取得
+
+            // 敵の情報を取得
+            var enemyDataInfo = GameDataManager.instance.GetEnemyDataInfo(0);
+            //var enemyNum = enemySpawnInfo.enemyNum;
+
+            /*for (int i = 0; i < enemyNum; i++)
+            {
+                Vector3 center = spawnPoint.position;
+                // ランダムな方向を選択
+                Vector3 randomDirection = Random.insideUnitSphere * 1f;
+                // 中心からランダムな方向へ1からランダムな距離の位置を計算
+                Vector3 randomPos = center + randomDirection;
+                // Y軸の位置を中心と同じにする（必要に応じて修正）
+                randomPos.y = center.y;
+
+                var enemy = Instantiate(enemyDataInfo.enemyObj, randomPos, Quaternion.identity).GetComponent<Enemy>();
+
+                enemy.Init(enemyDataInfo);
+
+                enemy.EnemyDestroySubject.Subscribe(_ =>
+                {
+                    DesteryEnemy(enemy);
+                }).AddTo(this);
+
+                enemy.EnemyDefeatSubject.Subscribe(_ =>
+                {
+                    GetDropMoneySubject.OnNext(enemy.enemyDataInfo.dropMoney);
+                    DesteryEnemy(enemy);
+                }).AddTo(this);
+
+                // 生成した敵を追加
+                enemyList.Add(enemy);
+
+                yield return new WaitForSeconds(1f);
+            }*/
+            
+
+            yield return new WaitForSeconds(waveInterval);
+
+            NextWaveSubject.OnNext(waveNum);
+
+            isWaveStart = true;
+        }
+
+        private RouteInfo GetRandomRouteInfo(List<RouteInfo> routeInfoList)
+        {
+            if (routeInfoList == null || routeInfoList.Count == 0)
+            {
+                return null; // リストが空の場合はnullを返す
+            }
+
+            int randomIndex = Random.Range(0, routeInfoList.Count);
+            return routeInfoList[randomIndex];
+        }
+
+        /// <summary>
         /// 敵が消滅する時の処理
         /// </summary>
         private void DesteryEnemy(Enemy enemy)
@@ -138,6 +218,8 @@ namespace Game.Enemy
                 IsFinishSubject.OnNext(false);
             }
         }
+
+
         #endregion
     }
 }

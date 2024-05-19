@@ -21,8 +21,6 @@ namespace Game
         #endregion
 
         #region PrivateField
-        /// <summary>ウェーブ数の初期化</summary>
-        private const int waveInitNum = 0;
         /// <summary>ゲーム開始ボタンを押した時の処理</summary>
         private IObservable<Unit> OnClickGameStartButtonObserver => gameStartBtn.OnClickAsObservable();
         #endregion
@@ -46,15 +44,24 @@ namespace Game
         /// </summary>
         public void Init()
         {
-            // ステージ情報を取得
-            var stageDataInfo = GameDataManager.instance.GetStageDataInfo();
+            var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
 
-            // ゲーム情報をを初期化
-            var gameDataInfo = new GameDataInfo(stageDataInfo.startFortressLife, stageDataInfo.startMoney, waveInitNum, false, false);
-            GameDataManager.instance.SetGameDataInfo(gameDataInfo);
+            if (gameDataInfo.isEXStage)
+            {
+                // EXステージ情報を取得
+                var stageDataInfo = GameDataManager.instance.GetEXStageDataInfo();
 
-            Instantiate(stageDataInfo.stageObj, Vector3.zero, Quaternion.identity);
-            fortressController = GameObject.FindWithTag("Fortress").GetComponent<FortressController>();
+                Instantiate(stageDataInfo.stageObj, Vector3.zero, Quaternion.identity);
+                fortressController = GameObject.FindWithTag("Fortress").GetComponent<FortressController>();
+            }
+            else
+            {
+                // 通常ステージ情報を取得
+                var stageDataInfo = GameDataManager.instance.GetStageDataInfo();
+
+                Instantiate(stageDataInfo.stageObj, Vector3.zero, Quaternion.identity);
+                fortressController = GameObject.FindWithTag("Fortress").GetComponent<FortressController>();
+            }
 
             // 初期化
             fortressController.FortressDamageSubject.Subscribe(_ =>
@@ -78,7 +85,7 @@ namespace Game
 
             OnClickGameStartButtonObserver.Subscribe(_ =>
             {
-                GameStart(stageDataInfo);
+                GameStart();
             }).AddTo(this);
         }
         #endregion
@@ -87,12 +94,12 @@ namespace Game
         /// <summary>
         /// ゲームを開始する処理
         /// </summary>
-        private void GameStart(StageDataInfo stageDataInfo)
+        private void GameStart()
         {
             // 開始と同時にボタンを非表示にする
             gameStartBtn.gameObject.SetActive(false);
 
-            enemyController.Init(stageDataInfo);
+            enemyController.Init();
 
             enemyController.NextWaveSubject.Subscribe(waveNum =>
             {
@@ -127,6 +134,7 @@ namespace Game
                     fortressLife,
                     gameDataInfo.possessionMoney,
                     gameDataInfo.waveNum,
+                    gameDataInfo.isEXStage,
                     gameDataInfo.isGameClear,
                     gameDataInfo.isGameOver);
             GameDataManager.instance.SetGameDataInfo(setGameDataInfo);
@@ -152,6 +160,7 @@ namespace Game
                     gameDataInfo.fortressLife,
                     possessionMoney,
                     gameDataInfo.waveNum,
+                    gameDataInfo.isEXStage,
                     gameDataInfo.isGameClear,
                     gameDataInfo.isGameOver);
             
@@ -176,6 +185,7 @@ namespace Game
                     gameDataInfo.fortressLife,
                     gameDataInfo.possessionMoney,
                     waveNum,
+                    gameDataInfo.isEXStage,
                     gameDataInfo.isGameClear,
                     gameDataInfo.isGameOver);
             GameDataManager.instance.SetGameDataInfo(setGameDataInfo);
@@ -210,6 +220,7 @@ namespace Game
                         gameDataInfo.fortressLife,
                         gameDataInfo.possessionMoney,
                         gameDataInfo.waveNum,
+                        gameDataInfo.isEXStage,
                         gameDataInfo.isGameClear,
                         true);
                 GameDataManager.instance.SetGameDataInfo(setGameDataInfo);

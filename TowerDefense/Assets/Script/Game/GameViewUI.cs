@@ -27,11 +27,20 @@ namespace Game
         public void UpdateViewUI()
         {
             var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
-            var stageDataInfo = GameDataManager.instance.GetStageDataInfo();
+            
 
             fortressLifeText.text = gameDataInfo.fortressLife.ToString();
             possessionMoneyText.text = gameDataInfo.possessionMoney.ToString();
-            waveText.text = $"{gameDataInfo.waveNum + correctionWaveNum}/{stageDataInfo.waveInfo.Count}";
+
+            if (gameDataInfo.isEXStage)
+            {
+                waveText.text = $"{gameDataInfo.waveNum + correctionWaveNum}";
+            }
+            else
+            {
+                var stageDataInfo = GameDataManager.instance.GetStageDataInfo();
+                waveText.text = $"{gameDataInfo.waveNum + correctionWaveNum}/{stageDataInfo.waveInfo.Count}";
+            }
         }
         #endregion
     }

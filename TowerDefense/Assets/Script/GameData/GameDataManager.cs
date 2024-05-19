@@ -18,6 +18,8 @@ namespace GameData
         private GameDataInfo gameDataInfo;
         /// <summary>ステージの情報</summary>
         private StageDataInfo stageDataInfo;
+        /// <summary>EXステージの情報</summary>
+        private EXStageDataInfo exStageDataInfo;
         /// <summary>タワーの情報</summary>
         private TowerDatabase towerDatabase;
         /// <summary>敵の情報</summary>
@@ -82,6 +84,22 @@ namespace GameData
         public StageDataInfo GetStageDataInfo()
         {
             return stageDataInfo;
+        }
+
+        /// <summary>
+        /// EXステージの情報を設定する
+        /// </summary>
+        public void SetEXStageDataInfo(EXStageDataInfo exStageDataInfo)
+        {
+            this.exStageDataInfo = exStageDataInfo;
+        }
+
+        /// <summary>
+        /// EXステージの情報を返す
+        /// </summary>
+        public EXStageDataInfo GetEXStageDataInfo()
+        {
+            return exStageDataInfo;
         }
 
         /// <summary>

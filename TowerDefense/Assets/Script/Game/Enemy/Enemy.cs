@@ -78,8 +78,8 @@ namespace Game.Enemy
             // 現在の中継地点の次の地点を設定
             currentRouteAnchorIndex++;
 
-            var stageDataInfo = GameDataManager.instance.GetStageDataInfo();
             var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
+            var stageDataInfo = GameDataManager.instance.GetStageDataInfo();
 
             // もしすべての中継地点を通過したら、砦に向かう
             if (currentRouteAnchorIndex >= stageDataInfo.waveInfo[gameDataInfo.waveNum].routeAnchor.Count)

@@ -16,7 +16,9 @@ namespace Title
     public class TitleController : MonoBehaviour
     {
         #region PrivateField
-
+        /// <summary>ウェーブ数の初期化</summary>
+        private const int waveInitNum = 0;
+        /// <summary>シーン遷移待機時間</summary>
         private const float sceneLoaderWaitTime = 2f;
         /// <summary>ステージ選択ボタンを押した時の処理</summary>
         private IObservable<Unit> OnClickStageSelectButtonObserver => stageSelectBtn.OnClickAsObservable();
@@ -105,6 +107,10 @@ namespace Title
                 }
                 var stageDataInfo = handle.Result;
                 GameDataManager.instance.SetStageDataInfo(stageDataInfo);
+
+                // ゲーム情報をを初期化
+                var gameDataInfo = new GameDataInfo(stageDataInfo.startFortressLife, stageDataInfo.startMoney, waveInitNum, false, false, false);
+                GameDataManager.instance.SetGameDataInfo(gameDataInfo);
             };
 
             StartCoroutine(ChangeGameScene());
@@ -124,6 +130,10 @@ namespace Title
                 }
                 var stageDataInfo = handle.Result;
                 GameDataManager.instance.SetStageDataInfo(stageDataInfo);
+
+                // ゲーム情報をを初期化
+                var gameDataInfo = new GameDataInfo(stageDataInfo.startFortressLife, stageDataInfo.startMoney, waveInitNum, false, false, false);
+                GameDataManager.instance.SetGameDataInfo(gameDataInfo);
             };
 
             StartCoroutine(ChangeGameScene());
@@ -134,7 +144,7 @@ namespace Title
         /// </summary>
         private void SetEXStage()
         {
-            Addressables.LoadAssetAsync<StageDataInfo>("EXStageData.asset").Completed += handle =>
+            Addressables.LoadAssetAsync<EXStageDataInfo>("EXStageData.asset").Completed += handle =>
             {
                 if (handle.Result == null)
                 {
@@ -142,7 +152,11 @@ namespace Title
                     return;
                 }
                 var stageDataInfo = handle.Result;
-                GameDataManager.instance.SetStageDataInfo(stageDataInfo);
+                GameDataManager.instance.SetEXStageDataInfo(stageDataInfo);
+
+                // ゲーム情報をを初期化
+                var gameDataInfo = new GameDataInfo(stageDataInfo.startFortressLife, stageDataInfo.startMoney, waveInitNum, true, false, false);
+                GameDataManager.instance.SetGameDataInfo(gameDataInfo);
             };
 
             StartCoroutine(ChangeGameScene());
