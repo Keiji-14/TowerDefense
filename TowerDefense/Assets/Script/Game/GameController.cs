@@ -7,6 +7,7 @@ using System;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 namespace Game
 {
@@ -278,7 +279,55 @@ namespace Game
                         true);
                 GameDataManager.instance.SetGameDataInfo(setGameDataInfo);
 
+                SaveScore();
+
                 GameOverSubject.OnNext(Unit.Default);
+            }
+        }
+
+        /// <summary>
+        /// スコアを保存する処理
+        /// </summary>
+        private void SaveScore()
+        {
+            var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
+            // EXステージならスコアを保存する
+            if (gameDataInfo.isEXStage)
+            {
+                var rankingNum = 5;
+                List<int> rankingScoreList = new List<int>();
+                
+                for (int i = 0; i < rankingNum; i++)
+                {
+                    rankingScoreList.Add(PlayerPrefs.GetInt(("RANKINGSCORE" + (i + 1)), 0));
+                }
+
+                // リザルトのスコアが5位のスコアを上回ったら保存する
+                if (rankingScoreList[rankingNum - 1] < gameDataInfo.score)
+                {
+                    Debug.Log("Save" + gameDataInfo.score);
+                    rankingScoreList[rankingNum - 1] = gameDataInfo.score;
+                }
+                
+                // 保存したスコアをソートする
+                for (int i = 0; i < rankingScoreList.Count; i++)
+                {
+                    for (int j = i; j < rankingScoreList.Count; j++)
+                    {
+                        if (rankingScoreList[i] < rankingScoreList[j])
+                        {
+                            int tmp = rankingScoreList[i];
+                            rankingScoreList[i] = rankingScoreList[j];
+                            rankingScoreList[j] = tmp;
+                        }
+                    }
+                }
+
+                for (int i = 0; i < rankingScoreList.Count; i++)
+                {
+                    Debug.Log(rankingScoreList[i]);
+                    PlayerPrefs.SetInt(("RANKINGSCORE" + (i + 1)), rankingScoreList[i]);
+                }
             }
         }
 

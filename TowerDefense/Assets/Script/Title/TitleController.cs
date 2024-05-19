@@ -26,6 +26,8 @@ namespace Title
         private IObservable<Unit> OnClickStageSelectButtonObserver => stageSelectBtn.OnClickAsObservable();
         /// <summary>チュートリアルステージのボタンを押した時の処理</summary>
         private IObservable<Unit> OnClickTutorialStageButtonObserver => tutorialStageBtn.OnClickAsObservable();
+        /// <summary>チュートリアルステージのボタンを押した時の処理</summary>
+        private IObservable<Unit> OnClickRankingButtonObserver => rankingBtn.OnClickAsObservable();
         /// <summary>終了ボタンを押した時の処理</summary>
         private IObservable<Unit> OnClickExitButtonObserver => exitBtn.OnClickAsObservable();
         #endregion
@@ -37,12 +39,18 @@ namespace Title
         [SerializeField] private Button exitBtn;
         /// <summary>チュートリアルステージのボタン</summary>
         [SerializeField] private Button tutorialStageBtn;
+        /// <summary>ランキングのボタン</summary>
+        [SerializeField] private Button rankingBtn;
         /// <summary>タイトル画面のUIオブジェクト</summary>
         [SerializeField] private GameObject mainTitleUIObj;
         /// <summary>ステージ選択画面のUIオブジェクト</summary>
         [SerializeField] private GameObject stageSelectUIObj;
+        /// <summary>ランキング画面のUIオブジェクト</summary>
+        [SerializeField] private GameObject rankingUIObj;
         /// <summary>ステージ選択画面</summary>
         [SerializeField] private StageSelect stageSelect;
+        /// <summary>ランキング画面</summary>
+        [SerializeField] private Ranking ranking;
         /// <summary>フェードイン・フェードアウトの処理</summary>
         [SerializeField] private FadeController fadeController;
         #endregion
@@ -54,6 +62,8 @@ namespace Title
         public void Init()
         {
             stageSelect.Init();
+
+            ranking.Init();
 
             // ステージ選択画面を開く処理
             OnClickStageSelectButtonObserver.Subscribe(_ =>
@@ -74,9 +84,19 @@ namespace Title
                 SetDefaultStage(stageNum);
             }).AddTo(this);
 
+            // チュートリアルステージの設定を行う処理
             OnClickTutorialStageButtonObserver.Subscribe(_ =>
             {
                 SetTutorialStage();
+            }).AddTo(this);
+
+            // ランキング画面を開く処理
+            OnClickRankingButtonObserver.Subscribe(_ =>
+            {
+                ranking.ViewRanking();
+
+                mainTitleUIObj.SetActive(false);
+                rankingUIObj.SetActive(true);
             }).AddTo(this);
 
             // EXステージの設定を行う処理
@@ -90,6 +110,13 @@ namespace Title
             {
                 mainTitleUIObj.SetActive(true);
                 stageSelectUIObj.SetActive(false);
+            }).AddTo(this);
+
+            // ランキング画面を閉じる処理
+            ranking.MainTitleBackSubject.Subscribe(_ =>
+            {
+                mainTitleUIObj.SetActive(true);
+                rankingUIObj.SetActive(false);
             }).AddTo(this);
         }
         #endregion
