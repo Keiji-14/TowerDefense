@@ -1,44 +1,46 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
 namespace GameData.Stage
 {
     /// <summary>
-    /// EXƒXƒe[ƒW‚Ìî•ñ‚ğ•Û‚·‚éScriptableObject
+    /// EXã‚¹ãƒ†ãƒ¼ã‚¸ã®æƒ…å ±ã‚’ä¿æŒã™ã‚‹ScriptableObject
     /// </summary>
     [CreateAssetMenu(fileName = "EXStageData", menuName = "Create EX Stage Data")]
     public class EXStageDataInfo : ScriptableObject
     {
         #region PublicField
-        /// <summary>ƒXƒe[ƒWID</summary>
+        /// <summary>ã‚¹ãƒ†ãƒ¼ã‚¸ID</summary>
         public int stageID;
-        /// <summary>ŠJn‚ÌÔ‚Ì‘Ï‹v’l</summary>
+        /// <summary>é–‹å§‹æ™‚ã®ç ¦ã®è€ä¹…å€¤</summary>
         public int startFortressLife;
-        /// <summary>ŠJn‚ÌŠ‹à</summary>
+        /// <summary>é–‹å§‹æ™‚ã®æ‰€æŒé‡‘</summary>
         public int startMoney;
-        /// <summary>ƒEƒF[ƒu‚ÌƒCƒ“ƒ^[ƒoƒ‹</summary>
+        /// <summary>é–‹å§‹æ™‚ã®æ•µã®å‡ºç¾æ•°</summary>
+        public int enemyNum;
+        /// <summary>ã‚¦ã‚§ãƒ¼ãƒ–ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒ«</summary>
         public float waveInterval;
-        /// <summary>ƒXƒe[ƒW‚ÌƒIƒuƒWƒFƒNƒg</summary>
+        /// <summary>ã‚¹ãƒ†ãƒ¼ã‚¸ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</summary>
         public GameObject stageObj;
-        /// <summary>Ô‚ÌêŠ</summary>
+        /// <summary>ç ¦ã®å ´æ‰€</summary>
         public Transform fortressTransform;
-        /// <summary>EXƒXƒe[ƒW‚Ìƒ‹[ƒg‚Ìî•ñ</summary>
+        /// <summary>EXã‚¹ãƒ†ãƒ¼ã‚¸ã®ãƒ«ãƒ¼ãƒˆã®æƒ…å ±</summary>
         public List<RouteInfo> routeInfoList = new List<RouteInfo>();
         #endregion
     }
 
     /// <summary>
-    /// EXƒXƒe[ƒW‚Ìƒ‹[ƒg‚Ìî•ñ
+    /// EXã‚¹ãƒ†ãƒ¼ã‚¸ã®ãƒ«ãƒ¼ãƒˆã®æƒ…å ±
     /// </summary>
     [System.Serializable]
     public class RouteInfo
     {
         #region PublicField
-        /// <summary>“G‚ÌoŒ»”</summary>
+        /// <summary>æ•µã®å‡ºç¾æ•°</summary>
         //public List<EnemySpawnInfo> enemySpawnInfoList = new List<EnemySpawnInfo>();
-        /// <summary>“G‚ÌoŒ»êŠ</summary>
+        /// <summary>æ•µã®å‡ºç¾å ´æ‰€</summary>
         public Transform spawnPoint;
-        /// <summary>ƒ‹[ƒg‚Ì’†Œp’n“_</summary>
+        /// <summary>ãƒ«ãƒ¼ãƒˆã®ä¸­ç¶™åœ°ç‚¹</summary>
         public List<Transform> routeAnchor;
         #endregion
     }

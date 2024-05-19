@@ -15,6 +15,7 @@ MonoBehaviour:
   stageID: 0
   startFortressLife: 10
   startMoney: 150
+  enemyNum: 5
   waveInterval: 5
   stageObj: {fileID: 902099497394016601, guid: 9a6630843ed5c154dbdcab04cb0dfe23, type: 3}
   fortressTransform: {fileID: 3614475118831378226, guid: fab6d40e08da7fa4ebfdec6246fd2f2f, type: 3}

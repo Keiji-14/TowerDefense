@@ -15,6 +15,8 @@ namespace GameData.Enemy
         public int life;
         /// <summary>撃破時の獲得する金額</summary>
         public int dropMoney;
+        /// <summary>撃破時の獲得するポイント</summary>
+        public int point;
         /// <summary>移動速度</summary>
         public float speed;
         /// <summary>垂直変位</summary>

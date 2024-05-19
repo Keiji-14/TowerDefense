@@ -1,5 +1,6 @@
 ﻿using GameData;
 using GameData.Enemy;
+using GameData.Stage;
 using UniRx;
 using UnityEngine;
 using UnityEngine.AI;
@@ -28,6 +29,8 @@ namespace Game.Enemy
         private int currentRouteAnchorIndex = -1;
         /// <summary>NavMeshAgentコンポーネント</summary>
         private NavMeshAgent agent;
+        /// <summary>通過するルート</summary>
+        private RouteInfo routeInfo;
         #endregion
 
         #region SerializeField
@@ -73,23 +76,62 @@ namespace Game.Enemy
             agent.autoBraking = false;     // 目的地に近づいても速度を落とさない
         }
 
+        /// <summary>
+        /// 初期化
+        /// </summary>
+        public void Init(EnemyDataInfo enemyDataInfo, RouteInfo routeInfo)
+        {
+            agent = GetComponent<NavMeshAgent>();
+            this.routeInfo = routeInfo;
+
+            var stageDataInfo = GameDataManager.instance.GetEXStageDataInfo();
+            target = stageDataInfo.fortressTransform;
+
+            this.enemyDataInfo = enemyDataInfo;
+            life = enemyDataInfo.life;
+            // 体力バーを設定する
+            lifeBar.maxValue = enemyDataInfo.life;
+            lifeBar.value = life;
+
+            agent.speed = enemyDataInfo.speed;
+            agent.baseOffset = enemyDataInfo.baseOffset;
+            agent.autoBraking = false;     // 目的地に近づいても速度を落とさない
+        }
+
         private void MoveToNextWaypoint()
         {
             // 現在の中継地点の次の地点を設定
             currentRouteAnchorIndex++;
 
             var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
-            var stageDataInfo = GameDataManager.instance.GetStageDataInfo();
 
-            // もしすべての中継地点を通過したら、砦に向かう
-            if (currentRouteAnchorIndex >= stageDataInfo.waveInfo[gameDataInfo.waveNum].routeAnchor.Count)
+            if (gameDataInfo.isEXStage)
             {
-                agent.destination = target.position;
+                // もしすべての中継地点を通過したら、砦に向かう
+                if (currentRouteAnchorIndex >= routeInfo.routeAnchor.Count)
+                {
+                    agent.destination = target.position;
+                }
+                else
+                {
+                    // 次の中継地点に向かう
+                    agent.destination = routeInfo.routeAnchor[currentRouteAnchorIndex].position;
+                }
             }
             else
             {
-                // 次の中継地点に向かう
-                agent.destination = stageDataInfo.waveInfo[gameDataInfo.waveNum].routeAnchor[currentRouteAnchorIndex].position;
+                var stageDataInfo = GameDataManager.instance.GetStageDataInfo();
+
+                // もしすべての中継地点を通過したら、砦に向かう
+                if (currentRouteAnchorIndex >= stageDataInfo.waveInfo[gameDataInfo.waveNum].routeAnchor.Count)
+                {
+                    agent.destination = target.position;
+                }
+                else
+                {
+                    // 次の中継地点に向かう
+                    agent.destination = stageDataInfo.waveInfo[gameDataInfo.waveNum].routeAnchor[currentRouteAnchorIndex].position;
+                }
             }
         }
 
