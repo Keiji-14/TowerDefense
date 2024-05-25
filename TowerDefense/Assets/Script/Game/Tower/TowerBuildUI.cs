@@ -124,7 +124,8 @@ namespace Game.Tower
                 var towerData = GameDataManager.instance.GetTowerData(towerType);
                 var towerStatus = towerData.towerStatusDataInfoList[0];
 
-                var towerBuildDescriptionInfo = new TowerBuildDescriptionInfo(towerData.name, towerStatus.attack, towerStatus.attackSpeed, towerStatus.towerCost, towerData.description);
+                var towerBuildDescriptionInfo = new TowerBuildDescriptionInfo
+                    (towerData.name, towerStatus.attack, towerStatus.attackSpeed, towerStatus.firingRange, towerStatus.uniqueName, towerStatus.uniqueStatus, towerStatus.towerCost, towerData.description);
                 towerDescriptionUI.ViewTowerText(towerBuildDescriptionInfo);
             }
             else

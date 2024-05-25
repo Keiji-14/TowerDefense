@@ -69,6 +69,8 @@ namespace GameData.Tower
         public float attackSpeed;
         /// <summary>弾速</summary>
         public float bulletSpeed;
+        /// <summary>タワー固有値の名前</summary>
+        public string uniqueName;
         /// <summary>タワー固有値</summary>
         public float uniqueStatus;
     }
