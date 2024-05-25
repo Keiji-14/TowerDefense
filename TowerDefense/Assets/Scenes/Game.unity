@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.76203185, g: 0.7857626, b: 0.7305226, a: 1}
+  m_IndirectSpecularColor: {r: 0.76191425, g: 0.7857415, b: 0.7305165, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3130,20 +3130,20 @@ MonoBehaviour:
   clickControlObjB: {fileID: 217167307}
   fadeBackImg: {fileID: 1785483457}
   fadeBackSprige:
-  - {fileID: 21300000, guid: 0b2931a8f6082a440a6b19a127faa040, type: 3}
-  - {fileID: 21300000, guid: b1ace66c8d8ec1642961a2a263335d3f, type: 3}
-  - {fileID: 21300000, guid: 490881d254b8cf44aa4575487531b8ef, type: 3}
-  - {fileID: 21300000, guid: 9b4bf2aba98732e47aa8a2f53223c04e, type: 3}
-  - {fileID: 21300000, guid: 0b0ce49fb943eb54f9ea401fa3344af3, type: 3}
-  - {fileID: 21300000, guid: a074b502a216b1d42b5330e3a276a46e, type: 3}
-  - {fileID: 21300000, guid: 850e9e58b9d8e914d8776e0a9eee75b1, type: 3}
-  - {fileID: 21300000, guid: 0b0ce49fb943eb54f9ea401fa3344af3, type: 3}
+  - {fileID: 21300000, guid: 86a69b957a56a234d943eebf7c8e0f63, type: 3}
+  - {fileID: 21300000, guid: 0ac52f2786072b84fbc4613f39ffdbd9, type: 3}
+  - {fileID: 21300000, guid: 95e2eeedc8386d94f8a9650b4da31baa, type: 3}
+  - {fileID: 21300000, guid: 94959d33b8d3fe644a624a10facd52ff, type: 3}
+  - {fileID: 21300000, guid: e88929c51e9e3f543a6c44e861f81841, type: 3}
+  - {fileID: 21300000, guid: a181a986acc697a49a8e91127db8a74b, type: 3}
+  - {fileID: 21300000, guid: 3981500b13d180a4c878071f95692ae2, type: 3}
+  - {fileID: 21300000, guid: e88929c51e9e3f543a6c44e861f81841, type: 3}
   - {fileID: 21300000, guid: 8df9118112acbe644acf0d28a357835e, type: 3}
-  - {fileID: 21300000, guid: 0b0ce49fb943eb54f9ea401fa3344af3, type: 3}
-  - {fileID: 21300000, guid: 0b2931a8f6082a440a6b19a127faa040, type: 3}
-  - {fileID: 21300000, guid: 0389a361260800d408df1bd49f2dcae8, type: 3}
-  - {fileID: 21300000, guid: 0b2931a8f6082a440a6b19a127faa040, type: 3}
-  - {fileID: 21300000, guid: ef3e7be4e77121141ba80a6974e2a5dd, type: 3}
+  - {fileID: 21300000, guid: e88929c51e9e3f543a6c44e861f81841, type: 3}
+  - {fileID: 21300000, guid: 86a69b957a56a234d943eebf7c8e0f63, type: 3}
+  - {fileID: 21300000, guid: 55c46b706830851498b8131e700fe2ae, type: 3}
+  - {fileID: 21300000, guid: 86a69b957a56a234d943eebf7c8e0f63, type: 3}
+  - {fileID: 21300000, guid: 29c5a3768b78397419cb9422965e481e, type: 3}
   nextDescriptionBtn: {fileID: 1327588084}
   tutorial: {fileID: 1843383360}
   cameraMove: {fileID: 963194229}
