@@ -26,7 +26,9 @@ namespace Title
         private IObservable<Unit> OnClickStageSelectButtonObserver => stageSelectBtn.OnClickAsObservable();
         /// <summary>チュートリアルステージのボタンを押した時の処理</summary>
         private IObservable<Unit> OnClickTutorialStageButtonObserver => tutorialStageBtn.OnClickAsObservable();
-        /// <summary>チュートリアルステージのボタンを押した時の処理</summary>
+        /// <summary>ヘルプボタンを押した時の処理</summary>
+        private IObservable<Unit> OnClickHelpButtonObserver => helpBtn.OnClickAsObservable();
+        /// <summary>ランキングボタンを押した時の処理</summary>
         private IObservable<Unit> OnClickRankingButtonObserver => rankingBtn.OnClickAsObservable();
         /// <summary>終了ボタンを押した時の処理</summary>
         private IObservable<Unit> OnClickExitButtonObserver => exitBtn.OnClickAsObservable();
@@ -35,12 +37,14 @@ namespace Title
         #region SerializeField
         /// <summary>ステージ選択ボタン</summary>
         [SerializeField] private Button stageSelectBtn;
-        /// <summary>終了ボタン</summary>
-        [SerializeField] private Button exitBtn;
         /// <summary>チュートリアルステージのボタン</summary>
         [SerializeField] private Button tutorialStageBtn;
+        /// <summary>ヘルプボタン</summary>
+        [SerializeField] private Button helpBtn;
         /// <summary>ランキングのボタン</summary>
         [SerializeField] private Button rankingBtn;
+        /// <summary>終了ボタン</summary>
+        [SerializeField] private Button exitBtn;
         /// <summary>タイトル画面のUIオブジェクト</summary>
         [SerializeField] private GameObject mainTitleUIObj;
         /// <summary>ステージ選択画面のUIオブジェクト</summary>
@@ -72,22 +76,22 @@ namespace Title
                 stageSelectUIObj.SetActive(true);
             }).AddTo(this);
 
-            // ゲームを終了する処理
-            OnClickExitButtonObserver.Subscribe(_ =>
-            {
-                Application.Quit();
-            }).AddTo(this);
-
-            // 通常ステージの設定を行う処理
-            stageSelect.StageDecisionSubject.Subscribe(stageNum =>
-            {
-                SetDefaultStage(stageNum);
-            }).AddTo(this);
-
             // チュートリアルステージの設定を行う処理
             OnClickTutorialStageButtonObserver.Subscribe(_ =>
             {
                 SetTutorialStage();
+            }).AddTo(this);
+
+            // ヘルプ画面に遷移を行う処理
+            OnClickHelpButtonObserver.Subscribe(_ =>
+            {
+                SceneLoader.Instance().Load(SceneLoader.SceneName.Help, true);
+            }).AddTo(this);
+
+            // ゲームを終了する処理
+            OnClickExitButtonObserver.Subscribe(_ =>
+            {
+                Application.Quit();
             }).AddTo(this);
 
             // ランキング画面を開く処理
@@ -97,6 +101,12 @@ namespace Title
 
                 mainTitleUIObj.SetActive(false);
                 rankingUIObj.SetActive(true);
+            }).AddTo(this);
+
+            // 通常ステージの設定を行う処理
+            stageSelect.StageDecisionSubject.Subscribe(stageNum =>
+            {
+                SetDefaultStage(stageNum);
             }).AddTo(this);
 
             // EXステージの設定を行う処理

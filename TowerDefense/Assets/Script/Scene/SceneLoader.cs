@@ -19,6 +19,7 @@ namespace Scene
             {SceneName.Game,    "Game"},
             {SceneName.GameClear, "GameClear"},
             {SceneName.GameOver, "GameOver"},
+            {SceneName.Help, "Help"},
         };
         #endregion
 
@@ -30,6 +31,7 @@ namespace Scene
             Game,
             GameClear,
             GameOver,
+            Help,
         }
 
         /// <summary>
@@ -58,6 +60,15 @@ namespace Scene
         {
             StartCoroutine(LoadAsync(SceneNames[sceneName], isAdditive));
         }
+
+        /// <summary>
+        /// シーンアンロード
+        /// </summary>
+        /// <param name="sceneName">シーン名</param>
+        public void UnLoad(SceneName sceneName)
+        {
+            StartCoroutine(UnLoadAsync(SceneNames[sceneName]));
+        }
         #endregion
 
 
@@ -81,6 +92,22 @@ namespace Scene
 
             // シーンが追加された後に、アクティブ状態を変更する
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
+        }
+
+        /// <summary>
+        /// 非同期シーンアンロード
+        /// </summary>
+        /// <param name="sceneName">シーン名</param>
+        private IEnumerator UnLoadAsync(string sceneName)
+        {
+            // シーンを非同期でアンロードする
+            var asyncUnload = SceneManager.UnloadSceneAsync(sceneName);
+
+            // ロードが完了するまで待機する
+            while (!asyncUnload.isDone)
+            {
+                yield return null;
+            }
         }
         #endregion
     }

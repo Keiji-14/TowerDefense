@@ -15,7 +15,7 @@ namespace GameData.Enemy
         public int life;
         /// <summary>撃破時の獲得する金額</summary>
         public int dropMoney;
-        /// <summary>撃破時の獲得するポイント</summary>
+        /// <summary>撃破時の獲得するポイント(EXステージ用)</summary>
         public int scorePoint;
         /// <summary>移動速度</summary>
         public float speed;
@@ -23,8 +23,6 @@ namespace GameData.Enemy
         public float baseOffset;
         /// <summary>敵のオブジェクト</summary>
         public GameObject enemyObj;
-        /// <summary>消滅時のパーティクル</summary>
-        public ParticleSystem destroyParticle;
         #endregion
     }
 }

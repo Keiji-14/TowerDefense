@@ -21,7 +21,7 @@ namespace GameData.Tower
         public string description;
         /// <summary>タワーのレベル</summary>
         public int level;
-        /// <summary>タワーのオブジェクト</summary>
+        /// <summary>タワーのステータス</summary>
         public List<TowerStatusDataInfo> towerStatusDataInfoList = new List<TowerStatusDataInfo>();
         /// <summary>タワーのオブジェクト</summary>
         public GameObject towerObj;

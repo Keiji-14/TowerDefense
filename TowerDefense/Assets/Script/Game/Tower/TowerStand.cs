@@ -49,7 +49,7 @@ namespace Game.Tower
         }
 
         /// <summary>
-        /// 建設しているタワーを削除するの処理
+        /// 建設しているタワーを削除する処理
         /// </summary>
         public void DestroyTower()
         {

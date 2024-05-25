@@ -15,7 +15,7 @@ namespace Game.Fortress
         #endregion
 
         #region PrivateMethod
-        // 敵が弾に当たった時の処理
+        // 敵に当たった時の処理
         private void OnTriggerEnter(Collider other)
         {
             if (GameDataManager.instance.GetGameDataInfo().isGameClear ||

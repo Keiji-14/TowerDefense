@@ -34,7 +34,6 @@ namespace GameData.Stage
     public class WaveInfo
     {
         #region PublicField
-        public int enemyNum;
         /// <summary>敵の出現数</summary>
         public List<EnemySpawnInfo> enemySpawnInfoList = new List<EnemySpawnInfo>();
         /// <summary>敵の出現場所</summary>

@@ -99,7 +99,7 @@ namespace Game.Tower
         }
 
         /// <summary>
-        /// タワーと代を選択する処理
+        /// タワー土台を選択する処理
         /// </summary>
         private void SelectTowerStand(TowerStand towerStand)
         {
@@ -153,7 +153,7 @@ namespace Game.Tower
         }
 
         /// <summary>
-        /// 建設内を選択するUIを表示する
+        /// 建設するタワーを選択するUIを表示する
         /// </summary>
         private void ShowTowerBuildUI()
         {

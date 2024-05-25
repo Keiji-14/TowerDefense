@@ -1,5 +1,4 @@
 ﻿using GameData;
-using GameData.Stage;
 using Game.Fortress;
 using Game.Tower;
 using Game.Enemy;
@@ -24,10 +23,6 @@ namespace Game
         #endregion
 
         #region PrivateField
-        /// <summary>ウェーブ数の初期化</summary>
-        private const int waveInitNum = 0;
-        /// <summary>スコアの初期化</summary>
-        private const int scoreInitNum = 0;
         /// <summary>ゲーム開始ボタンを押した時の処理</summary>
         private IObservable<Unit> OnClickGameStartButtonObserver => gameStartBtn.OnClickAsObservable();
         #endregion
@@ -160,7 +155,7 @@ namespace Game
         /// <summary>
         /// 所持金を更新する処理
         /// </summary>
-        /// <param name="towerCost">タワーの価値</param>
+        /// <param name="variableValue">タワーの価値</param>
         private void PossessionMoneyUpdate(int variableValue)
         {
             var gameDataInfo = GameDataManager.instance.GetGameDataInfo();

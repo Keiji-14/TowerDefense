@@ -237,8 +237,6 @@ namespace Game.Enemy
                 IsFinishSubject.OnNext(false);
             }
         }
-
-
         #endregion
     }
 }
