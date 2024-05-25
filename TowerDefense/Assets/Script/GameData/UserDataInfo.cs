@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-
-namespace GameData
+﻿namespace GameData
 {
     [System.Serializable]
     public class UserDataInfo

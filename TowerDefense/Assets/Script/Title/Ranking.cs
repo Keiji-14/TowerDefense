@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GameData;
+using NetWark;
+using System;
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
@@ -13,7 +15,7 @@ namespace Title
     public class Ranking : MonoBehaviour
     {
         #region PublicField
-        /// <summary>ステージ選択決定時の処理</summary>
+        /// <summary>メインタイトルに戻る時の処理</summary>
         public Subject<Unit> MainTitleBackSubject = new Subject<Unit>();
         #endregion
 
@@ -27,6 +29,8 @@ namespace Title
         [SerializeField] private Button mainTitleBackBtn;
 
         [SerializeField] private List<TextMeshProUGUI> rankingTextList = new List<TextMeshProUGUI>();
+        /// <summary>API処理</summary>
+        [SerializeField] private APIClient apiClient;
         #endregion
 
         #region PublicMethod
@@ -39,8 +43,6 @@ namespace Title
             {
                 MainTitleBackSubject.OnNext(Unit.Default);
             }).AddTo(this);
-
-
         }
 
         /// <summary>
@@ -48,11 +50,26 @@ namespace Title
         /// </summary>
         public void ViewRanking()
         {
-            var index = 0;
-            foreach (var rankingText in rankingTextList)
+            StartCoroutine(apiClient.GetRankingData(UpdateRankingDisplay));
+        }
+        #endregion
+
+        #region PrivateMethod
+        /// <summary>
+        /// ランキングを表示を更新する処理
+        /// </summary>
+        private void UpdateRankingDisplay(List<UserDataInfo> rankingData)
+        {
+            for (int i = 0; i < rankingTextList.Count; i++)
             {
-                rankingText.text = $"{PlayerPrefs.GetInt($"RANKINGSCORE{index + 1}", 0)}";
-                index++;
+                if (i < rankingData.Count)
+                {
+                    rankingTextList[i].text = $"{rankingData[i].name}: {rankingData[i].highscore}";
+                }
+                else
+                {
+                    rankingTextList[i].text = $"---";
+                }
             }
         }
         #endregion

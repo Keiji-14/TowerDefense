@@ -7,6 +7,7 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
+using TMPro;
 
 namespace Title
 {
@@ -51,6 +52,8 @@ namespace Title
         [SerializeField] private GameObject stageSelectUIObj;
         /// <summary>ランキング画面のUIオブジェクト</summary>
         [SerializeField] private GameObject rankingUIObj;
+        /// <summary>ユーザー情報のテキスト</summary>
+        [SerializeField] private TextMeshProUGUI userDataText;
         /// <summary>ステージ選択画面</summary>
         [SerializeField] private StageSelect stageSelect;
         /// <summary>ランキング画面</summary>
@@ -67,10 +70,9 @@ namespace Title
         /// </summary>
         public void Init()
         {
-            firstStartup.Init();
+            FirstStartupInit();
 
             stageSelect.Init();
-
             ranking.Init();
 
             // ステージ選択画面を開く処理
@@ -102,7 +104,6 @@ namespace Title
             OnClickRankingButtonObserver.Subscribe(_ =>
             {
                 ranking.ViewRanking();
-
                 mainTitleUIObj.SetActive(false);
                 rankingUIObj.SetActive(true);
             }).AddTo(this);
@@ -136,6 +137,38 @@ namespace Title
         #endregion
 
         #region PrivateMethod
+        /// <summary>
+        /// 初回起動時の初期化処理
+        /// </summary>
+        private void FirstStartupInit()
+        {
+            var isFirstTime = PlayerPrefs.GetInt("FirstTime", 0) == 0;
+
+            firstStartup.ViewUserDataSubject.Subscribe(_ =>
+            {
+                ViewUserData();
+            }).AddTo(this);
+
+            if (isFirstTime)
+            {
+                userDataText.gameObject.SetActive(false);
+                firstStartup.Init();
+            }
+            else
+            {
+                firstStartup.AlreadyStartUp();
+            }
+        }
+
+
+        public void ViewUserData()
+        {
+            var userDataInfo = GameDataManager.instance.GetUserDataInfo();
+            userDataText.text = $"UID：{userDataInfo.id}　Name：{userDataInfo.name}";
+
+            userDataText.gameObject.SetActive(true);
+        }
+
         /// <summary>
         /// 通常ステージの設定を行う処理
         /// </summary>

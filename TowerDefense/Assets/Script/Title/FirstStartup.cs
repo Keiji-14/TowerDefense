@@ -12,11 +12,14 @@ namespace Title
     /// </summary>
     public class FirstStartup : MonoBehaviour
     {
+        #region PublicField
+        /// <summaryユーザー情報をタイトル画面に表示する処理</summary>
+        public Subject<Unit> ViewUserDataSubject = new Subject<Unit>();
+        #endregion
+
         #region PrivateField
         /// <summary>プレイヤー名の初期名</summary>
         private const string initialText = "ユーザー";
-
-        private bool isFirstTime;
         /// <summary>決定ボタンを選択した時の処理</summary>
         private IObservable<Unit> InputEnterObservable =>
             enterBtn.OnClickAsObservable();
@@ -29,7 +32,7 @@ namespace Title
         [SerializeField] private InputField nameInputField;
         /// <summary>マッチングウィンドウ</summary>
         [SerializeField] private GameObject firstStartupWindow;
-
+        /// <summary>API処理</summary>
         [SerializeField] private APIClient apiClient;
         #endregion
 
@@ -50,26 +53,17 @@ namespace Title
         /// </summary>
         public void Init()
         {
-            isFirstTime = PlayerPrefs.GetInt("FirstTime", 0) == 0;
+            firstStartupWindow.SetActive(true);
 
-            if (isFirstTime)
+            nameInputField.text = initialText;
+            enterBtn.interactable = false;
+
+            nameInputField.onValueChanged.AddListener(OnInputFieldValueChanged);
+
+            InputEnterObservable.Subscribe(_ =>
             {
-                firstStartupWindow.SetActive(true);
-
-                nameInputField.text = initialText;
-                enterBtn.interactable = false;
-
-                nameInputField.onValueChanged.AddListener(OnInputFieldValueChanged);
-
-                InputEnterObservable.Subscribe(_ =>
-                {
-                    StartCoroutine(RegisterUserIfNeeded(nameInputField.text));
-                }).AddTo(this);
-            }
-            else
-            {
-                AlreadyStartUp();
-            }
+                StartCoroutine(RegisterUserIfNeeded(nameInputField.text));
+            }).AddTo(this);
         }
 
         /// <summary>
@@ -77,8 +71,7 @@ namespace Title
         /// </summary>
         public void AlreadyStartUp()
         {
-            StartCoroutine(apiClient.GetUserData());
-            firstStartupWindow.SetActive(false);
+            StartCoroutine(AlreadyStartUpCoroutine());
         }
         #endregion
 
@@ -106,11 +99,20 @@ namespace Title
         {
             yield return apiClient.RegisterUserAndGetID(name);
 
-            // ユーザー登録が完了したら、フラグを設定して初回起動処理を終了する
-            isFirstTime = false;
             PlayerPrefs.SetInt("FirstTime", 1);
-            PlayerPrefs.SetString("UserName", name);
             firstStartupWindow.SetActive(false);
+
+            ViewUserDataSubject.OnNext(Unit.Default);
+        }
+
+        /// <summary>
+        /// 2回目以降の起動時の非同期処理
+        /// </summary>
+        private IEnumerator AlreadyStartUpCoroutine()
+        {
+            yield return StartCoroutine(apiClient.GetUserData());
+            firstStartupWindow.SetActive(false);
+            ViewUserDataSubject.OnNext(Unit.Default);
         }
         #endregion
     }
