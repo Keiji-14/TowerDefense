@@ -58,7 +58,7 @@ namespace Game
 
             descriptionObj.SetActive(true);
             fadeBackImg.sprite = fadeBackSprige[spriteCount];
-            
+
             tutorial.ViewDescriptionText(descriptionStrList[stepCount]);
 
             OnClickNextDescriptionButtonObserver.Subscribe(_ =>
