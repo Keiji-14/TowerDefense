@@ -118,7 +118,7 @@ namespace Game.Enemy
 
             var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
 
-            if (gameDataInfo.isEXStage)
+            if (gameDataInfo.stageType == StageType.EX)
             {
                 // もしすべての中継地点を通過したら、砦に向かう
                 if (currentRouteAnchorIndex >= routeInfo.routeAnchor.Count)

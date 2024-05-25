@@ -148,7 +148,7 @@ namespace Title
                 GameDataManager.instance.SetStageDataInfo(stageDataInfo);
 
                 // ゲーム情報をを初期化
-                var gameDataInfo = new GameDataInfo(stageDataInfo.startFortressLife, stageDataInfo.startMoney, waveInitNum, scoreInitNum, false, false, false);
+                var gameDataInfo = new GameDataInfo(stageDataInfo.startFortressLife, stageDataInfo.startMoney, waveInitNum, scoreInitNum, false, false, StageType.Default);
                 GameDataManager.instance.SetGameDataInfo(gameDataInfo);
             };
 
@@ -171,7 +171,7 @@ namespace Title
                 GameDataManager.instance.SetStageDataInfo(stageDataInfo);
 
                 // ゲーム情報をを初期化
-                var gameDataInfo = new GameDataInfo(stageDataInfo.startFortressLife, stageDataInfo.startMoney, waveInitNum, scoreInitNum, false, false, false);
+                var gameDataInfo = new GameDataInfo(stageDataInfo.startFortressLife, stageDataInfo.startMoney, waveInitNum, scoreInitNum, false, false, StageType.Tutorial);
                 GameDataManager.instance.SetGameDataInfo(gameDataInfo);
             };
 
@@ -194,7 +194,7 @@ namespace Title
                 GameDataManager.instance.SetEXStageDataInfo(stageDataInfo);
 
                 // ゲーム情報をを初期化
-                var gameDataInfo = new GameDataInfo(stageDataInfo.startFortressLife, stageDataInfo.startMoney, waveInitNum, scoreInitNum, true, false, false);
+                var gameDataInfo = new GameDataInfo(stageDataInfo.startFortressLife, stageDataInfo.startMoney, waveInitNum, scoreInitNum, true, false, StageType.EX);
                 GameDataManager.instance.SetGameDataInfo(gameDataInfo);
             };
 

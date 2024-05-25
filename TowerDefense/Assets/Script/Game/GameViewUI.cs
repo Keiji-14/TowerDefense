@@ -38,8 +38,8 @@ namespace Game
         {
             var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
 
-            defaultStageUI.SetActive(!gameDataInfo.isEXStage);
-            exStageUI.SetActive(gameDataInfo.isEXStage);
+            defaultStageUI.SetActive(gameDataInfo.stageType != StageType.EX);
+            exStageUI.SetActive(gameDataInfo.stageType == StageType.EX);
 
             UpdateViewUI();
         }
@@ -54,7 +54,7 @@ namespace Game
             fortressLifeText.text = $"{gameDataInfo.fortressLife}";
             possessionMoneyText.text = $"{gameDataInfo.possessionMoney}";
 
-            if (gameDataInfo.isEXStage)
+            if (gameDataInfo.stageType == StageType.EX)
             {
                 exStageWaveText.text = $"{gameDataInfo.waveNum + correctionWaveNum}";
                 scorePointText.text = $"{gameDataInfo.score}";

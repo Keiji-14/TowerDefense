@@ -42,7 +42,7 @@ namespace Game.Enemy
             if (isWaveStart)
             {
                 isWaveStart = false;
-                if (gameDataInfo.isEXStage)
+                if (gameDataInfo.stageType == StageType.EX)
                 {
                     StartCoroutine(EXCreateEnemy());
                 }

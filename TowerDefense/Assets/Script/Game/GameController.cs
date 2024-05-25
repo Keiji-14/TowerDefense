@@ -7,6 +7,7 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using GameData.Stage;
 
 namespace Game
 {
@@ -36,6 +37,8 @@ namespace Game
         [SerializeField] private TowerController towerController;
         /// <summary>敵の処理</summary>
         [SerializeField] private EnemyController enemyController;
+        /// <summary>チュートリアルの処理</summary>
+        [SerializeField] private TutorialController tutorialController;
         /// <summary>ゲームで表示するUI情報</summary>
         [SerializeField] private GameViewUI gameViewUI;
         #endregion
@@ -48,21 +51,31 @@ namespace Game
         {
             var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
 
-            if (gameDataInfo.isEXStage)
+            switch (gameDataInfo.stageType)
             {
-                // EXステージ情報を取得
-                var stageDataInfo = GameDataManager.instance.GetEXStageDataInfo();
+                case StageType.Default:
+                    // 通常ステージ情報を取得
+                    var stageDataInfo = GameDataManager.instance.GetStageDataInfo();
 
-                Instantiate(stageDataInfo.stageObj, Vector3.zero, Quaternion.identity);
-                fortressController = GameObject.FindWithTag("Fortress").GetComponent<FortressController>();
-            }
-            else
-            {
-                // 通常ステージ情報を取得
-                var stageDataInfo = GameDataManager.instance.GetStageDataInfo();
+                    Instantiate(stageDataInfo.stageObj, Vector3.zero, Quaternion.identity);
+                    fortressController = GameObject.FindWithTag("Fortress").GetComponent<FortressController>();
+                    break;
+                case StageType.Tutorial:
+                    //チュートリアルステージ情報を取得
+                    var tutorialStageDataInfo = GameDataManager.instance.GetStageDataInfo();
 
-                Instantiate(stageDataInfo.stageObj, Vector3.zero, Quaternion.identity);
-                fortressController = GameObject.FindWithTag("Fortress").GetComponent<FortressController>();
+                    Instantiate(tutorialStageDataInfo.stageObj, Vector3.zero, Quaternion.identity);
+                    fortressController = GameObject.FindWithTag("Fortress").GetComponent<FortressController>();
+
+                    tutorialController.Init();
+                    break;
+                case StageType.EX:
+                    // EXステージ情報を取得
+                    var exStageDataInfo = GameDataManager.instance.GetEXStageDataInfo();
+
+                    Instantiate(exStageDataInfo.stageObj, Vector3.zero, Quaternion.identity);
+                    fortressController = GameObject.FindWithTag("Fortress").GetComponent<FortressController>();
+                    break;
             }
 
             // 初期化
@@ -142,9 +155,9 @@ namespace Game
                     gameDataInfo.possessionMoney,
                     gameDataInfo.waveNum,
                     gameDataInfo.score,
-                    gameDataInfo.isEXStage,
                     gameDataInfo.isGameClear,
-                    gameDataInfo.isGameOver);
+                    gameDataInfo.isGameOver,
+                    gameDataInfo.stageType);
             GameDataManager.instance.SetGameDataInfo(setGameDataInfo);
 
             gameViewUI.UpdateViewUI();
@@ -169,9 +182,9 @@ namespace Game
                     possessionMoney,
                     gameDataInfo.waveNum,
                     gameDataInfo.score,
-                    gameDataInfo.isEXStage,
                     gameDataInfo.isGameClear,
-                    gameDataInfo.isGameOver);
+                    gameDataInfo.isGameOver,
+                    gameDataInfo.stageType);
             
             GameDataManager.instance.SetGameDataInfo(setGameDataInfo);
 
@@ -195,9 +208,9 @@ namespace Game
                     gameDataInfo.possessionMoney,
                     waveNum,
                     gameDataInfo.score,
-                    gameDataInfo.isEXStage,
                     gameDataInfo.isGameClear,
-                    gameDataInfo.isGameOver);
+                    gameDataInfo.isGameOver,
+                    gameDataInfo.stageType);
             GameDataManager.instance.SetGameDataInfo(setGameDataInfo);
 
             gameViewUI.UpdateViewUI();
@@ -220,9 +233,9 @@ namespace Game
                     gameDataInfo.possessionMoney,
                     gameDataInfo.waveNum,
                     score,
-                    gameDataInfo.isEXStage,
                     gameDataInfo.isGameClear,
-                    gameDataInfo.isGameOver);
+                    gameDataInfo.isGameOver,
+                    gameDataInfo.stageType);
             GameDataManager.instance.SetGameDataInfo(setGameDataInfo);
 
             gameViewUI.UpdateViewUI();
@@ -243,9 +256,9 @@ namespace Game
                         gameDataInfo.possessionMoney,
                         gameDataInfo.waveNum,
                         gameDataInfo.score,
-                        gameDataInfo.isEXStage,
                         true,
-                        gameDataInfo.isGameOver);
+                        gameDataInfo.isGameOver,
+                        gameDataInfo.stageType);
                 GameDataManager.instance.SetGameDataInfo(setGameDataInfo);
 
                 GameClearSubject.OnNext(Unit.Default);
@@ -269,9 +282,9 @@ namespace Game
                         gameDataInfo.possessionMoney,
                         gameDataInfo.waveNum,
                         gameDataInfo.score,
-                        gameDataInfo.isEXStage,
                         gameDataInfo.isGameClear,
-                        true);
+                        true,
+                        gameDataInfo.stageType);
                 GameDataManager.instance.SetGameDataInfo(setGameDataInfo);
 
                 SaveScore();
@@ -287,7 +300,7 @@ namespace Game
         {
             var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
             // EXステージならスコアを保存する
-            if (gameDataInfo.isEXStage)
+            if (gameDataInfo.stageType == StageType.EX)
             {
                 var rankingNum = 5;
                 List<int> rankingScoreList = new List<int>();

@@ -26,6 +26,11 @@ namespace Game.Tower
         private Vector3 bulletInitRot = new Vector3(90.0f, 0.0f, 0.0f);
         #endregion
 
+        #region SerializeField
+        /// <summary>ヒットエフェクトのオブジェクト</summary>
+        [SerializeField] GameObject hitEffectObj;
+        #endregion
+
         #region UnityEvent
         void Update()
         {
@@ -115,7 +120,9 @@ namespace Game.Tower
             var explosionRadius = uniqueStatus;
 
             Collider[] colliders = Physics.OverlapSphere(explosionPoint, explosionRadius);
-            
+
+            Instantiate(hitEffectObj, transform.position, Quaternion.identity);
+
             foreach (Collider hit in colliders)
             {
                 // 範囲内の敵にダメージを与える
