@@ -217,6 +217,12 @@ namespace Game.Tower
                 towerStand.DestroyTower();
                 DestroyTowerBuildUI();
             }).AddTo(this);
+
+
+            if (GameDataManager.instance.GetGameDataInfo().stageType == StageType.Tutorial)
+            {
+                NextDescriptionSubject.OnNext(Unit.Default);
+            }
         }
 
         /// <summary>
@@ -263,8 +269,6 @@ namespace Game.Tower
 
                 var tower = towerStand.GetTower();
                 tower.UpGradeTower();
-                //selectionTowerStand.UpGradeTower();
-                //selectionTowerStand.CreateTower();
 
                 DestroyTowerBuildUI();
             }
@@ -293,6 +297,12 @@ namespace Game.Tower
                 towerActionsUI = null;
             }
             selectionTowerStand = null;
+
+
+            if (GameDataManager.instance.GetGameDataInfo().stageType == StageType.Tutorial)
+            {
+                NextDescriptionSubject.OnNext(Unit.Default);
+            }
         }
         #endregion
     }

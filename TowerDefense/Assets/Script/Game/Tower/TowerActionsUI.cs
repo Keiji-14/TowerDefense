@@ -64,6 +64,7 @@ namespace Game.Tower
             // レベルが最大の場合
             if (towerDataInfo.level >= towerDataInfo.towerStatusDataInfoList.Count)
             {
+                towerUpgradeBtn.interactable = false;
                 var towerIncome = towerDataInfo.towerStatusDataInfoList[towerDataInfo.level - 1].towerIncome;
 
                 towerActionsDescriptionUI.ViewLevelMaxTowerText(towerIncome);

@@ -33,8 +33,9 @@ namespace Game
         /// <summary>説明テキスト</summary>
         [SerializeField] private GameObject descriptionObj;
         /// <summary>クリックを制御するオブジェクト</summary>
-        [SerializeField] private GameObject clickControlObj;
+        [SerializeField] private GameObject clickControlObjA;
         /// <summary>クリックを制御するオブジェクト</summary>
+        [SerializeField] private GameObject clickControlObjB;
         /// <summary>背景イメージ</summary>
         [SerializeField] private Image fadeBackImg;
         /// <summary>背景イメージの画像リスト</summary>
@@ -53,6 +54,10 @@ namespace Game
         /// </summary>
         public void Init()
         {
+            tutorial.gameObject.SetActive(true);
+            clickControlObjA.SetActive(true);
+            clickControlObjB.SetActive(true);
+
             stepCount = 0;
             spriteCount = 0;
 
@@ -75,7 +80,7 @@ namespace Game
         /// </summary>
         public void NextDescription()
         {
-            if (stepCount >= 18)
+            if (stepCount >= 23)
                 return;
 
             stepCount++;
@@ -96,67 +101,95 @@ namespace Game
             if (stepCount == 9)
             {
                 NextBackSprite();
-                nextDescriptionBtn.gameObject.SetActive(false);
-                fadeBackImg.raycastTarget = false;
+                SwicthDescription(false);
+
+                clickControlObjA.SetActive(false);
             }
             if (stepCount == 10)
             {
                 NextBackSprite();
-                nextDescriptionBtn.gameObject.SetActive(true);
-                fadeBackImg.raycastTarget = true;
+                SwicthDescription(true);
             }
             if (stepCount == 11)
             {
                 NextBackSprite();
-                nextDescriptionBtn.gameObject.SetActive(false);
-                fadeBackImg.raycastTarget = false;
+                SwicthDescription(false);
 
-                clickControlObj.SetActive(true);
+                clickControlObjA.SetActive(true);
             }
+            // タワーの建設が完了
             if (stepCount == 12)
             {
                 NextBackSprite();
-                nextDescriptionBtn.gameObject.SetActive(true);
-                fadeBackImg.raycastTarget = true;
-
-                clickControlObj.SetActive(false);
+                SwicthDescription(true);
             }
+            // タワー再度選択
             if (stepCount == 13)
             {
+                SwicthDescription(false);
+
+                clickControlObjA.SetActive(false);
+            }
+
+            if (stepCount == 14)
+            {
+                SwicthDescription(true);
                 NextBackSprite();
             }
-            if (stepCount == 14)
+            if (stepCount == 17)
+            {
+                SwicthDescription(false);
+                NextBackSprite();
+            }
+            if (stepCount == 18)
+            {
+                SwicthDescription(true);
+                NextBackSprite();
+            }
+            // カメラの確認
+            if (stepCount == 19)
             {
                 cameraMove.enabled = true;
                 NextBackSprite();
             }
-            if (stepCount == 15)
+            // カメラの確認完了
+            if (stepCount == 20)
             {
                 NextBackSprite();
             }
-            if (stepCount == 16)
+            // ゲーム開始ボタンの説明
+            if (stepCount == 21)
             {
                 NextBackSprite();
             }
 
-            if (stepCount >= 18)
+            if (stepCount >= 23)
             {
                 tutorial.gameObject.SetActive(false);
                 FinishDescriptionSubject.OnNext(Unit.Default);
             }
             tutorial.ViewDescriptionText(descriptionStrList[stepCount]);
         }
+        #endregion
 
+        #region PrivateMethod
         /// <summary>
         /// 背景を更新
         /// </summary>
-        public void NextBackSprite()
+        private void NextBackSprite()
         {
             spriteCount++;
             fadeBackImg.sprite = fadeBackSprige[spriteCount];
         }
+
+        /// <summary>
+        /// 説明方法を切り替える処理
+        /// </summary>
+        private void SwicthDescription(bool isActive)
+        {
+            nextDescriptionBtn.gameObject.SetActive(isActive);
+            fadeBackImg.raycastTarget = isActive;
+        }
         #endregion
     }
-
-
 }
