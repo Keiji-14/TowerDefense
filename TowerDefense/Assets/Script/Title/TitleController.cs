@@ -55,6 +55,8 @@ namespace Title
         [SerializeField] private StageSelect stageSelect;
         /// <summary>ランキング画面</summary>
         [SerializeField] private Ranking ranking;
+        /// <summary>初回起動時の処理</summary>
+        [SerializeField] private FirstStartup firstStartup;
         /// <summary>フェードイン・フェードアウトの処理</summary>
         [SerializeField] private FadeController fadeController;
         #endregion
@@ -65,6 +67,8 @@ namespace Title
         /// </summary>
         public void Init()
         {
+            firstStartup.Init();
+
             stageSelect.Init();
 
             ranking.Init();

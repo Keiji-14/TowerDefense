@@ -8,6 +8,6 @@ namespace GameData
     [System.Serializable]
     public class JsonData
     {
-        public List<TowerDataInfo> tower_list;
+        public List<UserDataInfo> userDataInfoList;
     }
 }
