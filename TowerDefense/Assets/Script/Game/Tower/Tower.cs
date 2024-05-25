@@ -49,7 +49,7 @@ namespace Game.Tower
         public void Init(TowerDataInfo towerDataInfo)
         {
             // タワーの情報をディープコピーして保持させる
-            this.towerDataInfo = (TowerDataInfo)towerDataInfo.Clone(); ;
+            this.towerDataInfo = (TowerDataInfo)towerDataInfo.Clone();
 
             capsuleCollider = GetComponent<CapsuleCollider>();
             // 射程距離を設定

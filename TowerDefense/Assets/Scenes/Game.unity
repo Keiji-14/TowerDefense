@@ -38,11 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-<<<<<<< HEAD
-  m_IndirectSpecularColor: {r: 0.76203203, g: 0.78575265, b: 0.7305185, a: 1}
-=======
   m_IndirectSpecularColor: {r: 0.76189655, g: 0.78568894, b: 0.73049927, a: 1}
->>>>>>> parent of 406a377 (チュートリアル機能を追加)
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:

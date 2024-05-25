@@ -57,22 +57,44 @@ namespace Game
                     // 通常ステージ情報を取得
                     var stageDataInfo = GameDataManager.instance.GetStageDataInfo();
 
+                    // 取得したステージを生成
                     Instantiate(stageDataInfo.stageObj, Vector3.zero, Quaternion.identity);
                     fortressController = GameObject.FindWithTag("Fortress").GetComponent<FortressController>();
                     break;
                 case StageType.Tutorial:
-                    //チュートリアルステージ情報を取得
+                    // チュートリアルステージ情報を取得
                     var tutorialStageDataInfo = GameDataManager.instance.GetStageDataInfo();
 
+                    // 取得したステージを生成
                     Instantiate(tutorialStageDataInfo.stageObj, Vector3.zero, Quaternion.identity);
                     fortressController = GameObject.FindWithTag("Fortress").GetComponent<FortressController>();
 
                     tutorialController.Init();
+
+                    // 次の説明へ移行する処理
+                    tutorialController.NextDescriptionSubject.Subscribe(_ =>
+                    {
+                        tutorialController.NextDescription();
+                    }).AddTo(this);
+                    // 次の説明へ移行する処理
+                    towerController.NextDescriptionSubject.Subscribe(_ =>
+                    {
+                        tutorialController.NextDescription();
+                    }).AddTo(this);
+                    tutorialController.FinishDescriptionSubject.Subscribe(_ =>
+                    {
+                        // ゲーム開始ボタンを押せなくする
+                        gameStartBtn.interactable = true;
+                    }).AddTo(this);
+
+                    // ゲーム開始ボタンを押せなくする
+                    gameStartBtn.interactable = false;
                     break;
                 case StageType.EX:
                     // EXステージ情報を取得
                     var exStageDataInfo = GameDataManager.instance.GetEXStageDataInfo();
 
+                    // 取得したステージを生成
                     Instantiate(exStageDataInfo.stageObj, Vector3.zero, Quaternion.identity);
                     fortressController = GameObject.FindWithTag("Fortress").GetComponent<FortressController>();
                     break;

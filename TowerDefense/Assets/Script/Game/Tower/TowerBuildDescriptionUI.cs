@@ -46,7 +46,7 @@ namespace Game.Tower
     }
 
     /// <summary>
-    /// タワーについての表示する情報
+    /// タワーの建設についての表示する情報
     /// </summary>
     public class TowerBuildDescriptionInfo
     {
@@ -68,7 +68,15 @@ namespace Game.Tower
         /// <summary>説明</summary>
         public string description;
 
-        public TowerBuildDescriptionInfo(string name, int attack, float attackSpeed, float firingRange, string uniqueName, float uniqueStatus, int cose, string description)
+        public TowerBuildDescriptionInfo(
+            string name, 
+            int attack, 
+            float attackSpeed, 
+            float firingRange, 
+            string uniqueName, 
+            float uniqueStatus, 
+            int cose, 
+            string description)
         {
             this.name = name;
             this.attack = attack;

@@ -38,12 +38,13 @@ namespace GameData.Tower
                 clone.towerStatusDataInfoList.Add(new TowerStatusDataInfo
                 {
                     attack = status.attack,
-                    towerCost = status.towerCost,
-                    towerIncome = status.towerIncome,
-                    firingRange = status.firingRange,
                     attackSpeed = status.attackSpeed,
                     bulletSpeed = status.bulletSpeed,
-                    uniqueStatus = status.uniqueStatus
+                    firingRange = status.firingRange,
+                    uniqueName = status.uniqueName,
+                    uniqueStatus = status.uniqueStatus,
+                    towerCost = status.towerCost,
+                    towerIncome = status.towerIncome,
                 });
             }
             return clone;
@@ -59,20 +60,20 @@ namespace GameData.Tower
     {
         /// <summary>攻撃力</summary>
         public int attack;
-        /// <summary>建設費用</summary>
-        public int towerCost;
-        /// <summary>売却時の返金額</summary>
-        public int towerIncome;
-        /// <summary>射程距離</summary>
-        public float firingRange;
         /// <summary>攻撃速度</summary>
         public float attackSpeed;
         /// <summary>弾速</summary>
         public float bulletSpeed;
+        /// <summary>射程距離</summary>
+        public float firingRange;
         /// <summary>タワー固有値の名前</summary>
         public string uniqueName;
         /// <summary>タワー固有値</summary>
         public float uniqueStatus;
+        /// <summary>建設費用</summary>
+        public int towerCost;
+        /// <summary>売却時の返金額</summary>
+        public int towerIncome;
     }
 
     /// <summary>

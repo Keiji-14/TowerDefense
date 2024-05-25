@@ -37,8 +37,8 @@ namespace Game.Tower
         [SerializeField] private Button towerUpgradeBtn;
         /// <summary>タワーの売却ボタン</summary>
         [SerializeField] private Button towerSaleBtn;
-        /// <summary>タワー強化UIオブジェクト</summary>
-        [SerializeField] private GameObject towerUpgradeDescriptionUIObj;
+        /// <summary>タワー強化・売却UIのコンポーネント</summary>
+        [SerializeField] private TowerActionsDescriptionUI towerActionsDescriptionUI;
         #endregion
 
         #region PublicMethod
@@ -59,16 +59,38 @@ namespace Game.Tower
                 TowerSaleSubject.OnNext(towerStand);
             }).AddTo(this);
 
-            var towerUpgradeUIHandler = towerUpgradeBtn.GetComponent<TowerBuildButtonHandler>();
-            towerUpgradeUIHandler.TowerDescriptionSubject.Subscribe(isView =>
-            {
-                var createPos = new Vector3(
-                        towerUpgradeBtn.transform.position.x + correctionDescriptionUIPosX,
-                        towerUpgradeBtn.transform.position.y,
-                        towerUpgradeBtn.transform.position.z);
+            var towerDataInfo = towerStand.GetTower().GetTowerDataInfo();
 
-                IsViewTowerDescription(isView, createPos, towerStand.GetTower());
-            }).AddTo(this);
+            // レベルが最大の場合
+            if (towerDataInfo.level >= towerDataInfo.towerStatusDataInfoList.Count)
+            {
+                var towerIncome = towerDataInfo.towerStatusDataInfoList[towerDataInfo.level - 1].towerIncome;
+
+                towerActionsDescriptionUI.ViewLevelMaxTowerText(towerIncome);
+            }
+            else
+            {
+                var towerCurrentStatus = towerDataInfo.towerStatusDataInfoList[towerDataInfo.level - 1];
+                var towerUpGradeStatus = towerDataInfo.towerStatusDataInfoList[towerDataInfo.level];
+
+                var towerActionsDescriptionInfo =
+                    new TowerActionsDescriptionInfo(
+                        towerDataInfo.name,
+                        towerCurrentStatus.attack,
+                        towerUpGradeStatus.attack,
+                        towerCurrentStatus.attackSpeed,
+                        towerUpGradeStatus.attackSpeed,
+                        towerCurrentStatus.firingRange,
+                        towerUpGradeStatus.firingRange,
+                        towerCurrentStatus.uniqueName,
+                        towerCurrentStatus.uniqueStatus,
+                        towerUpGradeStatus.uniqueStatus,
+                        towerUpGradeStatus.towerCost,
+                        towerCurrentStatus.towerIncome
+                        );
+
+                towerActionsDescriptionUI.ViewTowerText(towerActionsDescriptionInfo);
+            }
         }
 
         /// <summary>
@@ -83,27 +105,5 @@ namespace Game.Tower
             }
         }
         #endregion
-
-        #region PrivateMethod
-        /// <summary>
-        /// タワーの説明を表示するかどうか
-        /// </summary>
-        private void IsViewTowerDescription(bool isView, Vector3 createPos, Tower tower)
-        {
-            if (isView)
-            {
-                towerDescriptionUI = Instantiate(towerUpgradeDescriptionUIObj, createPos, Quaternion.identity, uiCanvas).GetComponent<TowerBuildDescriptionUI>();
-
-                var towerData = tower.GetTowerDataInfo();
-                //var towerDescriptionInfo = new TowerDescriptionInfo(towerData.name, towerData.attack, towerData.attackSpeed, towerData.towerCost, towerData.description);
-                //towerDescriptionUI.ViewTowerText(towerDescriptionInfo);
-            }
-            else
-            {
-                Destroy(towerDescriptionUI.gameObject);
-                towerDescriptionUI = null;
-            }
-        }
-#endregion
     }
 }

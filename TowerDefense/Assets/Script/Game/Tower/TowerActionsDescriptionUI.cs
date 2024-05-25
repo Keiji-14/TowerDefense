@@ -35,18 +35,106 @@ namespace Game.Tower
         /// <summary>強化コストのテキスト</summary>
         [SerializeField] private TextMeshProUGUI upGradeCostText;
         /// <summary>売却のテキスト</summary>
-        //[SerializeField] private TextMeshProUGUI saleText;
+        [SerializeField] private TextMeshProUGUI saleText;
+        [Header("UpGradeCost")]
+        /// <summary>タワーのステータスを表示するUIオブジェクト</summary>
+        [SerializeField] private GameObject towerStatusUIObj;
+        /// <summary>最大レベル時に表示するUIオブジェクト</summary>
+        [SerializeField] private GameObject levelMaxUIObj;
         #endregion
 
         /// <summary>
         /// タワーの情報を表示する
         /// </summary>
-        public void ViewTowerText(TowerBuildDescriptionInfo towerDescriptionInfo)
+        public void ViewTowerText(TowerActionsDescriptionInfo towerActionsDescriptionInfo)
         {
-            nameText.text = towerDescriptionInfo.name;
-            attackText.text = towerDescriptionInfo.attack.ToString();
-            attackSpeedText.text = towerDescriptionInfo.attackSpeed.ToString();
-            //upGradeCostText.text = towerDescriptionInfo
+            towerStatusUIObj.SetActive(true);
+            levelMaxUIObj.SetActive(false);
+
+            nameText.text = $"{towerActionsDescriptionInfo.name}";
+            attackText.text = $"{towerActionsDescriptionInfo.attack}";
+            attackUpGradeText.text = $"{towerActionsDescriptionInfo.attackUpgrade}";
+            attackSpeedText.text = $"{towerActionsDescriptionInfo.attackSpeed}s";
+            attackSpeedUpGradeText.text = $"{towerActionsDescriptionInfo.attackSpeedUpgrade}s";
+            firingRangeText.text = $"{towerActionsDescriptionInfo.firingRange}";
+            firingRangeUpGradeText.text = $"{towerActionsDescriptionInfo.firingRangeUpgrade}";
+            uniqueNameText.text = $"{towerActionsDescriptionInfo.uniqueName}";
+            uniqueStatusText.text = $"{towerActionsDescriptionInfo.uniqueStatus}";
+            uniqueStatusUpGradeText.text = $"{towerActionsDescriptionInfo.uniqueStatusUpgrade}";
+            upGradeCostText.text = $"{towerActionsDescriptionInfo.upGradeCost}";
+            saleText.text = $"{towerActionsDescriptionInfo.sale}";
         }
+
+        /// <summary>
+        /// 最大レベル時のタワーの情報を表示する
+        /// </summary>
+        public void ViewLevelMaxTowerText(int sale)
+        {
+            towerStatusUIObj.SetActive(false);
+            levelMaxUIObj.SetActive(true);
+
+            saleText.text = $"{sale}";
+        }
+    }
+
+    /// <summary>
+    /// タワーの強化・売却についての表示する情報
+    /// </summary>
+    public class TowerActionsDescriptionInfo
+    {
+        #region PublicField
+        /// <summary>名前</summary>
+        public string name;
+        /// <summary>攻撃力</summary>
+        public int attack;
+        /// <summary>強化後の攻撃力</summary>
+        public int attackUpgrade;
+        /// <summary>攻撃速度</summary>
+        public float attackSpeed;
+        /// <summary>強化後の攻撃速度</summary>
+        public float attackSpeedUpgrade;
+        /// <summary>射程距離</summary>
+        public float firingRange;
+        /// <summary>強化後の射程距離</summary>
+        public float firingRangeUpgrade;
+        /// <summary>固有値の名前</summary>
+        public string uniqueName;
+        /// <summary>固有値</summary>
+        public float uniqueStatus;
+        /// <summary>強化後の固有値</summary>
+        public float uniqueStatusUpgrade;
+        /// <summary>強化コスト</summary>
+        public int upGradeCost;
+        /// <summary>説明</summary>
+        public int sale;
+
+        public TowerActionsDescriptionInfo(
+            string name, 
+            int attack, 
+            int attackUpgrade, 
+            float attackSpeed, 
+            float attackSpeedUpgrade, 
+            float firingRange, 
+            float firingRangeUpgrade, 
+            string uniqueName, 
+            float uniqueStatus, 
+            float uniqueStatusUpgrade, 
+            int upGradeCost, 
+            int sale)
+        {
+            this.name = name;
+            this.attack = attack;
+            this.attackUpgrade = attackUpgrade;
+            this.attackSpeed = attackSpeed;
+            this.attackSpeedUpgrade = attackSpeedUpgrade;
+            this.firingRange = firingRange;
+            this.firingRangeUpgrade = firingRangeUpgrade;
+            this.uniqueName = uniqueName;
+            this.uniqueStatus = uniqueStatus;
+            this.uniqueStatusUpgrade = uniqueStatusUpgrade;
+            this.upGradeCost = upGradeCost;
+            this.sale = sale;
+        }
+        #endregion
     }
 }

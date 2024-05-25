@@ -17,6 +17,8 @@ namespace Game.Tower
         public Subject<int> TowerBuildSubject = new Subject<int>();
         /// <summary>タワーを売却した時の処理</summary>
         public Subject<int> TowerSaleSubject = new Subject<int>();
+        /// <summary>次の説明へ移行する処理(チュートリアルに使用)</summary>
+		public Subject<Unit> NextDescriptionSubject = new Subject<Unit>();
         #endregion
 
         #region PrivateField
@@ -32,7 +34,7 @@ namespace Game.Tower
 
         #region SerializeField
         /// <summary>生成場所の親オブジェクト</summary>
-        [SerializeField] private Transform uiCanvas;
+        [SerializeField] private Transform createParent;
         /// <summary>タワー建設のUIオブジェクト</summary>
         [SerializeField] private GameObject towerBuildUIObj;
         /// <summary>タワー強化・売却のUIオブジェクト</summary>
@@ -115,7 +117,7 @@ namespace Game.Tower
                     towerStand.OnTowerClicked();
                     selectionTowerStand.OnTowerClicked();
                     selectionTowerStand = towerStand;
-                    //ShowTowerActionsUI(selectionTowerStand);
+                    ShowTowerActionsUI(selectionTowerStand);
                 }
                 else if (selectionTowerStand != null && towerStand.GetTower() == null)
                 {
@@ -128,7 +130,7 @@ namespace Game.Tower
                 {
                     towerStand.OnTowerClicked();
                     selectionTowerStand = towerStand;
-                    //ShowTowerActionsUI(selectionTowerStand);
+                    ShowTowerActionsUI(selectionTowerStand);
                 }
                 else
                 {
@@ -164,14 +166,24 @@ namespace Game.Tower
             }
 
             // UIをインスタンス化して表示する
-            towerBuildUI = Instantiate(towerBuildUIObj, new Vector3(960, 540, 0), Quaternion.identity, uiCanvas).GetComponent<TowerBuildUI>();
+            towerBuildUI = Instantiate(towerBuildUIObj, new Vector3(960, 540, 0), Quaternion.identity, createParent).GetComponent<TowerBuildUI>();
 
             towerBuildUI.Init();
 
             towerBuildUI.TowerBuildSubject.Subscribe(towerType =>
             {
                 IsCanBuild(towerType);
+
+                if (GameDataManager.instance.GetGameDataInfo().stageType == StageType.Tutorial)
+                {
+                    NextDescriptionSubject.OnNext(Unit.Default);
+                }
             }).AddTo(this);
+
+            if (GameDataManager.instance.GetGameDataInfo().stageType == StageType.Tutorial)
+            {
+                NextDescriptionSubject.OnNext(Unit.Default);
+            }
         }
 
         /// <summary>
@@ -186,13 +198,12 @@ namespace Game.Tower
             }
 
             // UIをインスタンス化して表示する
-            towerActionsUI = Instantiate(towerActionsUIObj, new Vector3(960, 540, 0), Quaternion.identity, uiCanvas).GetComponent<TowerActionsUI>();
+            towerActionsUI = Instantiate(towerActionsUIObj, new Vector3(960, 540, 0), Quaternion.identity, createParent).GetComponent<TowerActionsUI>();
             towerActionsUI.Init(towerStand);
 
             towerActionsUI.TowerUpgradeSubject.Subscribe(towerStand =>
             {
                 IsCanUpGrade(towerStand);
-                //var towerDataInfo = towerStand.GetTower().GetTowerDataInfo();
             }).AddTo(this);
 
             towerActionsUI.TowerSaleSubject.Subscribe(towerStand =>
