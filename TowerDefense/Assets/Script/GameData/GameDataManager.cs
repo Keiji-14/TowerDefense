@@ -17,6 +17,8 @@ namespace GameData
         #region PrivateField
         /// <summary>ゲームの情報</summary>
         private GameDataInfo gameDataInfo;
+        /// <summary>ユーザーの情報</summary>
+        private UserDataInfo userDataInfo;
         /// <summary>ステージの情報</summary>
         private StageDataInfo stageDataInfo;
         /// <summary>EXステージの情報</summary>
@@ -58,6 +60,22 @@ namespace GameData
         public GameDataInfo GetGameDataInfo()
         {
             return gameDataInfo;
+        }
+
+        // <summary>
+        /// ユーザーの情報を設定する
+        /// </summary>
+        public void SetUserDataInfo(UserDataInfo userDataInfo)
+        {
+            this.userDataInfo = userDataInfo;
+        }
+
+        /// <summary>
+        ///ユーザーの情報を返す
+        /// </summary>
+        public UserDataInfo GetUserDataInfo()
+        {
+            return userDataInfo;
         }
 
 

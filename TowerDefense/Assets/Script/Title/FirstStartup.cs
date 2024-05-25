@@ -98,6 +98,7 @@ namespace Title
         private IEnumerator RegisterUserIfNeeded(string name)
         {
             yield return apiClient.RegisterUserAndGetID(name);
+            yield return StartCoroutine(apiClient.GetUserData());
 
             PlayerPrefs.SetInt("FirstTime", 1);
             firstStartupWindow.SetActive(false);

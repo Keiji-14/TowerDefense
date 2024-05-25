@@ -2,12 +2,12 @@
 using Game.Fortress;
 using Game.Tower;
 using Game.Enemy;
+using Direction;
+using NetWark;
 using System;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
-using GameData.Stage;
 
 namespace Game
 {
@@ -41,6 +41,10 @@ namespace Game
         [SerializeField] private TutorialController tutorialController;
         /// <summary>ゲームで表示するUI情報</summary>
         [SerializeField] private GameViewUI gameViewUI;
+        /// <summary>砦のダメージ演出</summary>
+        [SerializeField] private DamageDirection damageDirection;
+        /// <summary>API処理</summary>
+        [SerializeField] private APIClient apiClient;
         #endregion
 
         #region PublicMethod
@@ -183,6 +187,11 @@ namespace Game
             GameDataManager.instance.SetGameDataInfo(setGameDataInfo);
 
             gameViewUI.UpdateViewUI();
+            
+            if (fortressLife > 0)
+            {
+                StartCoroutine(damageDirection.Damage());
+            }
 
             IsGameOver();
         }
@@ -321,42 +330,23 @@ namespace Game
         private void SaveScore()
         {
             var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
+            var userDataInfo = GameDataManager.instance.GetUserDataInfo();
+            
             // EXステージならスコアを保存する
             if (gameDataInfo.stageType == StageType.EX)
             {
-                var rankingNum = 5;
-                List<int> rankingScoreList = new List<int>();
-                
-                for (int i = 0; i < rankingNum; i++)
+                var userID = PlayerPrefs.GetInt("UserID", -1);
+                if (userID == -1)
                 {
-                    rankingScoreList.Add(PlayerPrefs.GetInt(("RANKINGSCORE" + (i + 1)), 0));
+                    Debug.LogError("No UserID found in PlayerPrefs");
+                    return;
                 }
 
-                // リザルトのスコアが5位のスコアを上回ったら保存する
-                if (rankingScoreList[rankingNum - 1] < gameDataInfo.score)
-                {
-                    Debug.Log("Save" + gameDataInfo.score);
-                    rankingScoreList[rankingNum - 1] = gameDataInfo.score;
-                }
-                
-                // 保存したスコアをソートする
-                for (int i = 0; i < rankingScoreList.Count; i++)
-                {
-                    for (int j = i; j < rankingScoreList.Count; j++)
-                    {
-                        if (rankingScoreList[i] < rankingScoreList[j])
-                        {
-                            int tmp = rankingScoreList[i];
-                            rankingScoreList[i] = rankingScoreList[j];
-                            rankingScoreList[j] = tmp;
-                        }
-                    }
-                }
+                var currentHighScore = gameDataInfo.score;
 
-                for (int i = 0; i < rankingScoreList.Count; i++)
+                if (currentHighScore > userDataInfo.highscore)
                 {
-                    Debug.Log(rankingScoreList[i]);
-                    PlayerPrefs.SetInt(("RANKINGSCORE" + (i + 1)), rankingScoreList[i]);
+                    StartCoroutine(apiClient.UpdateUserHighScore(userID, currentHighScore));
                 }
             }
         }

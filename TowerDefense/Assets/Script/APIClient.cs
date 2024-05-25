@@ -2,6 +2,7 @@
 using UnityEngine.Networking;
 using System.Collections;
 using GameData;
+using System.Collections.Generic;
 
 namespace NetWark
 {
@@ -66,10 +67,15 @@ namespace NetWark
             {
                 Debug.Log("User data: " + request.downloadHandler.text);
 
-                UserDataInfo userInfo = JsonUtility.FromJson<UserDataInfo>(request.downloadHandler.text);
-                if (userInfo == null)
+                UserDataInfo userDataInfo = JsonUtility.FromJson<UserDataInfo>(request.downloadHandler.text);
+
+                if (userDataInfo == null)
                 {
                     Debug.LogError("Failed to parse user data");
+                }
+                else
+                {
+                    GameDataManager.instance.SetUserDataInfo(userDataInfo);
                 }
             }
             else
@@ -77,15 +83,72 @@ namespace NetWark
                 Debug.LogError("Error: " + request.error);
             }
         }
+
+        /// <summary>
+        /// 保存されたUserIDを使用してユーザー情報を取得する処理
+        /// </summary>
+        public IEnumerator GetRankingData(System.Action<List<UserDataInfo>> callback)
+        {
+            UnityWebRequest request = UnityWebRequest.Get(baseUrl + "get_ranking.php");
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                string jsonResponse = request.downloadHandler.text;
+                //List<UserDataInfo> ranking = JsonUtility.FromJson<RankingResponse>(jsonResponse).ranking;
+                RankingResponse rankingResponse = JsonUtility.FromJson<RankingResponse>("{\"ranking\":" + jsonResponse + "}");
+
+                if (rankingResponse != null)
+                {
+                    callback(rankingResponse.ranking);
+                }
+                else
+                {
+                    Debug.LogError("Failed to parse ranking data");
+                    callback(new List<UserDataInfo>());
+                }
+            }
+            else
+            {
+                Debug.LogError("Error getting ranking data: " + request.error);
+                callback(new List<UserDataInfo>());
+            }
+        }
+
+        /// <summary>
+        /// ユーザーのハイスコアを更新する処理
+        /// </summary>
+        public IEnumerator UpdateUserHighScore(int userID, int newHighScore)
+        {
+            WWWForm form = new WWWForm();
+            form.AddField("id", userID);
+            form.AddField("highscore", newHighScore);
+
+            UnityWebRequest request = UnityWebRequest.Post(baseUrl + "update_highscore.php", form);
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                Debug.Log("High score updated: " + request.downloadHandler.text);
+            }
+            else
+            {
+                Debug.LogError("Error updating high score: " + request.error);
+            }
+        }
         #endregion
     }
-
-
 
     [System.Serializable]
     public class UserIDResponse
     {
         public int id;
         public string error; // エラーメッセージを格納するフィールド
+    }
+
+    [System.Serializable]
+    public class RankingResponse
+    {
+        public List<UserDataInfo> ranking;
     }
 }

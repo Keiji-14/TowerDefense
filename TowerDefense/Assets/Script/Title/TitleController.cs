@@ -231,7 +231,7 @@ namespace Title
                 GameDataManager.instance.SetEXStageDataInfo(stageDataInfo);
 
                 // ゲーム情報をを初期化
-                var gameDataInfo = new GameDataInfo(stageDataInfo.startFortressLife, stageDataInfo.startMoney, waveInitNum, scoreInitNum, true, false, StageType.EX);
+                var gameDataInfo = new GameDataInfo(stageDataInfo.startFortressLife, stageDataInfo.startMoney, waveInitNum, scoreInitNum, false, false, StageType.EX);
                 GameDataManager.instance.SetGameDataInfo(gameDataInfo);
             };
 
