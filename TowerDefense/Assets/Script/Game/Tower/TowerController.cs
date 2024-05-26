@@ -259,7 +259,7 @@ namespace Game.Tower
         private void IsCanUpGrade(TowerStand towerStand)
         {
             var towerDataInfo = towerStand.GetTower().GetTowerDataInfo();
-            var upGradeCost = towerDataInfo.towerStatusDataInfoList[towerDataInfo.level - 1].towerCost;
+            var upGradeCost = towerDataInfo.towerStatusDataInfoList[towerDataInfo.level].towerCost;
             var possessionMoney = GameDataManager.instance.GetGameDataInfo().possessionMoney;
 
             if (upGradeCost <= possessionMoney)
