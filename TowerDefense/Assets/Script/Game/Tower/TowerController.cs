@@ -110,7 +110,7 @@ namespace Game.Tower
                 if (selectionTowerStand == towerStand)
                 {
                     towerStand.OnTowerClicked();
-                    DestroyTowerBuildUI();
+                    DestroyTowerUI();
                 }
                 else if (selectionTowerStand != null && towerStand.GetTower() != null)
                 {
@@ -118,6 +118,7 @@ namespace Game.Tower
                     selectionTowerStand.OnTowerClicked();
                     selectionTowerStand = towerStand;
                     ShowTowerActionsUI(selectionTowerStand);
+                    DestroyTowerBuildUI();
                 }
                 else if (selectionTowerStand != null && towerStand.GetTower() == null)
                 {
@@ -125,6 +126,7 @@ namespace Game.Tower
                     selectionTowerStand.OnTowerClicked();
                     selectionTowerStand = towerStand;
                     ShowTowerBuildUI();
+                    DestroyTowerActionsUI();
                 }
                 else if (selectionTowerStand == null && towerStand.GetTower() != null)
                 {
@@ -215,7 +217,7 @@ namespace Game.Tower
 
                 selectionTowerStand.OnTowerClicked();
                 towerStand.DestroyTower();
-                DestroyTowerBuildUI();
+                DestroyTowerUI();
             }).AddTo(this);
 
 
@@ -244,7 +246,7 @@ namespace Game.Tower
                 selectionTowerStand.OnTowerClicked();
                 selectionTowerStand.CreateTower(towerData);
 
-                DestroyTowerBuildUI();
+                DestroyTowerUI();
             }
             else
             {
@@ -270,7 +272,7 @@ namespace Game.Tower
                 var tower = towerStand.GetTower();
                 tower.UpGradeTower();
 
-                DestroyTowerBuildUI();
+                DestroyTowerUI();
             }
             else
             {
@@ -279,30 +281,46 @@ namespace Game.Tower
         }
 
         /// <summary>
-        /// 建設UIを削除する処理
+        /// タワーのUIを削除する処理
         /// </summary>
-        private void DestroyTowerBuildUI()
+        private void DestroyTowerUI()
         {
             if (towerBuildUI != null)
             {
-                towerBuildUI.DeleteTowerDescription();
-                Destroy(towerBuildUI.gameObject);
-                towerBuildUI = null;
+                DestroyTowerBuildUI();
             }
 
             if (towerActionsUI != null)
             {
-                towerActionsUI.DeleteTowerDescription();
-                Destroy(towerActionsUI.gameObject);
-                towerActionsUI = null;
+                DestroyTowerActionsUI();
             }
-            selectionTowerStand = null;
 
+            selectionTowerStand = null;
 
             if (GameDataManager.instance.GetGameDataInfo().stageType == StageType.Tutorial)
             {
                 NextDescriptionSubject.OnNext(Unit.Default);
             }
+        }
+
+        /// <summary>
+        /// タワーの建設UIを削除する処理
+        /// </summary>
+        private void DestroyTowerBuildUI()
+        {
+            towerBuildUI.DeleteTowerDescription();
+            Destroy(towerBuildUI.gameObject);
+            towerBuildUI = null;
+        }
+
+        /// <summary>
+        /// タワーの強化・売却UIを削除する処理
+        /// </summary>
+        private void DestroyTowerActionsUI()
+        {
+            towerActionsUI.DeleteTowerDescription();
+            Destroy(towerActionsUI.gameObject);
+            towerActionsUI = null;
         }
         #endregion
     }

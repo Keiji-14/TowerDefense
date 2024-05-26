@@ -202,7 +202,7 @@ namespace Game.Enemy
                 yield return new WaitForSeconds(createInterval);
             }
 
-            if (waveNum > 0 && waveNum % 5 == 0)
+            if (waveNum > 0 && waveNum % 3 == 0)
             {
                 // ボス級の敵情報をランダムに選択
                 var randomBossIndex = Random.Range(0, bossEnemyDataInfoList.Count);
