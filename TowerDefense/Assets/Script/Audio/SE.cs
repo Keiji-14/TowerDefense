@@ -13,6 +13,8 @@ namespace Audio
 
         #region SerializeField
         [SerializeField] private AudioSource audioSource;
+
+        [SerializeField] private List<AudioClip> seClipList;
         #endregion
 
         #region UnityEvent
@@ -31,6 +33,20 @@ namespace Audio
         #endregion
 
         #region PublicMethod
+        public enum SEName
+        {
+            ButtonSE,
+        }
+
+        /// <summary>
+        /// SEを再生
+        /// </summary>
+        /// <param name="seName">効果音名</param>
+        public void Play(SEName seName)
+        {
+            audioSource.PlayOneShot(seClipList[(int)seName]);
+        }
+
         /// <summary>
         /// SEを再生
         /// </summary>

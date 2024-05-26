@@ -388,7 +388,7 @@ MonoBehaviour:
   target: {fileID: 0}
   sliderCanvas: {fileID: 8960412156349599748}
   lifeBar: {fileID: 8336859517796595158}
-  destroySE: {fileID: 0}
+  destroySE: {fileID: 8300000, guid: 371e9cb787b7adc4c9320f5f2941dd0e, type: 3}
   destroyParticle: {fileID: 4299712043060941692, guid: 6acf936b1dd8df545ac0abe8dff80c86, type: 3}
 --- !u!195 &575853659828228001
 NavMeshAgent:

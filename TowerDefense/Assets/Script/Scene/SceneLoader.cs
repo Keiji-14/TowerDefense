@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,6 +11,10 @@ namespace Scene
     /// </summary>
     public class SceneLoader : MonoBehaviour
     {
+        #region PublicField
+        public event Action<string> OnSceneLoaded;
+        #endregion
+
         #region PrivateField
         private static SceneLoader instance = null;
 
@@ -92,6 +97,9 @@ namespace Scene
 
             // シーンが追加された後に、アクティブ状態を変更する
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
+
+            // シーンロード完了を通知する
+            OnSceneLoaded?.Invoke(sceneName);
         }
 
         /// <summary>
