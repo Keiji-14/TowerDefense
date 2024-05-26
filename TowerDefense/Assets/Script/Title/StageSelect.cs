@@ -45,13 +45,16 @@ namespace Title
         /// </summary>
         public void Init()
         {
-            int stageNum = 1; // ステージ番号を初期化
+            // ステージ番号を初期化
+            int stageNum = 1;
 
+            // 通常ステージのボタンに処理を追加
             foreach (var button in stageNumBtnList)
             {
                 // ステージ番号を設定
-                int capturedStageNum = stageNum; 
+                int capturedStageNum = stageNum;
 
+                // 通常ステージのボタンを押した時の処理
                 button.OnClickAsObservable().Subscribe(_ =>
                 {
                     SE.instance.Play(SE.SEName.ButtonSE);
@@ -61,12 +64,14 @@ namespace Title
                 stageNum++;
             }
 
+            // EXステージのボタンを押した時の処理
             OnClickEXStageButtonObserver.Subscribe(_ =>
             {
                 SE.instance.Play(SE.SEName.ButtonSE);
                 EXStageSubject.OnNext(Unit.Default);
             }).AddTo(this);
 
+            // メインタイトルに戻るボタンを押した時の処理
             OnClickMainTitleBackButtonObserver.Subscribe(_ =>
             {
                 SE.instance.Play(SE.SEName.ButtonSE);

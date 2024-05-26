@@ -153,11 +153,13 @@ namespace Title
         {
             var isFirstTime = PlayerPrefs.GetInt("FirstTime", 0) == 0;
 
+            // ユーザー情報を表示する処理
             firstStartup.ViewUserDataSubject.Subscribe(_ =>
             {
                 ViewUserData();
             }).AddTo(this);
 
+            // 初回起動時か判定する
             if (isFirstTime)
             {
                 userDataText.gameObject.SetActive(false);
@@ -169,7 +171,9 @@ namespace Title
             }
         }
 
-
+        /// <summary>
+        /// ユーザー情報を表示する処理
+        /// </summary>
         public void ViewUserData()
         {
             var userDataInfo = GameDataManager.instance.GetUserDataInfo();

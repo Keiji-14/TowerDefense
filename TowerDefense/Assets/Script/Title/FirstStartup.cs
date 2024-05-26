@@ -53,7 +53,7 @@ namespace Title
         public void Init()
         {
             firstStartupWindow.SetActive(true);
-
+            // テキストフィールドに初期名を設定
             nameInputField.text = initialText;
             enterBtn.interactable = false;
 
@@ -80,6 +80,7 @@ namespace Title
         /// <summary>
         /// ひらがな、カタカナ、英語、一部の記号以外の文字を削除する処理
         /// </summary>
+        /// <param name="value">入力したテキスト</param>
         private void OnInputFieldValueChanged(string value)
         {
             string filteredText = System.Text.RegularExpressions.Regex.Replace(value, "[^ぁ-んァ-ンa-zA-Z0-9!\"#$%&'()*+,./:;<=>?@[\\]^_`{|}ー~]+", "");
@@ -96,6 +97,10 @@ namespace Title
             return nameInputField.text.Length > 0;
         }
 
+        /// <summary>
+        /// ユーザー登録後にユーザーデータを取得する非同期処理
+        /// </summary>
+        /// <param name="name">ユーザー名</param>
         private IEnumerator RegisterUserIfNeeded(string name)
         {
             yield return APIClient.Instance().RegisterUserAndGetID(name);

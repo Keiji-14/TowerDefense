@@ -28,7 +28,7 @@ namespace Title
         #region SerializeField
         /// <summary>メインタイトルに戻るボタン</summary>
         [SerializeField] private Button mainTitleBackBtn;
-
+        /// <summary>順位を表示するテキスト</summary>
         [SerializeField] private List<TextMeshProUGUI> rankingTextList = new List<TextMeshProUGUI>();
         #endregion
 
@@ -58,6 +58,7 @@ namespace Title
         /// <summary>
         /// ランキングを表示を更新する処理
         /// </summary>
+        /// <param name="rankingData">ランキングの情報</param>
         private void UpdateRankingDisplay(List<UserDataInfo> rankingData)
         {
             for (int i = 0; i < rankingTextList.Count; i++)
