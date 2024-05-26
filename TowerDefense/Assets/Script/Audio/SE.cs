@@ -2,9 +2,10 @@
 using UnityEngine;
 
 namespace Audio
-{    /// <summary>
-     /// 効果音の再生処理
-     /// </summary>
+{    
+    /// <summary>
+    /// 効果音の再生処理
+    /// </summary>
     public class SE : MonoBehaviour
     {
         #region PublicField

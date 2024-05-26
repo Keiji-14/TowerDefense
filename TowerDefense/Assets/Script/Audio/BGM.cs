@@ -20,6 +20,7 @@ namespace Audio
 
         #region SerializeField
         [SerializeField] private AudioSource bgm;
+        /// <summary>各シーンのBGM</summary>
         [SerializeField] private List<SceneBGM> sceneBGMList;
         #endregion
 
@@ -40,14 +41,21 @@ namespace Audio
 
         void Start()
         {
+            // シーン開始時にBGMを再生する処理
             PlayBGMForCurrentScene();
         }
 
+        /// <summary>
+        /// シーンが有効化された時にイベント登録
+        /// </summary>
         private void OnEnable()
         {
             SceneLoader.Instance().OnSceneLoaded += OnSceneLoaded;
         }
 
+        /// <summary>
+        /// シーンが無効化された時にイベント解除
+        /// </summary>
         private void OnDisable()
         {
             if (SceneLoader.Instance() != null)
@@ -58,6 +66,9 @@ namespace Audio
         #endregion
 
         #region PrivateMethod
+        /// <summary>
+        /// シーンごとにBGMをマップに初期化する処理
+        /// </summary>
         private void InitializeSceneBGMMap()
         {
             sceneBGMMap = new Dictionary<string, AudioClip>();
@@ -70,16 +81,27 @@ namespace Audio
             }
         }
 
+        /// <summary>
+        /// シーンが読み込まれた時に呼び出される処理
+        /// </summary>
+        /// <param name="sceneName">シーンの名前</param>
         private void OnSceneLoaded(string sceneName)
         {
             PlayBGMForScene(sceneName);
         }
 
+        /// <summary>
+        /// 現在のシーンに対応するBGMを再生する処理
+        /// </summary>
         private void PlayBGMForCurrentScene()
         {
             PlayBGMForScene(SceneManager.GetActiveScene().name);
         }
 
+        /// <summary>
+        /// 指定されたシーンのBGMを再生する処理
+        /// </summary>
+        /// <param name="sceneName">シーンの名前</param>
         private void PlayBGMForScene(string sceneName)
         {
             if (sceneBGMMap.TryGetValue(sceneName, out var bgmClip))
@@ -93,6 +115,9 @@ namespace Audio
         }
         #endregion
 
+        /// <summary>
+        /// シーンごとのBGM情報を格納する
+        /// </summary>
         [System.Serializable]
         public struct SceneBGM
         {
