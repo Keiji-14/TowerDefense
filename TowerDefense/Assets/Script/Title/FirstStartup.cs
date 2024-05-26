@@ -1,4 +1,5 @@
 ﻿using NetWark;
+using Audio;
 using System;
 using System.Collections;
 using UniRx;
@@ -60,6 +61,8 @@ namespace Title
 
             InputEnterObservable.Subscribe(_ =>
             {
+                SE.instance.Play(SE.SEName.ButtonSE);
+
                 StartCoroutine(RegisterUserIfNeeded(nameInputField.text));
             }).AddTo(this);
         }

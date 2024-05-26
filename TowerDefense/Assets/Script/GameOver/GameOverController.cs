@@ -1,4 +1,5 @@
 ﻿using Scene;
+using Audio;
 using System;
 using System.Collections;
 using UniRx;
@@ -35,6 +36,8 @@ namespace GameOver
             // タイトル画面に遷移する処理
             OnClickTitleBackButtonObserver.Subscribe(_ =>
             {
+                SE.instance.Play(SE.SEName.ButtonSE);
+
                 StartCoroutine(ChangeScene(SceneLoader.SceneName.Title));
             }).AddTo(this);
         }

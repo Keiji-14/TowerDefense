@@ -1,5 +1,6 @@
 ﻿using GameData;
 using NetWark;
+using Audio;
 using System;
 using System.Collections.Generic;
 using UniRx;
@@ -39,6 +40,7 @@ namespace Title
         {
             OnClickMainTitleBackButtonObserver.Subscribe(_ =>
             {
+                SE.instance.Play(SE.SEName.ButtonSE);
                 MainTitleBackSubject.OnNext(Unit.Default);
             }).AddTo(this);
         }

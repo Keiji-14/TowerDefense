@@ -1,6 +1,7 @@
 ﻿using System;
 using UniRx;
 using UnityEngine;
+using Audio;
 using UnityEngine.UI;
 using TMPro;
 
@@ -36,6 +37,8 @@ namespace Help
         {
             OnClickGameHelpSelectBackButtonObserver.Subscribe(_ =>
             {
+                SE.instance.Play(SE.SEName.ButtonSE);
+
                 HelpSelectBackSubject.OnNext(Unit.Default);
             }).AddTo(this);
         }

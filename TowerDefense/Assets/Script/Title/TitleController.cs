@@ -1,6 +1,7 @@
 ﻿using GameData;
 using GameData.Stage;
 using Scene;
+using Audio;
 using System;
 using System.Collections;
 using UniRx;
@@ -78,6 +79,8 @@ namespace Title
             // ステージ選択画面を開く処理
             OnClickStageSelectButtonObserver.Subscribe(_ =>
             {
+                SE.instance.Play(SE.SEName.ButtonSE);
+
                 mainTitleUIObj.SetActive(false);
                 stageSelectUIObj.SetActive(true);
             }).AddTo(this);
@@ -85,24 +88,28 @@ namespace Title
             // チュートリアルステージの設定を行う処理
             OnClickTutorialStageButtonObserver.Subscribe(_ =>
             {
+                SE.instance.Play(SE.SEName.ButtonSE);
                 SetTutorialStage();
             }).AddTo(this);
 
             // ヘルプ画面に遷移を行う処理
             OnClickHelpButtonObserver.Subscribe(_ =>
             {
+                SE.instance.Play(SE.SEName.ButtonSE);
                 SceneLoader.Instance().Load(SceneLoader.SceneName.Help, true);
             }).AddTo(this);
 
             // ゲームを終了する処理
             OnClickExitButtonObserver.Subscribe(_ =>
             {
+                SE.instance.Play(SE.SEName.ButtonSE);
                 Application.Quit();
             }).AddTo(this);
 
             // ランキング画面を開く処理
             OnClickRankingButtonObserver.Subscribe(_ =>
             {
+                SE.instance.Play(SE.SEName.ButtonSE);
                 ranking.ViewRanking();
                 mainTitleUIObj.SetActive(false);
                 rankingUIObj.SetActive(true);
@@ -130,6 +137,8 @@ namespace Title
             // ランキング画面を閉じる処理
             ranking.MainTitleBackSubject.Subscribe(_ =>
             {
+                SE.instance.Play(SE.SEName.ButtonSE);
+
                 mainTitleUIObj.SetActive(true);
                 rankingUIObj.SetActive(false);
             }).AddTo(this);

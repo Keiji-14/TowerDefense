@@ -1,4 +1,5 @@
 ﻿using Scene;
+using Audio;
 using System;
 using System.Collections.Generic;
 using UniRx;
@@ -61,42 +62,56 @@ namespace Help
         {
             OnClickGameHelpButtonObserver.Subscribe(_ =>
             {
+                SE.instance.Play(SE.SEName.ButtonSE);
+
                 SwitchHelpUI(true);
                 help.ViewHelp(helpInfoList[(int)HelpType.Game]);
             }).AddTo(this);
 
             OnClickOperationHelpButtonObserver.Subscribe(_ =>
             {
+                SE.instance.Play(SE.SEName.ButtonSE);
+
                 SwitchHelpUI(true);
                 help.ViewHelp(helpInfoList[(int)HelpType.Operation]);
             }).AddTo(this);
 
             OnClickStageHelpButtonObserver.Subscribe(_ =>
             {
+                SE.instance.Play(SE.SEName.ButtonSE);
+
                 SwitchHelpUI(true);
                 help.ViewHelp(helpInfoList[(int)HelpType.Stage]);
             }).AddTo(this);
 
             OnClickTowerHelpButtonObserver.Subscribe(_ =>
             {
+                SE.instance.Play(SE.SEName.ButtonSE);
+
                 SwitchHelpUI(true);
                 help.ViewHelp(helpInfoList[(int)HelpType.Tower]);
             }).AddTo(this);
 
             OnClickEnemyHelpButtonObserver.Subscribe(_ =>
             {
+                SE.instance.Play(SE.SEName.ButtonSE);
+
                 SwitchHelpUI(true);
                 help.ViewHelp(helpInfoList[(int)HelpType.Enemy]);
             }).AddTo(this);
 
             OnClickRankingHelpButtonObserver.Subscribe(_ =>
             {
+                SE.instance.Play(SE.SEName.ButtonSE);
+
                 SwitchHelpUI(true);
                 help.ViewHelp(helpInfoList[(int)HelpType.Ranking]);
             }).AddTo(this);
 
             OnClickTitleBackButtonObserver.Subscribe(_ =>
             {
+                SE.instance.Play(SE.SEName.ButtonSE);
+
                 SceneLoader.Instance().UnLoad(SceneLoader.SceneName.Help);
             }).AddTo(this);
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Audio;
+using System;
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
@@ -53,6 +54,7 @@ namespace Title
 
                 button.OnClickAsObservable().Subscribe(_ =>
                 {
+                    SE.instance.Play(SE.SEName.ButtonSE);
                     StageDecisionSubject.OnNext(capturedStageNum);
                 }).AddTo(this);
 
@@ -61,11 +63,13 @@ namespace Title
 
             OnClickEXStageButtonObserver.Subscribe(_ =>
             {
+                SE.instance.Play(SE.SEName.ButtonSE);
                 EXStageSubject.OnNext(Unit.Default);
             }).AddTo(this);
 
             OnClickMainTitleBackButtonObserver.Subscribe(_ =>
             {
+                SE.instance.Play(SE.SEName.ButtonSE);
                 MainTitleBackSubject.OnNext(Unit.Default);
             }).AddTo(this);
         }
