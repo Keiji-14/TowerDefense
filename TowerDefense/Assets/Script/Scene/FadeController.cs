@@ -1,31 +1,31 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Scene
 {
 	/// <summary>
-	/// ƒtƒF[ƒhƒCƒ“EƒtƒF[ƒhƒAƒEƒg‚Ìˆ—
+	/// ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³ãƒ»ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆã®å‡¦ç†
 	/// </summary>
 	public class FadeController : MonoBehaviour
 	{
 		#region PublicField
-		/// <summary>ƒtƒF[ƒhƒCƒ“‚ğs‚¤‚©‚Ç‚¤‚©</summary>
+		/// <summary>ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³ã‚’è¡Œã†ã‹ã©ã†ã‹</summary>
 		public bool fadeIn = false;
-		/// <summary>ƒtƒF[ƒhƒAƒEƒg‚ğs‚¤‚©‚Ç‚¤‚©</summary>
+		/// <summary>ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆã‚’è¡Œã†ã‹ã©ã†ã‹</summary>
 		public bool fadeOut = false;
 		#endregion
 
 		#region PrivateField
-		/// <summary>RGBA‚Ì’l</summary>
+		/// <summary>RGBAã®å€¤</summary>
 		private float red, green, blue, alfa;
-		/// <summary>ƒtƒF[ƒh‚·‚é‰æ‘œ</summary>
+		/// <summary>ãƒ•ã‚§ãƒ¼ãƒ‰ã™ã‚‹ç”»åƒ</summary>
 		private Image fadeImage;
 		#endregion
 
 		#region PublicField
-		/// <summary>ƒtƒF[ƒhƒCƒ“‚Ì‘¬“x</summary>
+		/// <summary>ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³ã®é€Ÿåº¦</summary>
 		[SerializeField] private float fadeInSpeed;
-		/// <summary>ƒtƒF[ƒhƒAƒEƒg‚Ì‘¬“x</summary>
+		/// <summary>ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆã®é€Ÿåº¦</summary>
 		[SerializeField] private float fadeOutSpeed;
 		#endregion
 
@@ -55,8 +55,10 @@ namespace Scene
 		}
 		#endregion
 
-		#region PrivateMethod
-		// ƒtƒF[ƒhƒCƒ“‚ğs‚¤ˆ—
+		#region PublicMethod
+		/// <summary>
+		/// ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³ã‚’è¡Œã†å‡¦ç†
+		/// </summary>
 		public void StartFadeIn()
 		{
 			fadeIn = true;
@@ -69,7 +71,9 @@ namespace Scene
 			}
 		}
 
-		// ƒtƒF[ƒhƒAƒEƒg‚ğs‚¤ˆ—
+		/// <summary>
+		/// ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆã‚’è¡Œã†å‡¦ç†
+		/// </summary>
 		public void StartFadeOut()
 		{
 			fadeOut = true;
@@ -81,8 +85,13 @@ namespace Scene
 				fadeOut = false;
 			}
 		}
+		#endregion
 
-		void SetAlpha()
+		#region PrivateMethod
+		/// <summary>
+		/// ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®è¨­å®šã‚’è¡Œã†å‡¦ç†
+		/// </summary>
+		private void SetAlpha()
 		{
 			fadeImage.color = new Color(red, green, blue, alfa);
 		}

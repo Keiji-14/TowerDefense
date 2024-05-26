@@ -12,12 +12,13 @@ namespace Scene
     public class SceneLoader : MonoBehaviour
     {
         #region PublicField
+        /// <summary>シーンがロードされた時に発生するイベント</summary>
         public event Action<string> OnSceneLoaded;
         #endregion
 
         #region PrivateField
         private static SceneLoader instance = null;
-
+        /// <summary>シーン名</summary>
         private Dictionary<SceneName, string> SceneNames = new Dictionary<SceneName, string>()
         {
             {SceneName.Title,   "Title"},
