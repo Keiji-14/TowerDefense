@@ -19,23 +19,20 @@ MonoBehaviour:
   stageObj: {fileID: 6475056314885943523, guid: 1182df93a07edd74897ac66eb4cb7b03, type: 3}
   fortressTransform: {fileID: 7445357097074513048, guid: ddc4bc4be3b49314c82c84924acbf163, type: 3}
   waveInfo:
-  - enemyNum: 5
-    enemySpawnInfoList:
-    - enemyID: 0
+  - enemySpawnInfoList:
+    - enemyID: 1
       enemyNum: 5
     spawnPoint: {fileID: 8910044401463765576, guid: 1d6ee6ca9809d9a4297069403e03a508, type: 3}
     routeAnchor: []
-  - enemyNum: 7
-    enemySpawnInfoList:
-    - enemyID: 1
+  - enemySpawnInfoList:
+    - enemyID: 2
       enemyNum: 7
     spawnPoint: {fileID: 8910044401463765576, guid: 1d6ee6ca9809d9a4297069403e03a508, type: 3}
     routeAnchor: []
-  - enemyNum: 9
-    enemySpawnInfoList:
-    - enemyID: 0
-      enemyNum: 5
+  - enemySpawnInfoList:
     - enemyID: 1
+      enemyNum: 5
+    - enemyID: 2
       enemyNum: 4
     spawnPoint: {fileID: 8910044401463765576, guid: 1d6ee6ca9809d9a4297069403e03a508, type: 3}
     routeAnchor: []
