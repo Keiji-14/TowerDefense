@@ -30,7 +30,7 @@ namespace Scene
         #endregion
 
         #region PublicMethod
-
+        /// <summary>シーンの種類</summary>
         public enum SceneName
         {
             Title,

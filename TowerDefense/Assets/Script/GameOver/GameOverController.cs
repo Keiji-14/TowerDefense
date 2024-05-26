@@ -1,10 +1,12 @@
-﻿using Scene;
+﻿using GameData;
+using Scene;
 using Audio;
 using System;
 using System.Collections;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace GameOver
 {
@@ -23,6 +25,8 @@ namespace GameOver
         #region SerializeField
         /// <summary>タイトル画面の戻るボタン</summary>
         [SerializeField] private Button titleBackBtn;
+        /// <summary>スコアテキスト</summary>
+        [SerializeField] private TextMeshProUGUI scoreText;
         /// <summary>フェードイン・フェードアウトの処理</summary>
         [SerializeField] private FadeController fadeController;
         #endregion
@@ -33,6 +37,8 @@ namespace GameOver
         /// </summary>
         public void Init()
         {
+            ViewScoreText();
+
             // タイトル画面に遷移する処理
             OnClickTitleBackButtonObserver.Subscribe(_ =>
             {
@@ -44,6 +50,17 @@ namespace GameOver
         #endregion
 
         #region PrivateMethod
+        /// <summary>
+        /// スコアテキストを表示する処理
+        /// </summary>
+        private void ViewScoreText()
+        {
+            var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
+
+            // EXステージだった場合はスコアを表示する
+            scoreText.gameObject.SetActive(gameDataInfo.stageType == StageType.EX);
+            scoreText.text = $"Score:{gameDataInfo.score}";
+        }
 
         /// <summary>
         /// シーン遷移を行う処理
