@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Direction
 {
+    /// <summary>
+    /// エフェクトの処理
+    /// </summary>
     public class Effect : MonoBehaviour
     {
         #region SerializeField
@@ -18,6 +21,9 @@ namespace Direction
         #endregion
 
         #region PrivateMethod
+        /// <summary>
+        /// エフェクトを消滅させる非同期処理
+        /// </summary>
         private IEnumerator DestroyEffect()
         {
             yield return new WaitForSeconds(effectTime);

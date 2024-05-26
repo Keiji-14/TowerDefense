@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,9 +7,9 @@ namespace Direction
     public class DamageDirection : MonoBehaviour
     {
         #region PrivateField
-        /// <summary>RGBA‚Ì’l</summary>
+        /// <summary>RGBAã®å€¤</summary>
 		private float red, green, blue, alfa;
-        /// <summary>ƒ_ƒ[ƒW•\‹L‚Ì‰æ–Ê</summary>
+        /// <summary>ãƒ€ãƒ¡ãƒ¼ã‚¸è¡¨è¨˜ã®ç”»é¢</summary>
         private Image damageImg;
         #endregion
 
@@ -25,6 +25,9 @@ namespace Direction
         #endregion
 
         #region PublicMethod
+        /// <summary>
+        /// ãƒ€ãƒ¡ãƒ¼ã‚¸æ¼”å‡º
+        /// </summary>
         public IEnumerator Damage()
         {
             damageImg.enabled = true;
@@ -34,7 +37,7 @@ namespace Direction
 
             while (alfa > 0)
             {
-                // ƒAƒ‹ƒtƒ@’l‚ğ­‚µ‚¸‚ÂŒ¸‚ç‚·
+                // ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã‚’å°‘ã—ãšã¤æ¸›ã‚‰ã™
                 alfa -= 0.01f;
                 alfa = Mathf.Clamp01(alfa);
                 damageImg.color = new Color(red, green, blue, alfa);
