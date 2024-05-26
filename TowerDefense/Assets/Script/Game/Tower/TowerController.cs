@@ -1,5 +1,6 @@
 ﻿using GameData;
 using GameData.Tower;
+using Audio;
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
@@ -140,6 +141,8 @@ namespace Game.Tower
                     selectionTowerStand = towerStand;
                     ShowTowerBuildUI();
                 }
+
+                SE.instance.Play(SE.SEName.ButtonSE);
             }
         }
 

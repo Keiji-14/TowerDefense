@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Audio;
+using System;
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
@@ -68,6 +69,7 @@ namespace Game
 
             OnClickNextDescriptionButtonObserver.Subscribe(_ =>
             {
+                SE.instance.Play(SE.SEName.ButtonSE);
                 NextDescriptionSubject.OnNext(Unit.Default);
             }).AddTo(this);
 

@@ -36,6 +36,7 @@ namespace Audio
         public enum SEName
         {
             ButtonSE,
+            GameStartSE,
         }
 
         /// <summary>

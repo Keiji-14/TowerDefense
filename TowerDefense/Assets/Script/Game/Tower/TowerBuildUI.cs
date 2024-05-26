@@ -1,5 +1,6 @@
 ﻿using GameData;
 using GameData.Tower;
+using Audio;
 using System;
 using UniRx;
 using UnityEngine;
@@ -53,16 +54,19 @@ namespace Game.Tower
             OnClickMachineGunTowerBuildButtonObserver.Subscribe(_ =>
             {
                 TowerBuildSubject.OnNext(TowerType.MachineGun);
+                SE.instance.Play(SE.SEName.ButtonSE);
             }).AddTo(this);
             
             OnClickCannonTowerBuildButtonObserver.Subscribe(_ =>
             {
                 TowerBuildSubject.OnNext(TowerType.Cannon);
+                SE.instance.Play(SE.SEName.ButtonSE);
             }).AddTo(this);
 
             OnClickJammingTowerBuildButtonObserver.Subscribe(_ =>
             {
                 TowerBuildSubject.OnNext(TowerType.Jamming);
+                SE.instance.Play(SE.SEName.ButtonSE);
             }).AddTo(this);
 
             var machineGunTowerUIHandler = machineGunTowerBuildBtn.GetComponent<TowerBuildButtonHandler>();

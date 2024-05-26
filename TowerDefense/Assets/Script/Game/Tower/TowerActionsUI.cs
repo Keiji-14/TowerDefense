@@ -1,5 +1,4 @@
-﻿using GameData;
-using GameData.Tower;
+﻿using Audio;
 using System;
 using UniRx;
 using UnityEngine;
@@ -20,8 +19,6 @@ namespace Game.Tower
         #endregion
 
         #region PrivateField
-        /// <summary>説明UIの生成するX座標の補正値</summary>
-        private const int correctionDescriptionUIPosX = 290;
         /// <summary>生成場所の親オブジェクト</summary>
         private Transform uiCanvas;
         /// <summary>表示しているタワーの説明UI</summary>
@@ -52,11 +49,13 @@ namespace Game.Tower
             OnClickTowerUpgradeButtonObserver.Subscribe(_ =>
             {
                 TowerUpgradeSubject.OnNext(towerStand);
+                SE.instance.Play(SE.SEName.ButtonSE);
             }).AddTo(this);
 
             OnClickTowerSaleButtonObserver.Subscribe(_ =>
             {
                 TowerSaleSubject.OnNext(towerStand);
+                SE.instance.Play(SE.SEName.ButtonSE);
             }).AddTo(this);
 
             var towerDataInfo = towerStand.GetTower().GetTowerDataInfo();

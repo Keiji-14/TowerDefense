@@ -3,6 +3,7 @@ using Game.Fortress;
 using Game.Tower;
 using Game.Enemy;
 using Direction;
+using Audio;
 using NetWark;
 using System;
 using UniRx;
@@ -83,6 +84,7 @@ namespace Game
                     {
                         tutorialController.NextDescription();
                     }).AddTo(this);
+
                     tutorialController.FinishDescriptionSubject.Subscribe(_ =>
                     {
                         // ゲーム開始ボタンを押せなくする
@@ -137,6 +139,7 @@ namespace Game
         {
             // 開始と同時にボタンを非表示にする
             gameStartBtn.gameObject.SetActive(false);
+            SE.instance.Play(SE.SEName.GameStartSE);
 
             enemyController.Init();
 
