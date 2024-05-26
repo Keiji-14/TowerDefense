@@ -21,7 +21,9 @@ MonoBehaviour:
   waveInfo:
   - enemySpawnInfoList:
     - enemyID: 2
-      enemyNum: 5
+      enemyNum: 4
+    - enemyID: 3
+      enemyNum: 1
     spawnPoint: {fileID: 1967474276183628169, guid: 897e12e6ff535c84a838f08d64f952b8, type: 3}
     routeAnchor:
     - {fileID: 5985564738577281464, guid: 86e4c579700256d4d9c52a2b0d87f52e, type: 3}
@@ -42,8 +44,10 @@ MonoBehaviour:
   - enemySpawnInfoList:
     - enemyID: 1
       enemyNum: 1
+    - enemyID: 3
+      enemyNum: 2
     - enemyID: 2
-      enemyNum: 6
+      enemyNum: 4
     spawnPoint: {fileID: 1967474276183628169, guid: 897e12e6ff535c84a838f08d64f952b8, type: 3}
     routeAnchor:
     - {fileID: 5985564738577281464, guid: 86e4c579700256d4d9c52a2b0d87f52e, type: 3}
@@ -52,8 +56,10 @@ MonoBehaviour:
     - {fileID: 8095190539145269452, guid: 583ff5fbe05399346aed23ed1fa79a9c, type: 3}
   - enemySpawnInfoList:
     - enemyID: 2
-      enemyNum: 6
+      enemyNum: 4
     - enemyID: 1
+      enemyNum: 2
+    - enemyID: 3
       enemyNum: 2
     spawnPoint: {fileID: 1967474276183628169, guid: 897e12e6ff535c84a838f08d64f952b8, type: 3}
     routeAnchor:
@@ -62,10 +68,12 @@ MonoBehaviour:
     - {fileID: 2267935459521538042, guid: 0872f1ac3dc01f34a82b109682001753, type: 3}
     - {fileID: 8095190539145269452, guid: 583ff5fbe05399346aed23ed1fa79a9c, type: 3}
   - enemySpawnInfoList:
+    - enemyID: 4
+      enemyNum: 1
     - enemyID: 1
-      enemyNum: 5
+      enemyNum: 2
     - enemyID: 2
-      enemyNum: 5
+      enemyNum: 2
     spawnPoint: {fileID: 1967474276183628169, guid: 897e12e6ff535c84a838f08d64f952b8, type: 3}
     routeAnchor:
     - {fileID: 5985564738577281464, guid: 86e4c579700256d4d9c52a2b0d87f52e, type: 3}

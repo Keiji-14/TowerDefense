@@ -21,9 +21,11 @@ MonoBehaviour:
   waveInfo:
   - enemySpawnInfoList:
     - enemyID: 1
-      enemyNum: 3
+      enemyNum: 2
     - enemyID: 2
       enemyNum: 3
+    - enemyID: 3
+      enemyNum: 2
     spawnPoint: {fileID: 3732372337987329717, guid: d1f577628713c124d82801f85535a1e3, type: 3}
     routeAnchor:
     - {fileID: 3900516547521330221, guid: 66ed1b90f76a4ae459cf7436f0a3b3c7, type: 3}
@@ -37,26 +39,34 @@ MonoBehaviour:
     routeAnchor:
     - {fileID: 1471064795543202723, guid: a5951505341d9a74d899af27e4e9b43d, type: 3}
   - enemySpawnInfoList:
-    - enemyID: 0
-      enemyNum: 8
     - enemyID: 1
+      enemyNum: 3
+    - enemyID: 4
+      enemyNum: 1
+    - enemyID: 2
+      enemyNum: 3
+    spawnPoint: {fileID: 3732372337987329717, guid: d1f577628713c124d82801f85535a1e3, type: 3}
+    routeAnchor:
+    - {fileID: 1471064795543202723, guid: a5951505341d9a74d899af27e4e9b43d, type: 3}
+  - enemySpawnInfoList:
+    - enemyID: 1
+      enemyNum: 6
+    - enemyID: 2
+      enemyNum: 2
+    - enemyID: 3
       enemyNum: 2
     spawnPoint: {fileID: 791886702655390684, guid: 3286e05ffec875d4b9b70c3d7f3a84a4, type: 3}
     routeAnchor:
     - {fileID: 1471064795543202723, guid: a5951505341d9a74d899af27e4e9b43d, type: 3}
   - enemySpawnInfoList:
     - enemyID: 1
-      enemyNum: 6
-    - enemyID: 1
-      enemyNum: 6
-    spawnPoint: {fileID: 3732372337987329717, guid: d1f577628713c124d82801f85535a1e3, type: 3}
-    routeAnchor:
-    - {fileID: 1471064795543202723, guid: a5951505341d9a74d899af27e4e9b43d, type: 3}
-  - enemySpawnInfoList:
-    - enemyID: 1
-      enemyNum: 10
+      enemyNum: 2
+    - enemyID: 3
+      enemyNum: 3
+    - enemyID: 4
+      enemyNum: 1
     - enemyID: 2
-      enemyNum: 4
+      enemyNum: 2
     spawnPoint: {fileID: 791886702655390684, guid: 3286e05ffec875d4b9b70c3d7f3a84a4, type: 3}
     routeAnchor:
     - {fileID: 3900516547521330221, guid: 66ed1b90f76a4ae459cf7436f0a3b3c7, type: 3}
