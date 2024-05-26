@@ -103,8 +103,8 @@ namespace Game.Enemy
                 {
                     Vector3 center = spawnPoint;
                     // ランダムな方向を選択
-                    Vector3 randomDirection = Random.insideUnitSphere * 1f;
-                    // 中心からランダムな方向へ1からランダムな距離の位置を計算
+                    Vector3 randomDirection = Random.insideUnitSphere * 0.5f;
+                    // 中心からランダムな方向へ0.5からランダムな距離の位置を計算
                     Vector3 randomPos = center + randomDirection;
                     // Y軸の位置を中心と同じにする（必要に応じて修正）
                     randomPos.y = center.y;

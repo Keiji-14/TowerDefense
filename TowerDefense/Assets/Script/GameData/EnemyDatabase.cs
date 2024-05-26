@@ -10,7 +10,10 @@ namespace GameData.Enemy
     public class EnemyDatabase : ScriptableObject
     {
         #region PublicField
+        /// <summary>通常の敵</summary>
         public List<EnemyDataInfo> enemyDataInfoList = new List<EnemyDataInfo>();
+        /// <summary>ボス級の敵</summary>
+        public List<EnemyDataInfo> bossEnemyDataInfoList = new List<EnemyDataInfo>();
         #endregion
     }
 }
