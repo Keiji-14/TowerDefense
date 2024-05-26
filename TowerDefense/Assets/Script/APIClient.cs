@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+﻿using GameData;
+using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
-using GameData;
 using System.Collections.Generic;
 
 namespace NetWark
@@ -9,10 +9,29 @@ namespace NetWark
     public class APIClient : MonoBehaviour
     {
         #region PrivateField
+        private static APIClient instance = null;
+
         private string baseUrl = "http://www.keiji14.shop/api/";
         #endregion
 
         #region PublicMethod
+        /// <summary>
+        /// インスタンス化
+        /// </summary>
+        /// <returns></returns>
+        public static APIClient Instance()
+        {
+            // オブジェクトを生成し、自身をAddCompleteして、DontDestroyに置く
+            if (instance == null)
+            {
+                var obj = new GameObject("APIClient");
+                DontDestroyOnLoad(obj);
+                instance = obj.AddComponent<APIClient>();
+            }
+
+            return instance;
+        }
+
         /// <summary>
         /// ユーザー登録を行う処理
         /// </summary>

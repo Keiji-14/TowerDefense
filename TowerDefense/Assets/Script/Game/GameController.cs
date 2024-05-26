@@ -43,8 +43,6 @@ namespace Game
         [SerializeField] private GameViewUI gameViewUI;
         /// <summary>砦のダメージ演出</summary>
         [SerializeField] private DamageDirection damageDirection;
-        /// <summary>API処理</summary>
-        [SerializeField] private APIClient apiClient;
         #endregion
 
         #region PublicMethod
@@ -346,7 +344,7 @@ namespace Game
 
                 if (currentHighScore > userDataInfo.highscore)
                 {
-                    StartCoroutine(apiClient.UpdateUserHighScore(userID, currentHighScore));
+                    StartCoroutine(APIClient.Instance().UpdateUserHighScore(userID, currentHighScore));
                 }
             }
         }

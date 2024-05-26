@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.76203185, g: 0.7857626, b: 0.7305226, a: 1}
+  m_IndirectSpecularColor: {r: 0.7621089, g: 0.785779, b: 0.73051655, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -261,7 +261,6 @@ MonoBehaviour:
   enterBtn: {fileID: 1072786343}
   nameInputField: {fileID: 1818091618}
   firstStartupWindow: {fileID: 458554778}
-  apiClient: {fileID: 1198437840}
 --- !u!4 &11854476
 Transform:
   m_ObjectHideFlags: 0
@@ -2154,7 +2153,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.5
 --- !u!222 &476171662
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3488,7 +3487,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.5
 --- !u!222 &693778313
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4264,7 +4263,6 @@ MonoBehaviour:
   - {fileID: 1404293521}
   - {fileID: 841703211}
   - {fileID: 1356213243}
-  apiClient: {fileID: 1198437840}
 --- !u!4 &830745700
 Transform:
   m_ObjectHideFlags: 0
@@ -5446,7 +5444,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.5
 --- !u!222 &1034278233
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6372,7 +6370,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.5
 --- !u!222 &1249210758
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7371,7 +7369,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.5
 --- !u!222 &1382399050
 CanvasRenderer:
   m_ObjectHideFlags: 0

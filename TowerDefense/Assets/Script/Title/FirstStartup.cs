@@ -32,8 +32,6 @@ namespace Title
         [SerializeField] private InputField nameInputField;
         /// <summary>マッチングウィンドウ</summary>
         [SerializeField] private GameObject firstStartupWindow;
-        /// <summary>API処理</summary>
-        [SerializeField] private APIClient apiClient;
         #endregion
 
         #region UnityEvent
@@ -97,8 +95,8 @@ namespace Title
 
         private IEnumerator RegisterUserIfNeeded(string name)
         {
-            yield return apiClient.RegisterUserAndGetID(name);
-            yield return StartCoroutine(apiClient.GetUserData());
+            yield return APIClient.Instance().RegisterUserAndGetID(name);
+            yield return StartCoroutine(APIClient.Instance().GetUserData());
 
             PlayerPrefs.SetInt("FirstTime", 1);
             firstStartupWindow.SetActive(false);
@@ -111,7 +109,7 @@ namespace Title
         /// </summary>
         private IEnumerator AlreadyStartUpCoroutine()
         {
-            yield return StartCoroutine(apiClient.GetUserData());
+            yield return StartCoroutine(APIClient.Instance().GetUserData());
             firstStartupWindow.SetActive(false);
             ViewUserDataSubject.OnNext(Unit.Default);
         }

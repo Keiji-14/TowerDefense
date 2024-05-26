@@ -29,8 +29,6 @@ namespace Title
         [SerializeField] private Button mainTitleBackBtn;
 
         [SerializeField] private List<TextMeshProUGUI> rankingTextList = new List<TextMeshProUGUI>();
-        /// <summary>API処理</summary>
-        [SerializeField] private APIClient apiClient;
         #endregion
 
         #region PublicMethod
@@ -50,7 +48,7 @@ namespace Title
         /// </summary>
         public void ViewRanking()
         {
-            StartCoroutine(apiClient.GetRankingData(UpdateRankingDisplay));
+            StartCoroutine(APIClient.Instance().GetRankingData(UpdateRankingDisplay));
         }
         #endregion
 
