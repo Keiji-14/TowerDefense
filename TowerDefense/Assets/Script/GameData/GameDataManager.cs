@@ -135,11 +135,23 @@ namespace GameData
         /// <param name="enemyID">敵のID</param>
         public EnemyDataInfo GetEnemyDataInfo(int enemyID)
         {
-            return enemyDatabase.enemyDataInfoList.FirstOrDefault
-                (data => data.enemyID == enemyID);
+            // 通常の敵リストから検索
+            var enemyData = enemyDatabase.enemyDataInfoList.FirstOrDefault(data => data.enemyID == enemyID);
+
+            // 通常の敵リストで見つからなければ、ボス級の敵リストから検索
+            if (enemyData == null)
+            {
+                enemyData = enemyDatabase.bossEnemyDataInfoList.FirstOrDefault(data => data.enemyID == enemyID);
+            }
+
+            return enemyData;
         }
         #endregion
 
+        #region PrivateMethod
+        /// <summary>
+        /// 指定した敵の情報を返す
+        /// </summary>
         private void DataInit()
         {
              Addressables.LoadAssetAsync<TowerDatabase>("TowerDatabase.asset").Completed += handle =>
@@ -162,5 +174,6 @@ namespace GameData
                 enemyDatabase = handle.Result;
             };
         }
+        #endregion
     }
 }
