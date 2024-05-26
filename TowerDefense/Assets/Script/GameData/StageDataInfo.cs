@@ -44,7 +44,7 @@ namespace GameData.Stage
     }
 
     /// <summary>
-    /// 敵の出現情報を管理するクラス
+    /// 敵の出現情報
     /// </summary>
     [System.Serializable]
     public class EnemySpawnInfo

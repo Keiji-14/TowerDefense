@@ -4,7 +4,7 @@ using UnityEngine;
 namespace GameData.Tower
 {
     /// <summary>
-    /// タワーの情報を管理するクラス
+    /// タワーの情報
     /// </summary>
     [System.Serializable]
     public class TowerDataInfo
@@ -53,7 +53,7 @@ namespace GameData.Tower
     }
 
     /// <summary>
-    /// 強化したタワーの情報を管理するクラス
+    /// タワーのステータス情報
     /// </summary>
     [System.Serializable]
     public class TowerStatusDataInfo

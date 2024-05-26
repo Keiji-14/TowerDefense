@@ -8,6 +8,9 @@ using UnityEngine.AddressableAssets;
 
 namespace GameData
 {
+    /// <summary>
+    /// ゲームの情報を管理するクラス
+    /// </summary>
     public class GameDataManager : MonoBehaviour
     {
         #region PublicField

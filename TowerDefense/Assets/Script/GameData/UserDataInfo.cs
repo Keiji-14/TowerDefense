@@ -1,5 +1,8 @@
 ﻿namespace GameData
 {
+    /// <summary>
+    /// ユーザー情報
+    /// </summary>
     [System.Serializable]
     public class UserDataInfo
     {

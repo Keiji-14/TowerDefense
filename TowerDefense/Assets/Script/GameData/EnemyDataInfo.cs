@@ -3,7 +3,7 @@
 namespace GameData.Enemy
 {
     /// <summary>
-    /// 敵の情報を管理するクラス
+    /// 敵の情報クラス
     /// </summary>
     [System.Serializable]
     public class EnemyDataInfo

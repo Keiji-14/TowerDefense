@@ -3,7 +3,7 @@
 namespace GameData
 {
     /// <summary>
-    /// ゲーム中の情報を管理するクラス
+    /// ゲーム中の情報
     /// </summary>
     [System.Serializable]
     public class GameDataInfo
@@ -37,6 +37,9 @@ namespace GameData
         #endregion
     }
 
+    /// <summary>
+    /// ステージの種類
+    /// </summary>
     public enum StageType
     {
         Default,
