@@ -228,6 +228,7 @@ namespace Game
         private void WaveUpdate(int waveNum)
         {
             var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
+
             // ウェーブ数を加算する
             waveNum++;
 

@@ -62,7 +62,11 @@ namespace Game
             else
             {
                 var stageDataInfo = GameDataManager.instance.GetStageDataInfo();
-                defaultStageWaveText.text = $"{gameDataInfo.waveNum + correctionWaveNum}/{stageDataInfo.waveInfo.Count}";
+
+                if (gameDataInfo.waveNum <= stageDataInfo.waveInfo.Count - 1)
+                {
+                    defaultStageWaveText.text = $"{gameDataInfo.waveNum + correctionWaveNum}/{stageDataInfo.waveInfo.Count}";
+                }
             }
         }
         #endregion
