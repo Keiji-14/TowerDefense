@@ -36,7 +36,7 @@ MonoBehaviour:
     enemyObj: {fileID: 2460110466401762909, guid: 1021aba628703954e83850b85ba4688b, type: 3}
   bossEnemyDataInfoList:
   - enemyID: 4
-    life: 150
+    life: 200
     dropMoney: 40
     scorePoint: 100
     speed: 1

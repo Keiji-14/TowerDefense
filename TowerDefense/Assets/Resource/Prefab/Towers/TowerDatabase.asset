@@ -20,29 +20,29 @@ MonoBehaviour:
     level: 1
     towerStatusDataInfoList:
     - attack: 1
-      towerCost: 30
-      towerIncome: 15
-      firingRange: 5
       attackSpeed: 0.5
       bulletSpeed: 20
+      firingRange: 5
       uniqueName: "\u9023\u5C04\u6570"
       uniqueStatus: 4
+      towerCost: 30
+      towerIncome: 15
     - attack: 1
-      towerCost: 40
-      towerIncome: 35
-      firingRange: 5.5
       attackSpeed: 0.4
       bulletSpeed: 20
+      firingRange: 5.5
       uniqueName: "\u9023\u5C04\u6570"
       uniqueStatus: 5
+      towerCost: 40
+      towerIncome: 35
     - attack: 2
-      towerCost: 50
-      towerIncome: 60
-      firingRange: 6
       attackSpeed: 0.3
       bulletSpeed: 20
+      firingRange: 6
       uniqueName: "\u9023\u5C04\u6570"
       uniqueStatus: 6
+      towerCost: 50
+      towerIncome: 60
     towerObj: {fileID: 1920787663165968115, guid: be4c46a52bcc89741b09bffb0356ac6b, type: 3}
     bulletObj: {fileID: 4651760243979247549, guid: 9b957f4da85cbaa409eea48d175924db, type: 3}
   - towerID: 1
@@ -51,30 +51,30 @@ MonoBehaviour:
     description: "\u5927\u7832\u3092\u642D\u8F09\u3057\u305F\u30BF\u30EF\u30FC\n\u7BC4\u56F2\u30C0\u30E1\u30FC\u30B8\u306E\u653B\u6483\u3092\u884C\u3046"
     level: 1
     towerStatusDataInfoList:
-    - attack: 5
-      towerCost: 40
-      towerIncome: 20
-      firingRange: 5
+    - attack: 4
       attackSpeed: 2
       bulletSpeed: 10
+      firingRange: 5
       uniqueName: "\u7206\u98A8\u7BC4\u56F2"
       uniqueStatus: 2
-    - attack: 10
-      towerCost: 50
-      towerIncome: 50
-      firingRange: 6
+      towerCost: 40
+      towerIncome: 20
+    - attack: 8
       attackSpeed: 2
       bulletSpeed: 10
+      firingRange: 6
       uniqueName: "\u7206\u98A8\u7BC4\u56F2"
       uniqueStatus: 2.5
-    - attack: 15
-      towerCost: 60
-      towerIncome: 90
-      firingRange: 7
+      towerCost: 50
+      towerIncome: 50
+    - attack: 13
       attackSpeed: 2
       bulletSpeed: 10
+      firingRange: 7
       uniqueName: "\u7206\u98A8\u7BC4\u56F2"
       uniqueStatus: 3
+      towerCost: 60
+      towerIncome: 90
     towerObj: {fileID: 2794337052100866639, guid: f73f4ed2dda148a4090ee2633190dd9e, type: 3}
     bulletObj: {fileID: 2418806758292392722, guid: d3197a5997f216a45a9eb9f2fa0ee0d7, type: 3}
   - towerID: 2
@@ -84,28 +84,28 @@ MonoBehaviour:
     level: 1
     towerStatusDataInfoList:
     - attack: 0
-      towerCost: 40
-      towerIncome: 20
-      firingRange: 5
       attackSpeed: 0
       bulletSpeed: 0
+      firingRange: 5
       uniqueName: 
       uniqueStatus: 0.9
+      towerCost: 40
+      towerIncome: 20
     - attack: 0
-      towerCost: 50
-      towerIncome: 50
-      firingRange: 5.5
       attackSpeed: 0
       bulletSpeed: 0
+      firingRange: 5.5
       uniqueName: 
       uniqueStatus: 0.8
+      towerCost: 50
+      towerIncome: 50
     - attack: 0
-      towerCost: 60
-      towerIncome: 90
-      firingRange: 6
       attackSpeed: 0
       bulletSpeed: 0
+      firingRange: 6
       uniqueName: 
       uniqueStatus: 0.6
+      towerCost: 60
+      towerIncome: 90
     towerObj: {fileID: 7097396684384315682, guid: e915e970279efa345b86148b94907ee6, type: 3}
     bulletObj: {fileID: 0}

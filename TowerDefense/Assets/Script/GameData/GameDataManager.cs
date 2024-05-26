@@ -130,6 +130,14 @@ namespace GameData
         }
 
         /// <summary>
+        /// ボス急の敵の情報リストを返す
+        /// </summary>
+        public List<EnemyDataInfo> GetBossEnemyDataInfoList()
+        {
+            return enemyDatabase.bossEnemyDataInfoList;
+        }
+
+        /// <summary>
         /// 指定した敵の情報を返す
         /// </summary>
         /// <param name="enemyID">敵のID</param>

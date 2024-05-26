@@ -117,13 +117,13 @@ namespace Game.Enemy
 
                     enemy.EnemyDestroySubject.Subscribe(_ =>
                     {
-                        DesteryEnemy(enemy);
+                        DestroyEnemy(enemy);
                     }).AddTo(this);
 
                     enemy.EnemyDefeatSubject.Subscribe(_ =>
                     {
                         GetDropMoneySubject.OnNext(enemy.enemyDataInfo.dropMoney);
-                        DesteryEnemy(enemy);
+                        DestroyEnemy(enemy);
                     }).AddTo(this);
 
                     // 生成した敵を追加
@@ -157,10 +157,12 @@ namespace Game.Enemy
             var createInterval = Mathf.Max(0.5f, 1f - 0.02f * waveNum);
             // ウェーブのインターバル時間を取得 
             var waveInterval = GameDataManager.instance.GetEXStageDataInfo().waveInterval;
-            // 敵の情報を取得
+            // 敵の数を取得
             var enemyNum = stageDataInfo.enemyNum + (waveNum - 1) * 2;
-
+            // 敵の情報を取得
             var enemyDataInfoList = GameDataManager.instance.GetEnemyDataInfoList();
+            // ボスの情報を取得
+            var bossEnemyDataInfoList = GameDataManager.instance.GetBossEnemyDataInfoList();
 
             for (int i = 0; i < enemyNum; i++)
             {
@@ -170,8 +172,8 @@ namespace Game.Enemy
 
                 Vector3 center = spawnPoint.position;
                 // ランダムな方向を選択
-                Vector3 randomDirection = Random.insideUnitSphere * 1f;
-                // 中心からランダムな方向へ1からランダムな距離の位置を計算
+                Vector3 randomDirection = Random.insideUnitSphere * 0.5f;
+                // 中心からランダムな方向へ0.5からランダムな距離の位置を計算
                 Vector3 randomPos = center + randomDirection;
                 // Y軸の位置を中心と同じにする（必要に応じて修正）
                 randomPos.y = center.y;
@@ -184,20 +186,56 @@ namespace Game.Enemy
 
                 enemy.EnemyDestroySubject.Subscribe(_ =>
                 {
-                    DesteryEnemy(enemy);
+                    DestroyEnemy(enemy);
                 }).AddTo(this);
 
                 enemy.EnemyDefeatSubject.Subscribe(_ =>
                 {
                     GetDropMoneySubject.OnNext(enemy.enemyDataInfo.dropMoney);
                     AddScoreSubject.OnNext(enemy.enemyDataInfo.scorePoint);
-                    DesteryEnemy(enemy);
+                    DestroyEnemy(enemy);
                 }).AddTo(this);
 
                 // 生成した敵を追加
                 enemyList.Add(enemy);
 
                 yield return new WaitForSeconds(createInterval);
+            }
+
+            if (waveNum > 0 && waveNum % 5 == 0)
+            {
+                // ボス級の敵情報をランダムに選択
+                var randomBossIndex = Random.Range(0, bossEnemyDataInfoList.Count);
+                var bossEnemyDataInfo = bossEnemyDataInfoList[randomBossIndex];
+
+                Vector3 center = spawnPoint.position;
+                // ランダムな方向を選択
+                Vector3 randomDirection = Random.insideUnitSphere * 0.5f;
+                // 中心からランダムな方向へ0.5からランダムな距離の位置を計算
+                Vector3 randomPos = center + randomDirection;
+                // Y軸の位置を中心と同じにする（必要に応じて修正）
+                randomPos.y = center.y;
+
+                var bossEnemy = Instantiate(bossEnemyDataInfo.enemyObj, randomPos, Quaternion.identity).GetComponent<Enemy>();
+
+                bossEnemy.transform.SetParent(createParent);
+
+                bossEnemy.Init(bossEnemyDataInfo, randomRouteInfo);
+
+                bossEnemy.EnemyDestroySubject.Subscribe(_ =>
+                {
+                    DestroyEnemy(bossEnemy);
+                }).AddTo(this);
+
+                bossEnemy.EnemyDefeatSubject.Subscribe(_ =>
+                {
+                    GetDropMoneySubject.OnNext(bossEnemy.enemyDataInfo.dropMoney);
+                    AddScoreSubject.OnNext(bossEnemy.enemyDataInfo.scorePoint);
+                    DestroyEnemy(bossEnemy);
+                }).AddTo(this);
+
+                // 生成したボス級の敵を追加
+                enemyList.Add(bossEnemy);
             }
 
             yield return new WaitForSeconds(waveInterval);
@@ -207,6 +245,9 @@ namespace Game.Enemy
             isWaveStart = true;
         }
 
+        /// <summary>
+        /// ルート情報を返す処理
+        /// </summary>
         private RouteInfo GetRandomRouteInfo(List<RouteInfo> routeInfoList)
         {
             if (routeInfoList == null || routeInfoList.Count == 0)
@@ -221,7 +262,7 @@ namespace Game.Enemy
         /// <summary>
         /// 敵が消滅する時の処理
         /// </summary>
-        private void DesteryEnemy(Enemy enemy)
+        private void DestroyEnemy(Enemy enemy)
         {
             enemyList.Remove(enemy);
 
