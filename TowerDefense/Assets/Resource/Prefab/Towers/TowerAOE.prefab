@@ -326,6 +326,7 @@ GameObject:
   - component: {fileID: 3093770051782111550}
   - component: {fileID: -3261600570879631648}
   - component: {fileID: -2345883703024132861}
+  - component: {fileID: 4129747716695015856}
   m_Layer: 7
   m_Name: TowerAOE
   m_TagString: Untagged
@@ -406,3 +407,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd4df18a164685447a54b4ba2dc0da00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firePointA: {fileID: 0}
+  firePointB: {fileID: 0}
+  muzzleFlashObj: {fileID: 0}
+  shotSE: {fileID: 0}
+--- !u!114 &4129747716695015856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7097396684384315682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1e172bb3df864242a2747240951932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeed: 20
+  haloObj: {fileID: 4187707702784718800}
