@@ -2,6 +2,7 @@
 using GameData;
 using GameData.Tower;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Tower
@@ -28,6 +29,8 @@ namespace Game.Tower
         private CapsuleCollider capsuleCollider;
         /// <summary>建設したタワーの情報</summary>
         private TowerDataInfo towerDataInfo;
+        /// <summary>ジャミングした敵</summary>
+        private HashSet<Enemy.Enemy> jammedEnemies = new HashSet<Enemy.Enemy>();
         #endregion
 
         #region SerializeField
@@ -96,6 +99,16 @@ namespace Game.Tower
             {
                 ReleaseTarget();
             }
+
+            if (towerDataInfo.towerType == TowerType.Jamming && other.transform.CompareTag("Enemy"))
+            {
+                var enemy = other.GetComponent<Enemy.Enemy>();
+                if (enemy != null && jammedEnemies.Contains(enemy))
+                {
+                    enemy.ResetSpeed();
+                    jammedEnemies.Remove(enemy);
+                }
+            }
         }
 
         /// <summary>
@@ -120,6 +133,7 @@ namespace Game.Tower
                     Cannon();
                     break;
                 case TowerType.Jamming:
+                    Jamming(enemyObj);
                     break;
             }
         }
@@ -238,6 +252,22 @@ namespace Game.Tower
             yield return new WaitForSeconds(towerStatusDataInfo.attackSpeed);
 
             isShootInterval = true;
+        }
+
+        /// <summary>
+        /// ジャミングの処理
+        /// </summary>
+        /// <param name="enemyObj">攻撃対象</param>
+        private void Jamming(GameObject enemyObj)
+        {
+            var towerStatusDataInfo = towerDataInfo.towerStatusDataInfoList[towerDataInfo.level - 1];
+
+            var enemy = enemyObj.GetComponent<Enemy.Enemy>();
+            if (enemy != null && !jammedEnemies.Contains(enemy))
+            {
+                enemy.ReduceSpeed(towerStatusDataInfo.uniqueStatus);
+                jammedEnemies.Add(enemy);
+            }
         }
         #endregion
     }

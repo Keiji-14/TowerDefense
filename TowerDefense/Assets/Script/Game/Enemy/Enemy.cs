@@ -29,6 +29,8 @@ namespace Game.Enemy
         private int life;
         /// <summary>現在の中継を通過した値</summary>
         private int currentRouteAnchorIndex = -1;
+        /// <summary>敵の移動速度</summary>
+        private float speed;
         /// <summary>NavMeshAgentコンポーネント</summary>
         private NavMeshAgent agent;
         /// <summary>通過するルート</summary>
@@ -82,16 +84,7 @@ namespace Game.Enemy
             target = stageDataInfo.fortressTransform;
             routeAnchor = stageDataInfo.waveInfo[gameDataInfo.waveNum].routeAnchor;
 
-
-            this.enemyDataInfo = enemyDataInfo;
-            life = enemyDataInfo.life;
-            // 体力バーを設定する
-            lifeBar.maxValue = enemyDataInfo.life;
-            lifeBar.value = life;
-
-            agent.speed = enemyDataInfo.speed;
-            agent.baseOffset = enemyDataInfo.baseOffset; 
-            agent.autoBraking = false;     // 目的地に近づいても速度を落とさない
+            InitStatus(enemyDataInfo);
         }
 
         /// <summary>
@@ -105,15 +98,27 @@ namespace Game.Enemy
             target = stageDataInfo.fortressTransform;
             routeAnchor = routeInfo.routeAnchor;
 
+            InitStatus(enemyDataInfo);
+        }
+
+        /// <summary>
+        /// ステータスの初期化
+        /// </summary>
+        public void InitStatus(EnemyDataInfo enemyDataInfo)
+        {
+            // 敵の情報を保持させる
             this.enemyDataInfo = enemyDataInfo;
             life = enemyDataInfo.life;
             // 体力バーを設定する
             lifeBar.maxValue = enemyDataInfo.life;
             lifeBar.value = life;
 
-            agent.speed = enemyDataInfo.speed;
+            // 移動速度を設定する
+            speed = enemyDataInfo.speed;
+            agent.speed = speed;
             agent.baseOffset = enemyDataInfo.baseOffset;
-            agent.autoBraking = false;     // 目的地に近づいても速度を落とさない
+            // 目的地に近づいても速度を落とさない
+            agent.autoBraking = false;
         }
 
         private void MoveToNextWaypoint()
@@ -218,6 +223,23 @@ namespace Game.Enemy
             // カメラのY軸回転を無視してHPバーを水平に保つ
             Quaternion targetRotation = Quaternion.Euler(0, sliderCanvas.transform.rotation.eulerAngles.y, 0);
             sliderCanvas.transform.rotation = Quaternion.Lerp(sliderCanvas.transform.rotation, targetRotation, Time.deltaTime);
+        }
+
+        /// <summary>
+        /// 移動速度を低下させる処理
+        /// </summary>
+        /// <param name="downValue">i低下率</param>
+        public void ReduceSpeed(float downValue)
+        {
+            agent.speed = speed * downValue;
+        }
+
+        /// <summary>
+        /// 移動速度を元に戻す処理
+        /// </summary>
+        public void ResetSpeed()
+        {
+            agent.speed = speed; // 元の速度に戻す
         }
 
         /// <summary>

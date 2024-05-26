@@ -288,15 +288,8 @@ namespace Game.Tower
         /// </summary>
         private void DestroyTowerUI()
         {
-            if (towerBuildUI != null)
-            {
-                DestroyTowerBuildUI();
-            }
-
-            if (towerActionsUI != null)
-            {
-                DestroyTowerActionsUI();
-            }
+            DestroyTowerBuildUI();
+            DestroyTowerActionsUI();
 
             selectionTowerStand = null;
 
@@ -311,9 +304,12 @@ namespace Game.Tower
         /// </summary>
         private void DestroyTowerBuildUI()
         {
-            towerBuildUI.DeleteTowerDescription();
-            Destroy(towerBuildUI.gameObject);
-            towerBuildUI = null;
+            if (towerBuildUI != null)
+            {
+                towerBuildUI.DeleteTowerDescription();
+                Destroy(towerBuildUI.gameObject);
+                towerBuildUI = null;
+            }
         }
 
         /// <summary>
@@ -321,9 +317,12 @@ namespace Game.Tower
         /// </summary>
         private void DestroyTowerActionsUI()
         {
-            towerActionsUI.DeleteTowerDescription();
-            Destroy(towerActionsUI.gameObject);
-            towerActionsUI = null;
+            if (towerActionsUI != null)
+            {
+                towerActionsUI.DeleteTowerDescription();
+                Destroy(towerActionsUI.gameObject);
+                towerActionsUI = null;
+            }
         }
         #endregion
     }
