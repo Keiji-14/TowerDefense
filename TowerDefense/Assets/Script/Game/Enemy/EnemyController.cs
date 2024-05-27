@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace Game.Enemy
 {
+    /// <summary>
+    /// 敵全体の処理
+    /// </summary>
     public class EnemyController : MonoBehaviour
     {
         #region PublicField
@@ -36,9 +39,11 @@ namespace Game.Enemy
         {
             var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
 
+            // ゲームオーバーかゲームクリアの場合は処理しない
             if (gameDataInfo.isGameOver || gameDataInfo.isGameClear)
                 return;
 
+            // ウェーブを開始するかどうか
             if (isWaveStart)
             {
                 isWaveStart = false;
@@ -62,6 +67,9 @@ namespace Game.Enemy
             isWaveStart = true;
         }
 
+        /// <summary>
+        /// 敵の数を返す処理
+        /// </summary>
         public int GetEnemyCount()
         {
             return enemyList.Count;
@@ -202,6 +210,7 @@ namespace Game.Enemy
                 yield return new WaitForSeconds(createInterval);
             }
 
+            // 3ウェーブ毎にボスを出現させる
             if (waveNum > 0 && waveNum % 3 == 0)
             {
                 // ボス級の敵情報をランダムに選択

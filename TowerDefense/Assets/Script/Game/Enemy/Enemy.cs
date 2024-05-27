@@ -75,12 +75,15 @@ namespace Game.Enemy
         /// <summary>
         /// 初期化
         /// </summary>
+        /// <param name="enemyDataInfo">敵の情報</param>
         public void Init(EnemyDataInfo enemyDataInfo)
         {
             agent = GetComponent<NavMeshAgent>();
 
+            // ゲームの情報とステージの情報を取得
             var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
             var stageDataInfo = GameDataManager.instance.GetStageDataInfo();
+
             target = stageDataInfo.fortressTransform;
             routeAnchor = stageDataInfo.waveInfo[gameDataInfo.waveNum].routeAnchor;
 
@@ -90,11 +93,14 @@ namespace Game.Enemy
         /// <summary>
         /// 初期化
         /// </summary>
+        /// <param name="enemyDataInfo">敵の情報</param>
+        /// <param name="routeInfo">敵のルート情報</param>
         public void Init(EnemyDataInfo enemyDataInfo, RouteInfo routeInfo)
         {
             agent = GetComponent<NavMeshAgent>();
-
+            // ステージの情報を取得
             var stageDataInfo = GameDataManager.instance.GetEXStageDataInfo();
+
             target = stageDataInfo.fortressTransform;
             routeAnchor = routeInfo.routeAnchor;
 
@@ -104,6 +110,7 @@ namespace Game.Enemy
         /// <summary>
         /// ステータスの初期化
         /// </summary>
+        /// <param name="enemyDataInfo">敵の情報</param>
         public void InitStatus(EnemyDataInfo enemyDataInfo)
         {
             // 敵の情報を保持させる
@@ -190,6 +197,7 @@ namespace Game.Enemy
         /// </summary>
         public void Destroy()
         {
+            // 消滅時にエフェクトを発生させる
             Instantiate(destroyParticle, transform.position, Quaternion.identity);
             SE.instance.Play(destroySE);
 
