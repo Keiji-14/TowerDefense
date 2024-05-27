@@ -52,6 +52,7 @@ namespace GameData
         /// <summary>
         /// ゲームの情報を設定する
         /// </summary>
+        /// <param name="gameDataInfo">ゲームの情報</param>
         public void SetGameDataInfo(GameDataInfo gameDataInfo)
         {
             this.gameDataInfo = gameDataInfo;
@@ -65,9 +66,10 @@ namespace GameData
             return gameDataInfo;
         }
 
-        // <summary>
+        /// <summary>
         /// ユーザーの情報を設定する
         /// </summary>
+        /// <param name="userDataInfo">ユーザーの情報</param>
         public void SetUserDataInfo(UserDataInfo userDataInfo)
         {
             this.userDataInfo = userDataInfo;
@@ -95,6 +97,7 @@ namespace GameData
         /// <summary>
         /// ステージの情報を設定する
         /// </summary>
+        /// <param name="stageDataInfo">ステージの情報</param>
         public void SetStageDataInfo(StageDataInfo stageDataInfo)
         {
             this.stageDataInfo = stageDataInfo;
@@ -111,6 +114,7 @@ namespace GameData
         /// <summary>
         /// EXステージの情報を設定する
         /// </summary>
+        /// <param name="exStageDataInfo">EXステージの情報</param>
         public void SetEXStageDataInfo(EXStageDataInfo exStageDataInfo)
         {
             this.exStageDataInfo = exStageDataInfo;
@@ -161,7 +165,7 @@ namespace GameData
 
         #region PrivateMethod
         /// <summary>
-        /// 指定した敵の情報を返す
+        /// ゲームの情報を初期化
         /// </summary>
         private void DataInit()
         {

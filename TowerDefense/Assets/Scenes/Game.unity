@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.76191425, g: 0.7857415, b: 0.7305165, a: 1}
+  m_IndirectSpecularColor: {r: 0.7619197, g: 0.785699, b: 0.73051107, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1918,7 +1918,6 @@ MonoBehaviour:
   tutorialController: {fileID: 1350137675}
   gameViewUI: {fileID: 508838375}
   damageDirection: {fileID: 1753139389}
-  apiClient: {fileID: 315299415}
 --- !u!4 &951100545
 Transform:
   m_ObjectHideFlags: 0
@@ -2040,6 +2039,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  minBounds: {x: -25, y: 0, z: -25}
+  maxBounds: {x: 25, y: 0, z: 25}
 --- !u!1 &999698087
 GameObject:
   m_ObjectHideFlags: 0
@@ -2146,6 +2147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1113037513}
+  seClipList: []
 --- !u!82 &1113037513
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4251,6 +4253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgm: {fileID: 2136113493}
+  sceneBGMList: []
 --- !u!82 &2136113493
 AudioSource:
   m_ObjectHideFlags: 0

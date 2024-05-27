@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageID: 2
   startFortressLife: 15
-  startMoney: 120
+  startMoney: 140
   waveInterval: 5
   stageObj: {fileID: 4231508434564124679, guid: 2b671bdfbbe3e4843a1af5cc45247cfb, type: 3}
   fortressTransform: {fileID: 6345978127419949043, guid: 0baac1ebcbc536f4ea24e851ec9e9942, type: 3}

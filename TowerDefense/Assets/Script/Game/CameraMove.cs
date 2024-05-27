@@ -10,6 +10,10 @@ namespace Game
         #region SerializeField 
         /// <summary>カメラの移動速度</summary>
         [SerializeField] private float moveSpeed;
+        /// <summary>カメラの移動範囲の最小値</summary>
+        [SerializeField] private Vector3 minBounds;
+        /// <summary>カメラの移動範囲の最大値</summary>
+        [SerializeField] private Vector3 maxBounds;
         #endregion
 
         #region UnityEvent
@@ -36,8 +40,15 @@ namespace Game
             movement = transform.TransformDirection(movement);
             movement.y = 0f; // Y方向の移動は無視する
 
-            // カメラの水平移動
-            transform.position += movement;
+            // 現在の位置に移動分を加算
+            Vector3 newPosition = transform.position + movement;
+
+            // 新しい位置が境界内にあるかチェック
+            newPosition.x = Mathf.Clamp(newPosition.x, minBounds.x, maxBounds.x);
+            newPosition.z = Mathf.Clamp(newPosition.z, minBounds.z, maxBounds.z);
+
+            // カメラの位置を更新
+            transform.position = newPosition;
         }
         #endregion
     }
