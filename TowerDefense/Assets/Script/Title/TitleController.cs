@@ -137,8 +137,6 @@ namespace Title
             // ランキング画面を閉じる処理
             ranking.MainTitleBackSubject.Subscribe(_ =>
             {
-                SE.instance.Play(SE.SEName.ButtonSE);
-
                 mainTitleUIObj.SetActive(true);
                 rankingUIObj.SetActive(false);
             }).AddTo(this);

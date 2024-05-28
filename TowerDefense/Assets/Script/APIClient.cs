@@ -114,7 +114,6 @@ namespace NetWark
             if (request.result == UnityWebRequest.Result.Success)
             {
                 string jsonResponse = request.downloadHandler.text;
-                //List<UserDataInfo> ranking = JsonUtility.FromJson<RankingResponse>(jsonResponse).ranking;
                 RankingResponse rankingResponse = JsonUtility.FromJson<RankingResponse>("{\"ranking\":" + jsonResponse + "}");
 
                 if (rankingResponse != null)

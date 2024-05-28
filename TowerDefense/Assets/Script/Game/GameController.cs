@@ -104,7 +104,7 @@ namespace Game
                     break;
             }
 
-            // 初期化
+            // 砦にダメージを与える時の処理
             fortressController.FortressDamageSubject.Subscribe(_ =>
             {
                 FortressTakeDamage();
@@ -112,11 +112,13 @@ namespace Game
 
             towerController.Init();
 
+            // タワーを建設・強化した時の処理
             towerController.TowerBuildSubject.Subscribe(towerCost =>
             {
                 PossessionMoneyUpdate(-towerCost);
             }).AddTo(this);
 
+            // タワーを売却した時の処理
             towerController.TowerSaleSubject.Subscribe(towerCost =>
             {
                 PossessionMoneyUpdate(towerCost);
@@ -124,6 +126,7 @@ namespace Game
 
             gameViewUI.Init();
 
+            // ゲーム開始ボタンを押した時の処理
             OnClickGameStartButtonObserver.Subscribe(_ =>
             {
                 GameStart();
@@ -143,16 +146,19 @@ namespace Game
 
             enemyController.Init();
 
+            // 次のウェーブに移行する時の処理
             enemyController.NextWaveSubject.Subscribe(waveNum =>
             {
                 WaveUpdate(waveNum);
             }).AddTo(this);
 
+            // 敵を倒してお金を入力する時の処理
             enemyController.GetDropMoneySubject.Subscribe(dropMoney =>
             {
                 PossessionMoneyUpdate(dropMoney);
             }).AddTo(this);
 
+            // スコアを加算する時の処理
             enemyController.AddScoreSubject.Subscribe(score =>
             {
                 ScoreUpdate(score);

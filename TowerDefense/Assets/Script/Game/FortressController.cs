@@ -10,18 +10,18 @@ namespace Game.Fortress
     public class FortressController : MonoBehaviour
     {
         #region PublicField
-        /// <summary>砦に時の処理</summary>
+        /// <summary>砦にダメージを与える時の処理</summary>
         public Subject<Unit> FortressDamageSubject = new Subject<Unit>();
         #endregion
 
         #region PrivateMethod
-        // 敵に当たった時の処理
         private void OnTriggerEnter(Collider other)
         {
             if (GameDataManager.instance.GetGameDataInfo().isGameClear ||
                 GameDataManager.instance.GetGameDataInfo().isGameOver)
                 return;
 
+            // 砦に敵に当たった時の処理
             if (other.transform.CompareTag("Enemy"))
             {
                 var enemy = other.GetComponent<Enemy.Enemy>();

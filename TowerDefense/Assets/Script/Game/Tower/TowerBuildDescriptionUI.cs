@@ -31,6 +31,7 @@ namespace Game.Tower
         /// <summary>
         /// タワーの情報を表示する
         /// </summary>
+        /// <param name="towerDescriptionInfo">タワーの建設についての表示する情報</param>
         public void ViewTowerText(TowerBuildDescriptionInfo towerDescriptionInfo)
         {
             nameText.text = $"{towerDescriptionInfo.name}";

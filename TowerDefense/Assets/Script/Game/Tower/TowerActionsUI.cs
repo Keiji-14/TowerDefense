@@ -42,6 +42,7 @@ namespace Game.Tower
         /// <summary>
         /// 初期化
         /// </summary>
+        /// <param name="towerStand">選択状態のタワー土台</param>
         public void Init(TowerStand towerStand)
         {
             uiCanvas = GameObject.FindWithTag("Canvas").transform;

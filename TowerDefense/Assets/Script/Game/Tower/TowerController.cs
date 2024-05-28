@@ -14,7 +14,7 @@ namespace Game.Tower
     public class TowerController : MonoBehaviour
     {
         #region PublicField
-        /// <summary>タワーを建設した時の処理</summary>
+        /// <summary>タワーを建設・強化した時の処理</summary>
         public Subject<int> TowerBuildSubject = new Subject<int>();
         /// <summary>タワーを売却した時の処理</summary>
         public Subject<int> TowerSaleSubject = new Subject<int>();
