@@ -117,7 +117,7 @@ namespace Game.Tower
         private void CannonGunBullet(Vector3 explosionPoint)
         {
             // 爆破範囲
-            var explosionRadius = 2;
+            var explosionRadius = 3;
 
             Collider[] colliders = Physics.OverlapSphere(explosionPoint, explosionRadius);
 

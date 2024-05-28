@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: StageData
   m_EditorClassIdentifier: 
   stageID: 2
-  startFortressLife: 15
-  startMoney: 140
+  startFortressLife: 20
+  startMoney: 150
   waveInterval: 5
   stageObj: {fileID: 4231508434564124679, guid: 2b671bdfbbe3e4843a1af5cc45247cfb, type: 3}
   fortressTransform: {fileID: 6345978127419949043, guid: 0baac1ebcbc536f4ea24e851ec9e9942, type: 3}
@@ -23,7 +23,7 @@ MonoBehaviour:
     - enemyID: 1
       enemyNum: 2
     - enemyID: 2
-      enemyNum: 3
+      enemyNum: 2
     - enemyID: 3
       enemyNum: 2
     spawnPoint: {fileID: 3732372337987329717, guid: d1f577628713c124d82801f85535a1e3, type: 3}
@@ -32,7 +32,7 @@ MonoBehaviour:
     - {fileID: 1471064795543202723, guid: a5951505341d9a74d899af27e4e9b43d, type: 3}
   - enemySpawnInfoList:
     - enemyID: 2
-      enemyNum: 5
+      enemyNum: 4
     - enemyID: 1
       enemyNum: 3
     spawnPoint: {fileID: 791886702655390684, guid: 3286e05ffec875d4b9b70c3d7f3a84a4, type: 3}

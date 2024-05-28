@@ -15,6 +15,7 @@ MonoBehaviour:
   enemyDataInfoList:
   - enemyID: 1
     life: 20
+    attack: 2
     dropMoney: 5
     scorePoint: 15
     speed: 2
@@ -22,20 +23,23 @@ MonoBehaviour:
     enemyObj: {fileID: 1769015344297125693, guid: 3e72a55154d25d44e8c814ccf9afeab4, type: 3}
   - enemyID: 2
     life: 15
+    attack: 1
     dropMoney: 5
     scorePoint: 10
     speed: 3
     baseOffset: 0
     enemyObj: {fileID: 8364678408733915518, guid: 951b2919b844ba24ca5971fe0b8f5d19, type: 3}
   - enemyID: 3
-    life: 25
+    life: 30
+    attack: 2
     dropMoney: 5
     scorePoint: 10
     speed: 1.5
     baseOffset: 0.7
     enemyObj: {fileID: 2460110466401762909, guid: 1021aba628703954e83850b85ba4688b, type: 3}
   - enemyID: 4
-    life: 20
+    life: 25
+    attack: 1
     dropMoney: 5
     scorePoint: 25
     speed: 2.5
@@ -43,7 +47,8 @@ MonoBehaviour:
     enemyObj: {fileID: 1348132538781680969, guid: 4b2b237edebd85142992d8d27e42c48b, type: 3}
   bossEnemyDataInfoList:
   - enemyID: 5
-    life: 200
+    life: 250
+    attack: 10
     dropMoney: 40
     scorePoint: 100
     speed: 1
