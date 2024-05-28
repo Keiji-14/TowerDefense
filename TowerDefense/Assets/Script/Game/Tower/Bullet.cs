@@ -117,19 +117,27 @@ namespace Game.Tower
         private void CannonGunBullet(Vector3 explosionPoint)
         {
             // 爆破範囲
-            var explosionRadius = uniqueStatus;
+            var explosionRadius = 2;
 
             Collider[] colliders = Physics.OverlapSphere(explosionPoint, explosionRadius);
 
             Instantiate(hitEffectObj, transform.position, Quaternion.identity);
 
+            int hitCount = 0;
+
             foreach (Collider hit in colliders)
             {
-                // 範囲内の敵にダメージを与える
+                if (hitCount >= uniqueStatus)
+                {
+                    break;
+                }
+
+                // 敵にダメージを与える
                 var enemy = hit.GetComponent<Enemy.Enemy>();
                 if (enemy != null)
                 {
                     enemy.TakeDamage(attack);
+                    hitCount++;
                 }
             }
 
