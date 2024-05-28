@@ -41,7 +41,7 @@ MonoBehaviour:
       firingRange: 6
       uniqueName: "\u9023\u5C04\u6570"
       uniqueStatus: 6
-      towerCost: 50
+      towerCost: 55
       towerIncome: 60
     towerObj: {fileID: 1920787663165968115, guid: be4c46a52bcc89741b09bffb0356ac6b, type: 3}
     bulletObj: {fileID: 4651760243979247549, guid: 9b957f4da85cbaa409eea48d175924db, type: 3}
@@ -57,7 +57,7 @@ MonoBehaviour:
       firingRange: 5
       uniqueName: "\u5BFE\u8C61\u6570"
       uniqueStatus: 3
-      towerCost: 40
+      towerCost: 50
       towerIncome: 20
     - attack: 8
       attackSpeed: 2
@@ -65,7 +65,7 @@ MonoBehaviour:
       firingRange: 5.5
       uniqueName: "\u5BFE\u8C61\u6570"
       uniqueStatus: 4
-      towerCost: 55
+      towerCost: 60
       towerIncome: 50
     - attack: 12
       attackSpeed: 2
@@ -73,7 +73,7 @@ MonoBehaviour:
       firingRange: 6.5
       uniqueName: "\u5BFE\u8C61\u6570"
       uniqueStatus: 5
-      towerCost: 70
+      towerCost: 75
       towerIncome: 90
     towerObj: {fileID: 2794337052100866639, guid: f73f4ed2dda148a4090ee2633190dd9e, type: 3}
     bulletObj: {fileID: 2418806758292392722, guid: d3197a5997f216a45a9eb9f2fa0ee0d7, type: 3}
@@ -89,7 +89,7 @@ MonoBehaviour:
       firingRange: 6
       uniqueName: "\u4F4E\u4E0B\u7387"
       uniqueStatus: 0.9
-      towerCost: 35
+      towerCost: 40
       towerIncome: 20
     - attack: 0
       attackSpeed: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
       firingRange: 7
       uniqueName: "\u4F4E\u4E0B\u7387"
       uniqueStatus: 0.8
-      towerCost: 45
+      towerCost: 50
       towerIncome: 50
     - attack: 0
       attackSpeed: 0
@@ -105,7 +105,7 @@ MonoBehaviour:
       firingRange: 8
       uniqueName: "\u4F4E\u4E0B\u7387"
       uniqueStatus: 0.65
-      towerCost: 60
+      towerCost: 65
       towerIncome: 90
     towerObj: {fileID: 7097396684384315682, guid: e915e970279efa345b86148b94907ee6, type: 3}
     bulletObj: {fileID: 0}

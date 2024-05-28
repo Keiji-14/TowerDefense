@@ -42,6 +42,8 @@ namespace Game
         [SerializeField] private TutorialController tutorialController;
         /// <summary>ゲームで表示するUI情報</summary>
         [SerializeField] private GameViewUI gameViewUI;
+        /// <summary>ゲームの速度を変更する処理</summary>
+        [SerializeField] private GameSpeed gameSpeed;
         /// <summary>砦のダメージ演出</summary>
         [SerializeField] private DamageDirection damageDirection;
         #endregion
@@ -124,6 +126,7 @@ namespace Game
                 PossessionMoneyUpdate(towerCost);
             }).AddTo(this);
 
+            gameSpeed.Init();
             gameViewUI.Init();
 
             // ゲーム開始ボタンを押した時の処理
@@ -306,6 +309,7 @@ namespace Game
                         gameDataInfo.stageType);
                 GameDataManager.instance.SetGameDataInfo(setGameDataInfo);
 
+                gameSpeed.InitGameSpeed();
                 GameClearSubject.OnNext(Unit.Default);
             }
         }
@@ -334,6 +338,7 @@ namespace Game
 
                 SaveScore();
 
+                gameSpeed.InitGameSpeed();
                 GameOverSubject.OnNext(Unit.Default);
             }
         }
