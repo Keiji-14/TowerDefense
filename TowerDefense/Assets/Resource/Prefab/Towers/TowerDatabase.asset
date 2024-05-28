@@ -56,7 +56,7 @@ MonoBehaviour:
       bulletSpeed: 10
       firingRange: 5
       uniqueName: "\u7206\u98A8\u7BC4\u56F2"
-      uniqueStatus: 2
+      uniqueStatus: 1.5
       towerCost: 40
       towerIncome: 20
     - attack: 8
@@ -64,7 +64,7 @@ MonoBehaviour:
       bulletSpeed: 10
       firingRange: 5.5
       uniqueName: "\u7206\u98A8\u7BC4\u56F2"
-      uniqueStatus: 2.5
+      uniqueStatus: 2
       towerCost: 50
       towerIncome: 50
     - attack: 13
@@ -72,7 +72,7 @@ MonoBehaviour:
       bulletSpeed: 10
       firingRange: 6.5
       uniqueName: "\u7206\u98A8\u7BC4\u56F2"
-      uniqueStatus: 3
+      uniqueStatus: 2.5
       towerCost: 60
       towerIncome: 90
     towerObj: {fileID: 2794337052100866639, guid: f73f4ed2dda148a4090ee2633190dd9e, type: 3}

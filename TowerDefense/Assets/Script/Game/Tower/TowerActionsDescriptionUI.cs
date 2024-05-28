@@ -46,6 +46,7 @@ namespace Game.Tower
         /// <summary>
         /// タワーの情報を表示する
         /// </summary>
+        /// <param name="towerActionsDescriptionInfo">タワーの強化・売却についての表示する情報</param>
         public void ViewTowerText(TowerActionsDescriptionInfo towerActionsDescriptionInfo)
         {
             towerStatusUIObj.SetActive(true);
@@ -68,6 +69,7 @@ namespace Game.Tower
         /// <summary>
         /// 最大レベル時のタワーの情報を表示する
         /// </summary>
+        /// <param name="sale">売却金</param>
         public void ViewLevelMaxTowerText(int sale)
         {
             towerStatusUIObj.SetActive(false);

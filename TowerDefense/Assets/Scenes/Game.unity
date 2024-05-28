@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.7619197, g: 0.785699, b: 0.73051107, a: 1}
+  m_IndirectSpecularColor: {r: 0.7620676, g: 0.78577226, b: 0.73050547, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -744,7 +744,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u300C\u58F2\u5374\u300D\u306B\u3064\u3044\u3066\u306F\u3001\u30BF\u30EF\u30FC\u3092\u89E3\u4F53\u3057\u3001\u67A0\u3092\u7A7A\u3051\u3066\u5225\u306E\u30BF\u30EF\u30FC\u3092\u5EFA\u8A2D\u3055\u305B\u308B\u3053\u3068\u304C\u51FA\u6765\u307E\u3059\u3002\n\u307E\u305F\u3001\u58F2\u5374\u3057\u305F\u6642\u306B\u4E00\u90E8\u6240\u6301\u91D1\u304C\u52A0\u7B97\u3055\u308C\u307E\u3059\u3002\n"
+  m_text: '
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ea2a74df5d8322340a7106eaf4bf23ec, type: 2}
   m_sharedMaterial: {fileID: 6194559917451303788, guid: ea2a74df5d8322340a7106eaf4bf23ec, type: 2}
@@ -1568,7 +1570,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &710980023
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1602,7 +1604,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeIn: 0
   fadeOut: 0
-  fadeInSpeed: 0.05
+  fadeInSpeed: 0.02
   fadeOutSpeed: 0.05
 --- !u!114 &710980025
 MonoBehaviour:
