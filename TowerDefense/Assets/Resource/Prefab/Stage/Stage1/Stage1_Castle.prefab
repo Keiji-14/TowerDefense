@@ -242,6 +242,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c14b43e29be2ec4fbc2f92b3361b65a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyObj: {fileID: 2486145956706683560, guid: 1da59ec3e6dbef947b5811e8461f8c67, type: 3}
+  destroySE: {fileID: 8300000, guid: 371e9cb787b7adc4c9320f5f2941dd0e, type: 3}
+  destroyParticle: {fileID: 5695923326397140884, guid: a9371c0b299c9b94582d631c5fab8dd9, type: 3}
 --- !u!1 &418815608306560372
 GameObject:
   m_ObjectHideFlags: 0

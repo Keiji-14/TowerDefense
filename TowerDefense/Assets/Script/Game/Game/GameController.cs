@@ -336,6 +336,8 @@ namespace Game
                         gameDataInfo.stageType);
                 GameDataManager.instance.SetGameDataInfo(setGameDataInfo);
 
+                StartCoroutine(fortressController.DestroyFortress());
+
                 SaveScore();
 
                 gameSpeed.InitGameSpeed();
