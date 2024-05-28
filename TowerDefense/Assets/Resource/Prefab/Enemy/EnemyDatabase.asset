@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDataInfoList:
   - enemyID: 1
-    life: 25
+    life: 20
     dropMoney: 5
     scorePoint: 15
     speed: 2
@@ -28,14 +28,21 @@ MonoBehaviour:
     baseOffset: 0
     enemyObj: {fileID: 8364678408733915518, guid: 951b2919b844ba24ca5971fe0b8f5d19, type: 3}
   - enemyID: 3
-    life: 30
+    life: 25
     dropMoney: 5
-    scorePoint: 25
+    scorePoint: 10
     speed: 1.5
     baseOffset: 0.7
     enemyObj: {fileID: 2460110466401762909, guid: 1021aba628703954e83850b85ba4688b, type: 3}
-  bossEnemyDataInfoList:
   - enemyID: 4
+    life: 20
+    dropMoney: 5
+    scorePoint: 25
+    speed: 2.5
+    baseOffset: 0
+    enemyObj: {fileID: 1348132538781680969, guid: 4b2b237edebd85142992d8d27e42c48b, type: 3}
+  bossEnemyDataInfoList:
+  - enemyID: 5
     life: 200
     dropMoney: 40
     scorePoint: 100

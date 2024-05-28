@@ -68,7 +68,7 @@ MonoBehaviour:
     - {fileID: 2267935459521538042, guid: 0872f1ac3dc01f34a82b109682001753, type: 3}
     - {fileID: 8095190539145269452, guid: 583ff5fbe05399346aed23ed1fa79a9c, type: 3}
   - enemySpawnInfoList:
-    - enemyID: 4
+    - enemyID: 5
       enemyNum: 1
     - enemyID: 1
       enemyNum: 2

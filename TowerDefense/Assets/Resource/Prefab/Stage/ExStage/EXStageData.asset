@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: EXStageData
   m_EditorClassIdentifier: 
   stageID: 0
-  startFortressLife: 20
-  startMoney: 150
+  startFortressLife: 30
+  startMoney: 200
   enemyNum: 5
   waveInterval: 5
   stageObj: {fileID: 902099497394016601, guid: 9a6630843ed5c154dbdcab04cb0dfe23, type: 3}
