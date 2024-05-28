@@ -152,8 +152,6 @@ namespace Game.Enemy
             }
             else
             {
-                var stageDataInfo = GameDataManager.instance.GetStageDataInfo();
-
                 // ルート情報のリストがnullでないことを確認
                 if (routeAnchor != null && currentRouteAnchorIndex < routeAnchor.Count)
                 {

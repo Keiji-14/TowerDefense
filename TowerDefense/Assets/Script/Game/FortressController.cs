@@ -11,7 +11,7 @@ namespace Game.Fortress
     {
         #region PublicField
         /// <summary>砦にダメージを与える時の処理</summary>
-        public Subject<Unit> FortressDamageSubject = new Subject<Unit>();
+        public Subject<int> FortressDamageSubject = new Subject<int>();
         #endregion
 
         #region PrivateMethod
@@ -25,11 +25,13 @@ namespace Game.Fortress
             if (other.transform.CompareTag("Enemy"))
             {
                 var enemy = other.GetComponent<Enemy.Enemy>();
+                var enemyDataInfo = enemy.enemyDataInfo;
+                
                 enemy.EnemyDestroySubject.OnNext(Unit.Default);
 
                 Destroy(other.gameObject);
 
-                FortressDamageSubject.OnNext(Unit.Default);
+                FortressDamageSubject.OnNext(enemyDataInfo.attack);
             }
         }
         #endregion

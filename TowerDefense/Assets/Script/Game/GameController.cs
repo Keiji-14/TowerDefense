@@ -105,9 +105,9 @@ namespace Game
             }
 
             // 砦にダメージを与える時の処理
-            fortressController.FortressDamageSubject.Subscribe(_ =>
+            fortressController.FortressDamageSubject.Subscribe(damege =>
             {
-                FortressTakeDamage();
+                FortressTakeDamage(damege);
             }).AddTo(this);
 
             towerController.Init();
@@ -176,11 +176,17 @@ namespace Game
         /// <summary>
         /// 砦にダメージを与える処理
         /// </summary>
-        private void FortressTakeDamage()
+        /// <param name="damege">ダメージ量</param>
+        private void FortressTakeDamage(int damege)
         {
             var gameDataInfo = GameDataManager.instance.GetGameDataInfo();
             var fortressLife = gameDataInfo.fortressLife;
-            fortressLife--;
+            fortressLife -= damege;
+
+            if (fortressLife <= 0)
+            {
+                fortressLife = 0;
+            }
 
             // ゲームの情報を更新する
             var setGameDataInfo = new GameDataInfo(
