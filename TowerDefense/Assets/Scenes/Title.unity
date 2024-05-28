@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.76190364, g: 0.7857276, b: 0.73051333, a: 1}
+  m_IndirectSpecularColor: {r: 0.7619606, g: 0.78572583, b: 0.7305007, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1264,7 +1264,7 @@ MonoBehaviour:
   - sceneName: Title
     bgmClip: {fileID: 8300000, guid: 9660ce613ddc2c943a9272bbc56a6ee7, type: 3}
   - sceneName: Game
-    bgmClip: {fileID: 8300000, guid: f8eaa02c127c08245a8498fe8334a306, type: 3}
+    bgmClip: {fileID: 8300000, guid: 6445cb18ae02b45478e95a8f0bc415c3, type: 3}
 --- !u!82 &173769652
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1277,9 +1277,9 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.3
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

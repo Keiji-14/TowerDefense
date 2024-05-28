@@ -48,32 +48,32 @@ MonoBehaviour:
   - towerID: 1
     name: "\u5927\u7832"
     towerType: 1
-    description: "\u5927\u7832\u3092\u642D\u8F09\u3057\u305F\u30BF\u30EF\u30FC\n\u7BC4\u56F2\u30C0\u30E1\u30FC\u30B8\u306E\u653B\u6483\u3092\u884C\u3046"
+    description: "\u5927\u7832\u3092\u642D\u8F09\u3057\u305F\u30BF\u30EF\u30FC\n\u8907\u6570\u306E\u6575\u306B\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B"
     level: 1
     towerStatusDataInfoList:
     - attack: 4
       attackSpeed: 2
       bulletSpeed: 10
       firingRange: 5
-      uniqueName: "\u7206\u98A8\u7BC4\u56F2"
-      uniqueStatus: 1.5
+      uniqueName: "\u5BFE\u8C61\u6570"
+      uniqueStatus: 3
       towerCost: 40
       towerIncome: 20
     - attack: 8
       attackSpeed: 2
       bulletSpeed: 10
       firingRange: 5.5
-      uniqueName: "\u7206\u98A8\u7BC4\u56F2"
-      uniqueStatus: 2
-      towerCost: 50
+      uniqueName: "\u5BFE\u8C61\u6570"
+      uniqueStatus: 4
+      towerCost: 55
       towerIncome: 50
-    - attack: 13
+    - attack: 12
       attackSpeed: 2
       bulletSpeed: 10
       firingRange: 6.5
-      uniqueName: "\u7206\u98A8\u7BC4\u56F2"
-      uniqueStatus: 2.5
-      towerCost: 60
+      uniqueName: "\u5BFE\u8C61\u6570"
+      uniqueStatus: 5
+      towerCost: 70
       towerIncome: 90
     towerObj: {fileID: 2794337052100866639, guid: f73f4ed2dda148a4090ee2633190dd9e, type: 3}
     bulletObj: {fileID: 2418806758292392722, guid: d3197a5997f216a45a9eb9f2fa0ee0d7, type: 3}
@@ -89,7 +89,7 @@ MonoBehaviour:
       firingRange: 6
       uniqueName: "\u4F4E\u4E0B\u7387"
       uniqueStatus: 0.9
-      towerCost: 40
+      towerCost: 35
       towerIncome: 20
     - attack: 0
       attackSpeed: 0
@@ -97,14 +97,14 @@ MonoBehaviour:
       firingRange: 7
       uniqueName: "\u4F4E\u4E0B\u7387"
       uniqueStatus: 0.8
-      towerCost: 50
+      towerCost: 45
       towerIncome: 50
     - attack: 0
       attackSpeed: 0
       bulletSpeed: 0
       firingRange: 8
       uniqueName: "\u4F4E\u4E0B\u7387"
-      uniqueStatus: 0.6
+      uniqueStatus: 0.65
       towerCost: 60
       towerIncome: 90
     towerObj: {fileID: 7097396684384315682, guid: e915e970279efa345b86148b94907ee6, type: 3}
