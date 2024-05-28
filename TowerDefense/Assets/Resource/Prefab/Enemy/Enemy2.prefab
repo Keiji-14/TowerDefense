@@ -1498,10 +1498,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.4
-  m_Height: 1
+  m_Radius: 0.5
+  m_Height: 0.5
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.4, z: 0}
 --- !u!54 &8033308563595682571
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1545,11 +1545,10 @@ MonoBehaviour:
     enemyID: 0
     life: 0
     dropMoney: 0
-    point: 0
+    scorePoint: 0
     speed: 0
     baseOffset: 0
     enemyObj: {fileID: 0}
-    destroyParticle: {fileID: 0}
   target: {fileID: 0}
   sliderCanvas: {fileID: 628778396593498629}
   lifeBar: {fileID: 6314640347981839161}
